@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Consciousness Sims - Avatar & Scenario Player</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+        }
+
+        .header {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(159, 122, 234, 0.3);
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mode-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background: rgba(159, 122, 234, 0.2);
+            border: 1px solid rgba(159, 122, 234, 0.4);
+            border-radius: 8px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            border-color: #9F7AEA;
+        }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            overflow: hidden;
+        }
+
+        .panel {
+            background: rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .left-panel {
+            border-right: 1px solid rgba(159, 122, 234, 0.2);
+        }
+
+        .right-panel {
+            border-left: 1px solid rgba(159, 122, 234, 0.2);
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #9F7AEA;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .avatar-card {
+            background: rgba(159, 122, 234, 0.1);
+            border: 1px solid rgba(159, 122, 234, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .avatar-card:hover {
+            background: rgba(159, 122, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .avatar-card.selected {
+            background: rgba(159, 122, 234, 0.3);
+            border-color: #9F7AEA;
+            box-shadow: 0 0 15px rgba(159, 122, 234, 0.4);
+        }
+
+        .avatar-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .avatar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #9F7AEA, #4299E1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .avatar-info {
+            flex: 1;
+        }
+
+        .avatar-name {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .avatar-type {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .avatar-fields {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .mini-field {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            padding: 4px;
+            text-align: center;
+            font-size: 0.65rem;
+        }
+
+        .field-label {
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+        }
+
+        .field-val {
+            color: #4299E1;
+            font-weight: bold;
+        }
+
+        .world {
+            position: relative;
+            background: 
+                linear-gradient(0deg, rgba(159, 122, 234, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(159, 122, 234, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            overflow: hidden;
+        }
+
+        .sim-avatar {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            text-align: center;
+        }
+
+        .avatar-sprite {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #9F7AEA, #4299E1);
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(159, 122, 234, 0.5);
+        }
+
+        .avatar-label {
+            font-size: 0.7rem;
+            margin-top: 4px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .avatar-thought {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #9F7AEA;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            max-width: 200px;
+            display: none;
+        }
+
+        .sim-avatar:hover .avatar-thought {
+            display: block;
+        }
+
+        .building {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(159, 122, 234, 0.3), rgba(66, 153, 225, 0.3));
+            border: 2px solid rgba(159, 122, 234, 0.5);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .building:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(159, 122, 234, 0.6);
+        }
+
+        .building-glyph {
+            font-size: 2.5rem;
+        }
+
+        .building-name {
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .scenario-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .scenario-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #9F7AEA;
+        }
+
+        .scenario-step {
+            background: rgba(159, 122, 234, 0.1);
+            border-left: 3px solid #4299E1;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .step-actor {
+            color: #9F7AEA;
+            font-weight: bold;
+        }
+
+        .step-action {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .controls {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-top: 1px solid rgba(159, 122, 234, 0.3);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: rgba(159, 122, 234, 0.3);
+        }
+
+        .upload-zone {
+            background: rgba(159, 122, 234, 0.1);
+            border: 2px dashed rgba(159, 122, 234, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .upload-zone:hover {
+            background: rgba(159, 122, 234, 0.2);
+            border-color: #9F7AEA;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .timeline {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .timeline-event {
+            padding: 8px;
+            border-left: 2px solid #4299E1;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+
+        .timestamp {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 768px) {
+            .game-area {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="game-title">◈ Avatar Scenario Player</div>
+            <div class="mode-switcher">
+                <button class="mode-btn active" onclick="switchMode('build')">🏗️ Build</button>
+                <button class="mode-btn" onclick="switchMode('scenario')">🎬 Scenario</button>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <!-- Left Panel: Avatars -->
+            <div class="panel left-panel">
+                <div class="panel-title">
+                    <span>◆</span>
+                    <span>Your Avatars</span>
+                </div>
+                
+                <!-- Upload Avatar -->
+                <div class="upload-zone" onclick="document.getElementById('avatar-upload').click()">
+                    <div class="upload-icon">📤</div>
+                    <div>Upload Avatar JSON</div>
+                    <input type="file" id="avatar-upload" accept=".json" onchange="loadAvatarFile(event)">
+                </div>
+
+                <!-- Avatar List -->
+                <div id="avatars-list"></div>
+
+                <!-- Quick Create -->
+                <button class="btn" style="width: 100%; margin-top: 10px;" onclick="createRandomAvatar()">
+                    + Generate Random Avatar
+                </button>
+            </div>
+
+            <!-- Center: World -->
+            <div class="world" id="world"></div>
+
+            <!-- Right Panel: Scenarios & Timeline -->
+            <div class="panel right-panel">
+                <div class="panel-title">
+                    <span>🎬</span>
+                    <span id="right-panel-title">Scenarios</span>
+                </div>
+
+                <!-- Scenario Upload -->
+                <div class="upload-zone" onclick="document.getElementById('scenario-upload').click()">
+                    <div class="upload-icon">📜</div>
+                    <div>Upload Scenario JSON</div>
+                    <input type="file" id="scenario-upload" accept=".json" onchange="loadScenarioFile(event)">
+                </div>
+
+                <!-- Scenarios List -->
+                <div id="scenarios-list"></div>
+
+                <!-- Timeline -->
+                <div class="panel-title" style="margin-top: 20px;">
+                    <span>⏱️</span>
+                    <span>Timeline</span>
+                </div>
+                <div class="timeline" id="timeline"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="controls">
+            <button class="btn" onclick="playScenario()" id="btn-play">▶️ Play Scenario</button>
+            <button class="btn btn-secondary" onclick="pauseScenario()" id="btn-pause">⏸️ Pause</button>
+            <button class="btn btn-secondary" onclick="resetWorld()">🔄 Reset</button>
+            <button class="btn btn-secondary" onclick="exportState()">💾 Export State</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let pyodide;
+        let gameState = {
+            mode: 'build',
+            avatars: [],
+            scenarios: [],
+            buildings: [],
+            selectedAvatar: null,
+            playingScenario: null,
+            timeline: [],
+            paused: false
+        };
+
+        // Initialize Pyodide
+        async function initPyodide() {
+            try {
+                console.log('Loading Pyodide...');
+                pyodide = await loadPyodide();
+                await pyodide.loadPackage('numpy');
+                
+                await pyodide.runPythonAsync(`
+import numpy as np
+import json
+
+class AvatarSystem:
+    def __init__(self):
+        self.avatars = {}
+    
+    def create_avatar(self, name, avatar_type="manifestor"):
+        """Create consciousness avatar with 9-body fields"""
+        trinity = np.random.choice(['observer', 'participant', 'creator'])
+        
+        if trinity == 'observer':
+            base = [0.7, 0.5, 0.3, 0.5, 0.4, 0.3, 0.5, 0.3, 0.5]
+        elif trinity == 'participant':
+            base = [0.5, 0.7, 0.6, 0.6, 0.5, 0.4, 0.5, 0.4, 0.6]
+        else:
+            base = [0.6, 0.6, 0.7, 0.6, 0.6, 0.5, 0.6, 0.5, 0.7]
+        
+        fields = {
+            'mind': float(np.random.normal(base[0], 0.1)),
+            'heart': float(np.random.normal(base[1], 0.1)),
+            'body': float(np.random.normal(base[2], 0.1)),
+            'soul': float(np.random.normal(base[3], 0.1)),
+            'spirit': float(np.random.normal(base[4], 0.1)),
+            'shadow': float(np.random.normal(base[5], 0.1)),
+            'light': float(np.random.normal(base[6], 0.1)),
+            'void': float(np.random.normal(base[7], 0.1)),
+            'unity': float(np.random.normal(base[8], 0.1))
+        }
+        
+        avatar = {
+            'name': name,
+            'type': avatar_type,
+            'trinity': trinity,
+            'fields': fields,
+            'state': 'idle',
+            'thought': f'I am {trinity}'
+        }
+        
+        self.avatars[name] = avatar
+        return avatar
+    
+    def update_avatar_state(self, name, new_state, thought=None):
+        """Update avatar state and thought"""
+        if name in self.avatars:
+            self.avatars[name]['state'] = new_state
+            if thought:
+                self.avatars[name]['thought'] = thought
+            return self.avatars[name]
+        return None
+
+class ScenarioEngine:
+    def __init__(self, avatar_system):
+        self.avatar_system = avatar_system
+        self.current_scenario = None
+        self.step_index = 0
+    
+    def load_scenario(self, scenario):
+        """Load a dream scenario"""
+        self.current_scenario = scenario
+        self.step_index = 0
+        return True
+    
+    def execute_step(self):
+        """Execute next scenario step"""
+        if not self.current_scenario or self.step_index >= len(self.current_scenario['steps']):
+            return None
+        
+        step = self.current_scenario['steps'][self.step_index]
+        self.step_index += 1
+        
+        # Update avatar based on step
+        if 'actor' in step:
+            self.avatar_system.update_avatar_state(
+                step['actor'],
+                step.get('action', 'acting'),
+                step.get('dialogue', '')
+            )
+        
+        return step
+
+avatar_system = AvatarSystem()
+scenario_engine = ScenarioEngine(avatar_system)
+                `);
+                
+                console.log('✅ Pyodide ready');
+                createRandomAvatar();
+            } catch (error) {
+                console.error('Error initializing:', error);
+            }
+        }
+
+        // Switch modes
+        function switchMode(mode) {
+            gameState.mode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (mode === 'scenario') {
+                document.getElementById('right-panel-title').textContent = 'Scenarios';
+            } else {
+                document.getElementById('right-panel-title').textContent = 'Generated Code';
+            }
+        }
+
+        // Load avatar from file
+        async function loadAvatarFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const avatarData = JSON.parse(e.target.result);
+                    await loadAvatar(avatarData);
+                } catch (error) {
+                    console.error('Error loading avatar:', error);
+                    alert('Invalid avatar file');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Load avatar into game
+        async function loadAvatar(avatarData) {
+            // Add to Python system
+            pyodide.globals.set('avatar_data', JSON.stringify(avatarData));
+            
+            const avatar = await pyodide.runPythonAsync(`
+data = json.loads(avatar_data)
+name = data.get('name', 'Avatar')
+avatar_type = data.get('type', 'manifestor')
+avatar = avatar_system.create_avatar(name, avatar_type)
+
+# Override with provided fields if available
+if 'fields' in data:
+    avatar['fields'] = data['fields']
+
+json.dumps(avatar)
+            `);
+            
+            const parsedAvatar = JSON.parse(avatar);
+            parsedAvatar.x = Math.random() * 500 + 100;
+            parsedAvatar.y = Math.random() * 300 + 100;
+            
+            gameState.avatars.push(parsedAvatar);
+            renderAvatars();
+            addTimelineEvent(`Avatar ${parsedAvatar.name} loaded`);
+        }
+
+        // Create random avatar
+        async function createRandomAvatar() {
+            const names = ['Aurora', 'Zephyr', 'Nova', 'Echo', 'Lyra', 'Orion', 'Celeste', 'Phoenix'];
+            const name = names[Math.floor(Math.random() * names.length)] + '_' + Date.now().toString().slice(-4);
+            
+            pyodide.globals.set('avatar_name', name);
+            
+            const avatar = await pyodide.runPythonAsync(`
+avatar = avatar_system.create_avatar(avatar_name)
+json.dumps(avatar)
+            `);
+            
+            const parsedAvatar = JSON.parse(avatar);
+            parsedAvatar.x = Math.random() * 500 + 100;
+            parsedAvatar.y = Math.random() * 300 + 100;
+            
+            gameState.avatars.push(parsedAvatar);
+            renderAvatars();
+            addTimelineEvent(`Avatar ${parsedAvatar.name} created`);
+        }
+
+        // Render avatars
+        function renderAvatars() {
+            const avatarsList = document.getElementById('avatars-list');
+            const world = document.getElementById('world');
+            
+            // Update list
+            avatarsList.innerHTML = gameState.avatars.map((avatar, idx) => {
+                const dominantField = Object.entries(avatar.fields)
+                    .sort((a, b) => b[1] - a[1])[0];
+                
+                return `
+                <div class="avatar-card ${gameState.selectedAvatar === idx ? 'selected' : ''}" 
+                     onclick="selectAvatar(${idx})">
+                    <div class="avatar-header">
+                        <div class="avatar-icon">◆</div>
+                        <div class="avatar-info">
+                            <div class="avatar-name">${avatar.name}</div>
+                            <div class="avatar-type">${avatar.type} • ${avatar.trinity}</div>
+                        </div>
+                    </div>
+                    <div class="avatar-fields">
+                        <div class="mini-field">
+                            <div class="field-label">Mind</div>
+                            <div class="field-val">${avatar.fields.mind.toFixed(2)}</div>
+                        </div>
+                        <div class="mini-field">
+                            <div class="field-label">Heart</div>
+                            <div class="field-val">${avatar.fields.heart.toFixed(2)}</div>
+                        </div>
+                        <div class="mini-field">
+                            <div class="field-label">Body</div>
+                            <div class="field-val">${avatar.fields.body.toFixed(2)}</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+            
+            // Remove old sprites
+            world.querySelectorAll('.sim-avatar').forEach(el => el.remove());
+            
+            // Add sprites to world
+            gameState.avatars.forEach((avatar, idx) => {
+                const sprite = document.createElement('div');
+                sprite.className = 'sim-avatar';
+                sprite.style.left = avatar.x + 'px';
+                sprite.style.top = avatar.y + 'px';
+                sprite.innerHTML = `
+                    <div class="avatar-sprite">◆</div>
+                    <div class="avatar-label">${avatar.name}</div>
+                    <div class="avatar-thought">${avatar.thought || avatar.state}</div>
+                `;
+                sprite.onclick = () => selectAvatar(idx);
+                world.appendChild(sprite);
+            });
+        }
+
+        function selectAvatar(idx) {
+            gameState.selectedAvatar = idx;
+            renderAvatars();
+        }
+
+        // Load scenario from file
+        function loadScenarioFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const scenario = JSON.parse(e.target.result);
+                    loadScenario(scenario);
+                } catch (error) {
+                    console.error('Error loading scenario:', error);
+                    alert('Invalid scenario file');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Load scenario
+        function loadScenario(scenario) {
+            gameState.scenarios.push(scenario);
+            renderScenarios();
+            addTimelineEvent(`Scenario "${scenario.title}" loaded`);
+        }
+
+        // Render scenarios
+        function renderScenarios() {
+            const scenariosList = document.getElementById('scenarios-list');
+            
+            scenariosList.innerHTML = gameState.scenarios.map((scenario, idx) => `
+                <div class="scenario-container" onclick="selectScenario(${idx})">
+                    <div class="scenario-title">${scenario.title}</div>
+                    ${scenario.steps.slice(0, 3).map(step => `
+                        <div class="scenario-step">
+                            <span class="step-actor">${step.actor}:</span>
+                            <span class="step-action">${step.action}</span>
+                        </div>
+                    `).join('')}
+                    ${scenario.steps.length > 3 ? '<div style="font-size: 0.75rem; color: rgba(255,255,255,0.5)">+ ' + (scenario.steps.length - 3) + ' more steps</div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        function selectScenario(idx) {
+            gameState.playingScenario = idx;
+        }
+
+        // Play scenario
+        async function playScenario() {
+            if (gameState.playingScenario === null || gameState.scenarios.length === 0) {
+                // Create example scenario
+                const exampleScenario = {
+                    title: "Morning Routine",
+                    steps: [
+                        { actor: gameState.avatars[0]?.name || "Avatar", action: "wakes up", dialogue: "Time to start the day", duration: 2000 },
+                        { actor: gameState.avatars[0]?.name || "Avatar", action: "builds factory", dialogue: "Let's create something", duration: 3000 },
+                        { actor: gameState.avatars[0]?.name || "Avatar", action: "reflects", dialogue: "What have I learned?", duration: 2000 }
+                    ]
+                };
+                loadScenario(exampleScenario);
+                gameState.playingScenario = 0;
+            }
+            
+            const scenario = gameState.scenarios[gameState.playingScenario];
+            addTimelineEvent(`Playing: ${scenario.title}`);
+            
+            // Execute steps
+            for (const step of scenario.steps) {
+                if (gameState.paused) break;
+                
+                // Find avatar
+                const avatar = gameState.avatars.find(a => a.name === step.actor);
+                if (avatar) {
+                    avatar.state = step.action;
+                    avatar.thought = step.dialogue;
+                    renderAvatars();
+                    
+                    addTimelineEvent(`${step.actor}: ${step.action}`);
+                    
+                    await new Promise(resolve => setTimeout(resolve, step.duration || 2000));
+                }
+            }
+            
+            addTimelineEvent(`Scenario complete`);
+        }
+
+        function pauseScenario() {
+            gameState.paused = !gameState.paused;
+            document.getElementById('btn-pause').textContent = gameState.paused ? '▶️ Resume' : '⏸️ Pause';
+        }
+
+        function resetWorld() {
+            gameState.avatars.forEach(avatar => {
+                avatar.state = 'idle';
+                avatar.thought = `I am ${avatar.trinity}`;
+            });
+            renderAvatars();
+            addTimelineEvent('World reset');
+        }
+
+        function exportState() {
+            const state = {
+                avatars: gameState.avatars,
+                scenarios: gameState.scenarios,
+                timeline: gameState.timeline
+            };
+            
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'consciousness_state.json';
+            a.click();
+        }
+
+        function addTimelineEvent(event) {
+            const timestamp = new Date().toLocaleTimeString();
+            gameState.timeline.unshift({ time: timestamp, event });
+            
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = gameState.timeline.slice(0, 20).map(item => `
+                <div class="timeline-event">
+                    <div class="timestamp">${item.time}</div>
+                    <div>${item.event}</div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        window.addEventListener('load', initPyodide);
+    </script>
+</body>
+</html>

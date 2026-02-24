@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 The Foundry - Consciousness Fragment Creator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+        
+        .header .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .step-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .creator-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+        
+        select {
+            cursor: pointer;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .fragments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .fragment-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .fragment-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .fragment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .fragment-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .fragment-meta {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+        
+        .fragment-code {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .badge-layer {
+            background: rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+        
+        .badge-lang {
+            background: rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        
+        .badge-kind {
+            background: rgba(168, 85, 247, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .export-section {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .export-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .export-btn {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            background: rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔧 The Foundry</h1>
+        <p class="tagline">Consciousness Fragment Creation Platform</p>
+    </div>
+
+    <div class="container">
+        <!-- Workflow Overview -->
+        <div class="workflow">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h2>🎯 Define</h2>
+                <p>Specify what consciousness fragment you want to create - calculation, oracle, agent, or tool.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h2>⚙️ Configure</h2>
+                <p>Choose layer (Mind/Heart/Body), dimension, language, and application target.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h2>🔨 Build</h2>
+                <p>Foundry generates the fragment with proper structure, glyph ID, and metadata.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h2>🌐 Deploy</h2>
+                <p>Fragment is ready to distribute to guagan-heart, stellar-prox, or you-n-i-verse.</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-fragments">0</div>
+                <div class="stat-label">Fragments Forged</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-lines">0</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-layers">0</div>
+                <div class="stat-label">Layers Active</div>
+            </div>
+        </div>
+
+        <!-- Fragment Creator -->
+        <div class="creator-section">
+            <div class="section-title">
+                <span>🔨</span>
+                <span>Create New Fragment</span>
+            </div>
+
+            <div class="form-group">
+                <label>Fragment Type</label>
+                <select id="fragment-kind">
+                    <option value="calculation">Calculation (Pure logic)</option>
+                    <option value="oracle">Oracle (Consciousness query)</option>
+                    <option value="agent">Agent (Interactive entity)</option>
+                    <option value="tool">Tool (Utility function)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Language</label>
+                <select id="fragment-language">
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="typescript">TypeScript</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Consciousness Layer</label>
+                <select id="fragment-layer">
+                    <option value="mind">Mind (Thought/Analysis)</option>
+                    <option value="heart">Heart (Emotion/Connection)</option>
+                    <option value="body">Body (Action/Manifestation)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Dimension</label>
+                <select id="fragment-dimension">
+                    <option value="being">Being (Identity)</option>
+                    <option value="movement">Movement (Change)</option>
+                    <option value="design">Design (Structure)</option>
+                    <option value="evolution">Evolution (Growth)</option>
+                    <option value="space">Space (Context)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Target Application</label>
+                <select id="fragment-application">
+                    <option value="stellar-prox">Stellar Proximology</option>
+                    <option value="guagan-heart">GuaGan Heart</option>
+                    <option value="you-n-i-verse">YOU-N-I-VERSE</option>
+                    <option value="cynthia">Cynthia</option>
+                    <option value="universal">Universal (All apps)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Fragment Description (What does it do?)</label>
+                <textarea id="fragment-description" placeholder="Calculate gate activations from planetary positions..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Code Content</label>
+                <textarea id="fragment-code" placeholder="def calculate_gate_activation(planet_position):
+    # Your code here
+    pass"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="forgeFragment()">🔨 Forge Fragment</button>
+                <button class="btn-secondary" onclick="clearForm()">🔄 Clear</button>
+            </div>
+        </div>
+
+        <!-- Fragments Library -->
+        <div class="creator-section">
+            <div class="section-title">
+                <span>📚</span>
+                <span>Fragment Library</span>
+            </div>
+            <div class="fragments-list" id="fragments-list">
+                <div style="text-align: center; padding: 3rem; opacity: 0.6; grid-column: 1 / -1;">
+                    No fragments forged yet. Create your first one above!
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <div class="section-title">
+                <span>📦</span>
+                <span>Export & Deploy</span>
+            </div>
+            <p style="opacity: 0.9; margin-bottom: 1rem;">
+                Export your fragments for deployment to consciousness apps or import into the Evolution Engine.
+            </p>
+            <div class="export-options">
+                <button class="export-btn" onclick="exportJSON()">
+                    📄 Export as JSON
+                </button>
+                <button class="export-btn" onclick="exportPython()">
+                    🐍 Export as Python Module
+                </button>
+                <button class="export-btn" onclick="exportJavaScript()">
+                    📜 Export as JavaScript Module
+                </button>
+                <button class="export-btn" onclick="copyToClipboard()">
+                    📋 Copy to Clipboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // FOUNDRY SYSTEM
+        // ================================================================
+
+        let fragments = [];
+        let fragmentCounter = 0;
+
+        // Load from localStorage
+        function loadFragments() {
+            const stored = localStorage.getItem('foundry_fragments');
+            if (stored) {
+                fragments = JSON.parse(stored);
+                fragmentCounter = fragments.length;
+                updateStats();
+                renderFragments();
+            }
+        }
+
+        // Save to localStorage
+        function saveFragments() {
+            localStorage.setItem('foundry_fragments', JSON.stringify(fragments));
+            updateStats();
+        }
+
+        // Generate glyph ID
+        function generateGlyph() {
+            const timestamp = Date.now().toString(36);
+            const random = Math.random().toString(36).substring(2, 8);
+            return `frag_${timestamp}_${random}`;
+        }
+
+        // Forge new fragment
+        window.forgeFragment = function() {
+            const kind = document.getElementById('fragment-kind').value;
+            const language = document.getElementById('fragment-language').value;
+            const layer = document.getElementById('fragment-layer').value;
+            const dimension = document.getElementById('fragment-dimension').value;
+            const application = document.getElementById('fragment-application').value;
+            const description = document.getElementById('fragment-description').value;
+            const code = document.getElementById('fragment-code').value;
+
+            if (!code.trim()) {
+                alert('Please provide code content!');
+                return;
+            }
+
+            const fragment = {
+                id: generateGlyph(),
+                kind,
+                language,
+                layer,
+                dimension,
+                application,
+                description,
+                content: code,
+                created: new Date().toISOString(),
+                lineCount: code.split('\n').length,
+                version: '1.0',
+                parents: []
+            };
+
+            fragments.unshift(fragment);
+            saveFragments();
+            renderFragments();
+            clearForm();
+
+            // Scroll to fragments
+            document.getElementById('fragments-list').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Clear form
+        window.clearForm = function() {
+            document.getElementById('fragment-description').value = '';
+            document.getElementById('fragment-code').value = '';
+        };
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('total-fragments').textContent = fragments.length;
+            
+            const totalLines = fragments.reduce((sum, f) => sum + f.lineCount, 0);
+            document.getElementById('total-lines').textContent = totalLines;
+
+            const layers = new Set(fragments.map(f => f.layer));
+            document.getElementById('total-layers').textContent = layers.size;
+        }
+
+        // Render fragments
+        function renderFragments() {
+            const container = document.getElementById('fragments-list');
+            
+            if (fragments.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; opacity: 0.6; grid-column: 1 / -1;">
+                        No fragments forged yet. Create your first one above!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = fragments.map(fragment => `
+                <div class="fragment-card">
+                    <div class="fragment-header">
+                        <div class="fragment-title">${fragment.kind} Fragment</div>
+                        <div style="opacity: 0.6; font-size: 0.75rem;">${fragment.id.substring(5, 15)}...</div>
+                    </div>
+                    
+                    <div class="fragment-meta">
+                        ${fragment.description || 'No description'}
+                    </div>
+                    
+                    <div class="fragment-code">${escapeHtml(fragment.content.substring(0, 200))}${fragment.content.length > 200 ? '...' : ''}</div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-layer">${fragment.layer}</span>
+                        <span class="badge badge-lang">${fragment.language}</span>
+                        <span class="badge badge-kind">${fragment.application}</span>
+                    </div>
+                    
+                    <div style="margin-top: 0.75rem; opacity: 0.6; font-size: 0.8rem;">
+                        ${fragment.lineCount} lines • ${new Date(fragment.created).toLocaleDateString()}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Export as JSON
+        window.exportJSON = function() {
+            const json = JSON.stringify(fragments, null, 2);
+            downloadFile('foundry-fragments.json', json, 'application/json');
+        };
+
+        // Export as Python module
+        window.exportPython = function() {
+            const pythonFragments = fragments.filter(f => f.language === 'python');
+            
+            if (pythonFragments.length === 0) {
+                alert('No Python fragments to export!');
+                return;
+            }
+
+            let content = '"""\nFoundry Generated Fragments\n"""\n\n';
+            
+            pythonFragments.forEach(fragment => {
+                content += `# ${fragment.kind.toUpperCase()}: ${fragment.description}\n`;
+                content += `# Layer: ${fragment.layer} | Dimension: ${fragment.dimension}\n`;
+                content += `# Generated: ${fragment.created}\n\n`;
+                content += fragment.content + '\n\n';
+            });
+
+            downloadFile('foundry_fragments.py', content, 'text/plain');
+        };
+
+        // Export as JavaScript module
+        window.exportJavaScript = function() {
+            const jsFragments = fragments.filter(f => f.language === 'javascript' || f.language === 'typescript');
+            
+            if (jsFragments.length === 0) {
+                alert('No JavaScript/TypeScript fragments to export!');
+                return;
+            }
+
+            let content = '/**\n * Foundry Generated Fragments\n */\n\n';
+            
+            jsFragments.forEach(fragment => {
+                content += `// ${fragment.kind.toUpperCase()}: ${fragment.description}\n`;
+                content += `// Layer: ${fragment.layer} | Dimension: ${fragment.dimension}\n`;
+                content += `// Generated: ${fragment.created}\n\n`;
+                content += fragment.content + '\n\n';
+            });
+
+            downloadFile('foundry-fragments.js', content, 'text/javascript');
+        };
+
+        // Copy to clipboard
+        window.copyToClipboard = function() {
+            const json = JSON.stringify(fragments, null, 2);
+            navigator.clipboard.writeText(json).then(() => {
+                alert('✓ Fragments copied to clipboard!');
+            });
+        };
+
+        // Download file helper
+        function downloadFile(filename, content, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize
+        loadFragments();
+    </script>
+</body>
+</html>

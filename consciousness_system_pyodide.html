@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Consciousness System - Full Stack Client-Side</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(159, 122, 234, 0.3);
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+
+        .loading { background: rgba(251, 191, 36, 0.2); color: #FCD34D; }
+        .ready { background: rgba(72, 187, 120, 0.2); color: #68D391; }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(159, 122, 234, 0.2);
+        }
+
+        .section-title {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(159, 122, 234, 0.3);
+            font-size: 1rem;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .output {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .field-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(159, 122, 234, 0.3);
+        }
+
+        .field-name {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+
+        .field-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 8px;
+        }
+
+        .field-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+        }
+
+        .field-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #9F7AEA, #4299E1);
+            transition: width 0.5s ease;
+        }
+
+        .loader {
+            border: 3px solid rgba(159, 122, 234, 0.2);
+            border-top: 3px solid #9F7AEA;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .controls { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>◈ Consciousness System</h1>
+        <p>Full-Stack Client-Side • Pyodide Computational Graph</p>
+        <div id="pyodide-status" class="status-badge loading">Loading Python...</div>
+    </div>
+
+    <div class="container">
+        <!-- GAN Controls -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧠</span>
+                <span>Consciousness Generator</span>
+            </div>
+            <div class="controls">
+                <button class="btn" onclick="generateConsciousness()" id="btn-generate" disabled>
+                    Generate State
+                </button>
+                <button class="btn" onclick="generateExperience()" id="btn-experience" disabled>
+                    Generate Experience
+                </button>
+                <button class="btn" onclick="classifyComponent()" id="btn-classify" disabled>
+                    Classify Component
+                </button>
+                <button class="btn" onclick="runFullPipeline()" id="btn-pipeline" disabled>
+                    Run Full Pipeline
+                </button>
+            </div>
+        </div>
+
+        <!-- 9-Body Fields Display -->
+        <div class="section">
+            <div class="section-title">
+                <span>◈</span>
+                <span>9-Body Consciousness Fields</span>
+            </div>
+            <div class="fields-grid" id="fields-display"></div>
+        </div>
+
+        <!-- Experience Texture Output -->
+        <div class="section">
+            <div class="section-title">
+                <span>🎨</span>
+                <span>Experience Texture</span>
+            </div>
+            <div class="output" id="experience-output">Waiting for generation...</div>
+        </div>
+
+        <!-- Classification Output -->
+        <div class="section">
+            <div class="section-title">
+                <span>📁</span>
+                <span>Component Classification</span>
+            </div>
+            <div class="output" id="classification-output">Waiting for classification...</div>
+        </div>
+
+        <!-- System Log -->
+        <div class="section">
+            <div class="section-title">
+                <span>📋</span>
+                <span>System Log</span>
+            </div>
+            <div class="output" id="system-log">Initializing Pyodide...</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let pyodide;
+        const bodyNames = ['mind', 'heart', 'body', 'soul', 'spirit', 'shadow', 'light', 'void', 'unity'];
+
+        // Initialize Pyodide
+        async function initPyodide() {
+            try {
+                log('Loading Pyodide runtime...');
+                pyodide = await loadPyodide();
+                
+                log('Loading NumPy...');
+                await pyodide.loadPackage('numpy');
+                
+                log('Initializing Python modules...');
+                await initPythonModules();
+                
+                document.getElementById('pyodide-status').textContent = 'Python Ready';
+                document.getElementById('pyodide-status').className = 'status-badge ready';
+                
+                // Enable buttons
+                document.querySelectorAll('.btn').forEach(btn => btn.disabled = false);
+                
+                log('✅ System ready!');
+            } catch (error) {
+                log('❌ Error initializing: ' + error);
+            }
+        }
+
+        // Initialize all Python modules
+        async function initPythonModules() {
+            await pyodide.runPythonAsync(`
+import numpy as np
+import json
+from datetime import datetime
+
+# ===== CONSCIOUSNESS GAN =====
+class ConsciousnessGAN:
+    def __init__(self):
+        self.latent_dim = 64
+        self.bodies = 9
+        self.field_dim = 32
+        
+    def generate(self, n_samples=1):
+        """Generate consciousness states (simplified - no training)"""
+        # Generate random but coherent 9-body states
+        noise = np.random.normal(0, 1, (n_samples, self.latent_dim))
+        
+        # Simple generation (in real version, use trained weights)
+        states = []
+        for i in range(n_samples):
+            # Generate correlated fields
+            trinity_mode = np.random.choice(['observer', 'participant', 'creator'])
+            
+            if trinity_mode == 'observer':
+                base = [0.7, 0.5, 0.3, 0.5, 0.4, 0.3, 0.5, 0.3, 0.5]
+            elif trinity_mode == 'participant':
+                base = [0.5, 0.7, 0.6, 0.6, 0.5, 0.4, 0.5, 0.4, 0.6]
+            else:
+                base = [0.6, 0.6, 0.7, 0.6, 0.6, 0.5, 0.6, 0.5, 0.7]
+            
+            # Add noise
+            state = np.array([
+                np.random.normal(b, 0.15, self.field_dim) 
+                for b in base
+            ])
+            state = np.clip(state, -1, 1)
+            states.append(state)
+        
+        return np.array(states)
+    
+    def get_field_summary(self, states):
+        """Get mean values for each body"""
+        if len(states.shape) == 3:
+            states = states[0]  # Take first sample
+        
+        return {
+            'mind': float(states[0].mean()),
+            'heart': float(states[1].mean()),
+            'body': float(states[2].mean()),
+            'soul': float(states[3].mean()),
+            'spirit': float(states[4].mean()),
+            'shadow': float(states[5].mean()),
+            'light': float(states[6].mean()),
+            'void': float(states[7].mean()),
+            'unity': float(states[8].mean())
+        }
+
+# ===== EXPERIENCE TEXTURE GENERATOR =====
+class ExperienceTextureGenerator:
+    def __init__(self):
+        self.gate_textures = {
+            12: {
+                "feel": "restraint and caution",
+                "texture": "like holding your breath before diving",
+                "gameplay": "character hesitates at key moments, then speaks truth"
+            },
+            41: {
+                "feel": "pressure to begin",
+                "texture": "like standing at the edge before jumping",
+                "gameplay": "character gets visions that drive action"
+            },
+            33: {
+                "feel": "withdrawal and reflection",
+                "texture": "like retreating to a cave to understand",
+                "gameplay": "character periodically disappears, returns wiser"
+            }
+        }
+    
+    def generate_from_fields(self, fields):
+        """Generate experience from consciousness fields"""
+        dominant = max(fields, key=fields.get)
+        strength = fields[dominant]
+        
+        textures = {
+            'mind': "sharp analytical clarity cutting through complexity",
+            'heart': "warm resonant connection with emotional depth",
+            'body': "grounded physical presence and kinetic awareness",
+            'soul': "deep alignment with purpose and meaning",
+            'spirit': "creative expression and inspired action",
+            'shadow': "integration of hidden aspects and unconscious patterns",
+            'light': "elevated consciousness and transcendent awareness",
+            'void': "stillness and clarity from emptiness",
+            'unity': "synthesis of all aspects into wholeness"
+        }
+        
+        # Randomly select gates based on dominant field
+        gates = np.random.choice(list(self.gate_textures.keys()), 2, replace=False)
+        
+        experience = {
+            'dominant_field': dominant,
+            'strength': float(strength),
+            'texture': textures.get(dominant, 'undefined quality'),
+            'gates': [int(g) for g in gates],
+            'gate_feel': self.gate_textures[gates[0]]['feel'],
+            'gameplay': self.gate_textures[gates[0]]['gameplay'],
+            'moment': f"Right now: {textures[dominant]}. {self.gate_textures[gates[0]]['texture']}."
+        }
+        
+        return experience
+
+# ===== LEGACY BUILDER (SIMPLIFIED) =====
+class LegacyBuilder:
+    def __init__(self):
+        self.categories = {
+            'engine': {'glyph': '◈', 'keywords': ['engine', 'core', 'system']},
+            'interface': {'glyph': '◯', 'keywords': ['component', 'widget', 'ui']},
+            'agent': {'glyph': '◆', 'keywords': ['agent', 'ai', 'bot']},
+            'world': {'glyph': '⬡', 'keywords': ['spatial', 'location', 'world']},
+            'knowledge': {'glyph': '◉', 'keywords': ['context', 'knowledge', 'data']}
+        }
+    
+    def classify(self, filename):
+        """Classify a filename into category"""
+        filename_lower = filename.lower()
+        
+        scores = {}
+        for category, config in self.categories.items():
+            score = sum(1 for kw in config['keywords'] if kw in filename_lower)
+            scores[category] = score
+        
+        if max(scores.values()) > 0:
+            category = max(scores, key=scores.get)
+        else:
+            category = 'engine'  # default
+        
+        return {
+            'category': category,
+            'glyph': self.categories[category]['glyph'],
+            'confidence': float(scores[category] / len(self.categories[category]['keywords'])),
+            'path': f'/organized/{category}/core/{filename}'
+        }
+
+# Initialize systems
+consciousness_gan = ConsciousnessGAN()
+experience_gen = ExperienceTextureGenerator()
+legacy_builder = LegacyBuilder()
+
+# Store for JS access
+systems_ready = True
+`);
+        }
+
+        // Generate consciousness state
+        async function generateConsciousness() {
+            log('🧠 Generating consciousness state...');
+            
+            try {
+                const result = await pyodide.runPythonAsync(`
+states = consciousness_gan.generate(n_samples=1)
+fields = consciousness_gan.get_field_summary(states)
+json.dumps(fields)
+`);
+                
+                const fields = JSON.parse(result);
+                displayFields(fields);
+                log('✅ Consciousness state generated');
+                
+                return fields;
+            } catch (error) {
+                log('❌ Error: ' + error);
+            }
+        }
+
+        // Generate experience texture
+        async function generateExperience() {
+            log('🎨 Generating experience texture...');
+            
+            try {
+                const result = await pyodide.runPythonAsync(`
+states = consciousness_gan.generate(n_samples=1)
+fields = consciousness_gan.get_field_summary(states)
+experience = experience_gen.generate_from_fields(fields)
+json.dumps(experience)
+`);
+                
+                const experience = JSON.parse(result);
+                displayExperience(experience);
+                log('✅ Experience texture generated');
+                
+            } catch (error) {
+                log('❌ Error: ' + error);
+            }
+        }
+
+        // Classify component
+        async function classifyComponent() {
+            const testFiles = [
+                'TrinityEngine.js',
+                'DashboardWidget.jsx',
+                'ResonanceAgent.js',
+                'LocationMap.js',
+                'ContextData.json'
+            ];
+            
+            const filename = testFiles[Math.floor(Math.random() * testFiles.length)];
+            log(`📁 Classifying: ${filename}`);
+            
+            try {
+                pyodide.globals.set('test_filename', filename);
+                const result = await pyodide.runPythonAsync(`
+classification = legacy_builder.classify(test_filename)
+json.dumps(classification)
+`);
+                
+                const classification = JSON.parse(result);
+                displayClassification(classification);
+                log(`✅ Classified as ${classification.category} ${classification.glyph}`);
+                
+            } catch (error) {
+                log('❌ Error: ' + error);
+            }
+        }
+
+        // Run full pipeline
+        async function runFullPipeline() {
+            log('🚀 Running full pipeline...');
+            log('  1. Generating consciousness...');
+            
+            try {
+                const result = await pyodide.runPythonAsync(`
+# Generate consciousness
+states = consciousness_gan.generate(n_samples=1)
+fields = consciousness_gan.get_field_summary(states)
+
+# Generate experience
+experience = experience_gen.generate_from_fields(fields)
+
+# Classify a component
+classification = legacy_builder.classify('ConsciousnessEngine.js')
+
+# Combine results
+pipeline_result = {
+    'fields': fields,
+    'experience': experience,
+    'classification': classification,
+    'timestamp': datetime.now().isoformat()
+}
+
+json.dumps(pipeline_result)
+`);
+                
+                const pipeline = JSON.parse(result);
+                
+                log('  2. Generated consciousness ✓');
+                displayFields(pipeline.fields);
+                
+                log('  3. Generated experience ✓');
+                displayExperience(pipeline.experience);
+                
+                log('  4. Classified component ✓');
+                displayClassification(pipeline.classification);
+                
+                log('✅ Pipeline complete!');
+                log(`   Timestamp: ${pipeline.timestamp}`);
+                
+            } catch (error) {
+                log('❌ Error: ' + error);
+            }
+        }
+
+        // Display functions
+        function displayFields(fields) {
+            const container = document.getElementById('fields-display');
+            container.innerHTML = '';
+            
+            bodyNames.forEach(name => {
+                const value = fields[name];
+                const normalized = (value + 1) / 2; // Convert from [-1,1] to [0,1]
+                
+                const card = document.createElement('div');
+                card.className = 'field-card';
+                card.innerHTML = `
+                    <div class="field-name">${name}</div>
+                    <div class="field-value">${value.toFixed(3)}</div>
+                    <div class="field-bar">
+                        <div class="field-bar-fill" style="width: ${normalized * 100}%"></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function displayExperience(exp) {
+            const output = document.getElementById('experience-output');
+            output.textContent = `
+Dominant Field: ${exp.dominant_field.toUpperCase()} (${exp.strength.toFixed(3)})
+
+Texture: ${exp.texture}
+
+Gates Active: ${exp.gates.join(', ')}
+
+Feels Like: ${exp.gate_feel}
+
+Gameplay: ${exp.gameplay}
+
+${exp.moment}
+`;
+        }
+
+        function displayClassification(classification) {
+            const output = document.getElementById('classification-output');
+            output.textContent = `
+Category: ${classification.category.toUpperCase()} ${classification.glyph}
+
+Confidence: ${(classification.confidence * 100).toFixed(1)}%
+
+Path: ${classification.path}
+
+Classification complete. Component ready for placement.
+`;
+        }
+
+        function log(message) {
+            const logElement = document.getElementById('system-log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.textContent += `\n[${timestamp}] ${message}`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initPyodide);
+    </script>
+</body>
+</html>

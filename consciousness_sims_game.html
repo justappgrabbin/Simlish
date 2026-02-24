@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Consciousness Sims - Browser Edition</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Game Container */
+        .game-container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(159, 122, 234, 0.3);
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .resources {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .resource {
+            background: rgba(159, 122, 234, 0.2);
+            padding: 5px 12px;
+            border-radius: 8px;
+        }
+
+        /* Main Game Area */
+        .game-area {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            overflow: hidden;
+        }
+
+        /* Sims Panel */
+        .sims-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-right: 1px solid rgba(159, 122, 234, 0.2);
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #9F7AEA;
+        }
+
+        .sim-card {
+            background: rgba(159, 122, 234, 0.1);
+            border: 1px solid rgba(159, 122, 234, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sim-card:hover {
+            background: rgba(159, 122, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .sim-card.selected {
+            background: rgba(159, 122, 234, 0.3);
+            border-color: #9F7AEA;
+        }
+
+        .sim-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .sim-status {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .sim-activity {
+            font-size: 0.8rem;
+            color: #4299E1;
+            margin-top: 5px;
+        }
+
+        /* World Canvas */
+        .world {
+            position: relative;
+            background: 
+                linear-gradient(0deg, rgba(159, 122, 234, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(159, 122, 234, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            overflow: hidden;
+        }
+
+        .building {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(159, 122, 234, 0.3), rgba(66, 153, 225, 0.3));
+            border: 2px solid rgba(159, 122, 234, 0.5);
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .building:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(159, 122, 234, 0.6);
+        }
+
+        .building-glyph {
+            font-size: 2rem;
+        }
+
+        .building-name {
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+
+        .building-status {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 3px;
+        }
+
+        .sim-avatar {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #9F7AEA, #4299E1);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .sim-avatar.moving {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Code Panel */
+        .code-panel {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 1px solid rgba(159, 122, 234, 0.2);
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .code-output {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Bottom Controls */
+        .controls {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-top: 1px solid rgba(159, 122, 234, 0.3);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #9F7AEA, #4299E1);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: rgba(159, 122, 234, 0.3);
+        }
+
+        /* Build Menu */
+        .build-menu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid #9F7AEA;
+            border-radius: 16px;
+            padding: 20px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .build-menu.active {
+            display: block;
+        }
+
+        .build-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .build-option {
+            background: rgba(159, 122, 234, 0.2);
+            border: 1px solid rgba(159, 122, 234, 0.4);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .build-option:hover {
+            background: rgba(159, 122, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .option-glyph {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .option-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .game-area {
+                grid-template-columns: 1fr;
+                grid-template-rows: 150px 1fr 200px;
+            }
+
+            .sims-panel, .code-panel {
+                overflow-y: auto;
+            }
+
+            .building {
+                min-width: 60px;
+                padding: 8px;
+            }
+
+            .building-glyph {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="game-title">◈ Consciousness Sims</div>
+            <div class="resources">
+                <div class="resource">🔋 Energy: <span id="energy">100</span></div>
+                <div class="resource">📦 Components: <span id="components">0</span></div>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <!-- Sims Panel -->
+            <div class="sims-panel">
+                <div class="panel-title">◆ Agents</div>
+                <div id="sims-list"></div>
+                <button class="btn" style="width: 100%; margin-top: 10px;" onclick="createSim()">
+                    + New Agent
+                </button>
+            </div>
+
+            <!-- World Canvas -->
+            <div class="world" id="world" onclick="handleWorldClick(event)">
+                <!-- Buildings and Sims render here -->
+            </div>
+
+            <!-- Code Output Panel -->
+            <div class="code-panel">
+                <div class="panel-title">📄 Generated Code</div>
+                <div id="code-list"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="controls">
+            <button class="btn" onclick="openBuildMenu()">🏗️ Build</button>
+            <button class="btn btn-secondary" onclick="toggleAutomate()">⚡ Auto-Build: <span id="auto-status">OFF</span></button>
+            <button class="btn btn-secondary" onclick="exportCode()">💾 Export All Code</button>
+        </div>
+    </div>
+
+    <!-- Build Menu (Modal) -->
+    <div class="build-menu" id="build-menu">
+        <div class="panel-title">Choose Building Type</div>
+        <div class="build-options">
+            <div class="build-option" onclick="buildBuilding('engine')">
+                <div class="option-glyph">◈</div>
+                <div class="option-name">Factory</div>
+                <div class="option-name" style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Generates Engines</div>
+            </div>
+            <div class="build-option" onclick="buildBuilding('interface')">
+                <div class="option-glyph">◯</div>
+                <div class="option-name">Gallery</div>
+                <div class="option-name" style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Generates UI</div>
+            </div>
+            <div class="build-option" onclick="buildBuilding('agent')">
+                <div class="option-glyph">◆</div>
+                <div class="option-name">Academy</div>
+                <div class="option-name" style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Generates Agents</div>
+            </div>
+            <div class="build-option" onclick="buildBuilding('world')">
+                <div class="option-glyph">⬡</div>
+                <div class="option-name">Landmark</div>
+                <div class="option-name" style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Generates Locations</div>
+            </div>
+            <div class="build-option" onclick="buildBuilding('knowledge')">
+                <div class="option-glyph">◉</div>
+                <div class="option-name">Library</div>
+                <div class="option-name" style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Generates Data</div>
+            </div>
+        </div>
+        <button class="btn" style="width: 100%; margin-top: 15px;" onclick="closeBuildMenu()">Cancel</button>
+    </div>
+
+    <script type="text/javascript">
+        let pyodide;
+        let gameState = {
+            sims: [],
+            buildings: [],
+            selectedSim: null,
+            energy: 100,
+            components: 0,
+            automate: false,
+            nextSimId: 1,
+            nextBuildingId: 1
+        };
+
+        const buildingTypes = {
+            'engine': { glyph: '◈', name: 'Factory', generates: 'Engine' },
+            'interface': { glyph: '◯', name: 'Gallery', generates: 'Component' },
+            'agent': { glyph: '◆', name: 'Academy', generates: 'Agent' },
+            'world': { glyph: '⬡', name: 'Landmark', generates: 'Location' },
+            'knowledge': { glyph: '◉', name: 'Library', generates: 'Data' }
+        };
+
+        // Initialize Pyodide
+        async function initPyodide() {
+            try {
+                console.log('Loading Pyodide...');
+                pyodide = await loadPyodide();
+                await pyodide.loadPackage('numpy');
+                
+                await pyodide.runPythonAsync(`
+import numpy as np
+import json
+
+class CodeGenerator:
+    def generate_code(self, building_type, name):
+        templates = {
+            'engine': f'''class {name}Engine:
+    def __init__(self):
+        self.active = True
+        self.power = 1.0
+    
+    def process(self, input):
+        return input * self.power
+''',
+            'interface': f'''export const {name}Widget = ({{ universe }}) => {{
+    return (
+        <div className="{name.lower()}-widget">
+            <h3>{name}</h3>
+        </div>
+    );
+}};
+''',
+            'agent': f'''class {name}Agent:
+    def __init__(self):
+        self.name = "{name}"
+        self.active = True
+    
+    def act(self):
+        return f"{{self.name}} is acting"
+''',
+            'world': f'''export const {name}Location = {{
+    name: "{name}",
+    type: "landmark",
+    coordinates: {{ x: 0, y: 0, z: 0 }}
+}};
+''',
+            'knowledge': f'''{{
+    "domain": "{name.lower()}",
+    "data": {{}},
+    "timestamp": "2025-01-04"
+}}
+'''
+        }
+        return templates.get(building_type, '// Code')
+
+code_gen = CodeGenerator()
+                `);
+                
+                console.log('✅ Pyodide ready');
+                
+                // Create initial sim
+                createSim();
+                
+                // Start game loop
+                gameLoop();
+            } catch (error) {
+                console.error('Error initializing:', error);
+            }
+        }
+
+        // Create a new Sim (Agent)
+        function createSim() {
+            const sim = {
+                id: gameState.nextSimId++,
+                name: `Agent_${gameState.nextSimId - 1}`,
+                x: Math.random() * 400 + 100,
+                y: Math.random() * 300 + 100,
+                activity: 'idle',
+                building: null
+            };
+            
+            gameState.sims.push(sim);
+            renderSims();
+        }
+
+        // Render sims in panel and world
+        function renderSims() {
+            const simsList = document.getElementById('sims-list');
+            const world = document.getElementById('world');
+            
+            // Update panel
+            simsList.innerHTML = gameState.sims.map(sim => `
+                <div class="sim-card ${gameState.selectedSim === sim.id ? 'selected' : ''}" 
+                     onclick="selectSim(${sim.id})">
+                    <div class="sim-name">◆ ${sim.name}</div>
+                    <div class="sim-status">Energy: ${Math.floor(Math.random() * 100)}</div>
+                    <div class="sim-activity">📍 ${sim.activity}</div>
+                </div>
+            `).join('');
+            
+            // Remove old avatars
+            world.querySelectorAll('.sim-avatar').forEach(el => el.remove());
+            
+            // Add avatars to world
+            gameState.sims.forEach(sim => {
+                const avatar = document.createElement('div');
+                avatar.className = 'sim-avatar' + (sim.activity !== 'idle' ? ' moving' : '');
+                avatar.style.left = sim.x + 'px';
+                avatar.style.top = sim.y + 'px';
+                avatar.textContent = '◆';
+                avatar.onclick = (e) => {
+                    e.stopPropagation();
+                    selectSim(sim.id);
+                };
+                world.appendChild(avatar);
+            });
+        }
+
+        function selectSim(id) {
+            gameState.selectedSim = id;
+            renderSims();
+        }
+
+        // Build menu
+        function openBuildMenu() {
+            document.getElementById('build-menu').classList.add('active');
+        }
+
+        function closeBuildMenu() {
+            document.getElementById('build-menu').classList.remove('active');
+        }
+
+        // Build a building
+        async function buildBuilding(type) {
+            closeBuildMenu();
+            
+            const config = buildingTypes[type];
+            const building = {
+                id: gameState.nextBuildingId++,
+                type: type,
+                name: `${config.name}_${gameState.nextBuildingId - 1}`,
+                glyph: config.glyph,
+                x: Math.random() * 500 + 50,
+                y: Math.random() * 400 + 50,
+                status: 'constructing',
+                progress: 0
+            };
+            
+            gameState.buildings.push(building);
+            renderBuildings();
+            
+            // Assign sim to build it
+            if (gameState.sims.length > 0) {
+                const sim = gameState.sims[0];
+                sim.activity = `building ${building.name}`;
+                sim.building = building.id;
+                
+                // Move sim to building
+                moveSim(sim, building.x, building.y);
+                
+                // Simulate construction
+                setTimeout(async () => {
+                    building.status = 'complete';
+                    building.progress = 100;
+                    
+                    // Generate code
+                    await generateCodeForBuilding(building);
+                    
+                    sim.activity = 'idle';
+                    sim.building = null;
+                    
+                    gameState.components++;
+                    updateResources();
+                    renderBuildings();
+                    renderSims();
+                }, 3000);
+            }
+        }
+
+        function moveSim(sim, targetX, targetY) {
+            const steps = 20;
+            const dx = (targetX - sim.x) / steps;
+            const dy = (targetY - sim.y) / steps;
+            
+            let step = 0;
+            const interval = setInterval(() => {
+                sim.x += dx;
+                sim.y += dy;
+                renderSims();
+                
+                step++;
+                if (step >= steps) {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        async function generateCodeForBuilding(building) {
+            try {
+                pyodide.globals.set('building_type', building.type);
+                pyodide.globals.set('building_name', building.name.replace(/_/g, ''));
+                
+                const code = await pyodide.runPythonAsync(`
+code_gen.generate_code(building_type, building_name)
+                `);
+                
+                building.code = code;
+                displayGeneratedCode(building);
+            } catch (error) {
+                console.error('Error generating code:', error);
+            }
+        }
+
+        function displayGeneratedCode(building) {
+            const codeList = document.getElementById('code-list');
+            const codeBlock = document.createElement('div');
+            codeBlock.className = 'code-output';
+            codeBlock.innerHTML = `
+<div style="color: #9F7AEA; font-weight: bold; margin-bottom: 5px;">
+${building.glyph} ${building.name}
+</div>
+<pre style="white-space: pre-wrap;">${building.code}</pre>
+            `;
+            codeList.insertBefore(codeBlock, codeList.firstChild);
+        }
+
+        function renderBuildings() {
+            const world = document.getElementById('world');
+            
+            // Remove old buildings
+            world.querySelectorAll('.building').forEach(el => el.remove());
+            
+            // Add buildings
+            gameState.buildings.forEach(building => {
+                const buildingEl = document.createElement('div');
+                buildingEl.className = 'building';
+                buildingEl.style.left = building.x + 'px';
+                buildingEl.style.top = building.y + 'px';
+                buildingEl.innerHTML = `
+                    <div class="building-glyph">${building.glyph}</div>
+                    <div class="building-name">${building.name}</div>
+                    <div class="building-status">${building.status}</div>
+                `;
+                world.appendChild(buildingEl);
+            });
+        }
+
+        function handleWorldClick(event) {
+            // Future: move selected sim to clicked location
+        }
+
+        function toggleAutomate() {
+            gameState.automate = !gameState.automate;
+            document.getElementById('auto-status').textContent = gameState.automate ? 'ON' : 'OFF';
+        }
+
+        function exportCode() {
+            const allCode = gameState.buildings
+                .filter(b => b.code)
+                .map(b => `// ${b.name}\n${b.code}`)
+                .join('\n\n');
+            
+            const blob = new Blob([allCode], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'generated_code.txt';
+            a.click();
+        }
+
+        function updateResources() {
+            document.getElementById('energy').textContent = gameState.energy;
+            document.getElementById('components').textContent = gameState.components;
+        }
+
+        // Game loop
+        function gameLoop() {
+            // Future: autonomous sim behavior
+            if (gameState.automate && gameState.sims.length > 0) {
+                // Sims automatically build things
+            }
+            
+            setTimeout(gameLoop, 1000);
+        }
+
+        // Initialize
+        window.addEventListener('load', initPyodide);
+    </script>
+</body>
+</html>
