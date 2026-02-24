@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Rezona</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --panel: #101010;
+            --card: #131313;
+            --ink: #f2f2f2;
+            --muted: #888;
+            --line: #222;
+            --accent: #8ef0ff;
+            --accent2: #d8b4fe;
+            --green: #00ff88;
+            --pink: #ec4899;
+            --gold: #fbbf24;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            background: var(--bg); color: var(--ink);
+            min-height: 100vh; padding-bottom: 80px;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px; background: var(--panel);
+            border-bottom: 1px solid var(--line);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-size: 20px; font-weight: 800; letter-spacing: 1px; color: var(--accent); }
+        .header-right { display: flex; align-items: center; gap: 12px; }
+        .status-dot { 
+            width: 8px; height: 8px; border-radius: 50%; 
+            background: var(--green); animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+        /* NAV */
+        nav {
+            display: flex; justify-content: space-around; padding: 10px 8px;
+            background: var(--panel); border-top: 1px solid var(--line);
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+            overflow-x: auto; gap: 4px;
+        }
+        .nav-btn {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            background: none; border: none; color: var(--muted);
+            font-size: 10px; cursor: pointer; padding: 8px 12px;
+            border-radius: 12px; transition: all 0.2s;
+        }
+        .nav-btn.active { color: var(--accent); background: rgba(142,240,255,0.08); }
+        .nav-icon { font-size: 20px; }
+
+        /* MAIN */
+        main { padding: 16px; max-width: 680px; margin: 0 auto; }
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* CARDS */
+        .card {
+            background: var(--card); border: 1px solid var(--line);
+            border-radius: 16px; padding: 20px; margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--muted); margin-bottom: 16px;
+        }
+
+        /* INPUTS */
+        .input {
+            width: 100%; padding: 14px 16px; background: var(--bg);
+            border: 1px solid var(--line); border-radius: 12px;
+            color: var(--ink); font-size: 15px; margin-bottom: 12px;
+            font-family: inherit;
+        }
+        .input:focus { outline: none; border-color: var(--accent); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .input-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
+
+        /* BUTTONS */
+        .btn {
+            padding: 14px 24px; border-radius: 12px; border: none;
+            font-weight: 700; font-size: 14px; cursor: pointer;
+            transition: all 0.2s; font-family: inherit;
+        }
+        .btn-full { width: 100%; }
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #000;
+        }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-ghost { background: rgba(255,255,255,0.07); color: var(--ink); }
+        .btn-small { padding: 8px 16px; font-size: 12px; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* TOGGLE */
+        .toggle-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; padding: 12px 20px; background: var(--panel);
+            border-radius: 14px; margin-bottom: 20px;
+        }
+        .toggle-label { font-size: 13px; font-weight: 600; }
+        .toggle-label.active { color: var(--accent); }
+        .toggle-label.inactive { color: var(--muted); }
+        .toggle-switch {
+            position: relative; width: 52px; height: 28px;
+            background: var(--line); border-radius: 14px; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .toggle-switch.on { background: var(--accent2); }
+        .toggle-knob {
+            position: absolute; top: 3px; left: 3px;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: #fff; transition: all 0.3s;
+        }
+        .toggle-switch.on .toggle-knob { left: 27px; }
+
+        /* PROFILE VIEW */
+        .profile-hero {
+            text-align: center; padding: 30px 20px;
+            background: linear-gradient(135deg, rgba(142,240,255,0.1), rgba(216,180,254,0.1));
+            border-radius: 16px; margin-bottom: 16px;
+            border: 1px solid var(--line);
+        }
+        .profile-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            margin: 0 auto 16px; display: flex; align-items: center;
+            justify-content: center; font-size: 32px;
+        }
+        .profile-type { font-size: 22px; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+        .profile-sub { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+        .gates-wrap { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
+        .gate-pill {
+            background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+            padding: 5px 12px; border-radius: 999px;
+            font-size: 12px; font-weight: 600; color: var(--accent);
+        }
+        .stat-row {
+            display: flex; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px solid var(--line);
+            font-size: 14px;
+        }
+        .stat-row:last-child { border: none; }
+        .stat-label { color: var(--muted); }
+        .stat-val { font-weight: 600; color: var(--ink); }
+
+        /* QUALIA HOME (Chart as House) */
+        .qualia-home {
+            background: linear-gradient(180deg, #0d0020 0%, #000510 100%);
+            border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(142,240,255,0.2);
+            min-height: 500px; position: relative;
+            margin-bottom: 16px;
+        }
+        .qualia-sky {
+            height: 120px; position: relative;
+            background: linear-gradient(180deg, #000420 0%, #001030 100%);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .qualia-stars {
+            position: absolute; inset: 0;
+            background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.8) 0%, transparent 100%),
+                              radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                              radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                              radial-gradient(2px 2px at 40% 70%, rgba(142,240,255,0.5) 0%, transparent 100%);
+        }
+        .qualia-title { 
+            font-size: 13px; text-transform: uppercase; letter-spacing: 3px;
+            color: rgba(142,240,255,0.6); z-index: 1; 
+        }
+        .house-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px; padding: 12px;
+        }
+        .center-room {
+            border-radius: 12px; padding: 16px 10px;
+            text-align: center; border: 1px solid transparent;
+            cursor: pointer; transition: all 0.2s; position: relative;
+        }
+        .center-room.defined {
+            background: rgba(142,240,255,0.12);
+            border-color: rgba(142,240,255,0.3);
+        }
+        .center-room.undefined {
+            background: rgba(255,255,255,0.02);
+            border-color: rgba(255,255,255,0.06);
+        }
+        .center-room.defined:hover { 
+            background: rgba(142,240,255,0.2); transform: scale(1.02); 
+        }
+        .room-name { 
+            font-size: 9px; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .center-room.defined .room-name { color: var(--accent); }
+        .center-room.undefined .room-name { color: var(--muted); }
+        .room-gates { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; }
+        .room-gate-dot {
+            width: 20px; height: 20px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 8px; font-weight: 700;
+        }
+        .room-gate-dot.active { background: var(--accent); color: #000; }
+        .room-gate-dot.inactive { background: rgba(255,255,255,0.06); color: var(--muted); }
+        .center-room.span2 { grid-column: span 2; }
+
+        /* AGENT CHAT */
+        .agent-bar {
+            background: rgba(216,180,254,0.1); border: 1px solid rgba(216,180,254,0.3);
+            border-radius: 16px; padding: 16px; margin-bottom: 16px;
+        }
+        .agent-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .agent-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent2), var(--pink));
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+        }
+        .agent-name { font-size: 15px; font-weight: 700; color: var(--accent2); }
+        .agent-status { font-size: 11px; color: var(--muted); }
+        .chat-messages {
+            max-height: 240px; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 10px;
+            margin-bottom: 12px; padding: 4px 0;
+        }
+        .chat-bubble {
+            max-width: 85%; padding: 10px 14px;
+            border-radius: 16px; font-size: 14px; line-height: 1.5;
+        }
+        .chat-bubble.agent { 
+            background: rgba(216,180,254,0.15); border-radius: 4px 16px 16px 16px;
+            color: var(--ink); align-self: flex-start;
+        }
+        .chat-bubble.user { 
+            background: var(--accent); color: #000;
+            border-radius: 16px 4px 16px 16px;
+            align-self: flex-end;
+        }
+        .chat-input-row { display: flex; gap: 8px; }
+        .chat-input { 
+            flex: 1; padding: 12px 16px; background: var(--bg);
+            border: 1px solid var(--line); border-radius: 12px;
+            color: var(--ink); font-size: 14px; font-family: inherit;
+        }
+        .chat-input:focus { outline: none; border-color: var(--accent2); }
+        .chat-send { 
+            width: 44px; height: 44px; background: var(--accent2);
+            border: none; border-radius: 12px; cursor: pointer;
+            font-size: 18px; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* RESONANCE MATCHES */
+        .match-card {
+            background: var(--card); border: 1px solid var(--line);
+            border-radius: 14px; padding: 16px; margin-bottom: 12px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .match-card:hover { border-color: var(--accent2); }
+        .match-header { 
+            display: flex; justify-content: space-between; 
+            align-items: center; margin-bottom: 10px; 
+        }
+        .match-type { font-size: 15px; font-weight: 700; color: var(--accent); }
+        .match-score { font-size: 28px; font-weight: 800; color: var(--accent2); }
+        .match-compat { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+        .match-gates { display: flex; flex-wrap: wrap; gap: 5px; }
+        .match-gate { 
+            background: rgba(142,240,255,0.1); color: var(--accent);
+            padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600;
+        }
+
+        /* PATHWAY TO PURPOSE */
+        .week-card {
+            border: 1px solid var(--line); border-radius: 12px;
+            padding: 16px; margin-bottom: 12px; cursor: pointer;
+            transition: all 0.2s; position: relative; overflow: hidden;
+        }
+        .week-card.active-week { border-color: var(--accent); }
+        .week-card::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px;
+        }
+        .week-card.done::before { background: var(--green); }
+        .week-card.active-week::before { background: var(--accent); }
+        .week-card.locked::before { background: var(--line); }
+        .week-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .week-num { 
+            font-size: 11px; padding: 3px 10px; border-radius: 20px;
+            background: rgba(99,102,241,0.2); color: #818cf8;
+        }
+        .week-status { font-size: 18px; }
+        .week-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .week-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+        /* LINKS OUT */
+        .link-card {
+            display: flex; align-items: center; gap: 16px;
+            background: var(--card); border: 1px solid var(--line);
+            border-radius: 14px; padding: 16px; margin-bottom: 10px;
+            cursor: pointer; transition: all 0.2s; text-decoration: none; color: inherit;
+        }
+        .link-card:hover { border-color: var(--accent); transform: translateX(4px); }
+        .link-icon { font-size: 28px; width: 44px; text-align: center; }
+        .link-info { flex: 1; }
+        .link-name { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+        .link-desc { font-size: 12px; color: var(--muted); }
+        .link-arrow { color: var(--muted); font-size: 18px; }
+
+        /* PROJECTOR - big screen viewer + library */
+        .projector-screen {
+            width: 100%; aspect-ratio: 1; background: #000;
+            border-radius: 20px; overflow: hidden; position: relative;
+            margin-bottom: 16px; display: flex; align-items: center;
+            justify-content: center; border: 2px solid var(--line);
+        }
+        .projector-screen.has-content { border-color: var(--accent); }
+        .projector-screen img, .projector-screen video {
+            width: 100%; height: 100%; object-fit: contain;
+        }
+        .projector-screen pre {
+            width: 100%; height: 100%; overflow: auto;
+            padding: 20px; font-size: 12px; color: var(--accent);
+            font-family: 'SF Mono', monospace; line-height: 1.5;
+        }
+        .projector-empty {
+            text-align: center; color: var(--muted);
+        }
+        .projector-empty-icon { font-size: 48px; opacity: 0.3; margin-bottom: 12px; }
+        .projector-fullscreen-btn {
+            position: absolute; bottom: 12px; right: 12px;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2); color: #fff;
+            cursor: pointer; display: flex; align-items: center;
+            justify-content: center; font-size: 16px; opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .projector-screen:hover .projector-fullscreen-btn { opacity: 1; }
+        .projector-controls {
+            display: flex; gap: 10px; margin-bottom: 20px;
+        }
+        .projector-add-btn {
+            flex: 1; padding: 14px; background: var(--accent);
+            color: #000; border: none; border-radius: 12px;
+            font-weight: 700; font-size: 14px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; transition: all 0.2s;
+        }
+        .projector-add-btn:active { transform: scale(0.98); }
+        .projector-library-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--muted); margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1px solid var(--line); display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .library-count { color: var(--accent); font-weight: 600; }
+        .projector-list { display: flex; flex-direction: column; gap: 10px; }
+        .projector-item {
+            display: flex; align-items: center; gap: 12px;
+            background: var(--card); border: 1px solid var(--line);
+            border-radius: 12px; padding: 12px; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .projector-item:hover { border-color: var(--accent); }
+        .projector-item.playing { border-color: var(--accent); background: rgba(142,240,255,0.05); }
+        .projector-thumb {
+            width: 48px; height: 48px; border-radius: 8px;
+            background: var(--line); flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; overflow: hidden;
+        }
+        .projector-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .projector-info { flex: 1; min-width: 0; }
+        .projector-title {
+            font-size: 14px; font-weight: 600; margin-bottom: 3px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .projector-meta {
+            font-size: 11px; color: var(--muted); display: flex;
+            gap: 8px; align-items: center;
+        }
+        .projector-source {
+            padding: 2px 6px; background: rgba(142,240,255,0.1);
+            border-radius: 4px; color: var(--accent); font-size: 9px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .projector-play-btn {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border: none; cursor: pointer; font-size: 14px; color: #000;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.2s;
+        }
+        .projector-play-btn:hover { transform: scale(1.1); }
+        .projector-item.playing .projector-play-btn {
+            background: var(--line); color: var(--muted);
+        }
+        .projector-delete {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2);
+            color: #ef4444; font-size: 12px; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .projector-item:hover .projector-delete { display: flex; }
+        .projector-fullscreen-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.98);
+            z-index: 300; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 20px;
+        }
+        .fullscreen-content {
+            max-width: 95vw; max-height: 85vh; position: relative;
+        }
+        .fullscreen-content img, .fullscreen-content video {
+            max-width: 100%; max-height: 85vh; border-radius: 12px;
+        }
+        .fullscreen-content pre {
+            background: var(--card); padding: 24px; border-radius: 12px;
+            overflow: auto; max-height: 85vh; font-size: 13px;
+            color: var(--accent); font-family: 'SF Mono', monospace;
+        }
+        .fullscreen-close {
+            position: fixed; top: 20px; right: 20px;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2); color: #fff;
+            font-size: 20px; cursor: pointer; z-index: 301;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .fullscreen-title {
+            margin-top: 16px; font-size: 16px; font-weight: 600;
+            text-align: center; color: var(--ink);
+        }
+        .fullscreen-meta {
+            margin-top: 6px; font-size: 12px; color: var(--muted);
+            text-align: center; font-family: monospace;
+        }
+        
+        /* CHARTS VIEW */
+        .chart-section { margin-bottom: 24px; }
+        .chart-section-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--muted); margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        .chart-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .chart-row:last-child { border: none; }
+        .chart-label { font-size: 13px; color: var(--muted); }
+        .chart-value { font-size: 13px; font-weight: 600; color: var(--ink); }
+        .channel-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(142,240,255,0.08); border: 1px solid rgba(142,240,255,0.2);
+            padding: 6px 12px; border-radius: 999px; margin: 4px;
+            font-size: 12px; font-weight: 600;
+        }
+        .channels-wrap { display: flex; flex-wrap: wrap; margin-top: 8px; }
+        .defined-center-badge {
+            padding: 6px 14px; border-radius: 999px; margin: 4px;
+            font-size: 12px; font-weight: 600;
+            background: rgba(0,255,136,0.1); color: var(--green);
+            border: 1px solid rgba(0,255,136,0.2);
+        }
+        .undefined-center-badge {
+            padding: 6px 14px; border-radius: 999px; margin: 4px;
+            font-size: 12px; color: var(--muted);
+            background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+        }
+
+        /* ALERTS */
+        .error { 
+            background: rgba(255,100,100,0.1); border: 1px solid rgba(255,100,100,0.3);
+            color: #ff8080; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .success {
+            background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3);
+            color: var(--green); padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        /* LOADING */
+        .spinner {
+            width: 36px; height: 36px; border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent); border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin: 0 auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-wrap { padding: 40px; text-align: center; }
+
+        /* COHERENCE BAR */
+        .coh-bar { 
+            height: 6px; background: var(--line); border-radius: 3px; 
+            overflow: hidden; margin: 8px 0; 
+        }
+        .coh-fill { 
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2)); 
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:8000'
+    : 'https://your-backend-url.com';
+
+// HD CENTER DATA
+const CENTERS = {
+    Head:     { gates: [61,63,64], role: 'Inspiration', type: 'Pressure' },
+    Ajna:     { gates: [47,24,4,11,43,17], role: 'Conceptualization', type: 'Awareness' },
+    Throat:   { gates: [62,23,56,35,12,45,33,8,31,20,16], role: 'Manifestation', type: 'Motor' },
+    G:        { gates: [1,13,25,46,2,15,10,7], role: 'Identity & Direction', type: 'Identity' },
+    Heart:    { gates: [51,21,40,26], role: 'Will & Ego', type: 'Motor' },
+    Spleen:   { gates: [48,57,44,50,32,28,18], role: 'Intuition & Survival', type: 'Awareness' },
+    SacralCenter: { gates: [5,14,29,59,9,3,42,27,34], role: 'Life Force', type: 'Motor' },
+    Solar:    { gates: [36,22,37,55,30,49,19,6,41], role: 'Emotional Wave', type: 'Awareness' },
+    Root:     { gates: [53,60,52,19,39,41,58,38,54], role: 'Pressure & Adrenaline', type: 'Pressure' },
+};
+
+// AGENT RESPONSES based on gate/type
+const agentResponse = (gate, type, msg) => {
+    const responses = {
+        Manifestor: [`Your initiation power is unmatched. ${msg ? 'Interesting...' : 'What will you create?'}`,
+                     `As a Manifestor, you don't need permission. What wants to emerge?`],
+        Generator:  [`Your response is everything. ${msg ? 'I sense...' : 'What lights you up?'}`,
+                     `Your sacral knows. Follow the pull, not the push.`],
+        'Manifesting Generator': [`You can do multiple things at once - that's your gift. What's alive right now?`,
+                                  `Your speed is real. Don't apologize for moving fast.`],
+        Projector:  [`You see systems others miss. ${msg ? 'Let me reflect...' : 'Who invited you in today?'}`,
+                     `Rest and recognition - those are your nutrients. Are you getting both?`],
+        Reflector:  [`You reflect the health of your community. What are you noticing lately?`,
+                     `Give yourself the full lunar cycle. Don't decide today.`],
+    };
+    const arr = responses[type] || [`Gate ${gate} is speaking. What is it telling you?`];
+    return arr[Math.floor(Math.random() * arr.length)];
+};
+
+// QUALIA HOME - HD Chart as a House
+function QualiaHome({ profile, isOwner }) {
+    const gates = profile?.gates || [];
+    const type = profile?.type || 'Generator';
+    const definedCenters = [];
+
+    const centerDefined = (cname) => {
+        const cGates = CENTERS[cname]?.gates || [];
+        return cGates.some(g => gates.includes(g));
+    };
+
+    const typeEmoji = {
+        Manifestor: '⚡', Generator: '🔥', 'Manifesting Generator': '🌀',
+        Projector: '🔭', Reflector: '🌙'
+    };
+
+    return (
+        <div className="qualia-home">
+            <div className="qualia-sky">
+                <div className="qualia-stars"></div>
+                <div className="qualia-title">
+                    {isOwner ? 'Your Qualia Home' : `${type}'s Space`}
+                </div>
+            </div>
+
+            <div className="house-grid">
+                {/* Row 1 */}
+                <div className={`center-room ${centerDefined('Head') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Head</div>
+                    <div className="room-gates">
+                        {CENTERS.Head.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div style={{gridColumn: 'span 2'}}></div>
+
+                {/* Row 2 */}
+                <div className={`center-room ${centerDefined('Ajna') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Ajna</div>
+                    <div className="room-gates">
+                        {CENTERS.Ajna.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div style={{gridColumn: 'span 2'}}></div>
+
+                {/* Row 3 - Throat spans */}
+                <div className={`center-room span2 ${centerDefined('Throat') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Throat</div>
+                    <div className="room-gates">
+                        {CENTERS.Throat.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={`center-room ${centerDefined('Heart') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Heart</div>
+                    <div className="room-gates">
+                        {CENTERS.Heart.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Row 4 - G center */}
+                <div className={`center-room ${centerDefined('Spleen') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Spleen</div>
+                    <div className="room-gates">
+                        {CENTERS.Spleen.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={`center-room ${centerDefined('G') ? 'defined' : 'undefined'}`} 
+                     style={{background: centerDefined('G') ? 'rgba(216,180,254,0.15)' : undefined,
+                             borderColor: centerDefined('G') ? 'rgba(216,180,254,0.4)' : undefined}}>
+                    <div className="room-name" style={{color: centerDefined('G') ? 'var(--accent2)' : undefined}}>
+                        {typeEmoji[type]} G
+                    </div>
+                    <div className="room-gates">
+                        {CENTERS.G.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}
+                                 style={gates.includes(g) ? {background: 'var(--accent2)', color: '#000'} : {}}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={`center-room ${centerDefined('Solar') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Solar Plexus</div>
+                    <div className="room-gates">
+                        {CENTERS.Solar.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Row 5 - Sacral */}
+                <div style={{}}></div>
+                <div className={`center-room ${centerDefined('SacralCenter') ? 'defined' : 'undefined'}`}
+                     style={{background: centerDefined('SacralCenter') ? 'rgba(0,255,136,0.1)' : undefined,
+                             borderColor: centerDefined('SacralCenter') ? 'rgba(0,255,136,0.3)' : undefined}}>
+                    <div className="room-name" style={{color: centerDefined('SacralCenter') ? 'var(--green)' : undefined}}>
+                        Sacral
+                    </div>
+                    <div className="room-gates">
+                        {CENTERS.SacralCenter.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}
+                                 style={gates.includes(g) ? {background: 'var(--green)', color: '#000'} : {}}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div style={{}}></div>
+
+                {/* Row 6 - Root */}
+                <div style={{}}></div>
+                <div className={`center-room ${centerDefined('Root') ? 'defined' : 'undefined'}`}>
+                    <div className="room-name">Root</div>
+                    <div className="room-gates">
+                        {CENTERS.Root.gates.map(g => (
+                            <div key={g} className={`room-gate-dot ${gates.includes(g) ? 'active' : 'inactive'}`}>
+                                {g}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div style={{}}></div>
+            </div>
+        </div>
+    );
+}
+
+// AGENT CHAT
+function AgentChat({ profile }) {
+    const [messages, setMessages] = useState([
+        { from: 'agent', text: agentResponse(profile?.gates?.[0], profile?.type, null) }
+    ]);
+    const [input, setInput] = useState('');
+    const bottomRef = useRef(null);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    const send = () => {
+        if (!input.trim()) return;
+        const userMsg = { from: 'user', text: input };
+        const agentMsg = { from: 'agent', text: agentResponse(profile?.gates?.[0], profile?.type, input) };
+        setMessages(prev => [...prev, userMsg, agentMsg]);
+        setInput('');
+    };
+
+    return (
+        <div className="agent-bar">
+            <div className="agent-header">
+                <div className="agent-avatar">🤖</div>
+                <div>
+                    <div className="agent-name">Your Agent</div>
+                    <div className="agent-status">
+                        {profile?.type} · Gate {profile?.gates?.[0]}
+                    </div>
+                </div>
+            </div>
+            <div className="chat-messages">
+                {messages.map((m, i) => (
+                    <div key={i} className={`chat-bubble ${m.from}`}>{m.text}</div>
+                ))}
+                <div ref={bottomRef}/>
+            </div>
+            <div className="chat-input-row">
+                <input
+                    className="chat-input"
+                    placeholder="Talk to your agent..."
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    onKeyDown={e => e.key === 'Enter' && send()}
+                />
+                <button className="chat-send" onClick={send}>↑</button>
+            </div>
+        </div>
+    );
+}
+
+// INDIVERSE - the toggle view
+function IndiVerse({ profile, isOwner }) {
+    const [mode, setMode] = useState('profile');
+
+    if (!profile) return (
+        <div className="card" style={{textAlign:'center', padding:'40px', color:'var(--muted)'}}>
+            Create your profile first
+        </div>
+    );
+
+    return (
+        <div>
+            {/* TOGGLE */}
+            <div className="toggle-bar">
+                <span className={`toggle-label ${mode === 'profile' ? 'active' : 'inactive'}`}>
+                    Profile
+                </span>
+                <div className={`toggle-switch ${mode === 'qualia' ? 'on' : ''}`}
+                     onClick={() => setMode(mode === 'profile' ? 'qualia' : 'profile')}>
+                    <div className="toggle-knob"/>
+                </div>
+                <span className={`toggle-label ${mode === 'qualia' ? 'active' : 'inactive'}`}>
+                    Qualia Home
+                </span>
+            </div>
+
+            {mode === 'profile' ? (
+                <>
+                    <div className="profile-hero">
+                        <div className="profile-avatar">
+                            {profile.type === 'Manifestor' ? '⚡' :
+                             profile.type === 'Generator' ? '🔥' :
+                             profile.type === 'Manifesting Generator' ? '🌀' :
+                             profile.type === 'Projector' ? '🔭' : '🌙'}
+                        </div>
+                        <div className="profile-type">{profile.type}</div>
+                        <div className="profile-sub">
+                            {profile.profile} · {profile.authority} Authority
+                        </div>
+                        <div className="gates-wrap">
+                            {(profile.gates || []).map(g => (
+                                <span key={g} className="gate-pill">Gate {g}</span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="stat-row">
+                            <span className="stat-label">Strategy</span>
+                            <span className="stat-val">
+                                {profile.type === 'Manifestor' ? 'Inform' :
+                                 profile.type?.includes('Generator') ? 'Respond' :
+                                 profile.type === 'Projector' ? 'Wait for invitation' : 'Wait lunar cycle'}
+                            </span>
+                        </div>
+                        <div className="stat-row">
+                            <span className="stat-label">Authority</span>
+                            <span className="stat-val">{profile.authority}</span>
+                        </div>
+                        <div className="stat-row">
+                            <span className="stat-label">Profile</span>
+                            <span className="stat-val">{profile.profile}</span>
+                        </div>
+                        <div className="stat-row">
+                            <span className="stat-label">Defined Gates</span>
+                            <span className="stat-val">{(profile.gates || []).length}</span>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <QualiaHome profile={profile} isOwner={isOwner} />
+                    {isOwner && <AgentChat profile={profile} />}
+                    {!isOwner && (
+                        <div className="card" style={{textAlign:'center', color:'var(--muted)', fontSize:'14px'}}>
+                            👁️ You're visiting {profile.type}'s Qualia Home
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
+    );
+}
+
+// PATHWAY TO PURPOSE
+function PathwayView({ profile }) {
+    const weeks = [
+        { n:1, title:'Discovery', desc:'Onboarding + HD profile. Find your common ground with the group. What unique thing do you bring?', icon:'🔍', status: profile ? 'active-week' : 'locked' },
+        { n:2, title:'Assessment', desc:'Role assignment via resonance. Who\'s the Attractor, Stabilizer, Builder? HD/I Ching deep dive.', icon:'🗺️', status: 'locked' },
+        { n:3, title:'Placement', desc:'Form project sub-teams. Bring your energy to the table. First real work begins.', icon:'⚡', status: 'locked' },
+        { n:4, title:'Activation', desc:'Launch mini-project. Target: first $100/group day. GAN adjustment based on early results.', icon:'🚀', status: 'locked' },
+        { n:5, title:'Refinement', desc:'Feedback loop + pivot if needed. Resonance Economy layer activated. Revenue sharing begins.', icon:'🔄', status: 'locked' },
+        { n:6, title:'Sustainability', desc:'Long-term build. Next cohort planning. You are now a node in the network.', icon:'🌱', status: 'locked' },
+    ];
+
+    return (
+        <div>
+            <div className="card" style={{background:'linear-gradient(135deg,rgba(142,240,255,0.08),rgba(216,180,254,0.08))'}}>
+                <div className="card-title">Pathways to Purpose</div>
+                <p style={{fontSize:'14px', color:'var(--muted)', lineHeight:'1.6'}}>
+                    A 6-week cohort program connecting people through designed resonance.
+                    You don't succeed unless your group succeeds.
+                </p>
+            </div>
+            {weeks.map(w => (
+                <div key={w.n} className={`week-card ${w.status}`}>
+                    <div className="week-header">
+                        <span className="week-num">Week {w.n}</span>
+                        <span className="week-status">
+                            {w.status === 'done' ? '✅' : w.status === 'active-week' ? '🎯' : '🔒'}
+                        </span>
+                    </div>
+                    <div className="week-title">{w.icon} {w.title}</div>
+                    <div className="week-desc">{w.desc}</div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+// PROJECTOR - Big screen viewer + modular library
+function ProjectorView() {
+    const [library, setLibrary] = useState(() => {
+        const saved = localStorage.getItem('rezona_projector_library');
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [playing, setPlaying] = useState(null);
+    const [fullscreen, setFullscreen] = useState(false);
+    const fileRef = useRef(null);
+
+    // Save library to localStorage and eventually to backend
+    const saveLibrary = (items) => {
+        localStorage.setItem('rezona_projector_library', JSON.stringify(items));
+        // TODO: POST to backend API to save JSON manifest
+        // await fetch(`${API_URL}/projector/save_library`, { method: 'POST', body: JSON.stringify(items) })
+    };
+
+    // Add files to library
+    const addFiles = (files) => {
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const item = {
+                    id: 'P' + Math.random().toString(36).substr(2,9).toUpperCase(),
+                    title: file.name.replace(/\.[^/.]+$/, ''), // Remove extension
+                    type: file.type,
+                    data: e.target.result, // Base64 for now, would be URL from backend
+                    source_app: 'rezona', // Could be 'youniverse', 'foundry', etc
+                    timestamp: Date.now(),
+                    url: null // Would be set by backend: /uploads/filename
+                };
+                
+                setLibrary(prev => {
+                    const next = [item, ...prev];
+                    saveLibrary(next);
+                    return next;
+                });
+
+                // Auto-play first upload
+                if (library.length === 0) setPlaying(item);
+            };
+            
+            if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+                reader.readAsDataURL(file);
+            } else {
+                reader.readAsText(file);
+            }
+        });
+    };
+
+    const deleteItem = (id, e) => {
+        e.stopPropagation();
+        if (!confirm('Delete this item from library?')) return;
+        
+        setLibrary(prev => {
+            const next = prev.filter(i => i.id !== id);
+            saveLibrary(next);
+            return next;
+        });
+        
+        if (playing?.id === id) setPlaying(null);
+    };
+
+    const playItem = (item) => {
+        setPlaying(item);
+    };
+
+    const typeIcon = (type) => {
+        if (type.startsWith('image/')) return '🖼️';
+        if (type.startsWith('video/')) return '🎬';
+        if (type.includes('json')) return '{ }';
+        if (type.includes('python') || type.endsWith('.py')) return '🐍';
+        if (type.includes('text')) return '📄';
+        return '📎';
+    };
+
+    const renderContent = (item) => {
+        if (!item) return (
+            <div className="projector-empty">
+                <div className="projector-empty-icon">📡</div>
+                <div style={{fontSize:'14px'}}>Select an item to play</div>
+            </div>
+        );
+
+        if (item.type.startsWith('image/')) {
+            return <img src={item.data} alt={item.title}/>;
+        }
+        if (item.type.startsWith('video/')) {
+            return <video src={item.data} controls autoPlay style={{width:'100%', height:'100%'}}/>;
+        }
+        return <pre>{item.data}</pre>;
+    };
+
+    return (
+        <div>
+            {/* FULLSCREEN OVERLAY */}
+            {fullscreen && playing && (
+                <div className="projector-fullscreen-overlay">
+                    <button className="fullscreen-close" onClick={() => setFullscreen(false)}>✕</button>
+                    <div className="fullscreen-content">
+                        {renderContent(playing)}
+                    </div>
+                    <div className="fullscreen-title">{playing.title}</div>
+                    <div className="fullscreen-meta">
+                        {playing.id} · {playing.source_app}
+                    </div>
+                </div>
+            )}
+
+            <div className="card" style={{padding:'16px'}}>
+                {/* BIG SCREEN */}
+                <div className={`projector-screen ${playing ? 'has-content' : ''}`}>
+                    {renderContent(playing)}
+                    {playing && (
+                        <button className="projector-fullscreen-btn" onClick={() => setFullscreen(true)}>
+                            ⛶
+                        </button>
+                    )}
+                </div>
+
+                {/* ADD BUTTON */}
+                <div className="projector-controls">
+                    <input type="file" ref={fileRef} style={{display:'none'}} multiple
+                        accept="image/*,video/*,.json,.py,.txt,.md"
+                        onChange={e => addFiles(e.target.files)}/>
+                    <button className="projector-add-btn" onClick={() => fileRef.current.click()}>
+                        <span style={{fontSize:'18px'}}>+</span> Add to Library
+                    </button>
+                </div>
+
+                {/* LIBRARY TITLE */}
+                <div className="projector-library-title">
+                    <span>Library</span>
+                    <span className="library-count">{library.length} items</span>
+                </div>
+
+                {/* SCROLLABLE LIST */}
+                {library.length === 0 ? (
+                    <div style={{textAlign:'center', padding:'40px', color:'var(--muted)', fontSize:'14px'}}>
+                        <div style={{fontSize:'32px', marginBottom:'12px', opacity:0.3}}>📚</div>
+                        Your library is empty.<br/>Upload files to get started.
+                    </div>
+                ) : (
+                    <div className="projector-list">
+                        {library.map(item => (
+                            <div key={item.id} 
+                                 className={`projector-item ${playing?.id === item.id ? 'playing' : ''}`}
+                                 onClick={() => playItem(item)}>
+                                <div className="projector-thumb">
+                                    {item.type.startsWith('image/') 
+                                        ? <img src={item.data} alt={item.title}/>
+                                        : typeIcon(item.type)
+                                    }
+                                </div>
+                                <div className="projector-info">
+                                    <div className="projector-title">{item.title}</div>
+                                    <div className="projector-meta">
+                                        <span className="projector-source">{item.source_app}</span>
+                                        <span>{item.id}</span>
+                                        <span>{new Date(item.timestamp).toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                                <button className="projector-play-btn" onClick={() => playItem(item)}>
+                                    {playing?.id === item.id ? '■' : '▶'}
+                                </button>
+                                <button className="projector-delete" onClick={(e) => deleteItem(item.id, e)}>
+                                    ✕
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/* INFO CARD */}
+            <div className="card" style={{background:'rgba(142,240,255,0.05)', borderColor:'rgba(142,240,255,0.2)'}}>
+                <div style={{fontSize:'12px', color:'var(--muted)', lineHeight:'1.6'}}>
+                    <strong style={{color:'var(--accent)', display:'block', marginBottom:'8px'}}>
+                        📡 Modular Library
+                    </strong>
+                    Files uploaded here are stored as JSON. Any app in the ecosystem 
+                    (Rezona, YOU-N-I-VERSE, Foundry, etc.) can save to this library.
+                    The library is portable and can be exported/imported between devices.
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// CHARTS VIEW - full HD chart breakdown
+function ChartsView({ profile }) {
+    if (!profile) return (
+        <div className="card" style={{textAlign:'center', padding:'40px', color:'var(--muted)'}}>
+            Calculate your chart first
+        </div>
+    );
+
+    const gates = profile.gates || [];
+    
+    // Determine defined vs undefined centers
+    const centerStatus = Object.entries(CENTERS).map(([name, data]) => ({
+        name,
+        defined: data.gates.some(g => gates.includes(g)),
+        activeGates: data.gates.filter(g => gates.includes(g)),
+        role: data.role,
+        type: data.type
+    }));
+
+    // Find channels (pairs of gates that form channels)
+    const CHANNELS = [
+        [28,38],[39,55],[36,35],[22,12],[37,40],[51,25],
+        [54,32],[53,42],[60,3],[52,9],[19,49],[39,55],
+        [57,34],[10,20],[34,57],[20,34],[1,8],[13,33],
+        [11,56],[23,43],[62,17],[47,64],[24,61],[4,63],
+        [14,2],[29,46],[59,6],[27,50],[48,16],[18,58],
+        [32,54],[44,26],[50,27],[45,21],[35,36],[16,48]
+    ];
+    const activeChannels = CHANNELS.filter(([a,b]) => gates.includes(a) && gates.includes(b));
+
+    return (
+        <div>
+            <div className="card">
+                <div className="card-title">Your Human Design Chart</div>
+                
+                <div className="chart-section">
+                    <div className="chart-section-title">Core Identity</div>
+                    <div className="chart-row">
+                        <span className="chart-label">Type</span>
+                        <span className="chart-value">{profile.type}</span>
+                    </div>
+                    <div className="chart-row">
+                        <span className="chart-label">Profile</span>
+                        <span className="chart-value">{profile.profile}</span>
+                    </div>
+                    <div className="chart-row">
+                        <span className="chart-label">Authority</span>
+                        <span className="chart-value">{profile.authority}</span>
+                    </div>
+                    <div className="chart-row">
+                        <span className="chart-label">Strategy</span>
+                        <span className="chart-value">
+                            {profile.type === 'Manifestor' ? 'Inform before acting' :
+                             profile.type?.includes('Generator') ? 'Wait to respond' :
+                             profile.type === 'Projector' ? 'Wait for the invitation' :
+                             'Wait a full lunar cycle'}
+                        </span>
+                    </div>
+                    <div className="chart-row">
+                        <span className="chart-label">Not-Self Theme</span>
+                        <span className="chart-value" style={{color:'#f87171'}}>
+                            {profile.type === 'Manifestor' ? 'Anger' :
+                             profile.type?.includes('Generator') ? 'Frustration' :
+                             profile.type === 'Projector' ? 'Bitterness' : 'Disappointment'}
+                        </span>
+                    </div>
+                    <div className="chart-row">
+                        <span className="chart-label">Signature</span>
+                        <span className="chart-value" style={{color:'var(--green)'}}>
+                            {profile.type === 'Manifestor' ? 'Peace' :
+                             profile.type?.includes('Generator') ? 'Satisfaction' :
+                             profile.type === 'Projector' ? 'Success' : 'Surprise'}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="chart-section-title">Defined Centers</div>
+                <div style={{display:'flex', flexWrap:'wrap'}}>
+                    {centerStatus.filter(c => c.defined).map(c => (
+                        <span key={c.name} className="defined-center-badge">✓ {c.name}</span>
+                    ))}
+                </div>
+                <div style={{marginTop:'12px'}}>
+                    <div className="chart-section-title">Undefined Centers</div>
+                    <div style={{display:'flex', flexWrap:'wrap'}}>
+                        {centerStatus.filter(c => !c.defined).map(c => (
+                            <span key={c.name} className="undefined-center-badge">○ {c.name}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="chart-section-title">Active Gates ({gates.length})</div>
+                <div style={{display:'flex', flexWrap:'wrap', gap:'6px'}}>
+                    {gates.map(g => <span key={g} className="gate-pill">Gate {g}</span>)}
+                </div>
+            </div>
+
+            {activeChannels.length > 0 && (
+                <div className="card">
+                    <div className="chart-section-title">Active Channels ({activeChannels.length})</div>
+                    <div className="channels-wrap">
+                        {activeChannels.map(([a,b]) => (
+                            <span key={`${a}-${b}`} className="channel-badge">
+                                {a}–{b}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            <div className="card">
+                <div className="chart-section-title">Trinity (3-Field Model)</div>
+                <div className="chart-row">
+                    <span className="chart-label">Mind (Sidereal)</span>
+                    <span className="chart-value" style={{color:'#00d4ff'}}>Gate {gates[0] || '—'}</span>
+                </div>
+                <div className="chart-row">
+                    <span className="chart-label">Body (Tropical)</span>
+                    <span className="chart-value" style={{color:'#22c55e'}}>Gate {gates[1] || '—'}</span>
+                </div>
+                <div className="chart-row">
+                    <span className="chart-label">Heart (Draconic)</span>
+                    <span className="chart-value" style={{color:'#f43f5e'}}>Gate {gates[2] || '—'}</span>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// MAIN APP
+function App() {
+    const [tab, setTab] = useState('indiverse');
+    const [userId, setUserId] = useState(localStorage.getItem('rezona_uid') || '');
+    const [profile, setProfile] = useState(null);
+    const [matches, setMatches] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const [birthData, setBirthData] = useState({
+        date: '', time: '', lat: 37.7749, lon: -122.4194, timezone: 'America/Los_Angeles'
+    });
+
+    useEffect(() => {
+        if (userId) loadProfile();
+    }, [userId]);
+
+    const loadProfile = async () => {
+        try {
+            setLoading(true);
+            const res = await fetch(`${API_URL}/get_profile/${userId}`);
+            const data = await res.json();
+            if (data.ok) setProfile(data.profile);
+        } catch(e) {
+            // offline mode - use stored profile
+            const stored = localStorage.getItem('rezona_profile');
+            if (stored) setProfile(JSON.parse(stored));
+        } finally { setLoading(false); }
+    };
+
+    const calculateChart = async () => {
+        if (!birthData.date || !birthData.time) { setError('Enter birth date and time'); return; }
+        setLoading(true); setError('');
+        try {
+            const res = await fetch(`${API_URL}/calculate_chart`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(birthData)
+            });
+            const data = await res.json();
+            if (data.ok) {
+                const uid = `user_${Date.now()}`;
+                const pRes = await fetch(`${API_URL}/create_profile`, {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ user_id: uid, birth_data: birthData, ...data.chart })
+                });
+                const pData = await pRes.json();
+                if (pData.ok) {
+                    setUserId(uid); localStorage.setItem('rezona_uid', uid);
+                    setProfile(pData.profile); localStorage.setItem('rezona_profile', JSON.stringify(pData.profile));
+                    setSuccess('Profile created! Welcome to Rezona ✨');
+                    setTab('indiverse');
+                }
+            }
+        } catch(e) {
+            // Demo mode when no backend
+            const demo = {
+                type: 'Projector', profile: '4/6', authority: 'Splenic',
+                gates: [28,38,39,55,57,44,32,50,18,48]
+            };
+            setProfile(demo); localStorage.setItem('rezona_profile', JSON.stringify(demo));
+            setSuccess('Demo profile loaded (connect backend for real calculation)');
+            setTab('indiverse');
+        } finally { setLoading(false); }
+    };
+
+    const findMatches = async () => {
+        if (!userId) { setError('Create your profile first'); return; }
+        setLoading(true); setError('');
+        try {
+            const poolRes = await fetch(`${API_URL}/matching_pool?limit=50`);
+            const poolData = await poolRes.json();
+            const targetIds = poolData.pool.filter(p => p.user_id !== userId).map(p => p.user_id);
+            const res = await fetch(`${API_URL}/calculate_resonance`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ user_id: userId, target_user_ids: targetIds })
+            });
+            const data = await res.json();
+            if (data.ok) { setMatches(data.matches); setSuccess(`${data.matches.length} matches found`); }
+        } catch(e) {
+            // Demo matches
+            setMatches([
+                { type: 'Generator', profile: '2/4', authority: 'Sacral', resonance_score: 0.87, gates: [28,38], user_id: 'demo1' },
+                { type: 'Manifestor', profile: '1/3', authority: 'Emotional', resonance_score: 0.74, gates: [1,8], user_id: 'demo2' },
+                { type: 'Reflector', profile: '6/2', authority: 'Lunar', resonance_score: 0.61, gates: [55,39], user_id: 'demo3' },
+            ]);
+        } finally { setLoading(false); }
+    };
+
+    const reportSuccess = async (matchId) => {
+        try {
+            await fetch(`${API_URL}/report_success`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ user_id: userId, matched_user_id: matchId, success_type:'connection', rating:5 })
+            });
+            setSuccess('Success logged — the network learns ✨');
+        } catch(e) { setSuccess('Success logged (demo mode)'); }
+    };
+
+    return (
+        <>
+            <div className="header">
+                <div className="logo">✦ REZONA</div>
+                <div className="header-right">
+                    <div className="status-dot"/>
+                    <span style={{fontSize:'11px', color:'var(--muted)'}}>
+                        {profile ? profile.type : 'No profile'}
+                    </span>
+                </div>
+            </div>
+
+            <main>
+                {error && <div className="error">{error}</div>}
+                {success && <div className="success" onClick={()=>setSuccess('')}>{success}</div>}
+
+                {/* CALCULATE / ONBOARD */}
+                <div className={`view ${tab === 'calculate' ? 'active' : ''}`}>
+                    <div className="card">
+                        <div className="card-title">Enter Birth Data</div>
+                        <div className="form-row">
+                            <div>
+                                <span className="input-label">Date</span>
+                                <input type="date" className="input" style={{marginBottom:0}}
+                                    value={birthData.date}
+                                    onChange={e => setBirthData({...birthData, date: e.target.value})}/>
+                            </div>
+                            <div>
+                                <span className="input-label">Time</span>
+                                <input type="time" className="input" style={{marginBottom:0}}
+                                    value={birthData.time}
+                                    onChange={e => setBirthData({...birthData, time: e.target.value})}/>
+                            </div>
+                        </div>
+                        <div style={{marginTop:'12px'}}>
+                            <span className="input-label">City / Location</span>
+                            <input type="text" className="input" placeholder="San Francisco, CA"
+                                onChange={e => {
+                                    // In production: geocode city to lat/lon
+                                }}/>
+                        </div>
+                        <button className="btn btn-primary btn-full" style={{marginTop:'8px'}}
+                            onClick={calculateChart} disabled={loading}>
+                            {loading ? 'Calculating...' : 'Calculate My Chart →'}
+                        </button>
+                    </div>
+                </div>
+
+                {/* INDIVERSE */}
+                <div className={`view ${tab === 'indiverse' ? 'active' : ''}`}>
+                    {!profile ? (
+                        <div className="card" style={{textAlign:'center', padding:'40px'}}>
+                            <div style={{fontSize:'40px', marginBottom:'16px'}}>✦</div>
+                            <div style={{fontSize:'18px', fontWeight:'700', marginBottom:'8px'}}>Welcome to Rezona</div>
+                            <div style={{color:'var(--muted)', marginBottom:'24px', fontSize:'14px', lineHeight:'1.6'}}>
+                                Your IndiVerse lives here.<br/>Calculate your chart to begin.
+                            </div>
+                            <button className="btn btn-primary" onClick={() => setTab('calculate')}>
+                                Get Started →
+                            </button>
+                        </div>
+                    ) : (
+                        <IndiVerse profile={profile} isOwner={true} />
+                    )}
+                </div>
+
+                {/* RESONANCE MATCHING */}
+                <div className={`view ${tab === 'network' ? 'active' : ''}`}>
+                    <div className="card">
+                        <div className="card-title">Resonance Network</div>
+                        <button className="btn btn-primary btn-full" onClick={findMatches} disabled={loading}>
+                            {loading ? <div className="spinner"/> : 'Find My Resonance Tribe →'}
+                        </button>
+                    </div>
+                    {matches.map((m, i) => (
+                        <div key={i} className="match-card">
+                            <div className="match-header">
+                                <div>
+                                    <div className="match-type">{m.type}</div>
+                                    <div style={{fontSize:'12px', color:'var(--muted)'}}>{m.profile} · {m.authority}</div>
+                                </div>
+                                <div>
+                                    <div className="match-score">{Math.round(m.resonance_score * 100)}%</div>
+                                    <div style={{fontSize:'10px', color:'var(--muted)', textAlign:'center'}}>resonance</div>
+                                </div>
+                            </div>
+                            <div className="coh-bar"><div className="coh-fill" style={{width:`${m.resonance_score*100}%`}}/></div>
+                            <div className="match-gates">
+                                {(m.gates || []).map(g => <span key={g} className="match-gate">Gate {g}</span>)}
+                            </div>
+                            <div style={{display:'flex', gap:'8px', marginTop:'12px'}}>
+                                <button className="btn btn-ghost btn-small" onClick={() => {}}>
+                                    View IndiVerse →
+                                </button>
+                                <button className="btn btn-primary btn-small" onClick={() => reportSuccess(m.user_id)}>
+                                    Report Success ✨
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* PROJECTOR */}
+                <div className={`view ${tab === 'projector' ? 'active' : ''}`}>
+                    <ProjectorView />
+                </div>
+
+                {/* CHARTS */}
+                <div className={`view ${tab === 'charts' ? 'active' : ''}`}>
+                    <ChartsView profile={profile} />
+                </div>
+
+                {/* PATHWAY TO PURPOSE */}
+                <div className={`view ${tab === 'purpose' ? 'active' : ''}`}>
+                    <PathwayView profile={profile} />
+                </div>
+
+                {/* HUB / LINKS OUT */}
+                <div className={`view ${tab === 'hub' ? 'active' : ''}`}>
+                    <div className="card">
+                        <div className="card-title">The Ecosystem</div>
+                    </div>
+                    {[
+                        { icon:'🌌', name:'YOU-N-I-VERSE', desc:'Where agents live. Full standalone experience.', href:'#' },
+                        { icon:'⚗️', name:'Stellar Proximology', desc:'The science lab. Consciousness field theory.', href:'#' },
+                        { icon:'🏭', name:'Foundry', desc:'Build and deploy agents.', href:'#' },
+                        { icon:'🕸️', name:'The Hub', desc:'Central connector for the ecosystem.', href:'#' },
+                        { icon:'🌐', name:'Browser', desc:'Explore the consciousness web.', href:'#' },
+                    ].map((l, i) => (
+                        <a key={i} className="link-card" href={l.href}>
+                            <div className="link-icon">{l.icon}</div>
+                            <div className="link-info">
+                                <div className="link-name">{l.name}</div>
+                                <div className="link-desc">{l.desc}</div>
+                            </div>
+                            <div className="link-arrow">→</div>
+                        </a>
+                    ))}
+                </div>
+            </main>
+
+            <nav>
+                <button className={`nav-btn ${tab==='indiverse'?'active':''}`} onClick={()=>setTab('indiverse')}>
+                    <span className="nav-icon">✦</span>IndiVerse
+                </button>
+                <button className={`nav-btn ${tab==='network'?'active':''}`} onClick={()=>setTab('network')}>
+                    <span className="nav-icon">🌐</span>Network
+                </button>
+                <button className={`nav-btn ${tab==='purpose'?'active':''}`} onClick={()=>setTab('purpose')}>
+                    <span className="nav-icon">🎯</span>Purpose
+                </button>
+                <button className={`nav-btn ${tab==='charts'?'active':''}`} onClick={()=>setTab('charts')}>
+                    <span className="nav-icon">📊</span>Charts
+                </button>
+                <button className={`nav-btn ${tab==='projector'?'active':''}`} onClick={()=>setTab('projector')}>
+                    <span className="nav-icon">📡</span>Projector
+                </button>
+                <button className={`nav-btn ${tab==='hub'?'active':''}`} onClick={()=>setTab('hub')}>
+                    <span className="nav-icon">🕸️</span>Hub
+                </button>
+                <button className={`nav-btn ${tab==='calculate'?'active':''}`} onClick={()=>setTab('calculate')}>
+                    <span className="nav-icon">🔮</span>Calculate
+                </button>
+            </nav>
+        </>
+    );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
+</html>
+
