@@ -1,0 +1,3 @@
+import './vendor/kernel.js';import './vendor/world-bridge.js';import './vendor/mesh-assembly.js';import './vendor/sim-core.js';
+import {runSlice} from './bridge.mjs';import {mkdir,writeFile} from 'node:fs/promises';
+const result=await runSlice();await mkdir(new URL('./output/',import.meta.url),{recursive:true});await writeFile(new URL('./output/demo.json',import.meta.url),JSON.stringify(result,null,2));console.log(JSON.stringify({executed:result.event.executed,worldChanged:result.event.before!==result.event.after,projections:result.event.projections.length,evaluation:result.evaluation},null,2));
