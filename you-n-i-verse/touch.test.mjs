@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {photoGesture,circleGesture,pairMetrics} from './touch-transform.mjs';
+const base={zoom:1,rotation:0,pan:{x:0,y:0},faceX:.5,faceY:.2,faceSize:.3};
+test('pinch changes zoom without moving its image focal point',()=>{const r=photoGesture(base,{ratio:2,focal:{x:20,y:10}},100);assert.equal(r.zoom,2);assert.equal(r.pan.x,-.2);assert.equal(r.pan.y,-.1);assert.equal(20*r.zoom+r.pan.x*100,20)});
+test('drag follows screen direction even with a rotated photo',()=>{const r=photoGesture({...base,rotation:30},{dx:100,dy:0},100);assert.ok(Math.abs(r.pan.x-Math.cos(Math.PI/6))<1e-9);assert.ok(Math.abs(r.pan.y+.5)<1e-9)});
+test('circle movement and sizing remain independent of photo zoom',()=>{const r=circleGesture(base,{dx:38,dy:87,ratio:1.5});assert.equal(r.faceX,.6);assert.ok(Math.abs(r.faceY-.3)<1e-9);assert.ok(Math.abs(r.faceSize-.45)<1e-9);assert.equal(r.zoom,1);assert.equal(circleGesture(base,{ratio:100}).faceSize,.5);assert.equal(photoGesture(base,{ratio:100},100).zoom,4)});
+test('two pointer distances and midpoints give pinch scale',()=>{assert.deepEqual(pairMetrics([{x:0,y:0},{x:20,y:0}]),{x:10,y:0,distance:20,angle:0})});

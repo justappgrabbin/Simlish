@@ -35,6 +35,7 @@ jobs:
         run: |
           node you-n-i-verse/test.mjs
           node you-n-i-verse/studio.test.mjs
+          node you-n-i-verse/touch.test.mjs
           node --check you-n-i-verse/studio.mjs
       - name: Build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}

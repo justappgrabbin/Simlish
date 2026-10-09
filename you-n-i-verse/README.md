@@ -29,3 +29,7 @@ The scene selector can execute an authored AutoLing entry rule and AutoNovel com
 ### Saving a complete project
 
 IndexedDB now stores the portrait, body, sprite image, alignment, world, controls and latest event together. The studio restores this project on opening and autosaves after edits. Save project on device forces a save; Download complete project produces a portable JSON containing the images, and Open saved project restores it. These project files contain personal photos: keep them private. Storage errors are displayed and a complete download remains available. PNG and settings-only exports are separate from project saves. Actual browser IndexedDB/camera/download behavior still requires device QA.
+
+### Direct touch editing
+
+Photo and face-circle modes are beside the preview. One finger moves the selected layer; two fingers scale it. Photo mode also supports two-finger rotation. The face window has a visible draggable size handle. Close-up view magnifies editing without changing the exported body framing. Fine sliders remain in the same panel. Guides are preview-only, and gestures autosave the existing project fields. Run node touch.test.mjs for focal-point zoom, rotated drag and circle independence checks. Physical-device multitouch still requires confirmation.
