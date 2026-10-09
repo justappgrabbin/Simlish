@@ -1,0 +1,98 @@
+[
+  {
+    "path": "1LoyFQsv-W8rNd8zbOYm5mOMBPlggAKqS/Synthia-Emergent-StateSpace-v0.4.0.zip.contents/Synthia-Emergent-StateSpace-v0.4.0/books/sources/Yijing1+2.pdf",
+    "sha256": "cb47886950546f6cba968922924966114f0a17e7f6596dbf8c167d251654885b",
+    "status": "text-extracted",
+    "characters": 2703497
+  },
+  {
+    "path": "1uJ4nrX0XiVY9sIxNUscHqS5IrkducPnG/CodonLife/attached_assets/# Stellar Proximology - Complete Technical Implementation Guide_1760383861231.pdf",
+    "sha256": "abcf0387da1b8d650706e61b5c26935195175e50e38c442fb38c87899fa1de4e",
+    "status": "text-extracted",
+    "characters": 282094
+  },
+  {
+    "path": "1uJ4nrX0XiVY9sIxNUscHqS5IrkducPnG/CodonLife/attached_assets/COMPLETE SENTENCE SYSTEM BREAK DOWN MESSY_1760383891524.pdf",
+    "sha256": "45256c1e8af0b0cd438c5164a2dc6b6f4ae9b3913a9b811f5a5f36b3107d1748",
+    "status": "text-extracted",
+    "characters": 148952
+  },
+  {
+    "path": "1uJ4nrX0XiVY9sIxNUscHqS5IrkducPnG/CodonLife/attached_assets/chart-human-design_compress (1)_1760384547295.pdf",
+    "sha256": "b55e35be80de75ea709093e63b9cf4681f5e3daae005bc482b745efdfe616927",
+    "status": "text-extracted",
+    "characters": 2266
+  },
+  {
+    "path": "1uJ4nrX0XiVY9sIxNUscHqS5IrkducPnG/CodonLife/attached_assets/# Stellar Proximology - Complete Technical Implementation Guide_1760383275482.pdf",
+    "sha256": "abcf0387da1b8d650706e61b5c26935195175e50e38c442fb38c87899fa1de4e",
+    "status": "duplicate-document",
+    "characters": 282094
+  },
+  {
+    "path": "18dAXH9ai5vJ8g6YAITJfKU_omrNM2hjd/CharacterEngine-master/Games.LifeSim-PostConcept.pdf",
+    "sha256": "07f76e1d7eb4fadcffef1ee611a0e6e64466ff11a30e944fcde3ee3996f8aae4",
+    "status": "text-extracted",
+    "characters": 14528
+  },
+  {
+    "path": "18dAXH9ai5vJ8g6YAITJfKU_omrNM2hjd/CharacterEngine-master/DesignDocument-ProjectBelinda.pdf",
+    "sha256": "c719f16cc6da3cd065912d4ed5c72775ac5681277c4e90a1503e6e58eb307d86",
+    "status": "text-extracted",
+    "characters": 46821
+  },
+  {
+    "path": "18dAXH9ai5vJ8g6YAITJfKU_omrNM2hjd/CharacterEngine-master/Scripts/DesignDocument-ProjectBelinda.pdf",
+    "sha256": "30c5d6267016a3f3111b7a8c746525e503e20b541924d43f0a2d277ea008f01e",
+    "status": "text-extracted",
+    "characters": 46687
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/constants.pdf",
+    "sha256": "a451c46036158b4f8bb7dc03828a8edbcc08f09e033d1aa4a74cee4d25e6ce17",
+    "status": "text-extracted",
+    "characters": 3054
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/godot-quickjs-master.zip.contents/godot-quickjs-master/extern/quickjs/doc/quickjs.pdf",
+    "sha256": "5444c466bc73aff26ce3df39d6f78e73c3cdd1c63778ac5050946d09036e77b4",
+    "status": "text-extracted",
+    "characters": 43312
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/godot-quickjs-master.zip.contents/godot-quickjs-master/extern/quickjs/doc/jsbignum.pdf",
+    "sha256": "0015491a72982a6a24e4a054c0b65c2596ec0f7e37fed2f6b99319b13dc27d4f",
+    "status": "text-extracted",
+    "characters": 23743
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/Online-Code-Execution-Engine-main.zip.contents/Online-Code-Execution-Engine-main/Project Report.pdf",
+    "sha256": "d975c8bc751f96d48f73243846c38d4ea919662670fd94288d9498376d7d35fd",
+    "status": "text-extracted",
+    "characters": 15687
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/Online-Code-Execution-Engine-main.zip.contents/Online-Code-Execution-Engine-main/Online Code Executor Engine.pdf",
+    "sha256": "aa9992dafd08e1e4722e152376f19136b14a1f534ae81575da79d27f3ce0db5c",
+    "status": "text-extracted",
+    "characters": 16567
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/Online-Code-Execution-Engine-main.zip.contents/Online-Code-Execution-Engine-main/Ressearch Paper Published.pdf",
+    "sha256": "aa9992dafd08e1e4722e152376f19136b14a1f534ae81575da79d27f3ce0db5c",
+    "status": "duplicate-document",
+    "characters": 16567
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/Online-Code-Execution-Engine-main.zip.contents/Online-Code-Execution-Engine-main/Research Paper.pdf",
+    "sha256": "f2672bec3590e89eccb8addd07933da833087ef816347bc28355a0aa6278038f",
+    "status": "text-extracted",
+    "characters": 14323
+  },
+  {
+    "path": "18NB4uYH1LahfB0y5zmxz_KiA3jDZOsmJ/Synthia-State-Space-Foundation/vendor/spine/donors/Online-Code-Execution-Engine-main.zip.contents/Online-Code-Execution-Engine-main/Project ppt.pdf",
+    "sha256": "d85e0af9ae43c55e74490c1fbf1a6439f6cb3bb757e3cfefb73a24823266c5a9",
+    "status": "text-extracted",
+    "characters": 2928
+  }
+]
