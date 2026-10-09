@@ -1,0 +1,16 @@
+plugins { id 'com.android.application' }
+android {
+ namespace 'app.youniverse.studio'
+ buildFeatures { buildConfig true }
+ compileSdk 35
+ defaultConfig {
+  applicationId 'app.youniverse.studio'
+  minSdk 26
+  targetSdk 35
+  versionCode (project.findProperty('buildNumber') ?: '1').toInteger()
+  versionName '0.1-debug'
+ }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+ sourceSets { main { assets.srcDirs = ['../../you-n-i-verse'] } }
+}
+dependencies { implementation 'androidx.webkit:webkit:1.12.1'; implementation 'androidx.core:core:1.15.0' }
