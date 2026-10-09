@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Simlish — Embodied Mesh</title>
+<style>
+body{background:#111820;color:#edf5f7;font:16px system-ui;margin:24px}
+button,select{font:inherit;padding:10px;background:#263c46;color:white;border:1px solid #779ca7;border-radius:6px}
+canvas{display:block;width:min(80vw,680px);height:auto;background:#172630;border:1px solid #63818c;margin:20px 0}
+pre{white-space:pre-wrap;max-width:680px}a{color:#90d8ee}
+</style>
+<h1>Embodied mesh</h1>
+<p>Request a world flavor. Click the world to apply an impulse to the nearest particle.</p>
+<label>Flavor <select id="flavor"><option>grounded</option><option>buoyant</option><option>elastic</option></select></label>
+<button id="definition">Show particle definitions</button><button id="export">Export world history</button>
+<canvas id="world" width="680" height="680" aria-label="Interactive particle world"></canvas>
+<output id="status"></output><pre id="details"></pre>
+<p><a href="../consciousness_sims_game.html">Original Simlish game</a></p>
+<script type="module" src="./view.mjs"></script></html>
