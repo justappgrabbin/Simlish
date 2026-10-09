@@ -15,3 +15,11 @@ Still required for the full integration: executable per-particle automata and ca
 The supplied CharacterEngine is a C# prototype with traits, emotions and skills; its README explicitly says its decision model is incomplete. The agent archive includes C# FSO interfaces and JavaScript astronomia. These are preserved in the source inventory; they have not been silently replaced with the particle simulation.
 
 `sources.json` identifies all sixteen downloaded source pieces and their hashes. Original Simlish files remain present. Downloaded archives remain in the review workspace while selected modules are integrated.
+
+## Letter expression phase
+
+The display now exposes constituent glyphs instead of bit-colored dots. The phrase form registers letters as particles, words as ordered compositions, and the phrase as an ordered composition of words. Mesh strain outlines a letter; broken relations use dashed outlines and edges without deleting membership or history. This is a 2D inspection view of the existing bridge, not the completed 3D host integration.
+
+A host address resolver can call `window.resolveSwarmColor(expressionId, {color, address, dimension, provenance})` to apply a resolved `#RRGGBB` color to a composition's constituents. Unresolved letters remain neutral. No canonical position-to-RGB formula is invented here. `rgbToHex` and `binaryRgbToHex` encode supplied RGB channel values; six hexagram lines are not assumed to be a 24-bit RGB color.
+
+Validation: `node --test swarm/world.test.mjs swarm/letter-expression.test.mjs`.
