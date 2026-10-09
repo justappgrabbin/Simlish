@@ -110,5 +110,26 @@
     "bytes": 49688,
     "sha256": "ae2c6d3bbca8546a8bc4a672ba67a2d0cccc49192c52095f2d8b42f756fc4763",
     "status": "downloaded; integration under review"
+  },
+  {
+    "name": "cynthia-morph-modelmaker-repair.zip",
+    "driveId": "12v5WL0t5kEHyHAnjJq0eaHiTOe4Xvq7w",
+    "bytes": 2555991,
+    "sha256": "cde5f326e460156bb6b60a977d29d75c4824e3fa2d16570a250c4da4fe6cf346",
+    "status": "downloaded; implementation paths reviewed; integration pending"
+  },
+  {
+    "name": "Synthia-merged-semantic-v0.6.2.zip",
+    "driveId": "1tVmN4vhxXvKkrAm7LAOUTaLkyzsC1ygo",
+    "bytes": 1057176,
+    "sha256": "2f18cefca520f3a52de52f520f412c15031c91788a254ae48be2ed72f132b950",
+    "status": "downloaded; implementation paths reviewed; integration pending"
+  },
+  {
+    "name": "Creating a Modular Semantic AI System.zip",
+    "driveId": "1S2rtipa6we55RJ0ptvXPsRIbYFdiMvsw",
+    "bytes": 99061515,
+    "sha256": null,
+    "status": "metadata verified; local transfer blocked by 32 MiB helper limit; direct retrieval unavailable; contents NOT reviewed"
   }
 ]
