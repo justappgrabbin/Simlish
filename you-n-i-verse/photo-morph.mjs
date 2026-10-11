@@ -1,3 +1,4 @@
+import {fitLighting} from './swarm-fit.mjs';
 export function affineTriangle(source,target) {
  const [a,b,c]=source,[p,q,r]=target;
  const det=(b.x-a.x)*(c.y-a.y)-(c.x-a.x)*(b.y-a.y);
@@ -55,11 +56,16 @@ export async function morphPhoto(photo,target){
  for(let i=0;i<pixels.data.length;i+=4)if(m.data[i+3]>200&&pixels.data[i+3]>200){for(let c=0;c<3;c++){sums[c]+=pixels.data[i+c];targetSums[c]+=base.data[i+c]}count++;}
  if(!count)throw Error('No usable face surface found.');
  const correction=sums.map((sum,c)=>(targetSums[c]-sum)/count*.6);
- for(let i=0;i<pixels.data.length;i+=4)for(let c=0;c<3;c++)pixels.data[i+c]=Math.max(0,Math.min(255,pixels.data[i+c]+correction[c]));ctx.putImageData(pixels,0,0);
+ const bounds={minX:Math.min(...oval.map(j=>t[j].x)),maxX:Math.max(...oval.map(j=>t[j].x)),minY:Math.min(...oval.map(j=>t[j].y)),maxY:Math.max(...oval.map(j=>t[j].y))};
+ const fw=bounds.maxX-bounds.minX,fh=bounds.maxY-bounds.minY,samples=[],step=Math.max(2,Math.floor(Math.sqrt(count)/16));
+ const feature=(x,y)=>{const inside=(a,b,rx,ry)=>{const p={x:(t[a].x+t[b].x)/2,y:(t[a].y+t[b].y)/2};return ((x-p.x)/rx)**2+((y-p.y)/ry)**2<1};return inside(33,133,fw*.22,fh*.13)||inside(362,263,fw*.22,fh*.13)||inside(61,291,fw*.3,fh*.14)};
+ for(let y=Math.max(2,Math.floor(bounds.minY));y<Math.min(body.height-2,bounds.maxY);y+=step)for(let x=Math.max(2,Math.floor(bounds.minX));x<Math.min(body.width-2,bounds.maxX);x+=step){const i=(y*body.width+x)*4;if(m.data[i+3]<220||pixels.data[i+3]<220||feature(x,y))continue;const a=[0,0,0],b=[0,0,0];let n=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const j=((y+dy)*body.width+x+dx)*4;if(pixels.data[j+3]<220)continue;for(let c=0;c<3;c++){a[c]+=pixels.data[j+c];b[c]+=base.data[j+c]}n++;}if(n)samples.push({x:(x-center.x)/Math.max(1,fw/2),y:(y-center.y)/Math.max(1,fh/2),source:a.map(v=>v/n),target:b.map(v=>v/n)});}
+ const lightingFit=await fitLighting(samples,correction),v=lightingFit.values;
+ for(let i=0;i<pixels.data.length;i+=4){if(!pixels.data[i+3])continue;const x=(i/4%body.width-center.x)/Math.max(1,fw/2),y=(Math.floor(i/4/body.width)-center.y)/Math.max(1,fh/2);for(let c=0;c<3;c++)pixels.data[i+c]=Math.max(0,Math.min(255,pixels.data[i+c]+v[c]+v[c+3]*x+v[c+6]*y));}ctx.putImageData(pixels,0,0);
  const feather=document.createElement('canvas');feather.width=body.width;feather.height=body.height;const fc=feather.getContext('2d');fc.filter=`blur(${Math.max(2,Math.sqrt(count)*.035)}px)`;fc.drawImage(mask,0,0);
  ctx.globalCompositeOperation='destination-in';ctx.drawImage(feather,0,0);
  const result=document.createElement('canvas');result.width=body.width;result.height=body.height;result.getContext('2d').drawImage(body,0,0);result.getContext('2d').drawImage(warped,0,0);
- return {canvas:result,receipt:{method:'local-neural-landmarks/triangle-warp/color-match/feather',landmarks:468,triangles:triangles.length/3,sourceFaces:1,targetFaces:1,network:false,trainedHere:false}};
+ return {canvas:result,receipt:{method:'local-neural-landmarks/triangle-warp/color-match/feather',landmarks:468,triangles:triangles.length/3,sourceFaces:1,targetFaces:1,network:false,trainedHere:false,lightingFit}};
 }
 
 export async function portraitSurface(photo){

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {inspectGLB} from './rig-format.mjs';
-const $=id=>document.getElementById(id),stage=$('stage');
+const $=id=>document.getElementById(id),stage=$('stage'),diagnostics=new URL(location.href).searchParams.get('test')==='1';$('rigDiagnostics').hidden=!diagnostics;
 let photoBinding=null;
 let renderer,scene,camera,controls,model,mixer,actions={},active=null,clips=[],playing=true,exporting=false,revision=0,last=0,persistence=Promise.resolve();
 const colors={cosmic:0x241036,forest:0x163624,ocean:0x123c59,desert:0x5b3728};
@@ -25,7 +25,7 @@ async function loadRig(buffer,label,saved={}){
  $('speed').value=saved.speed??1;$('rigWorld').value=colors[saved.world]?saved.world:'cosmic';scene.background=new THREE.Color(colors[$('rigWorld').value]);
  $('expression').replaceChildren();let index=0,bones=0,morphs=0;
  model.traverse(o=>{if(o.isBone)bones++;if(o.morphTargetDictionary)for(const [name,i] of Object.entries(o.morphTargetDictionary)){const label=document.createElement('label');label.textContent=name;const input=document.createElement('input');input.type='range';input.min=0;input.max=1;input.step=.01;input.value=saved.expressions?.[index++]??0;o.morphTargetInfluences[i]=Number(input.value);input.oninput=()=>{o.morphTargetInfluences[i]=Number(input.value);saveSettings()};label.append(input);$('expression').append(label);morphs++}});
- fit();if(saved.photoBound){try{await bindSavedPhoto(false)}catch(e){$('photoRigStatus').textContent='Photo surface could not restore: '+e.message}}if(ticket!==revision)return false;$('rigInfo').textContent=bones+' bones · '+clips.length+' motion clips · '+morphs+' expression controls';$('status').textContent=label+' ready. Motion is interpolated on the rig during playback.';if(!photoBinding)$('identityStatus').textContent=label==='Demonstration robot'?'This bundled robot tests movement and expressions. It is not your personalized avatar.':'Your imported character supplies its appearance. Photo-to-face texture binding is not connected in this 3D view yet.';return true;
+ fit();if(saved.photoBound&&diagnostics){try{await bindSavedPhoto(false)}catch(e){$('photoRigStatus').textContent='Photo surface could not restore: '+e.message}}if(ticket!==revision)return false;$('rigInfo').textContent=bones+' bones · '+clips.length+' motion clips · '+morphs+' expression controls';$('status').textContent=label+' ready. Motion is interpolated on the rig during playback.';if(!photoBinding)$('identityStatus').textContent=label==='Demonstration robot'?'This bundled robot tests movement and expressions. It is not your personalized avatar.':'Your imported character supplies its appearance. Photo-to-face texture binding is not connected in this 3D view yet.';return true;
 }
 async function open(buffer,label,saved){if(await loadRig(buffer,label,saved)){await store('readwrite',s=>s.put({buffer,label,settings:settings()},'current'));$('storageStatus').textContent='Character and settings saved on this device.'}}
 async function demo(){const r=await fetch('assets/rigs/RobotExpressive.glb');if(!r.ok)throw Error('Bundled rig could not load');const project=await readProject().catch(()=>null);await open(await r.arrayBuffer(),'Demonstration robot',{world:project?.world??'cosmic'})}
@@ -47,7 +47,7 @@ try{
  $('clip').onchange=()=>{changeClip($('clip').value);saveSettings()};$('pause').onclick=()=>{playing=!playing;$('pause').textContent=playing?'Pause':'Play'};$('speed').oninput=saveSettings;$('rigWorld').onchange=()=>{scene.background.setHex(colors[$('rigWorld').value]);saveSettings()};
  $('demo').onclick=()=>demo().catch(e=>$('status').textContent=e.message);$('rigFile').onchange=async()=>{try{const file=$('rigFile').files[0];if(file)await open(await file.arrayBuffer(),file.name)}catch(e){$('status').textContent=e.message}};$('exportRigSheet').onclick=()=>exportSheet(false);$('sendRigSheet').onclick=()=>exportSheet(true);
  let saved;try{saved=await store('readonly',s=>s.get('current'))}catch(e){$('storageStatus').textContent='Local storage unavailable: '+e.message}
- if(saved)await loadRig(saved.buffer,saved.label,saved.settings);else await demo();
+ if(saved&&(diagnostics||saved.label!=='Demonstration robot'))await loadRig(saved.buffer,saved.label,{...saved.settings,photoBound:diagnostics&&saved.settings?.photoBound});else if(diagnostics)await demo();else{$('status').textContent='Animation stage: waiting for a prepared character. No test body has been substituted.';$('identityStatus').textContent='Use the completed character from the body stage. Your saved photo and image preview remain in the studio.';}
 }catch(e){$('status').textContent='3D view could not start: '+e.message+'. The photo studio remains available.'}
 
 async function bindSavedPhoto(persist=true){

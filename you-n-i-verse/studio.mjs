@@ -83,7 +83,7 @@ async function autoMorph(){
  if(sprites){await prepareAnimation();return}
  if(!photo||!body){$('#morphStatus').textContent=photo?'Automatic morph needs a single target image.':'Choose your face photo first.';return}
  const revision=morphRevision;$('#autoMorph').disabled=true;$('#morphStatus').textContent='Matching faces and blending on this device…';
- try{const result=await morphPhoto(photo,body);if(revision!==morphRevision)return;morphedBody=result.canvas;morphReceipt=result.receipt;guides=false;$('#morphStatus').textContent='Face morphed and blended. Save your character or describe a scene.';render();scheduleSave()}
+ try{const result=await morphPhoto(photo,body);if(revision!==morphRevision)return;morphedBody=result.canvas;morphReceipt=result.receipt;guides=false;$('#morphStatus').textContent='Face lighting fitted and blended. Review this image preview; it is not a finished 3D character.';render();scheduleSave()}
  catch(error){if(revision===morphRevision)$('#morphStatus').textContent='Automatic morph: '+error.message+' Manual adjustment remains available.'}
  finally{$('#autoMorph').disabled=false}
 }
