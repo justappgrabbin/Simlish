@@ -1,3 +1,4 @@
+import {mountPhoto3D} from './photo-3d.mjs';
 import {MorphLibrary} from './morph-library.mjs';
 import {expandMotion} from './frame-morph.mjs';
 import {sheetGrid,personalizeFrames,actionKeyposes} from './animation.mjs';
@@ -150,3 +151,5 @@ $('#morphAll').onclick=async()=>{
   $('#formStatus').textContent=good.length+' forms ready. Select a form to view/export.'+(bad.length?' Failed: '+bad.map(item=>forms.targets.get(item.id).name+' ('+item.error.message+')').join('; '):'');
  }finally{$('#morphAll').disabled=false;$('#morphSelected').disabled=false;}
 };
+
+mountPhoto3D(()=>photo);

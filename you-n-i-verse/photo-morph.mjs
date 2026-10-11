@@ -62,3 +62,21 @@ export async function morphPhoto(photo,target,options={}){
  const result=document.createElement('canvas');result.width=body.width;result.height=body.height;result.getContext('2d').drawImage(body,0,0);result.getContext('2d').drawImage(warped,0,0);
  return {canvas:result,receipt:{method:'local-neural-landmarks/triangle-warp/color-match/feather',shape:options.shape??1,sculpt:options.sculpt??0,landmarks:468,triangles:triangles.length/3,sourceFaces:1,targetFaces:1,network:false,trainedHere:false}};
 }
+
+export async function reconstructFaceSurface(photo){
+ if(!photo)throw Error('Choose your identity photo first.');
+ const model=await detector();let portrait=portraitCache.get(photo);
+ if(!portrait){const source=surface(photo);portrait={source,faces:detectPortrait(model,source)};if(portrait.faces.length===1)portraitCache.set(photo,portrait);}
+ if(portrait.faces.length!==1)throw Error('Use a photo containing one visible face.');
+ const {faceGeometry,encodeFaceGLB}=await import('./photo-mesh.mjs');
+ const {FaceLandmarker}=await import('./vendor/vision/vision_bundle.mjs');
+ const landmarks=portrait.faces[0].slice(0,468),edges=FaceLandmarker.FACE_LANDMARKS_TESSELATION,triangles=[];
+ for(let i=0;i<edges.length;i+=3)triangles.push(edges[i].start,edges[i].end,edges[i+1].end);
+ // Tessellation leaves eye openings. Fill them with the photo's visible eye surface.
+ for(const eye of [[33,7,163,144,145,153,154,155,133,173,157,158,159,160,161,246],[263,249,390,373,374,380,381,382,362,398,384,385,386,387,388,466]])
+  for(let i=1;i<eye.length-1;i++)triangles.push(eye[0],eye[i],eye[i+1]);
+ const texture=await new Promise(resolve=>portrait.source.toBlob(resolve,'image/png'));
+ if(!texture)throw Error('Could not encode photo texture.');
+ const geometry=faceGeometry(landmarks,triangles),png=new Uint8Array(await texture.arrayBuffer());
+ return {bytes:encodeFaceGLB(geometry,png),export:options=>encodeFaceGLB(geometry,png,options),receipt:{method:'mediapipe-landmark-face-surface',landmarks:468,morphTargets:['Stylize','MouthOpen'],completeHead:false,completeBody:false,estimatedDepth:true}};
+}
