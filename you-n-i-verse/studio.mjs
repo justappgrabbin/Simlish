@@ -124,7 +124,9 @@ $('#chairDemo').onclick=loadActionMotion;
 
 
 // Use the same identity image for every form; selecting a cached form is immediate.
-const forms = new MorphLibrary(morphPhoto);
+const formOptions=()=>({shape:Number($("#formShape").value),sculpt:Number($("#formSculpt").value)});
+const forms = new MorphLibrary((identity,target)=>morphPhoto(identity,target,formOptions()));
+for(const id of ["formShape","formSculpt"])$("#"+id).oninput=()=>{forms.revision++;for(const target of forms.targets.values()){target.result=null;target.pending=null;}$("#formStatus").textContent="Shape changed. Morph selected form to apply.";};
 $('#morphTargets').onchange=async()=>{
  for(const file of $('#morphTargets').files){
   const url=URL.createObjectURL(file);
