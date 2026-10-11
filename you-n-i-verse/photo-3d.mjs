@@ -1,8 +1,9 @@
 import * as THREE from './vendor/three/three.module.js';
+import {GLTFExporter} from './vendor/three/GLTFExporter.js';
 import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 import {reconstructFaceSurface} from './photo-morph.mjs';
 export function mountPhoto3D(getPhoto){
- const $=id=>document.getElementById(id);let renderer,scene,camera,model,mixer,bytes,buildResult,identity,external=false,rotate=false,last=0,drag=null;
+ const $=id=>document.getElementById(id);let renderer,scene,camera,model,mixer,bytes,buildResult,identity,external=false,clips=[],rotate=false,last=0,drag=null;
  function init(){
   if(renderer)return;renderer=new THREE.WebGLRenderer({canvas:$('face3d'),antialias:true});renderer.setSize(400,400,false);renderer.setPixelRatio(Math.min(devicePixelRatio,2));scene=new THREE.Scene();scene.background=new THREE.Color('#161128');camera=new THREE.PerspectiveCamera(35,1,.01,100);camera.position.z=3;
   scene.add(new THREE.HemisphereLight(0xffffff,0x8877bb,2));const light=new THREE.DirectionalLight(0xffffff,2);light.position.set(0,2,4);scene.add(light);
@@ -13,24 +14,34 @@ export function mountPhoto3D(getPhoto){
  $('build3d').onclick=async()=>{
   const source=getPhoto();$('build3d').disabled=true;$('meshStatus').textContent='Reading photo landmarks and building the 3D face surface…';
   try{const result=await reconstructFaceSurface(source);if(source!==getPhoto())throw Error('Photo changed; build again.');init();const gltf=await new GLTFLoader().parseAsync(result.bytes.buffer,'');dispose(model);model=gltf.scene;scene.add(model);external=false;$('style3d').disabled=false;bytes=result.bytes;buildResult=result;identity=source;
-   const box=new THREE.Box3().setFromObject(model),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());model.position.sub(center);camera.position.z=Math.max(size.x,size.y)*2.2;
-   mixer=new THREE.AnimationMixer(model);mixer.clipAction(gltf.animations[0]).play();$('style3d').value=0;$('export3d').disabled=false;$('animate3d').disabled=false;$('meshStatus').textContent='3D face surface ready. Drag to turn. Depth is estimated; back of head and body are not reconstructed.';
+   model.updateMatrixWorld(true);model.traverse(node=>{if(node.isSkinnedMesh){node.skeleton.update();node.computeBoundingBox();}});const box=new THREE.Box3().setFromObject(model),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());model.position.sub(center);camera.position.z=Math.max(size.x,size.y)*2.2;
+   clips=gltf.animations;mixer=new THREE.AnimationMixer(model);mixer.clipAction(clips[0]).play();$('avatarExpressions').replaceChildren();$('style3d').value=0;$('export3d').disabled=false;$('animate3d').disabled=false;$('meshStatus').textContent='3D face surface ready. Drag to turn. Depth is estimated; back of head and body are not reconstructed.';
   }catch(error){$('meshStatus').textContent=error.message;}finally{$('build3d').disabled=false;}
  };
  $('style3d').oninput=()=>{model?.traverse(node=>{if(node.morphTargetInfluences)node.morphTargetInfluences[0]=Number($('style3d').value);});};
- $('animate3d').onclick=()=>{rotate=!rotate;$('animate3d').textContent=rotate?'Pause expression':'Animate expression';};
- $('export3d').onclick=()=>{
+ $('animate3d').onclick=()=>{rotate=!rotate;$('animate3d').textContent=rotate?'Pause animation':'Animate avatar';};
+ $('export3d').onclick=async()=>{
+  try{
   if(!external&&identity!==getPhoto()){$('meshStatus').textContent='Photo changed; rebuild before exporting.';return;}
   if(!external)bytes=buildResult.export({styleWeight:Number($('style3d').value)});
+  else bytes=new Uint8Array(await new GLTFExporter().parseAsync(model,{binary:true,animations:clips}));
   const blob=new Blob([bytes],{type:'model/gltf-binary'});
-  if(window.NativeDownloads?.save){const reader=new FileReader();reader.onload=()=>NativeDownloads.save('you-n-i-verse-face.glb','model/gltf-binary',reader.result.split(',')[1]);reader.readAsDataURL(blob);return;}
-  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='you-n-i-verse-face.glb';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  if(window.NativeDownloads?.save){const reader=new FileReader();reader.onload=()=>NativeDownloads.save('you-n-i-verse-avatar.glb','model/gltf-binary',reader.result.split(',')[1]);reader.readAsDataURL(blob);return;}
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='you-n-i-verse-avatar.glb';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch(error){$('meshStatus').textContent='GLB export failed: '+error.message;}
  };
  return {open:async data=>{
   init();const gltf=await new GLTFLoader().parseAsync(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength),'');dispose(model);model=gltf.scene;scene.add(model);bytes=data;external=true;buildResult=null;
-  const box=new THREE.Box3().setFromObject(model),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());model.position.sub(center);camera.position.z=Math.max(size.x,size.y)*2.2;camera.far=Math.max(100,camera.position.z*10);camera.updateProjectionMatrix();
-  mixer=null;rotate=false;if(gltf.animations.length){mixer=new THREE.AnimationMixer(model);mixer.clipAction(gltf.animations[0]).play();}
-  $('style3d').disabled=true;$('animate3d').disabled=!mixer;$('animate3d').textContent='Animate expression';$('export3d').disabled=false;$('meshStatus').textContent='Model-host avatar loaded. Drag to turn, or export GLB.';
+  model.updateMatrixWorld(true);model.traverse(node=>{if(node.isSkinnedMesh){node.skeleton.update();node.computeBoundingBox();}});const box=new THREE.Box3().setFromObject(model),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());model.position.sub(center);camera.position.z=Math.max(size.x,size.y)*2.2;camera.far=Math.max(100,camera.position.z*10);camera.updateProjectionMatrix();
+  mixer=null;rotate=false;clips=gltf.animations;$('avatarExpressions').replaceChildren();const tracks=[];
+  model.traverse(node=>{if(!node.morphTargetDictionary)return;for(const [name,index] of Object.entries(node.morphTargetDictionary)){
+   const label=document.createElement('label');label.textContent=name.replace(/([a-z])([A-Z])/g,'$1 $2');const slider=document.createElement('input');slider.type='range';slider.min=0;slider.max=1;slider.step=.01;slider.value=node.morphTargetInfluences[index];slider.oninput=()=>{rotate=false;$('animate3d').textContent='Animate avatar';node.morphTargetInfluences[index]=Number(slider.value);};label.append(slider);$('avatarExpressions').append(label);
+   if(/eyeBlink(Left|Right)/i.test(name))tracks.push(new THREE.NumberKeyframeTrack(node.uuid+'.morphTargetInfluences['+name+']',[0,1,1.15,1.3,3],[0,0,1,0,0]));
+   if(name==='jawOpen'||(name==='mouthOpen'&&!('jawOpen' in node.morphTargetDictionary)))tracks.push(new THREE.NumberKeyframeTrack(node.uuid+'.morphTargetInfluences['+name+']',[0,.5,1,1.5,2,3],[0,.2,0,.4,.1,0]));
+  }});
+  if(!clips.length&&tracks.length)clips=[new THREE.AnimationClip('Expression demonstration',3,tracks)];
+  if(clips.length){mixer=new THREE.AnimationMixer(model);mixer.clipAction(clips[0]).play();}
+  $('style3d').disabled=true;$('animate3d').disabled=!mixer;$('animate3d').textContent='Animate avatar';$('export3d').disabled=false;$('meshStatus').textContent='Model-host avatar loaded. Drag to turn, or export GLB.';
  }};
 
 }

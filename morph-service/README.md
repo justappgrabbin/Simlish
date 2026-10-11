@@ -37,7 +37,7 @@ photo editing, and no default model host is configured.
 | text-image | SDXL_MODEL: any local AutoPipelineForText2Image-compatible model | Prompt + seed → PNG |
 | instantid | INSTANTID_ROOT, SDXL_MODEL, InsightFace antelopev2, InstantID ControlNet and ip-adapter.bin | Photo + prompt + seed → identity-conditioned PNG |
 | deca | DECA_ROOT with DECA/FLAME dependencies and checkpoints | Photo → OBJ, textures, landmarks; GLB conversion when Blender is installed |
-| unum | UNUM_ROOT, BLENDER_BIN, UNUM_FACE_MODEL; Blender Python dependencies incl. MediaPipe, InsightFace buffalo_l, SciPy | Photo → full head/neck avatar GLB |
+| unum | UNUM_ROOT, BLENDER_BIN, UNUM_FACE_MODEL; Blender Python dependencies incl. MediaPipe, InsightFace buffalo_l, SciPy | Photo-derived head + inferred humanoid body → rigged GLB |
 | liveportrait | LIVEPORTRAIT_ROOT with human checkpoints | Photo + driving MP4 → animated video |
 | liveportrait-animal | same root with animal checkpoints | Animal photo + driving MP4 → animated video |
 | facefusion | FACEFUSION_ROOT with configured models | Source photo + target picture → PNG |
@@ -61,7 +61,7 @@ API authentication, unavailable-engine rejection, output-path isolation, and arg
 construction have regression tests (`python test_service.py`). Source syntax checked.
 Text-image tested with the actual downloaded segmind/tiny-sd model, revision
 cad0bd7495fa6c4bcca01b19a723dc91627fe84f (CreativeML Open RAIL-M), on CPU.
-Other upstream adapters require their checkpoints and have not run inference here.
+Unum was tested with its actual MediaPipe and InsightFace buffalo_l models in Blender 4.3.2. DECA, InstantID, LivePortrait and FaceFusion have not run inference here.
 
 End-to-end proof: a mobile-size Chromium studio submitted a real cartoon prompt
 through the API, polled the worker, downloaded the generated PNG and added it to
@@ -72,3 +72,22 @@ The generated cartoon also passed the actual landmark morph step with the origin
 photo. External GLB import/preview/export controls passed a browser check with a
 real exported face GLB. A separate 30-step photograph-style dog-on-log generation
 completed on the same model.
+
+## Full-body prototype
+
+Unum retains the supplied photo-derived head and its 12 facial morph targets.
+The integration replaces the cropped shoulder base with a **generic inferred
+humanoid**, including hands, feet, a 15-bone skin, body-width shape keys and a
+looped movement demonstration. This segmented mannequin is a prototype, not
+photorealistic anatomy or recovery of the person's body/clothing from a face photo.
+Body reconstruction from full-body images and production character topology remain
+future work. Facial expressions and body shape controls are available in the viewer.
+
+Use UNUM_INSIGHTFACE_ROOT for the directory containing models/buffalo_l.
+Set UNUM_PYTHONPATH to dependencies built for Blender's own Python version,
+and UNUM_LIBRARY_PATH if additional system shared libraries are required.
+Blender is invoked with --python-use-system-env and --python-exit-code 1 so
+Python dependency errors fail the job rather than reporting success. This runtime
+used Blender Python 3.13, MediaPipe, InsightFace, ONNX Runtime, SciPy and libGLESv2.
+The model host must be deployed/configured separately for access from a phone;
+the workspace test host is loopback only.

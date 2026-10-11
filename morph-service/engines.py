@@ -39,18 +39,21 @@ def command(engine, job, params):
  if engine == 'facefusion':
   return [python,str(root/entry),'headless-run','--source-paths',photo,'--target-path',str(job/'target.png'),'--output-path',str(out/'image.png'),'--processors','face_swapper'],root
  if engine == 'unum':
-  return [os.environ.get('BLENDER_BIN','blender'),'--background','--python',str(WORKERS/'unum.py'),'--',str(root/entry),photo,str(out),os.environ['UNUM_FACE_MODEL']],root
+  return [os.environ.get('BLENDER_BIN','blender'),'--background','--python-use-system-env','--python-exit-code','1','--python',str(WORKERS/'unum.py'),'--',str(root/entry),photo,str(out),os.environ['UNUM_FACE_MODEL']],root
  raise ValueError('Unsupported engine')
 
 def execute(engine, job, params):
  args,cwd=command(engine,job,params)
+ environment=os.environ.copy()
+ if engine=='unum' and os.environ.get('UNUM_PYTHONPATH'):environment['PYTHONPATH']=os.environ['UNUM_PYTHONPATH']
+ if engine=='unum' and os.environ.get('UNUM_LIBRARY_PATH'):environment['LD_LIBRARY_PATH']=os.environ['UNUM_LIBRARY_PATH']
  with (job/'worker.log').open('w') as log:
-  result=subprocess.run(args,cwd=cwd,stdout=log,stderr=subprocess.STDOUT,timeout=int(os.environ.get('MORPH_TIMEOUT','1800')))
+  result=subprocess.run(args,cwd=cwd,env=environment,stdout=log,stderr=subprocess.STDOUT,timeout=int(os.environ.get('MORPH_TIMEOUT','1800')))
  if result.returncode:raise RuntimeError(f'{engine} failed; see worker.log (exit {result.returncode}).')
  if engine=='deca' and shutil.which(os.environ.get('BLENDER_BIN','blender')):
   for mesh in (job/'output').rglob('*.obj'):
    with (job/'worker.log').open('a') as log:
-    conversion=subprocess.run([os.environ.get('BLENDER_BIN','blender'),'--background','--python',str(WORKERS/'obj_to_glb.py'),'--',str(mesh),str(mesh.with_suffix('.glb'))],stdout=log,stderr=subprocess.STDOUT,timeout=300)
+    conversion=subprocess.run([os.environ.get('BLENDER_BIN','blender'),'--background','--python-exit-code','1','--python',str(WORKERS/'obj_to_glb.py'),'--',str(mesh),str(mesh.with_suffix('.glb'))],stdout=log,stderr=subprocess.STDOUT,timeout=300)
    if conversion.returncode:raise RuntimeError('DECA mesh produced; GLB conversion failed. See worker.log.')
  files=[p for p in (job/'output').rglob('*') if p.is_file()]
  if not files:raise RuntimeError('Engine returned without output files.')

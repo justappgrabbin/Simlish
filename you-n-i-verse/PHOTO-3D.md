@@ -26,3 +26,12 @@ exported GLB from a public OpenCV portrait. Visual inspection corrected texture
 coordinates and replaced projected triangulation with canonical face topology.
 Export was parsed to verify selected weight, binary lengths and animation metadata.
 Physical Android device testing remains outstanding.
+
+## Model-host full-body prototype
+
+The Unum adapter now adds a generic segmented humanoid body to the reconstructed
+head, exporting a 15-bone rig, body-width morphs, facial expression controls and a
+movement clip. Body proportions/clothing are inferred defaults, not observations
+from a face photo. This is an animated prototype and needs anatomy/topology
+refinement before production character use. The browser can preview, animate and
+re-export the rigged GLB. Local face-surface generation still produces only a face.
