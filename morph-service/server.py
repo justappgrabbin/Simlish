@@ -51,6 +51,8 @@ async def submit(request:Request):
   if not readiness(engine)['ready']:raise HTTPException(409,readiness(engine)['reason'])
   if not isinstance(params,dict):raise ValueError('Invalid parameters')
   if engine in ['instantid','text-image'] and (not isinstance(params.get('prompt'),str) or not 1<=len(params['prompt'])<=4000):raise ValueError('Describe the requested picture')
+  identity_id=params.get('identity_id')
+  if identity_id is not None and (not isinstance(identity_id,str) or len(identity_id)!=70 or not identity_id.startswith('photo:') or any(c not in '0123456789abcdef' for c in identity_id[6:])):raise ValueError('Invalid identity reference')
   seed=params.get('seed',0)
   if not isinstance(seed,int) or not 0<=seed<2**32:raise ValueError('Invalid seed')
   with lock:
@@ -59,7 +61,7 @@ async def submit(request:Request):
    if engine!='text-image':asset(data.get('photo'),path/'photo.png')
    if engine.startswith('liveportrait'):asset(data.get('driving'),path/'driving.mp4',False)
    if engine=='facefusion':asset(data.get('target'),path/'target.png')
-   jobs[id]={'id':id,'engine':engine,'status':'queued','files':[],'params':params,'identity_sha256':hashlib.sha256((path/'photo.png').read_bytes()).hexdigest() if (path/'photo.png').exists() else None}
+   jobs[id]={'id':id,'engine':engine,'status':'queued','files':[],'params':params,'source_identity_id':params.get('identity_id'),'identity_sha256':hashlib.sha256((path/'photo.png').read_bytes()).hexdigest() if (path/'photo.png').exists() else None}
    queue.submit(run,id,engine,path,params)
   return {'id':id}
  except HTTPException:raise

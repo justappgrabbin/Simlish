@@ -17,6 +17,12 @@ class ServiceTests(unittest.TestCase):
  def test_unknown_engine_and_unlisted_output(self):
   self.assertEqual(client.post('/jobs',headers=headers,json={'engine':'shell'}).status_code,400)
   self.assertEqual(client.get('/jobs/not-a-job/files/etc/passwd',headers=headers).status_code,404)
+ def test_invalid_source_identity_is_rejected_before_queuing(self):
+  from unittest.mock import patch
+  with patch.dict(os.environ,{'SDXL_MODEL':tempfile.mkdtemp(),'MORPH_READY_ENGINES':'text-image'}):
+   response=client.post('/jobs',headers=headers,json={'engine':'text-image','params':{'prompt':'a generated form','identity_id':'wrong-source'}})
+   self.assertEqual(response.status_code,400)
+   self.assertIn('identity reference',response.json()['detail'])
  def test_prompt_is_one_argument_not_shell_code(self):
   root=Path(tempfile.mkdtemp());os.environ['INSTANTID_ROOT']=str(root);job=root/'job';job.mkdir()
   prompt='a purple unicorn; $(touch /tmp/should-not-exist)'
