@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
   web.setWebChromeClient(new WebChromeClient(){
    @Override public boolean onShowFileChooser(WebView view,ValueCallback<Uri[]> callback,FileChooserParams params){
     if(chooser!=null)chooser.onReceiveValue(null);chooser=callback;cameraUri=null;
-    Intent pick=new Intent(Intent.ACTION_GET_CONTENT);pick.addCategory(Intent.CATEGORY_OPENABLE);String[] accepts=params.getAcceptTypes();boolean image=false;for(String t:accepts)if(t.startsWith("image/"))image=true;pick.setType(image?"image/*":"application/json");
-    Intent select=Intent.createChooser(pick,image?"Choose from Photos":"Open studio project");
+    Intent pick=new Intent(Intent.ACTION_GET_CONTENT);pick.addCategory(Intent.CATEGORY_OPENABLE);String[] accepts=params.getAcceptTypes();boolean image=false;for(String t:accepts)if(t.startsWith("image/"))image=true;boolean model=false;for(String t:accepts)if(t.contains("glb")||t.contains("gltf")||t.contains("octet-stream"))model=true;pick.setType(image?"image/*":model?"*/*":"application/json");
+    Intent select=Intent.createChooser(pick,image?"Choose from Photos":model?"Open animated character":"Open studio project");
     if(image && params.isCaptureEnabled()){Intent camera=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);if(camera.resolveActivity(getPackageManager())!=null){try{File dir=new File(getCacheDir(),"camera");dir.mkdirs();File f=File.createTempFile("portrait-",".jpg",dir);cameraUri=FileProvider.getUriForFile(MainActivity.this,getPackageName()+".files",f);camera.putExtra(MediaStore.EXTRA_OUTPUT,cameraUri);camera.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_READ_URI_PERMISSION);camera.setClipData(ClipData.newRawUri("portrait",cameraUri));select.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{camera});}catch(Exception e){cameraUri=null;}}}
     try{startActivityForResult(select,PICK);}catch(Exception e){chooser.onReceiveValue(null);chooser=null;toast("File picker unavailable");}return true;
    }

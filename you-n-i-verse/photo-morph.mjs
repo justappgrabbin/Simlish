@@ -61,3 +61,10 @@ export async function morphPhoto(photo,target){
  const result=document.createElement('canvas');result.width=body.width;result.height=body.height;result.getContext('2d').drawImage(body,0,0);result.getContext('2d').drawImage(warped,0,0);
  return {canvas:result,receipt:{method:'local-neural-landmarks/triangle-warp/color-match/feather',landmarks:468,triangles:triangles.length/3,sourceFaces:1,targetFaces:1,network:false,trainedHere:false}};
 }
+
+export async function portraitSurface(photo){
+ const model=await detector();let portrait=portraitCache.get(photo);if(!portrait){const source=surface(photo);portrait={source,faces:detectPortrait(model,source)};if(portrait.faces.length===1)portraitCache.set(photo,portrait)}
+ if(portrait.faces.length!==1)throw Error('Use a photo with exactly one visible face.');
+ const points=portrait.faces[0].slice(0,468),D=await triangulator();
+ return {image:portrait.source,points,triangles:Array.from(D.from(points,p=>p.x,p=>p.y).triangles),method:'photo-texture/estimated-landmark-depth'};
+}
