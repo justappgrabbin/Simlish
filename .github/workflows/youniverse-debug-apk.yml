@@ -41,7 +41,16 @@ jobs:
           node you-n-i-verse/photo-morph.test.mjs
           node you-n-i-verse/animation.test.mjs
           node you-n-i-verse/frame-morph.test.mjs
+          node you-n-i-verse/morph-library.test.mjs
+          node you-n-i-verse/morph-geometry.test.mjs
+          node you-n-i-verse/photo-mesh.test.mjs
+          node you-n-i-verse/morph-project.test.mjs
+          node --check you-n-i-verse/model-client.mjs
           node --check you-n-i-verse/studio.mjs
+      - name: Check model-service boundaries
+        run: |
+          python -m pip install fastapi==0.143.0 Pillow==12.3.0 httpx==0.28.1
+          python morph-service/test_service.py
       - name: Build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
       - name: Name installable APK

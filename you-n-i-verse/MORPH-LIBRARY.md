@@ -8,10 +8,12 @@ detection on one target does not stop the others.
 
 Target names are unrestricted. This implementation requires one detectable face
 per target; it does not reconstruct anatomy or invent a new target from text.
-DECA, InstantID, LivePortrait, FaceFusion, UnumAvatar and Boneyard adapters remain
-future work. The form library is held in memory; the selected embodiment is saved
-by the existing project save, but the entire library is not persisted yet.
+The optional model service now connects DECA, InstantID, LivePortrait, FaceFusion
+and UnumAvatar adapters; their upstream inference requires installed checkpoints.
+Boneyard rig authoring remains pending. The form library, selected form, shape/sculpt settings and prepared results are
+retained in device autosave and complete-project exports. Old projects still open.
 
 Verified: source-sharing, cache invalidation, stale-result rejection, per-target
-failure isolation, and JavaScript syntax. Real-image/browser and Android testing
-remain outstanding.
+failure isolation, project validation and JavaScript syntax. Real-image morphing,
+generation-to-morph and save/reload are browser-tested. Physical Android testing
+remains outstanding.

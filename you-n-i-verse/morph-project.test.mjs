@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validateFormLibrary} from './project-store.mjs';
+const image='data:image/png;base64,example';
+test('library preserves open names, selected form, settings and cached outputs',()=>{assert.doesNotThrow(()=>validateFormLibrary({shape:.5,sculpt:-.5,selected:'a',targets:[{id:'a',name:'Any form at all',image,result:{image,receipt:{landmarks:468}}}]}));assert.doesNotThrow(()=>validateFormLibrary(undefined));});
+test('duplicate identities and invalid saved target/settings are rejected',()=>{const target={id:'a',name:'A',image};assert.throws(()=>validateFormLibrary({shape:1,sculpt:0,selected:'a',targets:[target,target]}));assert.throws(()=>validateFormLibrary({shape:NaN,sculpt:0,selected:'',targets:[]}));assert.throws(()=>validateFormLibrary({shape:1,sculpt:0,selected:'missing',targets:[target]}));});
