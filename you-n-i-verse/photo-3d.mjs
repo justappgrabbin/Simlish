@@ -30,7 +30,7 @@ export function mountPhoto3D(getPhoto){
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='you-n-i-verse-avatar.glb';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }catch(error){$('meshStatus').textContent='GLB export failed: '+error.message;}
  };
- return {open:async data=>{
+ const api={open:async data=>{
   init();const gltf=await new GLTFLoader().parseAsync(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength),'');dispose(model);model=gltf.scene;scene.add(model);bytes=data;external=true;buildResult=null;
   model.updateMatrixWorld(true);model.traverse(node=>{if(node.isSkinnedMesh){node.skeleton.update();node.computeBoundingBox();}});const box=new THREE.Box3().setFromObject(model),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());model.position.sub(center);camera.position.z=Math.max(size.x,size.y)*2.2;camera.far=Math.max(100,camera.position.z*10);camera.updateProjectionMatrix();
   mixer=null;rotate=false;clips=gltf.animations;$('avatarExpressions').replaceChildren();const tracks=[];
@@ -43,5 +43,6 @@ export function mountPhoto3D(getPhoto){
   if(clips.length){mixer=new THREE.AnimationMixer(model);mixer.clipAction(clips[0]).play();}
   $('style3d').disabled=true;$('animate3d').disabled=!mixer;$('animate3d').textContent='Animate avatar';$('export3d').disabled=false;$('meshStatus').textContent='Model-host avatar loaded. Drag to turn, or export GLB.';
  }};
-
+ $('import3d').onchange=async event=>{try{const file=event.target.files[0];if(!file)return;if(file.size>50_000_000)throw Error('Use a GLB below 50 MB.');await api.open(new Uint8Array(await file.arrayBuffer()));}catch(error){$('meshStatus').textContent=error.message;}finally{event.target.value='';}};
+ return api;
 }

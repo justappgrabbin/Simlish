@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
   web.setWebChromeClient(new WebChromeClient(){
    @Override public boolean onShowFileChooser(WebView view,ValueCallback<Uri[]> callback,FileChooserParams params){
     if(chooser!=null)chooser.onReceiveValue(null);chooser=callback;cameraUri=null;
-    Intent pick=new Intent(Intent.ACTION_GET_CONTENT);pick.addCategory(Intent.CATEGORY_OPENABLE);String[] accepts=params.getAcceptTypes();boolean image=false;for(String t:accepts)if(t.startsWith("image/"))image=true;pick.setType(image?"image/*":"application/json");
-    Intent select=Intent.createChooser(pick,image?"Choose from Photos":"Open studio project");
+    Intent pick=new Intent(Intent.ACTION_GET_CONTENT);pick.addCategory(Intent.CATEGORY_OPENABLE);String[] accepts=params.getAcceptTypes();boolean image=false;for(String t:accepts)if(t.startsWith("image/"))image=true;boolean video=false,model=false;for(String t:accepts){if(t.startsWith("video/"))video=true;if(t.equals(".glb")||t.startsWith("model/"))model=true;}pick.setType(image?"image/*":video?"video/*":model?"*/*":"application/json");pick.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,params.getMode()==FileChooserParams.MODE_OPEN_MULTIPLE);
+    Intent select=Intent.createChooser(pick,image?"Choose from Photos":video?"Choose animation video":model?"Open 3D avatar":"Open studio project");
     if(image && params.isCaptureEnabled()){Intent camera=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);if(camera.resolveActivity(getPackageManager())!=null){try{File dir=new File(getCacheDir(),"camera");dir.mkdirs();File f=File.createTempFile("portrait-",".jpg",dir);cameraUri=FileProvider.getUriForFile(MainActivity.this,getPackageName()+".files",f);camera.putExtra(MediaStore.EXTRA_OUTPUT,cameraUri);camera.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_READ_URI_PERMISSION);camera.setClipData(ClipData.newRawUri("portrait",cameraUri));select.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{camera});}catch(Exception e){cameraUri=null;}}}
     try{startActivityForResult(select,PICK);}catch(Exception e){chooser.onReceiveValue(null);chooser=null;toast("File picker unavailable");}return true;
    }
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
     if(pendingExport!=null){notifySave("Finish or cancel the current save first.");return;}
     try{
      if(encoded.length()>90_000_000)throw new Exception("Export is too large for this debug build");
-     if(!mime.equals("image/png")&&!mime.equals("application/json"))throw new Exception("Unsupported export type");
+     if(!mime.equals("image/png")&&!mime.equals("image/jpeg")&&!mime.equals("application/json")&&!mime.equals("model/gltf-binary")&&!mime.equals("video/mp4")&&!mime.equals("application/octet-stream")&&!mime.equals("text/plain"))throw new Exception("Unsupported export type");
      pendingExport=android.util.Base64.decode(encoded,android.util.Base64.DEFAULT);
      Intent out=new Intent(Intent.ACTION_CREATE_DOCUMENT);out.addCategory(Intent.CATEGORY_OPENABLE);out.setType(mime);out.putExtra(Intent.EXTRA_TITLE,name.replaceAll("[^a-zA-Z0-9._-]","_"));startActivityForResult(out,SAVE);
     }catch(Exception e){pendingExport=null;notifySave("Could not open save: "+e.getMessage());}
@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
    }catch(Exception e){runOnUiThread(()->toast("Could not open photo: "+e.getMessage()));}}).start();
   }
 
-  if(request==PICK&&chooser!=null){Uri[] uris=null;if(result==RESULT_OK){Uri uri=data!=null?data.getData():null;if(uri==null)uri=cameraUri;if(uri!=null)uris=new Uri[]{uri};}chooser.onReceiveValue(uris);chooser=null;cameraUri=null;}
+  if(request==PICK&&chooser!=null){Uri[] uris=null;if(result==RESULT_OK){uris=WebChromeClient.FileChooserParams.parseResult(result,data);if((uris==null||uris.length==0)&&cameraUri!=null)uris=new Uri[]{cameraUri};}chooser.onReceiveValue(uris);chooser=null;cameraUri=null;}
   if(request==SAVE){final byte[] bytes=pendingExport;pendingExport=null;if(result!=RESULT_OK||data==null||data.getData()==null){notifySave("Save cancelled. Your project is still in the studio.");return;}Uri uri=data.getData();new Thread(()->{try(OutputStream stream=getContentResolver().openOutputStream(uri)){if(stream==null)throw new Exception("Destination unavailable");stream.write(bytes);stream.flush();notifySave("File saved successfully.");}catch(Exception e){notifySave("Save failed: "+e.getMessage());}}).start();}
  }
  private void notifySave(String message){runOnUiThread(()->{toast(message);web.evaluateJavascript("window.dispatchEvent(new CustomEvent('native-save-result',{detail:"+org.json.JSONObject.quote(message)+"}));",null);});}
