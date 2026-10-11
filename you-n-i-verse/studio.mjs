@@ -1,3 +1,4 @@
+import {mountModelClient} from './model-client.mjs';
 import {mountPhoto3D} from './photo-3d.mjs';
 import {MorphLibrary} from './morph-library.mjs';
 import {expandMotion} from './frame-morph.mjs';
@@ -152,4 +153,5 @@ $('#morphAll').onclick=async()=>{
  }finally{$('#morphAll').disabled=false;$('#morphSelected').disabled=false;}
 };
 
-mountPhoto3D(()=>photo);
+const photo3D=mountPhoto3D(()=>photo);
+mountModelClient({getPhoto:()=>photo,open3D:bytes=>photo3D.open(bytes),addTarget:async(name,blob)=>{const url=URL.createObjectURL(blob);try{const image=await load(url),id=crypto.randomUUID();forms.add(id,name,image);const option=new Option(name,id);$('#morphForm').add(option);$('#morphForm').value=id;$('#formStatus').textContent='Generated picture added. Morph your identity into this form.';}finally{URL.revokeObjectURL(url);}}});
