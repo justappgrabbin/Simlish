@@ -9,6 +9,7 @@ export function affineTriangle(source,target) {
 }
 const oval=[10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58,132,93,234,127,162,21,54,103,67,109];
 let detectorPromise;
+const portraitCache=new WeakMap();
 async function detector(){
  if(!detectorPromise)detectorPromise=(async()=>{
   const {FilesetResolver,FaceLandmarker}=await import('./vendor/vision/vision_bundle.mjs');
@@ -33,8 +34,9 @@ function detectPortrait(model,image){
  return faces;
 }
 export async function morphPhoto(photo,target){
- const source=surface(photo),body=surface(target),model=await detector();
- const sourceFaces=detectPortrait(model,source),targetFaces=detectPortrait(model,body);
+ const body=surface(target),model=await detector();
+ let portrait=portraitCache.get(photo);if(!portrait){const source=surface(photo);portrait={source,faces:detectPortrait(model,source)};if(portrait.faces.length===1)portraitCache.set(photo,portrait)}
+ const source=portrait.source,sourceFaces=portrait.faces,targetFaces=detectPortrait(model,body);
  if(sourceFaces.length!==1)throw Error(`Found ${sourceFaces.length} faces in your photo. Use a photo with one visible face.`);
  if(targetFaces.length!==1)throw Error(`Found ${targetFaces.length} faces in the target. Choose a target image with one visible face.`);
  const points=(landmarks,c)=>landmarks.slice(0,468).map(p=>({x:p.x*c.width,y:p.y*c.height}));

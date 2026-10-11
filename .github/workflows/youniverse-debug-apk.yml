@@ -40,6 +40,7 @@ jobs:
           node you-n-i-verse/game-path.test.mjs
           node you-n-i-verse/photo-morph.test.mjs
           node you-n-i-verse/animation.test.mjs
+          node you-n-i-verse/frame-morph.test.mjs
           node --check you-n-i-verse/studio.mjs
       - name: Build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
