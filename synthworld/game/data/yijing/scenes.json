@@ -1,0 +1,48 @@
+{
+  "yijing/hex-24": {
+    "name": "Return",
+    "directives": [
+      {
+        "verb": "light",
+        "object": "sky/ambient_dawn",
+        "with": {
+          "grade": 0.65
+        }
+      },
+      {
+        "verb": "spawn",
+        "object": "vfx/fireflies",
+        "with": {
+          "density": 0.2
+        }
+      },
+      {
+        "verb": "play",
+        "object": "sfx/wind_chimes"
+      }
+    ]
+  },
+  "yijing/hex-51": {
+    "name": "Arousing (Thunder)",
+    "directives": [
+      {
+        "verb": "light",
+        "object": "sky/storm",
+        "with": {
+          "flashes": true
+        }
+      },
+      {
+        "verb": "spawn",
+        "object": "vfx/lightning",
+        "with": {
+          "rate": 0.1
+        }
+      },
+      {
+        "verb": "play",
+        "object": "sfx/thunder_roll"
+      }
+    ]
+  }
+}

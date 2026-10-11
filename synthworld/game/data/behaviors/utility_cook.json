@@ -1,0 +1,5 @@
+{
+  "action": "CookMeal",
+  "score": "0.6*creation + 0.3*hunger + 0.1*social",
+  "cooldownSec": 90
+}

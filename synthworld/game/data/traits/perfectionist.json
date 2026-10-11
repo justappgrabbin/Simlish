@@ -1,0 +1,14 @@
+{
+  "id": "perfectionist",
+  "tags": [
+    "quality"
+  ],
+  "modifiers": {
+    "drives": {
+      "creation": 0.1
+    },
+    "stats": {
+      "repairAmountMult": 1.1
+    }
+  }
+}

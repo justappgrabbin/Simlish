@@ -1,0 +1,29 @@
+
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Systems/World.gd" id=1]
+[ext_resource type="PackedScene" path="res://Scenes/Agents/Cynthia.tscn" id=2]
+[ext_resource type="PackedScene" path="res://Scenes/Props/Tree.tscn" id=3]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2(200, 200)
+
+[node name="World" type="Node3D"]
+script = ExtResource( 1 )
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 10, 0 )
+shadow_enabled = true
+
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 8, 12)
+rotation_degrees = Vector3(-28, 0, 0)
+current = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource( 1 )
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Cynthia" parent="." instance=ExtResource( 2 )]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://Scripts/AI/Cynthia.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/AI/TraitComponent.gd" id="2"]
+
+[sub_resource type="CapsuleShape3D" id="shape"]
+radius = 0.38
+height = 1.75
+
+[sub_resource type="CapsuleMesh" id="body_mesh"]
+radius = 0.38
+height = 1.35
+
+[sub_resource type="StandardMaterial3D" id="body_mat"]
+albedo_color = Color(0.12, 0.035, 0.2, 1)
+metallic = 0.25
+roughness = 0.32
+
+[sub_resource type="SphereMesh" id="head_mesh"]
+radius = 0.34
+height = 0.68
+
+[sub_resource type="StandardMaterial3D" id="skin_mat"]
+albedo_color = Color(0.34, 0.16, 0.11, 1)
+roughness = 0.48
+
+[sub_resource type="TorusMesh" id="halo_mesh"]
+inner_radius = 0.4
+outer_radius = 0.46
+rings = 20
+ring_segments = 10
+
+[sub_resource type="StandardMaterial3D" id="halo_mat"]
+albedo_color = Color(1, 0.35, 0.78, 1)
+emission_enabled = true
+emission = Color(0.9, 0.18, 0.65, 1)
+emission_energy_multiplier = 2.0
+
+[node name="Cynthia" type="CharacterBody3D"]
+script = ExtResource("1")
+collision_layer = 1
+collision_mask = 1
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.88, 0)
+shape = SubResource("shape")
+
+[node name="Look" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Look"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("body_mesh")
+material_override = SubResource("body_mat")
+
+[node name="Head" type="MeshInstance3D" parent="Look"]
+position = Vector3(0, 1.72, 0)
+mesh = SubResource("head_mesh")
+material_override = SubResource("skin_mat")
+
+[node name="Traits" type="Node" parent="."]
+script = ExtResource("2")

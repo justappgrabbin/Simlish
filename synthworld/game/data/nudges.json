@@ -1,0 +1,24 @@
+[
+  {
+    "id": "place_symbol_garden",
+    "tags": [
+      "nature",
+      "calm"
+    ],
+    "effect": {
+      "exploration": 0.2,
+      "rest": 0.1
+    }
+  },
+  {
+    "id": "inspire_idea_cooking",
+    "tags": [
+      "creation",
+      "home"
+    ],
+    "effect": {
+      "creation": 0.3
+    },
+    "decaySec": 120
+  }
+]
