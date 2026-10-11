@@ -25,8 +25,8 @@ function detectPortrait(model,image){
  // The supplied full-body target has a small head. Inspect its upper region
  // at full resolution and translate the landmarks back to image coordinates.
  for(const fraction of [.45,.3]){
-  const region=document.createElement('canvas');region.width=image.width;region.height=Math.round(image.height*fraction);
-  region.getContext('2d').drawImage(image,0,0);
+  const region=document.createElement('canvas');region.width=image.width*3;region.height=Math.round(image.height*fraction)*3;
+  region.getContext('2d').drawImage(image,0,0,image.width*3,image.height*3);
   faces=model.detect(region).faceLandmarks;
   if(faces.length)return faces.map(face=>face.map(p=>({...p,y:p.y*fraction})));
  }
