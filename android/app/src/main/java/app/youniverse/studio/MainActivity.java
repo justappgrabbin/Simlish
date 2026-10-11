@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
   WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setAllowFileAccess(false);s.setAllowContentAccess(true);s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);s.setMediaPlaybackRequiresUserGesture(true);
   WebViewAssetLoader loader=new WebViewAssetLoader.Builder().addPathHandler("/assets/",new WebViewAssetLoader.AssetsPathHandler(this)).build();
   web.setWebViewClient(new WebViewClient(){
-   @Override public WebResourceResponse shouldInterceptRequest(WebView view,WebResourceRequest request){return loader.shouldInterceptRequest(request.getUrl());}
+   @Override public WebResourceResponse shouldInterceptRequest(WebView view,WebResourceRequest request){WebResourceResponse response=loader.shouldInterceptRequest(request.getUrl());if(response!=null){String path=request.getUrl().getPath();if(path!=null&&(path.endsWith(".mjs")||path.endsWith(".js")))response.setMimeType("application/javascript");else if(path!=null&&path.endsWith(".wasm"))response.setMimeType("application/wasm");}return response;}
    @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){Uri u=request.getUrl();if(ORIGIN.equals(u.getScheme()+"://"+u.getHost())&&u.getPath()!=null&&u.getPath().startsWith("/assets/"))return false;if(request.isForMainFrame()&&(u.getScheme().equals("https")||u.getScheme().equals("http"))){try{startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(Exception e){toast("No browser available");}}return true;}
   });
   web.setWebChromeClient(new WebChromeClient(){
@@ -44,6 +44,32 @@ public class MainActivity extends Activity {
   web.loadUrl(ORIGIN+"/assets/index.html");
  }
  public class NativeExport {
+  @JavascriptInterface public void analyzeFace(String encoded,int requestId){
+   runOnUiThread(()->{
+    if(web.getUrl()==null||!web.getUrl().startsWith(ORIGIN+"/assets/"))return;
+    new Thread(()->{org.json.JSONObject output=new org.json.JSONObject();android.graphics.Bitmap bitmap=null,working=null;
+     try{
+      output.put("requestId",requestId);
+      if(encoded.length()>30_000_000)throw new Exception("Photo is too large for local analysis");
+      byte[] bytes=android.util.Base64.decode(encoded,android.util.Base64.DEFAULT);
+      android.graphics.BitmapFactory.Options options=new android.graphics.BitmapFactory.Options();options.inJustDecodeBounds=true;android.graphics.BitmapFactory.decodeByteArray(bytes,0,bytes.length,options);int originalWidth=options.outWidth,originalHeight=options.outHeight;if(originalWidth<=0||originalHeight<=0)throw new Exception("Cannot read photo");
+      options.inJustDecodeBounds=false;options.inSampleSize=1;while(Math.max(originalWidth,originalHeight)/options.inSampleSize>800)options.inSampleSize*=2;
+      bitmap=android.graphics.BitmapFactory.decodeByteArray(bytes,0,bytes.length,options);if(bitmap==null)throw new Exception("Cannot decode photo");
+      int width=bitmap.getWidth()-(bitmap.getWidth()%2);if(width<2)throw new Exception("Photo is too small");
+      working=android.graphics.Bitmap.createBitmap(width,bitmap.getHeight(),android.graphics.Bitmap.Config.RGB_565);new android.graphics.Canvas(working).drawBitmap(bitmap,0,0,null);
+      android.media.FaceDetector.Face[] faces=new android.media.FaceDetector.Face[3];int count=new android.media.FaceDetector(width,working.getHeight(),3).findFaces(working,faces);
+      if(count!=1){output.put("status",count>1?"multiple":"none");}
+      else{
+       android.graphics.PointF middle=new android.graphics.PointF();faces[0].getMidPoint(middle);double scale=(double)originalWidth/bitmap.getWidth(),eyes=faces[0].eyesDistance()*scale;
+       output.put("status","detected");output.put("confidence",faces[0].confidence());output.put("rotation",-faces[0].pose(android.media.FaceDetector.Face.EULER_Z));
+       org.json.JSONObject bounds=new org.json.JSONObject();bounds.put("x",middle.x*scale-eyes*1.1);bounds.put("y",middle.y*scale-eyes*.8);bounds.put("width",eyes*2.2);bounds.put("height",eyes*2.8);output.put("bounds",bounds);
+      }
+     }catch(Exception e){try{output.put("status","failed");output.put("message",e.getMessage());}catch(Exception ignored){}}
+     finally{if(working!=null)working.recycle();if(bitmap!=null)bitmap.recycle();}
+     String message=output.toString();runOnUiThread(()->web.evaluateJavascript("window.dispatchEvent(new CustomEvent('native-face-analysis',{detail:"+message+"}));",null));
+    }).start();
+   });
+  }
   @JavascriptInterface public void chooseImage(String target){runOnUiThread(()->{
    if(web.getUrl()==null||!web.getUrl().startsWith(ORIGIN+"/assets/"))return;
    if(!target.equals("photo")&&!target.equals("body")&&!target.equals("sheet"))return;

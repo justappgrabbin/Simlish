@@ -33,3 +33,16 @@ IndexedDB now stores the portrait, body, sprite image, alignment, world, control
 ### Direct touch editing
 
 Photo and face-circle modes are beside the preview. One finger moves the selected layer; two fingers scale it. Photo mode also supports two-finger rotation. The face window has a visible draggable size handle. Close-up view magnifies editing without changing the exported body framing. Fine sliders remain in the same panel. Guides are preview-only, and gestures autosave the existing project fields. Run node touch.test.mjs for focal-point zoom, rotated drag and circle independence checks. Physical-device multitouch still requires confirmation.
+
+
+## Integrated local morph and choice prototype — 11 October 2026
+
+The studio now automatically runs a bundled MediaPipe CPU face-landmark model when a portrait is selected. It maps source-face triangles into the supplied target, matches average face color, and feathers the boundary. No remote request or API key is needed. Automatic morph is beside the photo preview; manual placement remains available. A target must have one detectable face. Source and morphed image both persist in the complete project.
+
+This is a two-dimensional identity-image warp. It does not reconstruct unseen facial surfaces, generate outfits or anatomy, train new face-swap weights, or animate a new performance. Existing sprite sheets still use their existing manual shared anchor path.
+
+The description preview uses the supplied donor's 64 gate names/themes and 384 line entries with provenance. It keeps multiple exact phrase matches as alternatives. It is not yet a full Bantu morphological analysis or a birth-chart solver. The connected lexical slot module separates positioned lexemes and deterministic/inferred slots; inference records retain evidence and replay metadata. Source syntax includes the 18 operators in the flattened master export plus Vector from the supplied foundation transcription. No three-mode replacement punctuation alphabet is assumed.
+
+A uniquely matched gate can start a choice path. Choices use that gate's six supplied line descriptions. The canonical King Wen/Fu Xi table supplies the selected bottom-up line flip; AutoNovel records sequence lineage. The opening sentence, five dimensional observation records, and full choice history persist. These records observe the common event; they do not pretend to independently calculate five dimensional outcome laws. Win/loss evaluation and context-dependent choice-to-line resolution remain to be connected from the source rules.
+
+Verification: Node engine, studio, touch, lexical inference, canonical line-transition and triangle mapping checks passed. Headless Chromium at 420x850 verified automatic morph using a distinct test portrait, description preview, a choice, save/reload, and zero off-device requests. Physical Android device behavior remains to be tested. Models and JS/WASM files include source/version/hash provenance under vendor/vision.

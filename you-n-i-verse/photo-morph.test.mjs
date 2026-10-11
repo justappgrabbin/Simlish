@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {affineTriangle} from './photo-morph.mjs';
+test('face triangle mapping preserves all three pose anchors under rotation and scale',()=>{const source=[{x:1,y:2},{x:5,y:2},{x:1,y:6}],target=[{x:10,y:20},{x:18,y:24},{x:14,y:32}],m=affineTriangle(source,target);source.forEach((p,i)=>{assert.ok(Math.abs(m[0]*p.x+m[2]*p.y+m[4]-target[i].x)<1e-8);assert.ok(Math.abs(m[1]*p.x+m[3]*p.y+m[5]-target[i].y)<1e-8)})});
+test('degenerate face triangles do not produce invalid transforms',()=>assert.equal(affineTriangle([{x:0,y:0},{x:0,y:0},{x:0,y:0}],[{x:1,y:1},{x:2,y:2},{x:3,y:3}]),null));
