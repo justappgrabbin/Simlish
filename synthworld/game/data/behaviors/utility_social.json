@@ -1,0 +1,5 @@
+{
+  "action": "Socialize",
+  "score": "0.7*social + 0.2*rest + 0.1*exploration",
+  "cooldownSec": 30
+}

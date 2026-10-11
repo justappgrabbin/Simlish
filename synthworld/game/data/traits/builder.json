@@ -1,0 +1,21 @@
+{
+  "id": "builder",
+  "tags": [
+    "construction",
+    "focus"
+  ],
+  "modifiers": {
+    "stats": {
+      "buildSpeedMult": 1.25,
+      "repairAmountMult": 1.15
+    },
+    "action_bias": {
+      "Build": {
+        "scoreAdd": 0.2
+      },
+      "Repair": {
+        "scoreAdd": 0.15
+      }
+    }
+  }
+}

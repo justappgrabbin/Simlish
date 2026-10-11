@@ -1,0 +1,4 @@
+agent:Cynthia | verb:build | object:prop/tree | at:(0,0,8) | scene:yijing/hex-24 | because:nudge.place_symbol_garden | note:seed demo
+agent:Cynthia | verb:repair | object:prop/tree | when:prop.health<prop.max & distance(agent,object)<=1.5
+agent:Cynthia | verb:emote | object:emotion/serene | when:mood.harmony>=0.7
+agent:Cynthia | verb:light | object:sky/ambient_dawn | scene:yijing/hex-24
