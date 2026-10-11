@@ -1,3 +1,4 @@
+import {MorphLibrary} from './morph-library.mjs';
 import {expandMotion} from './frame-morph.mjs';
 import {sheetGrid,personalizeFrames,actionKeyposes} from './animation.mjs';
 import {beginPath,pathChoices,choosePath} from './game-path.mjs';
@@ -120,3 +121,30 @@ async function loadActionMotion(){
 }
 
 $('#chairDemo').onclick=loadActionMotion;
+
+
+// Use the same identity image for every form; selecting a cached form is immediate.
+const forms = new MorphLibrary(morphPhoto);
+$('#morphTargets').onchange=async()=>{
+ for(const file of $('#morphTargets').files){
+  const url=URL.createObjectURL(file);
+  try{const image=await load(url),id=crypto.randomUUID();forms.add(id,file.name,image);const option=document.createElement('option');option.value=id;option.textContent=file.name;$('#morphForm').append(option);}catch(error){$('#formStatus').textContent=error.message;}finally{URL.revokeObjectURL(url);}
+ }
+ $('#formStatus').textContent=forms.targets.size+' target forms loaded. Your identity photo is reused.';
+};
+async function showForm(id){
+ const identity=photo;forms.setSource(identity);const result=await forms.prepare(id);if(photo!==identity)throw new Error("Identity photo changed; morph again.");invalidateAnimation();morphRevision++;body=forms.targets.get(id).image;source=forms.targets.get(id).name;sprites=null;morphedBody=result.canvas;morphReceipt=result.receipt;guides=false;render();scheduleSave();
+}
+$('#morphSelected').onclick=async()=>{
+ forms.setSource(photo);$('#morphSelected').disabled=true;
+ try{await showForm($('#morphForm').value);$('#formStatus').textContent='Morphed into '+source+'. Save character PNG to export.';}catch(error){$('#formStatus').textContent=error.message;}finally{$('#morphSelected').disabled=false;}
+};
+$('#morphAll').onclick=async()=>{
+ forms.setSource(photo);$('#morphAll').disabled=true;$('#morphSelected').disabled=true;
+ try{
+  const results=await forms.prepareAll((n,total)=>$('#formStatus').textContent='Morphing form '+n+' of '+total+'…');
+  const good=results.filter(item=>item.result),bad=results.filter(item=>item.error);
+  if(good.length){$('#morphForm').value=good[0].id;await showForm(good[0].id);}
+  $('#formStatus').textContent=good.length+' forms ready. Select a form to view/export.'+(bad.length?' Failed: '+bad.map(item=>forms.targets.get(item.id).name+' ('+item.error.message+')').join('; '):'');
+ }finally{$('#morphAll').disabled=false;$('#morphSelected').disabled=false;}
+};
