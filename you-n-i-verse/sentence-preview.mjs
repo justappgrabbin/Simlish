@@ -4,6 +4,7 @@ import {LexicalFillEngine} from './lexical-fill.mjs';
 const contains=(text,phrase)=>(' '+text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ')+' ').includes(' '+phrase.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()+' ');
 export function previewSentence(description,{memory=[],persist=()=>{}}={}) {
  if(typeof description!=='string'||!description.trim())throw Error('Describe the situation first.');
+ const worldCandidates=['cosmic','forest','ocean','desert'].filter(world=>contains(description,world));
  const candidates=GATES.filter(g=>contains(description,g.name)||g.theme.split('/').some(word=>contains(description,word.trim())));
  const dimensions=['Movement','Evolution','Being','Design','Space'].filter(d=>contains(description,d));
  const lexemes=candidates.map(g=>({slot:'gate',word:g.name,position:g.number,source:GATE_SOURCE}));
@@ -17,7 +18,7 @@ export function previewSentence(description,{memory=[],persist=()=>{}}={}) {
  if(dimensions.length===1)deterministic.dimension=dimensions[0];
  const punctuationMarks=SYNTAX_OPERATORS.filter(op=>op.mark.length===1&&description.includes(op.mark)).map(op=>op.mark);
  const structure=new LexicalFillEngine({memory,persist}).resolve({lexemes,deterministic,punctuationMarks,rulebookVersion:'supplied-master-and-hd-donor.v1'});
- return {description,structure,gateCandidates:candidates.map(g=>({gate:g.number,name:g.name,theme:g.theme,source:GATE_SOURCE})),
+ return {description,structure,worldCandidates,appearance:worldCandidates.length===1?{world:worldCandidates[0]}:{},gateCandidates:candidates.map(g=>({gate:g.number,name:g.name,theme:g.theme,source:GATE_SOURCE})),
   summary:candidates.length ? candidates.map(g=>g.name).join(' · ') : 'No gate-name or theme match in the connected source table.',
   status:candidates.length===1?'source-match':candidates.length>1?'multiple-source-matches':'no-source-match'};
 }
