@@ -44,3 +44,5 @@ or implemented by this change.
 ## State and game handoff
 
 The saved character opens automatically in the animation workspace. New game paths retain the source photo identity through all five observation views; choosing a new source photo starts a new character path. This does not resolve missing ontological address fields. World appearance presets change the 3D background and generated outfit vertex colors while preserving face pixels, facial geometry and source identity. These color regions are not interchangeable clothing meshes. MakeHuman hair/clothing proxies and UV skin integration remain unconnected.
+
+Product rule: the face is the invariant across places. Body/form, hair, clothing, animation and surroundings may vary by place, while the source face remains the same. The current presets implement outfit colors and backdrop only; they do not implement all of those world-dependent changes yet.

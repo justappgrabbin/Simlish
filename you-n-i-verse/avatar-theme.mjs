@@ -5,7 +5,7 @@ export function applyAvatarTheme(model,world){
  const theme=AVATAR_THEMES[world];if(!theme)throw Error('Unsupported appearance theme');
  if(!model||model.userData.appearanceWorld===world)return false;
  let changed=false;
- model.traverse(node=>{const slots=node.userData.appearanceSlots,colors=node.geometry?.attributes.color;if(!slots||!colors)return;for(const slot of ['top','bottom','shoes']){const hex=theme[slot].slice(1),rgb=[0,2,4].map(i=>linear(parseInt(hex.slice(i,i+2),16)/255));for(const index of slots[slot]??[])colors.setXYZ(index,...rgb);}colors.needsUpdate=true;changed=true;});
+ model.traverse(node=>{const slots=node.userData.appearanceSlots,colors=node.geometry?.attributes.color;if(!slots||!colors)return;for(const slot of ['top','bottom','shoes']){const hex=theme[slot].slice(1),rgb=[0,2,4].map(i=>linear(parseInt(hex.slice(i,i+2),16)/255));for(const index of slots[slot]??[])colors.setXYZ(index,...rgb);}colors.needsUpdate=true;node.userData.appearanceWorld=world;changed=true;});
  if(changed)model.userData.appearanceWorld=world;
  return changed;
 }
