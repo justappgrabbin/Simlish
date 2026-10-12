@@ -47,6 +47,8 @@ jobs:
           node you-n-i-verse/morph-project.test.mjs
           node you-n-i-verse/photo-identity.test.mjs
           node you-n-i-verse/body-form.test.mjs
+          node you-n-i-verse/rig-format.test.mjs
+          node you-n-i-verse/swarm-fit.test.mjs
           node --check you-n-i-verse/full-avatar.mjs
           node --check you-n-i-verse/photo-3d.mjs
           node --check you-n-i-verse/model-client.mjs
