@@ -1,3 +1,4 @@
+import {applyAvatarTheme,AVATAR_THEMES} from './avatar-theme.mjs';
 import {planBodyForm} from './body-form.mjs';
 import {mountBodyProportions} from './body-proportions.mjs';
 import {buildFullAvatar} from './full-avatar.mjs';
@@ -48,7 +49,7 @@ export function mountPhoto3D(getPhoto,{getIdentity=async()=>null,onChange=()=>{}
   let requestedForm;model.traverse(node=>{if(node.userData.requestedForm!==undefined)requestedForm=node.userData.requestedForm;});if(requestedForm!==undefined)$('bodyRequest').value=requestedForm;
   $('style3d').disabled=true;$('animate3d').disabled=!mixer;$('animate3d').textContent='Animate avatar';$('exportAvatarPNG').disabled=false;$('export3d').disabled=false;$('meshStatus').textContent='Model-host avatar loaded. Drag to turn, or export GLB.';
  }
- const api={open:async(data,{silent=false}={})=>{bytes=data;const gltf=await new GLTFLoader().parseAsync(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength),'');await openModel(gltf);if(!silent)onChange();},
+ const api={setWorld:world=>{if(scene)scene.background.set(AVATAR_THEMES[world].background);return applyAvatarTheme(model,world);},open:async(data,{silent=false}={})=>{bytes=data;const gltf=await new GLTFLoader().parseAsync(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength),'');await openModel(gltf);if(!silent)onChange();},
  snapshot:async()=>{if(!model||!external)return null;const result=await new GLTFExporter().parseAsync(model,{binary:true,animations:clips});return {data:new Uint8Array(result),identityId:model.userData.sourceIdentity??null};},
  clear:()=>{if(model&&external){dispose(model);model=null;clips=[];mixer=null;$('avatarExpressions').replaceChildren();$('bodyProportions').replaceChildren();$('exportAvatarPNG').disabled=true;$('export3d').disabled=true;$('animate3d').disabled=true;}}};
  async function createFull(){const source=getPhoto();const plan=planBodyForm($('bodyRequest').value);if(!plan.ok){$('meshStatus').textContent=plan.reason;return;}$('buildFull3d').disabled=true;$('meshStatus').textContent='Building your complete character locally…';try{const sourceIdentity=await getIdentity(source);const gltf=await buildFullAvatar(source,sourceIdentity,plan);if(source!==getPhoto())throw Error('Photo changed; build again.');await openModel(gltf);$('meshStatus').textContent='Character ready'+(plan.applied.length?' · '+plan.applied.join(', '):'')+'. Face fitted automatically. Body proportions are generated.';onChange();}catch(error){$('meshStatus').textContent=error.message;}finally{$('buildFull3d').disabled=false;}}

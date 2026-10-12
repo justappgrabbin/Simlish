@@ -33,8 +33,10 @@ export async function buildFullAvatar(photo,identity,plan){
    if(front<3)kept.push(...ids);
   }
   geometry.setIndex(kept);geometry.computeBoundingBox();addProportionMorphs(node);
+  const slots={top:[],bottom:[],shoes:[]};
   const colors=new Float32Array(position.count*3),shirt=new THREE.Color('#344f78'),pants=new THREE.Color('#202c45'),shoe=new THREE.Color('#171d29');
-  for(let id=0;id<position.count;id++){node.getVertexPosition(id,point).applyMatrix4(node.matrixWorld);const color=point.y<.11?shoe:point.y<.87?pants:point.y<1.44&&(Math.abs(point.x)<.3||point.y>1.27)?shirt:skin;color.toArray(colors,id*3);}
+  for(let id=0;id<position.count;id++){node.getVertexPosition(id,point).applyMatrix4(node.matrixWorld);const color=point.y<.11?shoe:point.y<.87?pants:point.y<1.44&&(Math.abs(point.x)<.3||point.y>1.27)?shirt:skin;if(color===shirt)slots.top.push(id);else if(color===pants)slots.bottom.push(id);else if(color===shoe)slots.shoes.push(id);color.toArray(colors,id*3);}
+  node.userData.appearanceSlots=slots;
   geometry.setAttribute('color',new THREE.BufferAttribute(colors,3));const materials=Array.isArray(node.material)?node.material:[node.material];for(const material of materials){material.color.set(0xffffff);material.vertexColors=true;material.needsUpdate=true;}
  });
  const tracks=[...face.animations[0].tracks];

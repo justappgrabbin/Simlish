@@ -40,3 +40,7 @@ these identity/form/output boundaries. This path does not depend on gated SAM
 checkpoints. A later particle swarm can supply reconstructed geometry/appearance
 with the same source identity and rig/output contracts; no swarm model is trained
 or implemented by this change.
+
+## State and game handoff
+
+The saved character opens automatically in the animation workspace. New game paths retain the source photo identity through all five observation views; choosing a new source photo starts a new character path. This does not resolve missing ontological address fields. World appearance presets change the 3D background and generated outfit vertex colors while preserving face pixels, facial geometry and source identity. These color regions are not interchangeable clothing meshes. MakeHuman hair/clothing proxies and UV skin integration remain unconnected.
