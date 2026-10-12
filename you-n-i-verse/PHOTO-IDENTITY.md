@@ -23,8 +23,8 @@ The intended automatic workflow remains one source photo → generated form/body
 3D reconstruction → rigging/animation, with the same source reference throughout.
 SAM 3D Body fitting and the automatic generated-body handoff are not integrated
 or inference-verified yet; this change establishes persistent source identity.
-External GLB binaries/viewer edits are still exported separately, not embedded in
-project autosaves. Device storage can be cleared by the user/OS; complete project
+Full-character GLB binaries, request metadata, proportions and animation are now
+embedded in project autosaves/exports alongside their source identity. Device storage can be cleared by the user/OS; complete project
 exports retain the source photo for restoring on another device.
 
 Validation: unit checks cover shared/concurrent source capture, export/reload

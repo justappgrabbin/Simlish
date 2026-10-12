@@ -46,6 +46,9 @@ jobs:
           node you-n-i-verse/photo-mesh.test.mjs
           node you-n-i-verse/morph-project.test.mjs
           node you-n-i-verse/photo-identity.test.mjs
+          node you-n-i-verse/body-form.test.mjs
+          node --check you-n-i-verse/full-avatar.mjs
+          node --check you-n-i-verse/photo-3d.mjs
           node --check you-n-i-verse/model-client.mjs
           node --check you-n-i-verse/studio.mjs
       - name: Check model-service boundaries

@@ -1,3 +1,6 @@
+See [FULL-CHARACTER.md](FULL-CHARACTER.md) for the new automatic, local full-body path.
+The face-only mode below remains an optional advanced tool.
+
 # One-photo 3D face surface
 
 Choose an identity photo, then **Build 3D face from my photo**. Drag the 3D preview
