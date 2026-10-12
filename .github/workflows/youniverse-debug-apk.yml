@@ -46,6 +46,7 @@ jobs:
           node you-n-i-verse/photo-mesh.test.mjs
           node you-n-i-verse/morph-project.test.mjs
           node you-n-i-verse/photo-identity.test.mjs
+          node you-n-i-verse/causal-conditions.test.mjs
           node you-n-i-verse/avatar-theme.test.mjs
           node you-n-i-verse/body-form.test.mjs
           node you-n-i-verse/rig-format.test.mjs
