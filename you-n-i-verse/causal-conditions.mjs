@@ -1,5 +1,6 @@
 // User-authored architecture supplied in chat, 2026-10-12. These are system
 // semantics; center/biology labels are not measurements of biological function.
+export const CAUSAL_REPRESENTATION='action';
 export const CAUSAL_SOURCE='user-consciousness-causal-spec/2026-10-12';
 export const BASES=['Movement','Evolution','Being','Design','Space'];
 const gateBases=[1,1,4,2,5,3,1,1,4,3,5,5,2,4,5,5,2,4,3,1,4,5,2,2,2,4,3,3,3,5,1,4,2,3,4,5,3,3,1,4,5,4,2,4,4,3,2,4,3,4,1,4,4,4,5,5,4,3,3,1,2,5,2,2];
