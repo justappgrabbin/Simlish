@@ -2,7 +2,7 @@
 
 Open `verification.html` from the studio's “Investigate candidate rules” link.
 
-Candidates, evidence records and findings are separate. The investigation checks every supported candidate independently, searches retained evidence for unresolved candidates, records check results and scope, and persists its records locally. Export retains the records outside browser storage. Candidate revisions and evidence changes invalidate prior findings; reloaded findings require rerunning reproducible checks. Imported status labels cannot establish verification.
+Candidates, evidence records and findings are separate. The investigation automatically rechecks on opening/import and when candidates or evidence are added. It checks every supported candidate independently, searches retained evidence for unresolved candidates, records check results and scope, and persists its records locally. Export retains the records outside browser storage. Candidate revisions and evidence changes invalidate prior findings; reloaded findings require rerunning reproducible checks. Imported status labels cannot establish verification.
 
 Implemented verifiers:
 

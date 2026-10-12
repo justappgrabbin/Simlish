@@ -10,7 +10,8 @@ if(!ledger.candidates.size){
 }
 function save(){try{localStorage.setItem(key,JSON.stringify(ledger.export()));return true;}catch(e){$('status').textContent='Storage unavailable: '+e.message+'. Export records to retain this investigation.';return false;}}
 function render(){$('findings').replaceChildren();for(const r of ledger.candidates.values()){const a=document.createElement('article'),h=document.createElement('h2'),p=document.createElement('p'),pre=document.createElement('pre');h.textContent=r.claim;const f=ledger.inspect(r.id);p.textContent=f.status+' · '+(f.scope??'not checked');pre.textContent=JSON.stringify({...f,locatedEvidence:ledger.search(r.id).map(e=>({id:e.id,source:e.source,text:e.text}))},null,2);a.append(h,p,pre);$('findings').append(a);}}
-$('check').onclick=()=>{for(const id of ledger.candidates.keys())ledger.verify(id);if(save())$('status').textContent='Checks completed and saved. Unverified rules remain blocked.';render();};
-$('add').onclick=()=>{try{const r=JSON.parse($('record').value);if(r.version===1&&Array.isArray(r.candidates))ledger=new RuleVerification(r);else if(r.kind)ledger.addCandidate(r);else ledger.addEvidence(r);save();render();}catch(e){$('status').textContent=e.message;}};
+function investigate(){for(const id of ledger.candidates.keys())ledger.verify(id);if(save())$('status').textContent='Checks completed and saved. Unverified rules remain blocked.';render();}
+$('check').onclick=investigate;
+$('add').onclick=()=>{try{const r=JSON.parse($('record').value);if(r.version===1&&Array.isArray(r.candidates))ledger=new RuleVerification(r);else if(r.kind)ledger.addCandidate(r);else ledger.addEvidence(r);investigate();}catch(e){$('status').textContent=e.message;}};
 $('export').onclick=()=>{const blob=new Blob([JSON.stringify(ledger.export(),null,2)],{type:'application/json'});if(window.NativeDownloads?.save){const reader=new FileReader();reader.onload=()=>NativeDownloads.save('rule-investigation.json','application/json',reader.result.split(',')[1]);reader.readAsDataURL(blob);}else{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rule-investigation.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}};
-render();
+investigate();
