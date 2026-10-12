@@ -1,3 +1,4 @@
+import {BASE_CHAINS,resolveAnchor} from './causal-chains.mjs';
 // User-authored architecture supplied in chat, 2026-10-12. These are system
 // semantics; center/biology labels are not measurements of biological function.
 export const CAUSAL_REPRESENTATION='action';
@@ -21,7 +22,7 @@ export function subdivideGate(offsetArcseconds){
  for(const [field,width] of [['line',3375],['color',562.5],['tone',93.75],['base',18.75]]){result[field]=Math.floor(remainder/width)+1;remainder%=width;}
  return {...result,residualArcseconds:remainder,source:CAUSAL_SOURCE};
 }
-export function evaluateConditions(input,{chains={}}={}){
+export function evaluateConditions(input,{chains=BASE_CHAINS}={}){
  const check=compatibility(input);if(check.status==='invalid')return {...check,admitted:false};
  if(!Number.isInteger(input.gate)||input.gate<1||input.gate>64||!Number.isInteger(input.line)||input.line<1||input.line>6)return {status:'invalid',admitted:false,reason:'Gate or line outside authored range',source:CAUSAL_SOURCE};
  const anchor=GATE_ANCHORS[input.gate-1],unresolved=[];
@@ -29,7 +30,7 @@ export function evaluateConditions(input,{chains={}}={}){
  if(anchor.base!==input.base)unresolved.push('cross-base-anchor-edge');
  const chain=chains[input.base];if(!chain)unresolved.push('base-chain');
  // Compound labels are retained verbatim; no invented split or alias is used.
- else if(!chain.nodes?.includes(anchor.anchor))unresolved.push('anchor-node');
+ else if(!resolveAnchor(chain,anchor.anchor))unresolved.push('anchor-node');
  if(!['Vertical','Horizontal','Diagonal'].includes(input.axis))unresolved.push('axis');
  if(!input.zodiac)unresolved.push('zodiac');if(!input.house)unresolved.push('house');
  if(input.line===3)unresolved.push('line-3-loop-policy');

@@ -19,3 +19,7 @@ Conflicting source claims to retain until resolved:
 The source's P=N+O+S activation potential must remain a derived behavioral quantity separate from literal phosphorus stoichiometry. Contextual claims about interference/feedback still need numeric rules before they can drive placement. No quantum-observer or perception-flip behavior is implemented by this module.
 
 The face remains the identity constraint while body/form and environment can vary. The new condition module is tested independently but is not yet connected to a self-assembling swarm, sentence emitter or character renderer.
+
+## Verification update
+
+The supplied screenshots subsequently provided macro/micro chain sequences; these are now retained in causal-chains.mjs as source transcriptions. Following the user clarification, claims are candidates requiring verification before application. Runtime causal traversal is blocked pending appropriate evidence; explicit exploration is labeled a hypothesis. See RULE-VERIFICATION.md.
