@@ -1,0 +1,19 @@
+{
+  "input": "YOU-N-I-VERSE.zip",
+  "builder": "Supplied Synthia Compiler Kit v6 dropzip/zip2apk + template/build-any.sh",
+  "changes": [
+    "Dedicated workspace build paths",
+    "Pipefail-safe Android JAR structure check",
+    "Local HTTPS assets and Android document picker in generic wrapper",
+    "Avoid unavailable framework icon reference",
+    "Supply platform library and minimum API to D8"
+  ],
+  "package": "com.synthia.drop.app_you_n_i_verse.z55cd421a",
+  "sha256": "94c745619df7f86eb3c43a219776b199a39b4c792020e37967af5652541d2e4e",
+  "bytes": 12938443,
+  "archiveIntegrity": "passed",
+  "alignment": "passed",
+  "signature": "passed",
+  "physicalDeviceTest": "not performed",
+  "nativeFeatureBoundary": "Generic kit wrapper, not original app NativeDownloads bridge"
+}
