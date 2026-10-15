@@ -1,18 +1,14 @@
-name: Simlish Registration and Reality Checks
+name: Simlish Registration, Finisher and Reality Checks
 on:
   push:
     paths:
-      - 'you-n-i-verse/synthia-registration.mjs'
-      - 'you-n-i-verse/registration.test.mjs'
-      - 'you-n-i-verse/address-resolution.mjs'
-      - 'you-n-i-verse/scene-events.mjs'
-      - 'you-n-i-verse/reality-execution.mjs'
-      - 'you-n-i-verse/reality-execution.test.mjs'
+      - 'you-n-i-verse/**'
       - '.github/workflows/simlish-integration-checks.yml'
   pull_request:
     paths:
       - 'you-n-i-verse/**'
       - '.github/workflows/simlish-integration-checks.yml'
+  workflow_dispatch:
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -21,10 +17,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Registration and reality execution tests
-        run: node --test you-n-i-verse/registration.test.mjs you-n-i-verse/reality-execution.test.mjs
+      - name: Full test suite (includes studio, registration, swarm, finisher, supabase adapter, personalize, boot)
+        run: node --test you-n-i-verse/*.test.mjs
+      - name: Core engine check
+        run: node you-n-i-verse/test.mjs
       - name: Syntax checks
         run: |
-          node --check you-n-i-verse/scene-events.mjs
-          node --check you-n-i-verse/address-resolution.mjs
-          node --check you-n-i-verse/reality-execution.mjs
+          for f in you-n-i-verse/studio.mjs you-n-i-verse/simlish-panels.mjs you-n-i-verse/boot.mjs you-n-i-verse/app-finisher.mjs you-n-i-verse/finisher-targets.mjs you-n-i-verse/swarm-nsnf.mjs you-n-i-verse/swarm-component.mjs you-n-i-verse/supabase-original.mjs you-n-i-verse/personalize.mjs you-n-i-verse/registration-swarm.mjs you-n-i-verse/scene-events.mjs you-n-i-verse/address-resolution.mjs you-n-i-verse/reality-execution.mjs; do node --check "$f"; done

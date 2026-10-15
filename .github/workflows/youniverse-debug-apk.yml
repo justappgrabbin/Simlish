@@ -43,7 +43,9 @@ jobs:
           node you-n-i-verse/frame-morph.test.mjs
           node you-n-i-verse/rig-format.test.mjs
           node you-n-i-verse/swarm-fit.test.mjs
+          node --test you-n-i-verse/*.test.mjs
           node --check you-n-i-verse/studio.mjs
+          node --check you-n-i-verse/simlish-panels.mjs
       - name: Build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
       - name: Name installable APK
@@ -54,7 +56,8 @@ jobs:
           name: YOU-N-I-VERSE-debug-apk
           path: YOU-N-I-VERSE-debug.apk
           retention-days: 30
-      - name: Publish direct APK download
+      - name: Publish direct APK download (main only; branch builds keep the Actions artifact only)
+        if: github.ref == 'refs/heads/main'
         uses: actions/github-script@v7
         with:
           script: |
