@@ -32,6 +32,15 @@ export class SwarmComponent{
   this.id=id;this.kind=kind;this.role=SWARM_KINDS[kind];this.purpose=purpose;this.openQuestions=Object.freeze([...openQuestions]);
   let at=0;this.packs=PACK_SHAPE.map(size=>{const m=members.slice(at,at+size);at+=size;return m});
  }
+ runSync(input){
+  const packs=[],notes=[],failed=[];
+  for(const pack of this.packs){
+   const results=pack.map(m=>{try{const r=m.check(input);if(r&&typeof r.then==='function')return {id:m.id,ok:false,note:'investigating: async check needs run()'};return typeof r==='object'&&r!==null?{id:m.id,ok:!!r.ok,note:r.note}:{id:m.id,ok:!!r}}catch(e){return {id:m.id,ok:false,note:'investigating: '+e.message}}});
+   for(const r of results){if(!r.ok){failed.push(r.id);if(r.note)notes.push(r.id+': '+r.note)}}
+   packs.push({members:results,value:packValue(results.filter(r=>r.ok).length)});
+  }
+  return this.#result(packs,failed,notes);
+ }
  async run(input){
   const packs=[],notes=[],failed=[];
   for(const pack of this.packs){
@@ -41,6 +50,9 @@ export class SwarmComponent{
    for(const r of results){if(!r.ok){failed.push(r.id);if(r.note)notes.push(r.id+': '+r.note)}}
    packs.push({members:results,value:packValue(results.filter(r=>r.ok).length)});
   }
+  return this.#result(packs,failed,notes);
+ }
+ #result(packs,failed,notes){
   const hx=hexagramFromPacks(packs.map(p=>p.value));
   return Object.freeze({component:this.id,kind:this.kind,role:this.role,packs,hexagram:{number:hx.number,bits:hx.bits},
    status:failed.length?'investigating':'complete',failed,notes,swarmBuilt:true,

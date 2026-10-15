@@ -7,9 +7,11 @@ export async function interpretScene(text,{kernel=globalThis.AgentomagotchiKerne
  const parsed=await ling.call({operation:'recognize',text:normalized});const match=parsed.matches[0];const structure=match?[match.bindings['$actor'],'enters',match.bindings['$world']]:null;if(!structure||!worlds.has(structure[2]))return {ok:false,reason:'No compatible world'};
  if(!kernel)throw Error('Address kernel unavailable');
  const resolved=resolveAddress({kernel,...(addressContext||{})});
- if(!resolved.ok)return {ok:false,reason:resolved.reason,needs:resolved.needs,structure,world:structure[2]};
- const projections=resolved.projections;
+ if(!resolved.ok)return {ok:false,status:'investigating',reason:resolved.reason,needs:resolved.needs,structure,world:structure[2]};
+ // Five complete projections (one per dimension) from the uploader's real coordinates, as main's test expects; no invented default address.
+ const base={...resolved.address,arc:resolved.address.arcSecond};
+ const projections=kernel.DIMENSIONS.map(d=>{const full=new kernel.FullAddress({...base,dimension:d}).toObject();return Object.fromEntries(kernel.ADDRESS_FIELDS.map(k=>[k,full[k]]))});
  const novel=autoNovelAutomaton();await novel.call({operation:'register',domain:{id:'world-entry',primitives:[{id:'actor'},{id:'world'}],combinators:[{id:'entry.sequence.v1',type:'sequence',inputs:['actor','world'],output:'scene',apply:(actor,world)=>({actor,world})}]}});
  const story=await novel.call({operation:'generate',spec:{domain:'world-entry',seeds:[{type:'actor',value:structure[0]},{type:'world',value:structure[2]}]}});
- return {ok:true,event:{id:globalThis.crypto?.randomUUID?.()??`entry-${Date.now()}`,grammarRule:'scene-enter.v1',structure,world:structure[2],lineage:story.lineage,projections,addressSource:resolved.evidence.source,leadingDimension:resolved.leadingDimension,effect:'world-surface-treatment',recordedAt:new Date().toISOString()}};
+ return {ok:true,event:{id:globalThis.crypto?.randomUUID?.()??`entry-${Date.now()}`,grammarRule:'scene-enter.v1',structure,world:structure[2],lineage:story.lineage,projections,leadingProjection:resolved.projections[0],addressSource:resolved.evidence.source,leadingDimension:resolved.leadingDimension,effect:'world-surface-treatment',recordedAt:new Date().toISOString()}};
 }

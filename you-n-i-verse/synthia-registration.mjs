@@ -1,4 +1,7 @@
 // Preservation-safe local registry with update receipts and optional shared-computer relay.
+import {registrationPair,missingPlaces} from './registration-swarm.mjs';
+const unit=registrationPair(); // swarm building block: PSO genotype -> GA phenotype
+export const registrationUnit=unit;
 export const REGISTRY_KEY = 'synthia.simlish.registry.v1';
 export const OUTBOX_KEY = 'synthia.simlish.registration.outbox.v1';
 function load(storage,key) {
@@ -22,6 +25,11 @@ export function registerSimlish(storage,input){
     capabilities:input.capabilities??old.capabilities??[],
     updatedAt:new Date().toISOString()};
   if(!Array.isArray(record.capabilities))throw new TypeError('capabilities must be an array');
+  // Swarm: PSO genotype checks the full 13-place address; GA phenotype is what is shown. Uncertain -> 'investigating', kept.
+  const out=unit.forward({id:record.id,version:record.version,address:record.address,source:record.source,kernel:input.kernel??globalThis.AgentomagotchiKernel});
+  record.status=out.status==='complete'?'registered':'investigating';
+  record.investigation=record.status==='registered'?null:{missingPlaces:record.address&&typeof record.address==='object'?missingPlaces(record.address).missing:'address not given',failedChecks:out.genotype.failed,notes:out.genotype.notes};
+  record.swarm={genotype:{component:out.genotype.component,kind:'PSO',packs:out.genotype.packs,hexagram_code:out.genotype.hexagram_code},phenotype:{component:out.phenotype.component,kind:'GA',visible:out.phenotype.visible,status:out.phenotype.status},event:out.event};
   records[id]=record;
   storage.setItem(REGISTRY_KEY,JSON.stringify(records));
   const outbox=load(storage,OUTBOX_KEY);
