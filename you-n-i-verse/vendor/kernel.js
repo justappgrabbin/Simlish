@@ -79,7 +79,7 @@ const EXACT_ADDRESS_CARDINALITY=5n*64n*13n*6n*6n*6n*5n*30n*60n*60n*100n*12n*12n;
 const RESOLUTION_LEVELS=Object.freeze(['bit','binary','trinary','line','gate','filter','channel','dimension','full-address']);
 function addressKey(a){a=a instanceof FullAddress?a:new FullAddress(a);return a.toString()}
 function projectAddress(a,level){a=a instanceof FullAddress?a:new FullAddress(a);switch(level){
-  case'bit':return `${a.planetary}|${a.dimension}|G${a.gate}|L${a.line}|C${a.color}|T${a.tone}|B${a.base}|${a.degree}:${a.minute}:${a.second}|A${a.arc}|${a.zodiac}|H${a.house}`;
+  case'bit':return `${a.planetary}|${a.dimension}|${a.zodiac}|G${a.gate}|L${a.line}|C${a.color}|T${a.tone}|B${a.base}|${a.degree}:${a.minute}:${a.second}|A${a.arc}|H${a.house}`;
   case'binary':return `${a.planetary}|${a.dimension}|G${a.gate}|L${a.line}|binary:${KING_WEN[a.gate].lines[a.line-1]}|C${a.color}|T${a.tone}|B${a.base}`;
   case'trinary':return `${a.planetary}|${a.dimension}|G${a.gate}|tri:${Math.ceil(a.line/2)}|C${a.color}|T${a.tone}|B${a.base}`;
   case'line':return `${a.planetary}|${a.dimension}|G${a.gate}|L${a.line}`;
@@ -181,6 +181,6 @@ class AgentomagotchiField{
  snapshot(){return {version:'0.7.0',seed:this.seed,tick:this.tick,schema:FIELD_SCHEMA,potentialExactAddresses:this.potentialExactAddressesString,addressedPoints:[...this.points.values()].map(p=>p.snapshot()),relations:this.relationSnapshot(),ledger:this.ledger.snapshot()}}
 }
 const AgentomagotchiMesh=AgentomagotchiField;
-function makeFullAddress(o){return new FullAddress(Object.assign({planetary:'Sun',dimension:'Movement',gate:1,line:1,color:1,tone:1,base:1,degree:0,minute:0,second:0,arc:0,zodiac:'Aries',house:1},o||{}))}
+function makeFullAddress(o){if(!o||typeof o!=='object')throw new Error('Explicit complete address required');return new FullAddress(o)}
 global.AgentomagotchiKernel=Object.freeze({VERSION:'0.6.0',PRIMITIVES,DIMENSIONS,PLANETARIES,ZODIACS,LINE_NAMES,COLOR_NAMES,TONE_NAMES,TONE_SENSES,BASE_NAMES,GATE_NAMES,KING_WEN,CHANNELS,ADDRESS_FIELDS,RESOLUTION_LEVELS,ANGULAR,FIELD_SCHEMA,EXACT_ADDRESS_CARDINALITY,FullAddress,AddressedBitState,AgentomagotchiField,AgentomagotchiMesh,EventLedger,makeFullAddress,granularSpecialty,dmsWithinZodiacSeconds,addressKey,projectAddress,XorShift32});
 })(typeof window!=='undefined'?window:globalThis);
