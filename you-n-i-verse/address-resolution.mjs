@@ -1,5 +1,5 @@
 // Canonical positional address; preserve legacy kernel 'arc' field.
-export const ADDRESS_ORDER=Object.freeze(['planetary','dimension','zodiac','gate','line','color','tone','base','degree','minute','second','arcSecond','house']);
+export const ADDRESS_ORDER=Object.freeze(['planetary','dimension','gate','line','color','tone','base','degree','minute','second','arcSecond','zodiac','house']);
 export const ADDRESS_SCHEMA_VERSION=2;
 export function normalizeAddress(input){
  if(!input||typeof input!=='object')return {};

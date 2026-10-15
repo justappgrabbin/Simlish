@@ -5,7 +5,7 @@ import {ADDRESS_ORDER,resolveAddress} from './address-resolution.mjs';
 const kernel=globalThis.AgentomagotchiKernel;
 const coords={planetary:'Sun',zodiac:'Virgo',gate:6,line:4,color:4,tone:4,base:2,degree:25,minute:59,second:31,arcSecond:92,house:5};
 test('canonical address order and dimension binding',()=>{
- assert.deepEqual(ADDRESS_ORDER,['planetary','dimension','zodiac','gate','line','color','tone','base','degree','minute','second','arcSecond','house']);
+ assert.deepEqual(ADDRESS_ORDER,['planetary','dimension','gate','line','color','tone','base','degree','minute','second','arcSecond','zodiac','house']);
  const r=resolveAddress({kernel,leadingDimension:'Being',coordinates:coords,evidence:{source:'test fixture'}});
  assert.equal(r.ok,true);assert.deepEqual(Object.keys(r.address),ADDRESS_ORDER);
  assert.equal(r.address.dimension,'Being');assert.equal(r.address.arcSecond,92);
