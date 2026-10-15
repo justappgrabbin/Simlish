@@ -1,0 +1,30 @@
+name: Simlish Registration and Reality Checks
+on:
+  push:
+    paths:
+      - 'you-n-i-verse/synthia-registration.mjs'
+      - 'you-n-i-verse/registration.test.mjs'
+      - 'you-n-i-verse/address-resolution.mjs'
+      - 'you-n-i-verse/scene-events.mjs'
+      - 'you-n-i-verse/reality-execution.mjs'
+      - 'you-n-i-verse/reality-execution.test.mjs'
+      - '.github/workflows/simlish-integration-checks.yml'
+  pull_request:
+    paths:
+      - 'you-n-i-verse/**'
+      - '.github/workflows/simlish-integration-checks.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Registration and reality execution tests
+        run: node --test you-n-i-verse/registration.test.mjs you-n-i-verse/reality-execution.test.mjs
+      - name: Syntax checks
+        run: |
+          node --check you-n-i-verse/scene-events.mjs
+          node --check you-n-i-verse/address-resolution.mjs
+          node --check you-n-i-verse/reality-execution.mjs
