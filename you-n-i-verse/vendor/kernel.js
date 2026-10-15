@@ -29,13 +29,15 @@ function buildKW(){const t=new Array(65); for(const [gate,ln,un,romanized,keywor
 const KING_WEN=buildKW();
 const CHANNELS=Object.freeze([
 ['1-8',[1,8],'Inspiration'],['2-14',[2,14],'The Beat'],['3-60',[3,60],'Mutation'],['4-63',[4,63],'Logic'],['5-15',[5,15],'Rhythm'],['6-59',[6,59],'Mating'],['7-31',[7,31],'Alpha'],['9-52',[9,52],'Concentration'],['10-20',[10,20],'Awakening'],['10-34',[10,34],'Exploration'],['10-57',[10,57],'Perfected Form'],['11-56',[11,56],'Curiosity'],['12-22',[12,22],'Openness'],['13-33',[13,33],'Witness'],['16-48',[16,48],'Wavelength'],['17-62',[17,62],'Acceptance'],['18-58',[18,58],'Judgment'],['19-49',[19,49],'Synthesis'],['20-34',[20,34],'Charisma'],['20-57',[20,57],'Brainwave'],['21-45',[21,45],'Money Line'],['23-43',[23,43],'Structuring'],['24-61',[24,61],'Awareness'],['25-51',[25,51],'Initiation'],['26-44',[26,44],'Surrender'],['27-50',[27,50],'Preservation'],['28-38',[28,38],'Struggle'],['29-46',[29,46],'Discovery'],['30-41',[30,41],'Recognition'],['32-54',[32,54],'Transformation'],['34-57',[34,57],'Power'],['35-36',[35,36],'Transitoriness'],['37-40',[37,40],'Community'],['39-55',[39,55],'Emoting'],['42-53',[42,53],'Maturation'],['47-64',[47,64],'Abstraction']].map(x=>Object.freeze({id:x[0],gates:Object.freeze(x[1]),name:x[2]})));
-const ADDRESS_FIELDS=Object.freeze(['planetary','dimension','gate','line','color','tone','base','degree','minute','second','arc','zodiac','house']);
+const ADDRESS_FIELDS=Object.freeze(['planetary','dimension','zodiac','gate','line','color','tone','base','degree','minute','second','arc','house']);
 function ri(name,v,min,max){v=Number(v);if(!Number.isInteger(v)||v<min||v>max)throw new RangeError(name+' must be '+min+'..'+max+'; got '+v);return v}
 function rn(name,v,min,maxx){v=Number(v);if(!Number.isFinite(v)||v<min||v>=maxx)throw new RangeError(name+' must be >= '+min+' and < '+maxx+'; got '+v);return v}
 function ne(name,v,vals){if(Number.isInteger(v)){ri(name,v,1,vals.length);return {index:v,name:vals[v-1]}}const i=vals.findIndex(x=>x.toLowerCase()===String(v).toLowerCase());if(i<0)throw new RangeError(name+' invalid');return {index:i+1,name:vals[i]}}
 class FullAddress{
  constructor(raw){
   if(!raw||typeof raw!=='object')throw new TypeError('FullAddress requires object');
+  raw={...raw,arc:raw.arc??raw.arcSecond};
+  if(raw.arcSecond!==undefined&&raw.arc!==raw.arcSecond)throw new Error('Conflicting arc-second fields');
   const missing=ADDRESS_FIELDS.filter(k=>raw[k]===undefined||raw[k]===null||raw[k]==='');
   if(missing.length)throw new Error('INCOMPLETE ADDRESS: missing '+missing.join(', '));
   const planetary=ne('planetary',raw.planetary,PLANETARIES),dimension=ne('dimension',raw.dimension,DIMENSIONS),zodiac=ne('zodiac',raw.zodiac,ZODIACS);
@@ -49,8 +51,8 @@ class FullAddress{
   this.behavior=this.line;this.motivation=this.color;this.sense=this.tone;this.environment=this.base;
   Object.freeze(this)
  }
- toObject(){return {planetary:this.planetary,planetaryIndex:this.planetaryIndex,dimension:this.dimension,dimensionIndex:this.dimensionIndex,gate:this.gate,line:this.line,behavior:this.behavior,color:this.color,motivation:this.motivation,tone:this.tone,sense:this.sense,base:this.base,environment:this.environment,degree:this.degree,minute:this.minute,second:this.second,arc:this.arc,zodiac:this.zodiac,zodiacIndex:this.zodiacIndex,house:this.house}}
- toString(){const s=Number.isInteger(this.second)?String(this.second):this.second.toFixed(3).replace(/0+$/,'').replace(/\.$/,'');return `${this.planetary}>${this.dimension}>G${this.gate}.L${this.line}.C${this.color}.T${this.tone}.B${this.base}>${this.degree}°${this.minute}′${s}″>Arc${this.arc}>${this.zodiac}>H${this.house}`}
+ toObject(){return {planetary:this.planetary,planetaryIndex:this.planetaryIndex,dimension:this.dimension,dimensionIndex:this.dimensionIndex,gate:this.gate,line:this.line,behavior:this.behavior,color:this.color,motivation:this.motivation,tone:this.tone,sense:this.sense,base:this.base,environment:this.environment,degree:this.degree,minute:this.minute,second:this.second,arc:this.arc,arcSecond:this.arc,zodiac:this.zodiac,zodiacIndex:this.zodiacIndex,house:this.house}}
+ toString(){const s=Number.isInteger(this.second)?String(this.second):this.second.toFixed(3).replace(/0+$/,'').replace(/\.$/,'');return `${this.planetary}>${this.dimension}>${this.zodiac}>G${this.gate}.L${this.line}.C${this.color}.T${this.tone}.B${this.base}>${this.degree}°${this.minute}′${s}″>Arc${this.arc}>H${this.house}`}
 }
 const ANGULAR=Object.freeze({HEXAGRAM_SPAN_SECONDS:20250,LINE_SPAN_SECONDS:3375,COLOR_SPAN_SECONDS:562.5,TONE_SPAN_SECONDS:93.75,BASE_SPAN_SECONDS:18.75});
 function dmsWithinZodiacSeconds(d,m,s){return ri('degree',d,0,29)*3600+ri('minute',m,0,59)*60+rn('second',s,0,60)}
@@ -77,7 +79,7 @@ const EXACT_ADDRESS_CARDINALITY=5n*64n*13n*6n*6n*6n*5n*30n*60n*60n*100n*12n*12n;
 const RESOLUTION_LEVELS=Object.freeze(['bit','binary','trinary','line','gate','filter','channel','dimension','full-address']);
 function addressKey(a){a=a instanceof FullAddress?a:new FullAddress(a);return a.toString()}
 function projectAddress(a,level){a=a instanceof FullAddress?a:new FullAddress(a);switch(level){
-  case'bit':return `${a.planetary}|${a.dimension}|G${a.gate}|L${a.line}|C${a.color}|T${a.tone}|B${a.base}|${a.degree}:${a.minute}:${a.second}|A${a.arc}|${a.zodiac}|H${a.house}`;
+  case'bit':return `${a.planetary}|${a.dimension}|${a.zodiac}|G${a.gate}|L${a.line}|C${a.color}|T${a.tone}|B${a.base}|${a.degree}:${a.minute}:${a.second}|A${a.arc}|H${a.house}`;
   case'binary':return `${a.planetary}|${a.dimension}|G${a.gate}|L${a.line}|binary:${KING_WEN[a.gate].lines[a.line-1]}|C${a.color}|T${a.tone}|B${a.base}`;
   case'trinary':return `${a.planetary}|${a.dimension}|G${a.gate}|tri:${Math.ceil(a.line/2)}|C${a.color}|T${a.tone}|B${a.base}`;
   case'line':return `${a.planetary}|${a.dimension}|G${a.gate}|L${a.line}`;
@@ -179,6 +181,6 @@ class AgentomagotchiField{
  snapshot(){return {version:'0.7.0',seed:this.seed,tick:this.tick,schema:FIELD_SCHEMA,potentialExactAddresses:this.potentialExactAddressesString,addressedPoints:[...this.points.values()].map(p=>p.snapshot()),relations:this.relationSnapshot(),ledger:this.ledger.snapshot()}}
 }
 const AgentomagotchiMesh=AgentomagotchiField;
-function makeFullAddress(o){return new FullAddress(Object.assign({planetary:'Sun',dimension:'Movement',gate:1,line:1,color:1,tone:1,base:1,degree:0,minute:0,second:0,arc:0,zodiac:'Aries',house:1},o||{}))}
+function makeFullAddress(o){if(!o||typeof o!=='object')throw new Error('Explicit complete address required');return new FullAddress(o)}
 global.AgentomagotchiKernel=Object.freeze({VERSION:'0.6.0',PRIMITIVES,DIMENSIONS,PLANETARIES,ZODIACS,LINE_NAMES,COLOR_NAMES,TONE_NAMES,TONE_SENSES,BASE_NAMES,GATE_NAMES,KING_WEN,CHANNELS,ADDRESS_FIELDS,RESOLUTION_LEVELS,ANGULAR,FIELD_SCHEMA,EXACT_ADDRESS_CARDINALITY,FullAddress,AddressedBitState,AgentomagotchiField,AgentomagotchiMesh,EventLedger,makeFullAddress,granularSpecialty,dmsWithinZodiacSeconds,addressKey,projectAddress,XorShift32});
 })(typeof window!=='undefined'?window:globalThis);
