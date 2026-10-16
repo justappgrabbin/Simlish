@@ -91,6 +91,8 @@ export class StateSpaceKernel {
       address:normalizeAddress(capability.address || manifest.address,{mode:(capability.address||manifest.address).mode||'macro'}),
       input:capability.input || 'json', output:capability.output || 'json', effect:capability.effect || 'pure', implementation:capability.implementation || null,
     }));
+    const ids = capabilities.map(capability => String(capability.id));
+    if (new Set(ids).size !== ids.length) throw new TypeError('Capability ids must be unique within an artifact');
     const host = this.get(hostAddress);
     return Object.freeze({ id:manifest.id || `artifact:${host.addressKey}`, address:host.address, addressKey:host.addressKey, capabilities:Object.freeze(capabilities), mounted:true });
   }
