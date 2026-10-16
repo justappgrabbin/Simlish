@@ -165,3 +165,11 @@ test('invalid host address cannot mount artifact state', () => {
   assert.throws(() => kernel.mountArtifact({address:{...address(6),gate:100},capabilities:[]}));
   assert.equal(kernel.states.size,before);
 });
+
+test('duplicate capability identifiers reject mount without creating host', () => {
+  const kernel = new StateSpaceKernel();
+  const host = {...address(6),line:5};
+  assert.equal(kernel.states.has(canonicalAddress(host)),false);
+  assert.throws(() => kernel.mountArtifact({address:host,capabilities:[{id:'same'},{id:'same'}]}));
+  assert.equal(kernel.states.has(canonicalAddress(host)),false);
+});
