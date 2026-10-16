@@ -83,7 +83,7 @@ export class StateSpaceKernel {
   }
 
   mountArtifact(manifest) {
-    if (!manifest || typeof manifest !== 'object' || !manifest.address || !Array.isArray(manifest.capabilities)) throw new TypeError('Artifact manifest requires an address and capabilities');
+    if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest) || !manifest.address || !Array.isArray(manifest.capabilities)) throw new TypeError('Artifact manifest requires an address and capabilities');
     if (Array.isArray(manifest) || manifest.capabilities.some(capability => !capability || typeof capability !== 'object' || Array.isArray(capability))) throw new TypeError('Capabilities must be objects');
     const host = this.get(manifest.address);
     const capabilities = manifest.capabilities.map((capability,index)=>Object.freeze({
