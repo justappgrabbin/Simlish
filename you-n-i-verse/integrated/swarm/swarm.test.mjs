@@ -17,7 +17,7 @@ test('registry: every swarm she named is present, ids unique, nothing dropped',(
  for(const f of ['swarm-os','integrated','file-swarm','pso','abc','ga','trident','morph-search','four-llm'])assert.ok(REG.entries.some(e=>e.family===f),f);assert.equal(REG.missingAtBuild.length,0);assert.ok(REG.uncurated.length>100)});
 test('registry: hashes are real. In-repo files match, copies are byte-identical to the origin, out-of-repo originals still match when present',()=>{let repo=0,copies=0,ext=0;
  for(const e of REG.entries){if(e.origin.kind==='repo'){const p=e.origin.path==='morphgnn_server.py'?join(ROOT,'..',e.origin.path):join(ROOT,e.origin.path.replace(/^you-n-i-verse\//,''));if(existsSync(p)){assert.equal(sha(readFileSync(p)),e.sha256,e.id);repo++}}
-  else{const p=join('/workspace',e.origin.path);if(existsSync(p)){assert.equal(sha(readFileSync(p)),e.sha256,'origin untouched: '+e.id);ext++}}
+  else{const p=join(process.env.SWARM_WORKSPACE??'/workspace',e.origin.path);if(existsSync(p)){assert.equal(sha(readFileSync(p)),e.sha256,'origin untouched: '+e.id);ext++}}
   if(e.copy){const c=readFileSync(join(ROOT,e.copy.path.replace(/^integrated/,'integrated')));assert.equal(sha(c),e.sha256,'copy '+e.id);assert.equal(e.copy.sha256,e.sha256);copies++}}
  assert.ok(repo>=15&&copies>=30,`repo ${repo} copies ${copies} external ${ext}`)});
 test('registry: connected flags are computed from the import graph (snapshot equals recomputation) and the known gaps stay visible',async()=>{
