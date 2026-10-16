@@ -98,3 +98,9 @@ test('identity metadata is typed and canonical serialization escapes delimiters'
   assert.throws(()=>normalizeAddress({...a,scope:{value:'bad'}}));
   assert.throws(()=>normalizeAddress({...a,originContext:' '}));
 });
+
+test('address input must be an object rather than an array or primitive', () => {
+  assert.throws(()=>normalizeAddress('gate=6'));
+  assert.throws(()=>normalizeAddress([6,4,4,4,2]));
+  assert.throws(()=>normalizeAddress(42));
+});
