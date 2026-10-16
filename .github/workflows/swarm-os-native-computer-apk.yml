@@ -1,0 +1,143 @@
+name: SWARM-OS Native Computer APK
+on:
+  push:
+    branches: [swarm-os-native-computer-apk-20261016]
+    paths:
+      - 'android/**'
+      - 'you-n-i-verse/**'
+      - '.github/workflows/swarm-os-native-computer-apk.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: swarm-os-native-computer-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  native-apk:
+    name: Build and verify offline integrated APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout original YOU-N-I-VERSE Android host
+        uses: actions/checkout@v4
+      - name: Checkout PINNED SynthAi Computer with live recovered ATO/Klein
+        uses: actions/checkout@v4
+        with:
+          repository: justappgrabbin/SynthAi
+          ref: 9ac2007a2f1727b258735f42b93002b30a7ec4f5
+          path: synthai-computer-source
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Stage existing Computer browser runtime
+        run: |
+          node synthai-computer-source/computer/build-web.mjs
+          node android/stage-synthai-computer.mjs synthai-computer-source/public 9ac2007a2f1727b258735f42b93002b30a7ec4f5
+          node --check android/stage-synthai-computer.mjs
+          node --check android/test-local-computer.mjs
+      - name: Verify original studio and SWARM-OS execution tests
+        run: |
+          node --test you-n-i-verse/formation-spine.test.mjs you-n-i-verse/formation-klein.test.mjs
+          node you-n-i-verse/test.mjs
+          node you-n-i-verse/studio.test.mjs
+          node you-n-i-verse/game-path.test.mjs
+      - name: Install Chromium for Android asset-layout test
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exercise packaged studio → Computer → native ATO → IndexedDB reload
+        run: node android/test-local-computer.mjs
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Locate installed Android SDK manager
+        run: |
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          echo "SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
+          TOOL="$(find "$SDK_ROOT/cmdline-tools" -maxdepth 4 -type f -name sdkmanager -print | sort | tail -n 1)"
+          if [ -z "$TOOL" ]; then echo "Android command-line manager unavailable at $SDK_ROOT"; exit 1; fi
+          echo "SDKMANAGER=$TOOL" >> "$GITHUB_ENV"
+          "$TOOL" --version
+      - name: Set up existing Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Install target Android build SDK
+        run: |
+          "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Reuse existing YOU-N-I-VERSE debug signing key for upgrade compatibility
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: youniverse-debug-signing-v1
+      - name: Preserve existing Studio host and build debug APK
+        run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
+      - name: Verify real APK asset entries and pinned provenance
+        run: |
+          python3 - <<'PY'
+          import json, zipfile
+          apk = 'android/app/build/outputs/apk/debug/app-debug.apk'
+          with zipfile.ZipFile(apk) as z:
+              files = set(z.namelist())
+              expected = [
+                  'assets/index.html',
+                  'assets/studio.mjs',
+                  'assets/computer/index.html',
+                  'assets/computer/computer-app.mjs',
+                  'assets/computer/swarm-ui.mjs',
+                  'assets/computer/swarm-assets-manifest.json',
+                  'assets/computer/computer-runtime/ComputerRuntime.mjs',
+                  'assets/computer/computer-runtime/services/executable-formations.mjs',
+                  'assets/computer/computer-runtime/services/native-klein-memory.mjs',
+                  'assets/computer/computer-runtime/events/browser-event-emitter.mjs',
+                  'assets/computer/computer-runtime/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/vendor/ato-core/src/index.mjs',
+              ]
+              missing = [f for f in expected if f not in files]
+              if missing: raise SystemExit('APK is missing real Android/ATO assets: '+repr(missing))
+              manifest = json.loads(z.read('assets/computer/swarm-assets-manifest.json'))
+              assert manifest['upstreamCommit'] == '9ac2007a2f1727b258735f42b93002b30a7ec4f5'
+              assert b'computer/index.html' in z.read('assets/index.html')
+              assert b'./computer-runtime/ComputerRuntime.mjs' in z.read('assets/computer/computer-app.mjs')
+              assert b'../index.html' in z.read('assets/computer/index.html')
+              print('APK content verified:', len(files), 'ZIP entries,', len(manifest['files']), 'pinned Computer source files')
+          PY
+          ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Name installable SWARM-OS debug APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk SWARM-OS-YOU-N-I-VERSE-Computer-debug.apk
+      - name: Retain verified signed Android debug build
+        uses: actions/upload-artifact@v4
+        with:
+          name: SWARM-OS-YOU-N-I-VERSE-Computer-Android-APK
+          path: SWARM-OS-YOU-N-I-VERSE-Computer-debug.apk
+          retention-days: 30
+      - name: Publish direct prerelease APK (not a production release)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const tag = 'swarm-os-computer-debug-' + context.sha.slice(0, 12);
+            let release;
+            try { release = (await github.rest.repos.getReleaseByTag({ ...context.repo, tag })).data; }
+            catch (error) {
+              if (error.status !== 404) throw error;
+              release = (await github.rest.repos.createRelease({
+                ...context.repo, tag_name: tag, target_commitish: context.sha,
+                name: 'SWARM-OS · YOU-N-I-VERSE + Computer Debug · ' + context.sha.slice(0, 7),
+                prerelease: true,
+                body: 'Existing YOU-N-I-VERSE Android host with locally packaged SynthAi Computer, real recovered ATO/Klein executable formations, AUTOLING grammar learning, Diseminer lexical history and IndexedDB restart replay. Studio remains the first screen. All computation tested without an application backend or external LLM. This is an Android 8+ DEBUG APK, not a production release. Browser asset integration and build verified by GitHub Actions; physical-phone installation, background lifecycle and camera behavior remain unverified. SynthAi donor pin: 9ac2007a2f1727b258735f42b93002b30a7ec4f5'
+              })).data;
+            }
+            const name = 'SWARM-OS-YOU-N-I-VERSE-Computer-debug.apk';
+            const existing = (await github.rest.repos.listReleaseAssets({
+              ...context.repo, release_id: release.id,
+            })).data;
+            if (!existing.some(asset => asset.name === name)) {
+              await github.rest.repos.uploadReleaseAsset({
+                ...context.repo, release_id: release.id, name,
+                data: fs.readFileSync(name),
+                headers: { 'content-type': 'application/vnd.android.package-archive' },
+              });
+            }
