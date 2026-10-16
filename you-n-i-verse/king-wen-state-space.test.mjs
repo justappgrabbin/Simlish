@@ -136,3 +136,10 @@ test('unknown projections fail for both reads and writes', () => {
   assert.throws(() => kernel.project(address(6), 'unknown'));
   assert.throws(() => kernel.annotate(address(6), 'unknown', 42));
 });
+
+test('artifact mount rejects malformed capability records', () => {
+  const kernel = new StateSpaceKernel();
+  for (const capabilities of [[null], [false], [[]], ['bad']]) {
+    assert.throws(() => kernel.mountArtifact({address:address(6),capabilities}));
+  }
+});
