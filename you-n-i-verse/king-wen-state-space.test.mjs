@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { gateToLines } from './vendor/klein/king-wen.mjs';
-import { gateState, canonicalAddress, normalizeAddress } from './vendor/klein/address-space.mjs';
+import { gateState, canonicalAddress, normalizeAddress, macroProjection } from './vendor/klein/address-space.mjs';
 import { kingWenGateForBinaryValue } from './vendor/klein/gate-address.mjs';
 import { StateSpaceKernel } from './vendor/klein/state-space-kernel.mjs';
 
@@ -37,4 +37,13 @@ test('mounted state-space preserves canonical gate identity', () => {
 
 test('invalid gate addresses fail closed', () => {
   for (const gate of [0,65,-1,1.5]) assert.throws(()=>gateState(address(gate)));
+});
+
+test('macro projection removes all micro-only coordinates', () => {
+  const micro = { ...address(6), mode:'micro', planetary:'Sun', dimension:'movement', degree:25, minute:59, second:31, arc:99, zodiac:6, house:5, scope:'test', originContext:'source' };
+  const macro = macroProjection(micro);
+  assert.equal(macro.mode,'macro');
+  for (const field of ['planetary','dimension','degree','minute','second','arc','zodiac','house','scope','originContext']) assert.equal(macro[field],undefined);
+  assert.equal(macro.gate,6);
+  assert.equal(gateState(macro).bits,gateState(address(6)).bits);
 });
