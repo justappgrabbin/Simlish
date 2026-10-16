@@ -106,6 +106,7 @@ export function normalizeMicroAddress(input) {
 }
 
 export function addressKey(address) {
+  if (address?.mode !== undefined && address.mode !== 'macro' && address.mode !== 'micro') throw new ATOError('movement.create', 'INVALID_ADDRESS_MODE', 'Address mode is invalid');
   const normalized = address?.mode === 'micro' ? normalizeMicroAddress(address) : normalizeMacroAddress(address);
   return canonicalSpaceAddress(normalized);
 }
