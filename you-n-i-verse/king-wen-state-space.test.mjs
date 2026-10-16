@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { gateToLines } from './vendor/klein/king-wen.mjs';
-import { gateState, canonicalAddress, normalizeAddress, macroProjection, AddressSpace } from './vendor/klein/address-space.mjs';
+import { gateState, canonicalAddress, normalizeAddress, macroProjection, AddressSpace, transition } from './vendor/klein/address-space.mjs';
 import { kingWenGateForBinaryValue } from './vendor/klein/gate-address.mjs';
 import { StateSpaceKernel } from './vendor/klein/state-space-kernel.mjs';
 
@@ -55,4 +55,16 @@ test('address-space storage never trusts a supplied forged key', () => {
   assert.equal(state.addressKey,canonicalAddress(a));
   assert.equal(space.resolve(a),state);
   assert.equal(space.resolve(address(1)),null);
+});
+
+test('transitions canonicalize both endpoints even when supplied keys are stale', () => {
+  const source={address:address(6),addressKey:'forged-source'};
+  const target={address:address(59),addressKey:'forged-target'};
+  const edge=transition(source,target,'transmit');
+  assert.equal(edge.source,canonicalAddress(source.address));
+  assert.equal(edge.target,canonicalAddress(target.address));
+  const space=new AddressSpace();
+  space.put(source); space.put(target);
+  space.connect(edge);
+  assert.equal(space.reachable(source.address,target.address),true);
 });
