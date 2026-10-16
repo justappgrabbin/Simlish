@@ -12,13 +12,16 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['20', '22']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ matrix.node }}
       - name: Full test suite (includes studio, registration, swarm, finisher, supabase adapter, personalize, boot)
-        run: node --test you-n-i-verse/*.test.mjs
+        run: node --test you-n-i-verse/*.test.mjs you-n-i-verse/integrated/*.test.mjs
       - name: Core engine check
         run: node you-n-i-verse/test.mjs
       - name: Syntax checks

@@ -7,6 +7,7 @@ import {BrowserExecutionSurface} from './automata/browser-execution-surface.mjs'
 import {normalizeArtifact} from './automata/artifact-normalizer.mjs';
 import {readZip} from '../zip-lite.mjs';
 import {nuclear,hammingNeighbors} from '../state-space.mjs';
+import {Population} from './population.mjs';
 
 export const PROVIDER_INVESTIGATING=Object.freeze([
  'same-thread JavaScript cannot be sandboxed or interrupted without a web worker or vm (both ruled out). The guard is a deny-list of host/escape names plus a static check for obvious endless loops. It is a best-effort filter, NOT a security boundary: obfuscated code can get around it. Pass executeCode:false to analyse without running.',
@@ -120,9 +121,14 @@ export const zipProvider=(surface,{maxEntries=32,maxEntryBytes=1<<20,maxTotalByt
    unresolvedDependencies:[...new Set(members.flatMap(m=>m.unresolved))],result:{engine:'zip-member-execution',stdout:[],returnValue:{members,skipped,entries:entries.length}}};
  }});
 
+// ---- primitive organizations (.prim): resolved and executed by the shared population (population.mjs), not by a file-specific engine ----
+export const primitiveProvider=()=>({id:'primitive-population',canExecute:n=>extOf(n.name)==='prim',
+ async execute(n){const r=new Population().resolve(n.bytes,{name:n.name}),top=r.program.top,out=[];const inst=r.instance();for(let t=0;t<8;t++)out.push(inst.tick(Array(top.nIn).fill(0)));
+  return {kind:'primitive-organization',path:'population-resolution',...flags,ok:true,result:{engine:'population-tick',stdout:[],returnValue:{wellFormed:r.program.wellFormed,definitions:r.program.defs.length,nIn:top.nIn,nOut:top.nOut,actsAs:top.composite,address:r.address.key,firstTicksWithZeroInput:out}}}}});
+
 // Build her surface with the same-thread providers registered (order matters: first match wins; json/wasm fall through to her built-ins).
 export function createSurface({executeCode=true}={}){
  const surface=new BrowserExecutionSurface();
- for(const p of [javascriptProvider({executeCode}),cssProvider(),htmlProvider(),zipProvider(surface),placeholderProvider(),textProvider(),genericProvider()])surface.register(p);
+ for(const p of [primitiveProvider(),javascriptProvider({executeCode}),cssProvider(),htmlProvider(),zipProvider(surface),placeholderProvider(),textProvider(),genericProvider()])surface.register(p);
  return surface;
 }

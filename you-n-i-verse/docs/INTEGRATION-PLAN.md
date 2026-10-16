@@ -37,3 +37,6 @@ Her Execution Pipeline Patch v0.5.1 names the stages: ingest, normalize, primiti
 - Three address schemas exist (repo 13-place, spine computational coordinate, ingest patch). No mapping chosen.
 - Her pipeline allocates primitives to all five fields including Space; the NSNF state space keeps Space read-only. The state space is never written for Space.
 - Same-thread JS cannot be interrupted or truly sandboxed without a worker or vm: guard is a deny-list, runaway loops are only caught by a static check.
+
+## Added after Alexis's architecture statement and correction (see SWARM-OS-FOUNDATIONAL-ARCHITECTURE.md)
+integrated/population.mjs (four differentiated primitive kinds, one ontology), assemble.mjs, targets.mjs, lifecycle.mjs, inventory.mjs, roundtrip.mjs, bantu.mjs, ledger.mjs. Status, failures and limitations: integrated/PRIMITIVES.md.

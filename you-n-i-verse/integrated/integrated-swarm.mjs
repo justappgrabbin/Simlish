@@ -8,6 +8,7 @@ import {ExecutionAddressResolver} from './spine/execution-address-resolver.mjs';
 import {AutomataIngestionExecutionKernel} from './automata/ingestion-execution-kernel.mjs';
 import {BrowserAutomataStore} from './automata/browser-automata-store.mjs';
 import {OntologicalFileIngestor} from './ontological/ingestion/ontological-file-ingestor.mjs';
+import {HistoryLedger} from './ledger.mjs';
 import {createSurface,PROVIDER_INVESTIGATING} from './providers.mjs';
 import {WHEELS,WHEELS_INVESTIGATING,TEN_WINGS,wheelReadout,wheelRank} from './wheels.mjs';
 import {deriveAppCode,APP_CODE_INVESTIGATING} from './app-code.mjs';
@@ -27,16 +28,7 @@ const clamp=x=>Math.max(0,Math.min(1,x));
 // Her pipeline writes edges to a mesh when one is supplied (addEdge); this records them.
 export class MeshLog{constructor(){this.edges=[]}addEdge(layer,from,to,relation,meta={}){this.edges.push({layer,from,to,relation,meta});return true}}
 
-// History lands at the resolved address (spec §18: "resolve address -> land history/bookkeeping"). Append-only; also mirrored to the runtime store.
-export class HistoryLedger{
- #by=new Map();#n=0;
- constructor(store=null){this.store=store}
- append(addressKey,entry){const rec=Object.freeze({seq:++this.#n,addressKey,...entry});if(!this.#by.has(addressKey))this.#by.set(addressKey,[]);this.#by.get(addressKey).push(rec);this.store?.append?.('history',rec);return rec}
- recall(addressKey){return [...(this.#by.get(addressKey)||[])]}
- get size(){return this.#n}
- addresses(){return [...this.#by.keys()]}
-}
-
+export {HistoryLedger};
 export class IntegratedSwarm{
  constructor({runtime=new NsnfRuntime(),executeCode=true,maxPipelineBytes=8<<20,kernelStore=new BrowserAutomataStore(),pipelineStore=new MemoryExecutionPipelineStore()}={}){
   this.runtime=runtime;this.executeCode=executeCode;this.maxPipelineBytes=maxPipelineBytes;

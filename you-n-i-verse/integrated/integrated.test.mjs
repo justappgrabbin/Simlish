@@ -27,7 +27,7 @@ test('no worker, backend, network or external dependency in the integration (ada
  assert.ok(files.length>=20);
  for(const f of files){const t=readFileSync(f,'utf8').replace(/\/\/.*$/gm,'').replace(/\/\*[\s\S]*?\*\//g,'');
   assert.ok(!/new\s+Worker\s*\(|new\s+SharedWorker|\bfetch\s*\(|XMLHttpRequest\s*\(|new\s+WebSocket|\brequire\s*\(/.test(t),f);
-  for(const m of t.matchAll(/from\s*['"]([^'"]+)['"]/g))assert.ok(m[1].startsWith('.')||(f.endsWith('demo.mjs')&&m[1].startsWith('node:')),f+' must import only local files (demo may use node: built-ins), got '+m[1])}
+  for(const m of t.matchAll(/(?:^|\n)\s*(?:import|export)\b[^;\n]*?\bfrom\s*['"]([^'"]+)['"]/g))assert.ok(m[1].startsWith('.')||(f.endsWith('demo.mjs')&&m[1].startsWith('node:')),f+' must import only local files (demo may use node: built-ins), got '+m[1])}
 });
 test('wheels per spec §2.1: Fu Xi Movement, Mawangdui Evolution, King Wen Space (read only); Being/Design investigating, nothing invented',()=>{
  assert.deepEqual(WHEELS.Movement.order,Array.from({length:64},(_,i)=>i));
@@ -74,7 +74,7 @@ test('execute means decompose -> pipeline (11 stages, her order) -> run -> fold 
 test('each kind of file is executed by its own provider; non-JS languages are placeholders; Space is never written',async()=>{
  const sw=new IntegratedSwarm(),wasm=Uint8Array.from([0,0x61,0x73,0x6d,1,0,0,0,1,7,1,0x60,2,0x7f,0x7f,1,0x7f,3,2,1,0,7,7,1,3,0x61,0x64,0x64,0,0,10,9,1,7,0,0x20,0,0x20,1,0x6a,0x0b]);
  const zip=writeZip([{path:'a.js',data:'return 2*21'},{path:'b.json',data:'{"k":1}'},{path:'c.css',data:'a{b:c}'},{path:'d.py',data:'print(1)'}]);
- const cases=[['d.json','{"a":[1,2]}','JSON.parse'],['s.css','a{b:c}','css-structural-parse'],['p.html','<h1>x</h1><script>globalThis.__ranHtml=true</script>','html-structural-parse'],['n.md','# t\nwords','TextDecoder'],
+ const cases=[['d.json','{"a":[1,2]}','JSON.parse'],['x.prim','\u0001\u0002\u0003','population-tick'],['s.css','a{b:c}','css-structural-parse'],['p.html','<h1>x</h1><script>globalThis.__ranHtml=true</script>','html-structural-parse'],['n.md','# t\nwords','TextDecoder'],
   ['t.py','print(1)','generic-primitive-execution'],['x.ts','const a:number=1','generic-primitive-execution'],['m.wasm',wasm,'WebAssembly'],['b.bin',Uint8Array.from({length:300},(_,i)=>(i*37+11)&255),'generic-primitive-execution'],['z.zip',zip,'zip-member-execution']];
  globalThis.__ranHtml=false;
  for(const [n,b,engine] of cases){const r=await sw.execute(F(n,b));assert.equal(r.execution.engine,engine,n);assert.equal(r.execution.ok,true,n+' '+r.execution.error);
@@ -130,5 +130,5 @@ test('the file is never modified; empty and large inputs are handled; bad input 
  assert.equal(r.fold.truncatedPipelineInput,true);assert.deepEqual([...big],[...copy]);
  const e=await sw.execute(F('empty.txt',new Uint8Array(0)));assert.ok(e.app.code||e.app.status==='investigating');
  await assert.rejects(()=>sw.execute({name:'x'}),/bytes required/);
- const n=await normalizeArtifact(F('q.js','1'));assert.equal(createSurface().providers.length,7);assert.equal(n.kind,'javascript');
+ const n=await normalizeArtifact(F('q.js','1'));assert.equal(createSurface().providers.length,8);assert.equal(n.kind,'javascript');
 });
