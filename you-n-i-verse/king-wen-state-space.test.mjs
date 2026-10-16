@@ -112,3 +112,12 @@ test('canonical keys reject incomplete addresses', () => {
   assert.throws(()=>canonicalAddress({mode:'macro',gate:6}));
   assert.throws(()=>canonicalAddress({mode:'micro',gate:6,line:4,color:4,tone:4,base:2}));
 });
+
+import { addressKey as coreAddressKey, normalizeMacroAddress, normalizeMicroAddress } from './vendor/klein/index.mjs';
+
+test('core and state-space serializers agree on macro and micro addresses', () => {
+  const macro=normalizeMacroAddress(address(6));
+  assert.equal(coreAddressKey(macro),canonicalAddress(macro));
+  const micro=normalizeMicroAddress({...address(6),planetary:'Sun',dimension:'movement',degree:25,minute:59,second:31,arc:99,zodiac:6,house:5});
+  assert.equal(coreAddressKey(micro),canonicalAddress(micro));
+});
