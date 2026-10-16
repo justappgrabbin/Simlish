@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { gateToLines } from './vendor/klein/king-wen.mjs';
-import { gateState, canonicalAddress, normalizeAddress, macroProjection } from './vendor/klein/address-space.mjs';
+import { gateState, canonicalAddress, normalizeAddress, macroProjection, AddressSpace } from './vendor/klein/address-space.mjs';
 import { kingWenGateForBinaryValue } from './vendor/klein/gate-address.mjs';
 import { StateSpaceKernel } from './vendor/klein/state-space-kernel.mjs';
 
@@ -46,4 +46,13 @@ test('macro projection removes all micro-only coordinates', () => {
   for (const field of ['planetary','dimension','degree','minute','second','arc','zodiac','house','scope','originContext']) assert.equal(macro[field],undefined);
   assert.equal(macro.gate,6);
   assert.equal(gateState(macro).bits,gateState(address(6)).bits);
+});
+
+test('address-space storage never trusts a supplied forged key', () => {
+  const space = new AddressSpace();
+  const a = address(6);
+  const state = space.put({address:a,addressKey:'macro:gate=1',value:{ok:true}});
+  assert.equal(state.addressKey,canonicalAddress(a));
+  assert.equal(space.resolve(a),state);
+  assert.equal(space.resolve(address(1)),null);
 });
