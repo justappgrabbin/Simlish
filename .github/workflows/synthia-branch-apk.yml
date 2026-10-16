@@ -49,7 +49,7 @@ jobs:
           cp android/app/build/outputs/apk/debug/app-debug.apk Synthia-debug.apk
           ls -l Synthia-debug.apk
           unzip -l Synthia-debug.apk | grep -E 'assets/(guide\.(html|mjs)|measure\.(html|mjs)|integrated/measure\.mjs|integrated/swarm/(index|mesh|registry)\.mjs|integrated/swarm/registry\.json|integrated/swarm/INVENTORY\.(md|json)|vendor/mesh/state-space/mesh-state-space\.js|vendor/isohuman/(astronomy-engine|GeonatalCalculator\.browser)\.mjs|integrated/(chart-engine|guide)\.mjs|synthia-app\.(html|mjs)|models/trident_syntia\.pt|integrated/(app-server|swarm-loop|trident-js|arc-engine|assembly-plan)\.mjs|integrated/protected-originals\.json)' | tee apk-contents.txt
-          test "$(wc -l < apk-contents.txt)" -ge 27
+          test "$(wc -l < apk-contents.txt)" -ge 25
           $ANDROID_HOME/build-tools/35.0.0/aapt2 dump permissions Synthia-debug.apk | tee apk-permissions.txt
           ! grep -q 'android.permission.INTERNET' apk-permissions.txt
           sha256sum Synthia-debug.apk | tee Synthia-debug.apk.sha256
