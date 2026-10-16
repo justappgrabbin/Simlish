@@ -1,11 +1,13 @@
 // Reality execution readiness: inspectable capacity and bounded swarm work orders.
 // A large state space is not a substitute for geometry, assets or rendering.
 export const STATE_SPACE=Object.freeze({dimensions:5,centersPerDimension:9,gatesPerCenter:64,lines:6,colors:6,tones:6,bases:5,emergentCenterStates:81});
+import {capacityTable} from './state-space.mjs';
 export function stateCapacity(){
  const primary=STATE_SPACE.dimensions*STATE_SPACE.centersPerDimension*STATE_SPACE.gatesPerCenter;
  const configurations=BigInt(primary)*6n*6n*6n*5n;
  return {primary,configurations:configurations.toString(),emergentCenterStates:81,
-   note:'Combinatorial capacity is not a claim of trained coverage or visual quality'};
+   note:'Combinatorial capacity is not a claim of trained coverage or visual quality',
+   nested:capacityTable(),nestedNote:'NSNF nested state space per Alexis: 64 macro nodes per level, broken down into 12 (she also said six), five levels. The 9-centers-per-dimension figure above predates this and conflicts with the spec (nine centers must emerge, Spec §19; no modulo-nine): kept, flagged, not used by the swarm runtime.'};
 }
 export function inspectRealityOrder(order){
  const missing=[];
