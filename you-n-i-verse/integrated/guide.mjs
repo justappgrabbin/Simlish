@@ -1,0 +1,49 @@
+// Deterministic guide: every sentence comes from a field in her primitive attribute layer (named by the layer it sits in) or from a rule this app derives (labelled).
+// Nothing is generated or paraphrased. If her data has no field for the question the guide says so.
+import {CHANNELS,CENTER_OF_GATE,CENTERS,STANDARD} from './chart-engine.mjs';
+const ORD=['','first','second','third','fourth','fifth','sixth'];
+export function createGuide({clean,attrs}){
+ const P=new Map(clean.primitives.map(p=>[p.id,p])),A=id=>attrs[id]||null,sec=(label,text,from)=>text==null||text===''?null:({label,text:String(text),from});
+ const S=(...xs)=>xs.filter(Boolean);
+ const gate=n=>{const a=A('gate.'+n),p=P.get('gate.'+n);if(!a||!p)return null;return {title:`Gate ${n} — ${p.form}`,id:'gate.'+n,sections:S(
+  sec('Names',Object.entries(a.names||{}).map(([k,v])=>`${k}: ${v}`).join(' · '),'attributes: names'),
+  sec('Theme',a.theme,'attributes: theme'),sec('Center (Black Book)',a.blackBook?.center,'attributes: blackBook'),sec('Center (her source-gates field)',a.centerSG,'attributes: centerSG'),
+  sec('Zodiac sign (Black Book)',(a.blackBook?.signs||[]).join('; '),'attributes: blackBook'),sec('Biology (Black Book)',a.blackBook?.biology,'attributes: blackBook'),sec('Channel partner (Black Book)',a.blackBook?.channel,'attributes: blackBook'),
+  sec('doc3',a.doc3?`${a.doc3.archetype} · anchor: ${a.doc3.anchor} · zodiac ${a.doc3.zodiac} · ${a.doc3.house} · base ${a.doc3.base}`:null,'attributes: doc3'),
+  sec('Gene Key',a.geneKey?`shadow ${a.geneKey.shadow} → gift ${a.geneKey.gift} → siddhi ${a.geneKey.siddhi}`:null,'attributes: geneKey'),
+  sec('Amino acid / organ',[a.aminoAcid,a.organ].filter(Boolean).join(' / '),'attributes: aminoAcid, organ'),
+  sec('Zhouyi',a.zhouyi?.statement,'attributes: zhouyi'),sec('Hexagram bits',a.bits?`${a.bits} (macro ${a.macro}; complement gate-macro ${a.complement})`:null,'attributes: bits'),
+  p.gap?.length?sec('Open in her system',p.gap.join('; '),'primitive: gap'):null)}};
+ const line=(n,l)=>{const a=A(`gate.${n}.line.${l}`);if(!a)return null;return {title:`Gate ${n} line ${l}`,id:`gate.${n}.line.${l}`,sections:S(
+  sec('Keynote',a.keynote,'attributes: keynote'),sec('Black Book title',a.blackBook?.title,'attributes: blackBook'),sec('Black Book text',a.blackBook?.text,'attributes: blackBook'),sec('Exalted / detriment',a.exalted||a.detriment?`${a.exalted||'—'} / ${a.detriment||'—'}`:null,'attributes: exalted, detriment'),
+  sec('Zhouyi line',a.zhouyi,'attributes: zhouyi'),sec('Color of the line',a.colorOfLine,'attributes: colorOfLine'),sec('Sense of the line',a.senseOfLine,'attributes: senseOfLine'),sec('Rave 2001',a.rave2001,'attributes: rave2001'))}};
+ const color=n=>{const a=A('color.'+n),p=P.get('color.'+n);return a&&{title:`Color ${n} — ${p.form}`,id:'color.'+n,sections:S(sec('Modes',(a.modes||[]).join(' / '),'attributes: modes'),sec('Binary',a.binary,'attributes: binary'),p.gap?.length?sec('Open in her system',p.gap.join('; '),'primitive: gap'):null)}};
+ const tone=n=>{const a=A('tone.'+n),p=P.get('tone.'+n);return a&&{title:`Tone ${n}`,id:'tone.'+n,sections:S(sec('Sense',a.sense,'attributes: sense'),sec('Binary',a.binary,'attributes: binary'),a.toneColorCompat?sec('Tone/color compatibility',`${a.toneColorCompat.name}: works with colors ${a.toneColorCompat.ok.join(', ')}; conflict: ${a.toneColorCompat.bad}; frame: ${a.toneColorCompat.frame}`,'attributes: toneColorCompat'):null,p.gap?.length?sec('Open in her system',p.gap.join('; '),'primitive: gap'):null)}};
+ const base=n=>{const a=A('base.'+n),p=P.get('base.'+n);return a&&{title:`Base ${n}`,id:'base.'+n,sections:S(sec('Polarity',a.polarity,'attributes: polarity'),sec('Mode',a.mode,'attributes: mode'),sec('Question',a.question,'attributes: question'),sec('Sense',a.sense,'attributes: sense'),sec('Say',a.say,'attributes: say'),sec('Role',a.role,'attributes: role'),sec('Extra',a.extra,'attributes: extra'),p.gap?.length?sec('Open in her system',p.gap.join('; '),'primitive: gap'):null)}};
+ const planet=name=>{const id=Object.keys(attrs).find(k=>k.startsWith('planet.')&&k.slice(7).toLowerCase()===String(name).replace(/\s/g,'').toLowerCase().replace('northnode','nnode').replace('southnode','snode'));return id&&{title:`${P.get(id)?.form||id}`,id,sections:S(sec('Glyph',attrs[id].glyph,'attributes: glyph'),sec('Dimension number',attrs[id].DIM,'attributes: DIM'))}};
+ const zodiac=name=>{const id=Object.keys(attrs).find(k=>k==='zodiac.'+name);return id&&{title:name,id,sections:S(sec('Glyph',attrs[id].glyph,'attributes: glyph'),sec('Degrees',`${attrs[id].startDeg}–${attrs[id].endDeg}`,'attributes: startDeg/endDeg'))}};
+ const center=name=>{const key=CENTERS.find(c=>c.toLowerCase()===String(name).toLowerCase()||(c==='G'&&/^g( center)?$/i.test(name))||(c==='Heart'&&/^(ego|heart)/i.test(name)));if(!key)return null;const gs=Object.entries(CENTER_OF_GATE).filter(([,c])=>c===key).map(([g])=>+g).sort((a,b)=>a-b);
+  return {title:`${key} center`,id:'center.'+key,sections:S(sec('Gates in this center (standard map)',gs.join(', '),'derived: '+STANDARD),sec('Black Book wording for its gates',[...new Set(gs.map(g=>A('gate.'+g)?.blackBook?.center).filter(Boolean))].join(' | '),'attributes: blackBook'))}};
+ const channel=(a,b)=>{const ch=CHANNELS.find(c=>c[0]===Math.min(a,b)&&c[1]===Math.max(a,b));if(!ch)return {title:`${a}-${b}`,sections:[sec('Channel','There is no channel between these gates in the standard table, and her Black Book data lists none.','derived')],id:null};
+  return {title:`Channel ${ch[0]}-${ch[1]}`,id:null,sections:S(sec('Joins',`${CENTER_OF_GATE[ch[0]]} ↔ ${CENTER_OF_GATE[ch[1]]}`,'derived: '+STANDARD),sec(`Gate ${ch[0]}`,P.get('gate.'+ch[0]).form+' — '+(A('gate.'+ch[0]).theme||''),'attributes: names, theme'),sec(`Gate ${ch[1]}`,P.get('gate.'+ch[1]).form+' — '+(A('gate.'+ch[1]).theme||''),'attributes: names, theme'),
+   sec('In her Black Book data',[ch[0],ch[1]].some(g=>A('gate.'+g).blackBook?.channel)?'listed':'not listed (the Black Book lists 23 of the 36)','attributes: blackBook'))}};
+ function activation(a){const parts=[gate(a.gate),line(a.gate,a.line),color(a.color),tone(a.tone),base(a.base)].filter(Boolean);return {title:`${a.orientation==='design'?'Design':'Personality'} ${a.body}: ${a.gate}.${a.line}.${a.color}.${a.tone}.${a.base}`,id:null,sections:parts.flatMap(x=>[{label:'▸ '+x.title,text:'',from:x.id},...x.sections])}}
+ function ask(q,{chart=null}={}){
+  const t=String(q||'').trim(),l=t.toLowerCase();let m;
+  const done=(r)=>r?{ok:true,...r}:{ok:false,title:'Not found',sections:[{label:'Answer',text:'Her primitives and attribute layer have no entry for that.',from:'—'}]};
+  if((m=/\b(\d{1,2})\.(\d)\.(\d)\.(\d)\.(\d)\b/.exec(l)))return done(activation({orientation:'personality',body:'placement',gate:+m[1],line:+m[2],color:+m[3],tone:+m[4],base:+m[5]}));
+  if((m=/\bchannel\s*(\d{1,2})\s*[-–/ ]\s*(\d{1,2})\b/.exec(l)))return done(channel(+m[1],+m[2]));
+  if((m=/\bgate\s*(\d{1,2})\s*(?:[.\s]\s*(?:line\s*)?(\d))\b/.exec(l)))return done(line(+m[1],+m[2])&&{title:`Gate ${m[1]} line ${m[2]}`,id:`gate.${m[1]}.line.${m[2]}`,sections:[...gate(+m[1]).sections.slice(0,2),...line(+m[1],+m[2]).sections]});
+  if((m=/\bgate\s*(\d{1,2})\b/.exec(l)))return done(gate(+m[1]));
+  if((m=/\b(\d{1,2})\.(\d)\b/.exec(l)))return done(line(+m[1],+m[2]));
+  if((m=/\bcolou?r\s*([1-6])\b/.exec(l)))return done(color(+m[1]));if((m=/\btone\s*([1-6])\b/.exec(l)))return done(tone(+m[1]));if((m=/\bbase\s*([1-5])\b/.exec(l)))return done(base(+m[1]));
+  if((m=/\b(head|ajna|throat|g center|g|heart|ego|spleen|splenic|solar plexus|sacral|root)\s*center\b/.exec(l)||/\bcenter\s*(head|ajna|throat|g|heart|spleen|solar plexus|sacral|root)\b/.exec(l)))return done(center(m[1].replace('splenic','spleen')));
+  if(chart&&/\b(my |the )?(type|authority|profile|definition|centers?|channels?|gates)\b/.test(l)){const h=chart.hd;return done({title:'Your design (derived)',id:null,sections:S(sec('Type',h.type,'derived: '+STANDARD),sec('Authority',h.authority,'derived: '+STANDARD),sec('Profile (personality Sun line / design Sun line)',h.profile,'derived: '+STANDARD),sec('Definition',h.definition,'derived: '+STANDARD),sec('Defined centers',h.definedCenters.join(', ')||'none','derived: '+STANDARD),sec('Open centers',h.openCenters.join(', ')||'none','derived: '+STANDARD),sec('Defined channels',h.channels.map(c=>c.join('-')).join(', ')||'none','derived: '+STANDARD),sec('Activated gates',h.gates.join(', '),'derived: her donor calculator'),sec('Not available','Incarnation cross, circuitry, variables and type/authority descriptions have no source in her data here.','—'))})}
+  if(chart&&(m=/\b(personality|design|my)?\s*(sun|earth|moon|north node|south node|mercury|venus|mars|jupiter|saturn|uranus|neptune|pluto)\b/.exec(l))){const o=/design/.test(l)?'design':'personality',a=chart.activations.find(x=>x.orientation===o&&x.body.toLowerCase()===m[2]);if(a)return done(activation(a))}
+  if((m=/\b(sun|earth|moon|north node|south node|mercury|venus|mars|jupiter|saturn|uranus|neptune|pluto)\b/.exec(l)))return done(planet(m[1]));
+  if((m=/\b(aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricorn|aquarius|pisces)\b/.exec(l)))return done(zodiac(m[1][0].toUpperCase()+m[1].slice(1)));
+  return {ok:false,title:'I can look up',sections:[{label:'Try',text:'gate 13 · gate 13.2 · 13.2.3.4.5 · channel 13-33 · color 3 · tone 4 · base 2 · ajna center · sun · libra · "my type" · "my sun" · "design moon" (after calculating a chart)',from:'—'},{label:'Not answered',text:'This guide only reads her primitive and attribute layers and the labelled rules above. It does not write new interpretations.',from:'—'}]};
+ }
+ const render=r=>r.title+'\n'+r.sections.map(s=>(s.text?`${s.label}: ${s.text}`:s.label)+(s.from&&s.from!=='—'&&s.text?`  [${s.from}]`:'')).join('\n');
+ return {ask,render,gate,line,color,tone,base,planet,zodiac,center,channel,activation};
+}

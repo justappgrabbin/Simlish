@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Human Design + Astrology Guide</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,sans-serif;background:#0b0b14;color:#e8e6f5}
+header{padding:10px 12px;border-bottom:1px solid #2a2a44;display:flex;gap:10px;align-items:center;flex-wrap:wrap}header strong{letter-spacing:.06em}a{color:#a9a3ff}
+nav{display:flex;overflow-x:auto;border-bottom:1px solid #2a2a44;position:sticky;top:0;background:#0b0b14;z-index:2}nav button{flex:0 0 auto;border:0;border-bottom:3px solid transparent;border-radius:0;padding:12px 14px;background:none}nav button.on{border-color:#7c6cff;color:#fff}
+main{padding:12px;max-width:900px;margin:auto}section.tab{display:none}section.tab.on{display:block}
+input,select,button,textarea{font:inherit;background:#1b1b30;color:#e8e6f5;border:1px solid #38385e;border-radius:8px;padding:9px 10px}button{cursor:pointer}button.primary{background:#5b4bd6;border-color:#7c6cff}
+label{display:block;margin:8px 0 2px;font-size:12px;color:#a9a3ff;letter-spacing:.06em;text-transform:uppercase}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
+.card{background:#13132181;border:1px solid #2a2a44;border-radius:12px;padding:10px 12px;margin:10px 0}.card h3{margin:0 0 6px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#a9a3ff}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px}.kv b{color:#cfc9ff;font-weight:600}.note{color:#9a96bd;font-size:12px}.flag{color:#ffd78f;font-size:12px}.bad{color:#ff8f8f}.ok{color:#9dffb0}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 4px;border-bottom:1px solid #1d1d33;text-align:left;vertical-align:top}tr.act{cursor:pointer}tr.act:hover{background:#1b1b30}
+.scroll{overflow-x:auto}svg{width:100%;max-width:360px;display:block;margin:auto}.sec{margin:6px 0;padding-left:8px;border-left:2px solid #2a2a44}.sec b{color:#cfc9ff}.sec small{color:#7d79a3}
+#feed{max-height:340px;overflow:auto;font:12px/1.35 ui-monospace,monospace}#feed div{padding:2px 0;border-bottom:1px solid #1d1d33}.think{color:#8fd3ff}.act{color:#ffd78f}.observe{color:#9dffb0}.chart{color:#e0b3ff}.blocked,.tamper-detected{color:#ff8f8f}
+.bar{height:12px;background:#22223a;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:#7c6cff;width:0;transition:width .4s}
+</style></head><body>
+<header><strong>✧ HUMAN DESIGN + ASTROLOGY GUIDE</strong><span class="note">first release · runs on this device · no internet, no account</span><a href="synthia-app.html">Swarm &amp; chat</a><a href="index.html">Studio</a></header>
+<nav id="tabs"><button data-t="chart" class="on">Chart</button><button data-t="detail">Detail</button><button data-t="compare">Compare</button><button data-t="guide">Guide</button><button data-t="saved">Saved</button><button data-t="progress">Progress</button><button data-t="flags">To confirm</button></nav>
+<main>
+<section class="tab on" id="t-chart">
+ <div class="card"><h3>Birth data</h3>
+  <label for="name">Name (optional)</label><input id="name" autocomplete="off">
+  <div class="row"><div><label for="date">Birth date</label><input id="date" type="date" value="1990-06-15"></div><div><label for="time">Birth time (local)</label><input id="time" type="time" value="14:30"></div></div>
+  <label for="tz">Time zone (IANA name, e.g. America/Los_Angeles)</label><input id="tz" list="tzs" autocomplete="off"><datalist id="tzs"></datalist>
+  <div class="row"><div><label for="lat">Latitude (+N / −S)</label><input id="lat" inputmode="decimal" value="34.05"></div><div><label for="lon">Longitude (+E / −W)</label><input id="lon" inputmode="decimal" value="-118.24"></div></div>
+  <p class="note">There is no place search: it would need a world gazetteer, which is not in her data, or an internet connection. Enter decimal coordinates. Birth time accuracy matters: gate/line change within minutes, color within 2–3 minutes, base within about 20 seconds (her Colors book).</p>
+  <div class="row"><button class="primary" id="calc">Calculate chart</button><button id="save">Save on this device</button></div><p id="err" class="bad"></p></div>
+ <div id="result"></div>
+</section>
+<section class="tab" id="t-detail"><div id="detail" class="card"><p class="note">Tap an activation in the Chart tab to see its gate → line → color → tone → base text from her primitives.</p></div></section>
+<section class="tab" id="t-compare"><div class="card"><h3>Compare two people</h3><div class="row"><div><label for="ca">Person A</label><select id="ca"></select></div><div><label for="cb">Person B</label><select id="cb"></select></div></div><p class="note">Save two charts first (Chart tab → Save on this device).</p><button class="primary" id="cmp">Compare</button></div><div id="cmpout"></div></section>
+<section class="tab" id="t-guide"><div class="card"><h3>Guide (looks things up; never makes text up)</h3><div class="row"><input id="q" placeholder="gate 13 · channel 13-33 · color 3 · my type · my sun" autocomplete="off"><button class="primary" id="ask" style="flex:0 0 auto">Ask</button></div><p class="note">Answers are her primitive/attribute fields, each tagged with the layer it came from, plus labelled standard rules. If her data has nothing, it says so.</p></div><div id="answer"></div></section>
+<section class="tab" id="t-saved"><div class="card"><h3>Saved on this device</h3><div id="savedlist"></div></div></section>
+<section class="tab" id="t-progress"><div class="card"><h3>Swarm assembly progress</h3><div class="bar"><i id="pbar"></i></div><p id="ptext" class="note">starting…</p><div id="feed"></div><p class="note">The swarm loop keeps running by itself (Think → Act → Observe, heartbeat, audit log). Chart events appear here too.</p></div></section>
+<section class="tab" id="t-flags"><div class="card"><h3>Items for you to confirm</h3><div id="flaglist"></div></div></section>
+</main><script type="module" src="guide.mjs"></script></body></html>

@@ -45,3 +45,13 @@ test('chat runs her Trident weights in JavaScript (skipped when the weights are 
  const r=(await s.handle('POST','/api/chat',{text:'gate 57 line 3',maxNew:8,temp:0})).body;assert.equal(typeof r.reply,'string');assert.equal(r.reply.length,8);assert.ok(Math.abs(r.router.code+r.router.math+r.router.research-1)<1e-6);assert.match(r.note,/not answer questions reliably/)});
 test('feed is incremental by sequence number, and heartbeat beats do not crowd real work out of the feed',async()=>{const s=await mk();for(let i=0;i<3;i++)await s.handle('POST','/api/loop/cycle');
  const a=(await s.handle('GET','/api/feed?since=0')).body;assert.ok(a.events.length>=9);for(let i=0;i<30;i++)await s.heartbeat.beat();const b=(await s.handle('GET','/api/feed?since='+a.total)).body;assert.equal(b.events.length,0);assert.equal(b.total,a.total+30)});
+test('guide tools through the server: chart, guide, compare, save/list/delete on the device store',async()=>{const st=mem(),s=await mk({store:st});
+ const call=(n,b)=>s.handle('POST','/api/tool/'+n,b).then(r=>r.body);
+ const a=await call('chart.calculate',{name:'A',date:'1990-06-15',time:'14:30',timeZone:'America/Los_Angeles',latitude:34.05,longitude:-118.24}),b=await call('chart.calculate',{name:'B',date:'1984-02-03',time:'03:15',timeZone:'Europe/London',latitude:51.5,longitude:-0.12});
+ assert.equal(a.utc,'1990-06-15T21:30:00.000Z');assert.ok(a.hd.type);const q=await call('guide.ask',{q:'my profile',chart:a});assert.equal(q.ok,true);assert.ok(q.text.includes(a.hd.profile));
+ assert.ok((await call('chart.compare',{a,b})).centers.length===9);
+ assert.equal((await call('people.save',{chart:a})).count,1);await call('people.save',{chart:b});const list=await call('people.list',{});assert.equal(list.people.length,2);
+ const again=await mk({store:st});assert.equal((await again.handle('POST','/api/tool/people.list',{})).body.people.length,2);
+ assert.equal((await call('people.delete',{id:list.people[0].id})).count,1);
+ const feed=(await s.handle('GET','/api/feed?since=0')).body.events.filter(e=>e.phase==='chart');assert.ok(feed.length>=4);
+ const v=(await call('address.fromLongitude',{longitude:84.5})).variants;assert.ok(Object.keys(v).length===2)});

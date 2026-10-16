@@ -1,0 +1,16 @@
+// Generates integrated/reference/free-human-design-fixture.json from the MIT-licensed free-human-design package (independent VSOP87 ephemeris via astronomia).
+// Only numeric/label outputs are recorded (no code copied). Run from a folder where `npm i free-human-design` was done.
+const {computeChart}=require('free-human-design');
+let s=20261016;const rnd=()=>(s=(s*1664525+1013904223)>>>0)/2**32;
+const out=[];
+for(let i=0;i<48;i++){
+ const y=1940+Math.floor(rnd()*80),mo=1+Math.floor(rnd()*12),d=1+Math.floor(rnd()*28),h=Math.floor(rnd()*24),mi=Math.floor(rnd()*60);
+ const lat=+(-50+rnd()*110).toFixed(2),lng=+(-170+rnd()*340).toFixed(2);
+ const birthdate=`${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`,birthtime=`${String(h).padStart(2,'0')}:${String(mi).padStart(2,'0')}`;
+ const c=computeChart({birthdate,birthtime,timezone:'UTC',location:{lat,lng}});
+ const hd=c.humanDesign,pick=a=>a.map(x=>({body:x.body,gate:x.gate,line:x.line,longitude:x.longitude}));
+ out.push({birthdate,birthtime,utc:`${birthdate}T${birthtime}:00Z`,lat,lng,type:hd.type,authority:hd.authority,profile:hd.profile,definition:hd.definition,definedChannels:hd.definedChannels.map(x=>x.key),definedCenters:hd.definedCenters,
+  personality:pick(hd.activations.personality),design:pick(hd.activations.design),ascendant:c.astrology.angles.ascendant.longitude,activatedGates:hd.activatedGates});
+}
+require('fs').writeFileSync(process.argv[2],JSON.stringify({source:'free-human-design 1.1.0 (MIT, adamblvck/free-human-design), timezone UTC, astronomia VSOP87',note:'independent reference; recorded outputs only',charts:out},null,0));
+console.log(out.length,out[0].personality.length,out[0].design.length,out[0].type,out[0].authority);

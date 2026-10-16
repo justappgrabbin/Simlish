@@ -19,12 +19,14 @@ jobs:
           node-version: '20'
       - name: JavaScript tests (whole suite)
         run: cd you-n-i-verse && node --test
-      - name: Real-browser check (headless Chrome opens the app page; the swarm must assemble 73 of 73 units)
+      - name: Real-browser check (headless Chrome opens the guide page and the Synthia page; guide self-test and 73-of-73 swarm assembly must pass)
         run: |
           (cd you-n-i-verse && python3 -m http.server 8765 >/dev/null 2>&1 &)
           sleep 2
+          google-chrome --headless=new --no-sandbox --disable-gpu --enable-logging=stderr --v=0 --virtual-time-budget=30000 --dump-dom "http://localhost:8765/guide.html?selftest=1" 2>chrome-guide.err >dom-guide.html || true
           google-chrome --headless=new --no-sandbox --disable-gpu --enable-logging=stderr --v=0 --virtual-time-budget=200000 --dump-dom "http://localhost:8765/synthia-app.html?selftest=1" 2>chrome.err >dom.html || true
-          grep -o 'SYNTHIA_SELFTEST.*' chrome.err | head -1 | tee selftest-chrome.txt
+          { grep -o 'GUIDE_SELFTEST.*' chrome-guide.err | head -1; grep -o 'SYNTHIA_SELFTEST.*' chrome.err | head -1; } | tee selftest-chrome.txt
+          grep -q 'GUIDE_SELFTEST PASS' selftest-chrome.txt
           grep -q 'SYNTHIA_SELFTEST PASS' selftest-chrome.txt
       - uses: actions/setup-java@v4
         with:
@@ -44,8 +46,8 @@ jobs:
         run: |
           cp android/app/build/outputs/apk/debug/app-debug.apk Synthia-debug.apk
           ls -l Synthia-debug.apk
-          unzip -l Synthia-debug.apk | grep -E 'assets/(synthia-app\.(html|mjs)|models/trident_syntia\.pt|integrated/(app-server|swarm-loop|trident-js|arc-engine|assembly-plan)\.mjs|integrated/protected-originals\.json)' | tee apk-contents.txt
-          test "$(wc -l < apk-contents.txt)" -ge 9
+          unzip -l Synthia-debug.apk | grep -E 'assets/(guide\.(html|mjs)|vendor/isohuman/(astronomy-engine|GeonatalCalculator\.browser)\.mjs|integrated/(chart-engine|guide)\.mjs|synthia-app\.(html|mjs)|models/trident_syntia\.pt|integrated/(app-server|swarm-loop|trident-js|arc-engine|assembly-plan)\.mjs|integrated/protected-originals\.json)' | tee apk-contents.txt
+          test "$(wc -l < apk-contents.txt)" -ge 15
           $ANDROID_HOME/build-tools/35.0.0/aapt2 dump permissions Synthia-debug.apk | tee apk-permissions.txt
           ! grep -q 'android.permission.INTERNET' apk-permissions.txt
           sha256sum Synthia-debug.apk | tee Synthia-debug.apk.sha256

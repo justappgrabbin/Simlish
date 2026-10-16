@@ -10,6 +10,8 @@
   "integrated/reference/drive/morphogenetic-self-reflection-protocol.txt": "90d0ec0a543fe0e058f341964a5440d94808079793a201c949fce15d6c70c8a6",
   "integrated/reference/drive/rutt-excerpts.txt": "973872e477233e11d3250cac8bdb32eeb6220618ef6b1abc5ddd3d7ee9588ffc",
   "integrated/reference/drive/rutt-hexagrams.json": "1825f520519b906d7ff44c38836704f65e810a06c969b20e23b58c8f91012b95",
+  "integrated/reference/free-human-design-fixture.build.cjs.txt": "f5da010d0c445b3f1bdaff2f04e2fc65f0a4b422384e4ad4a6d46d7021913886",
+  "integrated/reference/free-human-design-fixture.json": "486674a012e2986e830f24d2c4c8234647afed0d223f316457b8a77625ee789f",
   "integrated/reference/her/dual-engine-server.py.txt": "ad44e15b2d1d8e0a4caf8e90214683ace9ea5685f33f7d669a5dcf6f470ea636",
   "integrated/reference/her/field_core.js.txt": "550fa96c82c8479e9a195766ed331def70b935a911d43f35d328991997f9abb3",
   "integrated/reference/her/field_scales.py.txt": "bc26fb418ccc6f93997331f011dc233d59f747874e92b4cc24a7fd47f0650e31",
@@ -32,6 +34,9 @@
   "integrated/reference/hf-synthia/trinity-system.js.txt": "65665f747ab941e2f85440b7c5f5b87756b918c7bff5c1ca62a32b52e7fcef84",
   "integrated/reference/sequences.js.txt": "700476e0da3ec301cbdd4a4862ca7b47bbee9f3079dfa39ea3e129d865bf9bf9",
   "models/trident_syntia.pt": "cf4885fee58391cb4d4a47035ba65a7d21d06e375b3105b535dc1225e731ea61",
-  "models/trident_vocab.json": "06193c1f40537e1633861f7d796c4ce183b32d63a22c0d7653c332f32e6a7b5b"
+  "models/trident_vocab.json": "06193c1f40537e1633861f7d796c4ce183b32d63a22c0d7653c332f32e6a7b5b",
+  "vendor/isohuman/GeonatalCalculator.browser.mjs": "ada0f6a8f36c66a7baf44f73a5131174e4c48bec4e395ecc6fc0ee38f34e3922",
+  "vendor/isohuman/PROVENANCE.txt": "688c3cd52fd3cefd8b5c8de334047a8c65e379e19cd6004be288e5ad572cef84",
+  "vendor/isohuman/astronomy-engine.mjs": "068f1445ed0c636c94818fe6d20d7d125120e605e0bab9fc4675c3d531be5ad7"
  }
 }

@@ -5,6 +5,9 @@ import {buildPlan} from './assembly-plan.mjs';
 import {Trident,tokenize,detokenize,CONFIG as TRIDENT} from './trident-js.mjs';
 import * as ARC from './arc-engine.mjs';
 import {finishApp} from '../app-finisher.mjs';
+import {calculateBirthChart,compareCharts} from './chart-engine.mjs';
+import {humanDesignResolution} from '../vendor/isohuman/GeonatalCalculator.browser.mjs';
+import {createGuide} from './guide.mjs';
 const te=new TextEncoder();
 const b64=u8=>{let s='';for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode(...u8.subarray(i,i+0x8000));return btoa(s)};
 const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
@@ -17,6 +20,13 @@ export const TOOLS=Object.freeze([
  {name:'file.ingest',route:'POST /api/tool/file.ingest',description:'her integrated swarm: ingest a file, reduce to six-bit primitives, resolve its address; executes code only when execute=true'},
  {name:'build.finish',route:'POST /api/tool/build.finish',description:'her app finisher: assess files against her checklist and add the missing pieces beside them'},
  {name:'workspace.write',route:'POST /api/tool/workspace.write',description:'add a file under user/ in the swarm workspace (audited; protected originals cannot be written)'},
+ {name:'chart.calculate',route:'POST /api/tool/chart.calculate',description:'birth chart from date, time, IANA time zone (or UTC offset) and latitude/longitude: her SynthAi calculator (13 bodies, personality + design) with gate/line/color/tone/base, houses, aspects and the labelled standard Human Design derivations'},
+ {name:'chart.compare',route:'POST /api/tool/chart.compare',description:'compare two calculated charts (channels, centers, her Hamming-1 emergence rule, synastry aspects)'},
+ {name:'guide.ask',route:'POST /api/tool/guide.ask',description:'deterministic guide: looks up gate, line, color, tone, base, channel, center, planet, sign, or your chart in her primitives; never invents text'},
+ {name:'people.save',route:'POST /api/tool/people.save',description:'save a calculated chart on this device'},
+ {name:'people.list',route:'POST /api/tool/people.list',description:'list charts saved on this device'},
+ {name:'people.get',route:'POST /api/tool/people.get',description:'open one saved chart by id'},
+ {name:'people.delete',route:'POST /api/tool/people.delete',description:'delete a saved chart by id'},
  {name:'chat',route:'POST /api/chat',description:'talk to Trident (her trident_syntia.pt, run in JavaScript on the device)'}]);
 export async function createAppServer({loadJson,loadBytes,store=null,now=()=>new Date().toISOString(),schedule,cancel,cycleMs=1500,beatMs=1000,loadModel=true,verbose=false}={}){
  const clean=await loadJson('integrated/primitive-functions.json'),attrs=(await loadJson('integrated/primitive-attributes.json')).attributes,manifest=await loadJson('integrated/protected-originals.json');
@@ -45,11 +55,20 @@ export async function createAppServer({loadJson,loadBytes,store=null,now=()=>new
  const status=()=>({time:now(),loop:{running:loop.running,cycle:loop.cycleNo,sleeping:loop.sleeping,...loop.progress(),units:loop.plan.length},heartbeat:{running:hb.running,beats:hb.beats,lastBeatAt:hb.lastBeatAt,lastResults:hb.lastResults},
   protected:{originals:originals.size,...verifyState},audit:{length:audit.length,chain:audit.verify()},versions:ws.versions().length,model:modelInfo,constitution:'protected'});
  const need=(o,k)=>{if(o?.[k]===undefined||o[k]===null)throw new RangeError('missing '+k);return o[k]};
+ const guide=createGuide({clean,attrs}),PEOPLE='synthia.people.v1';
+ const people=()=>{try{return JSON.parse(store?.get(PEOPLE)||'[]')}catch{return[]}};
  const tool={
   'primitives.get':({id})=>{const p=P.get(need({id},'id'));if(!p)return {error:'no such primitive'};return {primitive:p,attributes:attrs[id]??null}},
   'primitives.search':({q,kind=null,limit=20})=>{const s=String(q||'').toLowerCase();return {results:clean.primitives.filter(p=>(!kind||p.kind===kind)&&(p.id.toLowerCase().includes(s)||String(p.form).toLowerCase().includes(s)||p.symbol.toLowerCase()===s)).slice(0,limit).map(p=>({id:p.id,symbol:p.symbol,kind:p.kind,form:p.form}))}},
   'primitives.sources':async({id})=>{const S=await loadJson('integrated/primitive-sources.json');return {id,sources:S.sources?.[id]??null,functions:(P.get(id)?.fn||[]).map(f=>({name:f,...S.functions?.[f]}))}},
-  'address.fromLongitude':({longitude,planetary=null,dimension=null})=>ARC.addressFromLongitude(Number(need({longitude},'longitude')),{planetary,dimension}),
+  'address.fromLongitude':({longitude,planetary=null,dimension=null})=>({...ARC.addressFromLongitude(Number(need({longitude},'longitude')),{planetary,dimension}),variants:{'sentence-engine.ts wheel (this object, gate 41 at 272°)':null,'SynthAi isohuman wheel (used by the chart, gate 41 at 302°)':humanDesignResolution(Number(longitude))},note:'The two wheels differ by 30°; which is yours is unresolved. Charts use the SynthAi isohuman wheel, which also matches the published Human Design table and NatalEngine.'}),
+  'chart.calculate':({...i})=>{loop.emit('chart','calculating '+(i.name||'chart')+' '+i.date+' '+i.time,{quiet:false});const c=calculateBirthChart(i);loop.emit('chart',`${c.hd.type} · ${c.hd.authority} · profile ${c.hd.profile} · ${c.hd.channels.length} channels · design moment ${c.designUtc.slice(0,16)}Z`);return c},
+  'chart.compare':({a,b})=>{loop.emit('chart','comparing '+(a?.name||'A')+' with '+(b?.name||'B'));return compareCharts(need({a},'a'),need({b},'b'))},
+  'guide.ask':({q,chart=null})=>{const r=guide.ask(q,{chart});return {...r,text:guide.render(r)}},
+  'people.save':({chart})=>{const c=need({chart},'chart'),id=c.id||'p'+shaOf(JSON.stringify(c.input)+c.name).slice(0,10),list=people().filter(p=>p.id!==id);list.push({id,name:c.name,savedAt:now(),chart:{...c,id}});store?.set(PEOPLE,JSON.stringify(list));loop.emit('chart','saved '+(c.name||id)+' on this device');return {id,count:list.length}},
+  'people.list':()=>({people:people().map(p=>({id:p.id,name:p.name,savedAt:p.savedAt,input:p.chart.input,hd:{type:p.chart.hd.type,profile:p.chart.hd.profile}}))}),
+  'people.get':({id})=>({chart:people().find(p=>p.id===id)?.chart??null}),
+  'people.delete':({id})=>{const list=people().filter(p=>p.id!==id);store?.set(PEOPLE,JSON.stringify(list));return {count:list.length}},
   'address.lattice':a=>a.position!==undefined?ARC.latticePositionToAddress(Number(a.position)):{position:ARC.calculateLatticePosition(+a.gate,+a.line,+a.color,+a.tone,+a.base)},
   'file.ingest':async({name,text=null,base64=null,execute=false})=>{const {IntegratedSwarm}=await import('./integrated-swarm.mjs');const bytes=text!==null?te.encode(text):unb64(need({base64},'base64'));
    const sw=new IntegratedSwarm({executeCode:!!execute}),r=await sw.execute({name:name||'upload',bytes},{executeCode:!!execute});

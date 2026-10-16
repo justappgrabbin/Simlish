@@ -1,0 +1,7 @@
+These two files are byte-for-byte copies of her originals (hashes below) from github.com/justappgrabbin/SynthAi:
+  computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/donors/isohuman/
+  GeonatalCalculator.browser.mjs  sha256 ada0f6a8f36c66a7baf44f73a5131174e4c48bec4e395ecc6fc0ee38f34e3922
+  astronomy-engine.mjs            sha256 068f1445ed0c636c94818fe6d20d7d125120e605e0bab9fc4675c3d531be5ad7
+astronomy-engine is Don Cross's MIT-licensed library (license text is in the file header); it is the ephemeris her donor calculator already used.
+Known defect in the donor (not edited here, corrected in integrated/chart-engine.mjs): its internal equalHouseAscendant returns the descendant (180° off), so its house numbers are shifted by 6.
+They are listed in integrated/protected-originals.json, so the swarm loop can never overwrite them.
