@@ -12,6 +12,6 @@ android {
   versionName '0.1-debug'
  }
  compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
- sourceSets { main { assets.srcDirs = ['../../you-n-i-verse'] } }
+ sourceSets { main { assets.srcDirs = ['../../you-n-i-verse', 'src/main/swarm-assets'] } }
 }
 dependencies { implementation 'androidx.webkit:webkit:1.12.1'; implementation 'androidx.core:core:1.15.0' }
