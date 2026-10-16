@@ -103,4 +103,7 @@ test('address input must be an object rather than an array or primitive', () => 
   assert.throws(()=>normalizeAddress('gate=6'));
   assert.throws(()=>normalizeAddress([6,4,4,4,2]));
   assert.throws(()=>normalizeAddress(42));
+  assert.throws(()=>normalizeAddress(0));
+  assert.throws(()=>normalizeAddress(false));
+  assert.throws(()=>normalizeAddress(''));
 });
