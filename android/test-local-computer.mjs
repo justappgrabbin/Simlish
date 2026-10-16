@@ -130,6 +130,106 @@ try {
   assert.equal((await page.evaluate(() => window.SynthAIComputer.fitnessMorph.history())).length, 1);
   assert.ok((await page.evaluate(() => window.SynthAIComputer.formations.list().map(f => f.id)))
     .includes('simlish:frame-geometry'), 'executable frame morph persisted across native asset reload');
+  // Integration across the real on-device Studio project database:
+  // saved character → ATO fitness selection → append-only visible layer → Studio.
+  const studioOriginal = 'data:image/png;base64,' + photos.from;
+  await page.evaluate(async original => {
+    const { saveProject, readProject } = await import('/assets/project-store.mjs');
+    const controls = {
+      zoom: 1, rotation: 0, blend: 1, faceX: .46, faceY: .105,
+      faceSize: .30, influence: .5,
+    };
+    await saveProject({
+      type: 'you-n-i-verse-project', version: 1,
+      savedAt: new Date().toISOString(), world: 'cosmic',
+      source: 'on-device-test-pixel-art', controls,
+      pan: { x: 0, y: 0 }, photo: null, body: original, sprites: null,
+      morphedImage: null, morphedSprites: null,
+    });
+    const persisted = await readProject();
+    if (persisted.body !== original) throw new Error('Original Studio character project not retained');
+  }, studioOriginal);
+  await page.locator('#useStudioCharacter').click();
+  await page.waitForFunction(() =>
+    document.getElementById('studioCharacterStatus').textContent.includes('character loaded locally'));
+  await page.locator('#fitnessTarget').setInputFiles({
+    name: 'studio-reference.png', mimeType: 'image/png',
+    buffer: Buffer.from(photos.to, 'base64'),
+  });
+  await page.locator('#evolveLighting').click();
+  await page.waitForFunction(() => /^(Accepted:|Rejected:)/.test(
+    document.getElementById('fitnessStatus')?.textContent || ''),
+    null, { timeout: 40000 });
+  const evolutionary = await page.evaluate(() =>
+    window.SynthAIComputer.fitnessMorph.evolutionHistory());
+  assert.equal(evolutionary.length, 1);
+  assert.equal(evolutionary[0].result.candidates.length, 2);
+  assert.equal(evolutionary[0].result.accepted, true,
+    'Observed character-target pixels must produce a measurable improvement');
+  assert.match(await page.locator('#fitnessEvidence').innerText(), /candidate selected/);
+  await page.locator('#applyStudioFitness').click();
+  await page.waitForFunction(() =>
+    document.getElementById('studioCharacterStatus').textContent.includes('Original artwork'));
+  const saved = await page.evaluate(async () => {
+    const { readProject } = await import('/assets/project-store.mjs');
+    const project = await readProject();
+    return {
+      body: project.body, count: project.fitnessMorphLayers.length,
+      active: project.activeFitnessMorphId,
+      layers: project.fitnessMorphLayers.map(layer => ({
+        id: layer.id, sourceLayerId: layer.sourceLayerId,
+        image: layer.image, revision: layer.receipt.activeRevision,
+      })),
+    };
+  });
+  assert.equal(saved.body, studioOriginal, 'original character artwork was not overwritten');
+  assert.equal(saved.count, 1);
+  assert.equal(saved.layers[0].id, saved.active);
+  assert.equal(saved.layers[0].sourceLayerId, null);
+  assert.match(saved.layers[0].revision, /^formation:simlish:lighting-active@/);
+  assert.notEqual(saved.layers[0].image, saved.body, 'accepted character layer is a changed bitmap');
+  const privacy = await page.evaluate(async () => {
+    const all = await window.SynthAIComputer.eventEmitter.readAll();
+    return all.some(event => JSON.stringify(event).includes('data:image'));
+  });
+  assert.equal(privacy, false, 'no portrait data URLs in Computer append-only event records');
+
+  await page.locator('#returnToStudioFitness').click();
+  await page.waitForURL(/\/assets\/index\.html/);
+  await page.waitForFunction(() =>
+    document.getElementById('fitnessMorphStatus')?.textContent.includes('Fitted expression visible'),
+    null, { timeout: 20000 });
+  assert.equal(await page.locator('#toggleFitnessMorph').isVisible(), true);
+  const imageChecksum = async () => page.locator('#scene').evaluate(surface => {
+    const ctx = surface.getContext('2d');
+    const samples = ctx.getImageData(0, 0, surface.width, surface.height).data;
+    let sum = 0;
+    for (let y = 100; y < 850; y += 11) for (let x = 170; x < 550; x += 11) {
+      const i = (y * surface.width + x) * 4;
+      sum += samples[i] * 3 + samples[i + 1] * 5 + samples[i + 2] * 7;
+    }
+    return sum;
+  });
+  const acceptedCanvasChecksum = await imageChecksum();
+  await page.locator('#toggleFitnessMorph').click();
+  await page.waitForFunction(() =>
+    document.getElementById('fitnessMorphStatus').textContent.includes('Original appearance visible'));
+  const originalCanvasChecksum = await imageChecksum();
+  assert.notEqual(acceptedCanvasChecksum, originalCanvasChecksum,
+    'Studio canvas must visibly change when accepted character appearance is toggled');
+  await page.waitForFunction(async () => {
+    const { readProject } = await import('/assets/project-store.mjs');
+    const p = await readProject();
+    return p?.activeFitnessMorphId == null && p?.fitnessMorphLayers.length === 1;
+  }, null, { timeout: 12000 });
+  const persistedAfterToggle = await page.evaluate(async () => {
+    const { readProject } = await import('/assets/project-store.mjs');
+    const p = await readProject();
+    return { source: p.body, count: p.fitnessMorphLayers.length };
+  });
+  assert.equal(persistedAfterToggle.source, studioOriginal);
+  assert.equal(persistedAfterToggle.count, 1);
+  console.log('Original Studio character roundtrip passed: saved bitmap → ATO fitness-evolved graph → appended real image layer → visible reversible Studio rendering');
   assert.deepEqual(runtimeErrors, [], 'no uncaught module or runtime errors in embedded Computer');
   assert.deepEqual(offDevice, [], 'all required modules and requests remain within packaged assets');
   console.log('Android asset-layout browser integration passed: studio > Computer > native ATO execution > offline operation > persisted restart');
