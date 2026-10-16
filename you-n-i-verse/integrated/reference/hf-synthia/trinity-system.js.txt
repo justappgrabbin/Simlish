@@ -1,0 +1,413 @@
+// ============================================================================
+// TRINITY SYSTEM - Complete Integration
+// Combines Mind (TinyLlama) + Body (LlamaFile) + Heart (Resonance Detector)
+// with Evolution Engine for stage progression
+// ============================================================================
+
+import { ResonanceDetector, FieldVector } from './resonance-detector.js';
+import { EvolutionEngine, STAGES, EVOLUTION_EVENTS } from './evolution-engine.js';
+
+/**
+ * Mock TinyLlama interface (replace with actual WebGPU implementation)
+ */
+class TinyLlamaBrain {
+    constructor() {
+        this.ready = false;
+        this.name = 'TinyLlama';
+        this.type = 'fast';
+    }
+
+    async initialize() {
+        console.log('🧠 Initializing TinyLlama (Mind)...');
+        // TODO: Load actual WebGPU model
+        // const engine = await webllm.createModel("TinyLlama-1.1B-Chat");
+        this.ready = true;
+        console.log('✅ TinyLlama ready');
+    }
+
+    async generate(prompt, options = {}) {
+        if (!this.ready) {
+            throw new Error('TinyLlama not initialized');
+        }
+
+        // Fast, reactive generation
+        // In production, this calls the actual model
+        return {
+            output: `// TinyLlama fast response to: ${prompt}\nfunction quickSolution() {\n  return "reactive";\n}`,
+            tokens: 50,
+            latency: 100
+        };
+    }
+}
+
+/**
+ * Mock LlamaFile interface (replace with actual local LLM connection)
+ */
+class LlamaFileBody {
+    constructor() {
+        this.ready = false;
+        this.name = 'LlamaFile';
+        this.type = 'deep';
+    }
+
+    async initialize() {
+        console.log('🧱 Detecting LlamaFile (Body)...');
+        // TODO: Detect and connect to local LlamaFile instance
+        // Check localhost:8080 or similar
+        try {
+            // const response = await fetch('http://localhost:8080/health');
+            // if (response.ok) this.ready = true;
+            this.ready = true;
+            console.log('✅ LlamaFile connected');
+        } catch (error) {
+            console.log('⚠️  LlamaFile not available (will use Mind only)');
+            this.ready = false;
+        }
+    }
+
+    async generate(prompt, options = {}) {
+        if (!this.ready) {
+            throw new Error('LlamaFile not available');
+        }
+
+        // Deep, structural generation
+        // In production, this calls the actual model
+        return {
+            output: `/* LlamaFile deep response to: ${prompt} */\nclass ComprehensiveSolution {\n  constructor() {\n    this.architecture = "structured";\n    this.reasoning = "deep";\n  }\n  \n  implement() {\n    // Full implementation here\n  }\n}`,
+            tokens: 200,
+            latency: 500
+        };
+    }
+}
+
+/**
+ * Complete Trinity System
+ * Manages the full Mind-Body-Heart architecture with evolution
+ */
+export class TrinitySystem {
+    constructor() {
+        // The Three Nodes
+        this.mind = new TinyLlamaBrain();
+        this.body = new LlamaFileBody();
+        this.heart = new ResonanceDetector(64);
+        
+        // Evolution system
+        this.evolution = new EvolutionEngine('SEED');
+        
+        // System state
+        this.initialized = false;
+        this.trinityComplete = false;
+        
+        // Task history
+        this.tasks = [];
+        
+        // Setup evolution event listeners
+        this.setupEvolutionListeners();
+    }
+
+    /**
+     * Setup event listeners for evolution milestones
+     */
+    setupEvolutionListeners() {
+        this.evolution.on(EVOLUTION_EVENTS.STAGE_CHANGE, (data) => {
+            console.log(`🧬 EVOLUTION: ${data.from} → ${data.to}`);
+            console.log(`✨ Coherence now: ${(data.coherence * 100).toFixed(0)}%`);
+            
+            // Update heart's coherence
+            this.heart.coherenceScore = data.coherence;
+            
+            // Check if we've reached Plate stage (Trinity complete)
+            if (data.to === 'PLATE' && this.body.ready) {
+                this.trinityComplete = true;
+                this.evolution.updateMetric('trinityComplete', true);
+                console.log('⚡ TRINITY COMPLETE: Full field-based orchestration active');
+            }
+        });
+
+        this.evolution.on(EVOLUTION_EVENTS.CAPABILITY_UNLOCK, (data) => {
+            console.log(`🔓 New capability: ${data.capability}`);
+        });
+
+        this.evolution.on(EVOLUTION_EVENTS.REQUIREMENT_MET, (data) => {
+            if (data.readyForEvolution) {
+                console.log(`✅ Ready to evolve to ${data.nextStage}!`);
+            }
+        });
+    }
+
+    /**
+     * Initialize the system
+     */
+    async initialize() {
+        console.log('🌌 Initializing YOU-N-I-VERSE Trinity System...');
+        
+        // Initialize Mind (always available)
+        await this.mind.initialize();
+        this.evolution.incrementMetric('modulesActive');
+        
+        // Try to initialize Body (optional at early stages)
+        try {
+            await this.body.initialize();
+            if (this.body.ready) {
+                this.evolution.incrementMetric('modulesActive');
+            }
+        } catch (error) {
+            console.log('ℹ️  Body (LlamaFile) not available - continuing with Mind only');
+        }
+        
+        // Heart is always available (pure algorithm, not a model)
+        console.log('❤️  Heart (Resonance Detector) active');
+        this.evolution.incrementMetric('modulesActive');
+        
+        this.initialized = true;
+        console.log('✅ Trinity System initialized');
+        
+        return {
+            mindReady: this.mind.ready,
+            bodyReady: this.body.ready,
+            heartReady: true,
+            stage: this.evolution.currentStage
+        };
+    }
+
+    /**
+     * Process a task through the Trinity
+     */
+    async process(prompt, options = {}) {
+        if (!this.initialized) {
+            throw new Error('System not initialized. Call initialize() first.');
+        }
+
+        const task = {
+            id: Date.now(),
+            prompt,
+            options,
+            timestamp: Date.now(),
+            stage: this.evolution.currentStage
+        };
+
+        console.log(`\n🎯 Processing task at ${this.evolution.currentStage} stage:`);
+        console.log(`   "${prompt}"`);
+
+        // Strategy depends on current evolution stage
+        let result;
+        
+        switch (this.evolution.currentStage) {
+            case 'SEED':
+            case 'PAPER':
+                // Early stages: Mind only
+                result = await this.processMindOnly(prompt, options);
+                break;
+                
+            case 'TRAY':
+                // Orchestration stage: Use both if available, but simple delegation
+                result = await this.processWithDelegation(prompt, options);
+                break;
+                
+            case 'PLATE':
+            case 'COHERENCE':
+                // Advanced stages: Full resonance-based selection
+                result = await this.processWithResonance(prompt, options);
+                break;
+        }
+
+        // Track task and update metrics
+        task.result = result;
+        task.completionTime = Date.now() - task.timestamp;
+        this.tasks.push(task);
+        
+        this.evolution.incrementMetric('filesGenerated'); // Simulate file generation
+        this.evolution.updateCoherence(this.heart.coherenceScore);
+        
+        return result;
+    }
+
+    /**
+     * Early stage processing: Mind only
+     */
+    async processMindOnly(prompt, options) {
+        console.log('  🧠 Using Mind (fast path)');
+        const response = await this.mind.generate(prompt, options);
+        
+        return {
+            strategy: 'mind-only',
+            output: response.output,
+            source: 'mind',
+            metrics: {
+                tokens: response.tokens,
+                latency: response.latency
+            }
+        };
+    }
+
+    /**
+     * Mid stage processing: Simple delegation
+     */
+    async processWithDelegation(prompt, options) {
+        console.log('  🔀 Using delegation strategy');
+        
+        // Simple heuristic: long/complex → Body, short/simple → Mind
+        const useBody = this.body.ready && (
+            prompt.length > 100 ||
+            options.depth === 'high' ||
+            options.complexity === 'high'
+        );
+
+        if (useBody) {
+            console.log('  🧱 Delegated to Body (deep processing)');
+            const response = await this.body.generate(prompt, options);
+            return {
+                strategy: 'delegated-body',
+                output: response.output,
+                source: 'body',
+                metrics: { tokens: response.tokens, latency: response.latency }
+            };
+        } else {
+            console.log('  🧠 Delegated to Mind (fast processing)');
+            const response = await this.mind.generate(prompt, options);
+            return {
+                strategy: 'delegated-mind',
+                output: response.output,
+                source: 'mind',
+                metrics: { tokens: response.tokens, latency: response.latency }
+            };
+        }
+    }
+
+    /**
+     * Advanced stage processing: Resonance-based selection
+     */
+    async processWithResonance(prompt, options) {
+        console.log('  ⚡ Using resonance-based selection');
+        
+        // Generate outputs from both brains in parallel
+        const [mindResponse, bodyResponse] = await Promise.all([
+            this.mind.generate(prompt, options),
+            this.body.ready 
+                ? this.body.generate(prompt, options)
+                : { output: null, tokens: 0, latency: 0 }
+        ]);
+
+        if (!bodyResponse.output) {
+            // Body not available, use Mind
+            return {
+                strategy: 'resonance-mind-only',
+                output: mindResponse.output,
+                source: 'mind',
+                metrics: { tokens: mindResponse.tokens, latency: mindResponse.latency }
+            };
+        }
+
+        // Heart evaluates both outputs through resonance
+        console.log('  ❤️  Heart evaluating resonance...');
+        const selected = await this.heart.evaluate(
+            mindResponse.output,
+            bodyResponse.output,
+            { prompt, ...options }
+        );
+
+        return {
+            strategy: 'resonance-based',
+            output: selected.output,
+            source: selected.source,
+            resonance: selected.resonance,
+            metrics: {
+                mindTokens: mindResponse.tokens,
+                bodyTokens: bodyResponse.tokens,
+                totalLatency: Math.max(mindResponse.latency, bodyResponse.latency)
+            },
+            coherence: this.heart.coherenceScore
+        };
+    }
+
+    /**
+     * Evolve to next stage
+     */
+    async evolve(targetStage = null) {
+        if (!targetStage) {
+            // Auto-evolve to next stage
+            const canEvolve = this.evolution.canEvolveToNext();
+            if (!canEvolve.canEvolve) {
+                console.log('❌ Cannot evolve yet:');
+                canEvolve.unmetRequirements.forEach(req => console.log(`   - ${req}`));
+                return { success: false, reason: canEvolve.unmetRequirements };
+            }
+            targetStage = canEvolve.nextStage;
+        }
+
+        return await this.evolution.evolveTo(targetStage);
+    }
+
+    /**
+     * Get current system status
+     */
+    getStatus() {
+        const evolutionState = this.evolution.getState();
+        const resonanceStats = this.heart.getStats();
+        
+        return {
+            trinity: {
+                mind: { ready: this.mind.ready, name: this.mind.name },
+                body: { ready: this.body.ready, name: this.body.name },
+                heart: { active: true, coherence: this.heart.coherenceScore }
+            },
+            evolution: evolutionState,
+            resonance: resonanceStats,
+            tasks: {
+                total: this.tasks.length,
+                recent: this.tasks.slice(-5)
+            },
+            trinityComplete: this.trinityComplete
+        };
+    }
+
+    /**
+     * Export complete system state
+     */
+    export() {
+        return {
+            trinity: {
+                mindReady: this.mind.ready,
+                bodyReady: this.body.ready,
+                heartState: this.heart.export()
+            },
+            evolution: this.evolution.export(),
+            tasks: this.tasks,
+            trinityComplete: this.trinityComplete,
+            timestamp: Date.now()
+        };
+    }
+
+    /**
+     * Import previously saved state
+     */
+    import(data) {
+        this.heart.import(data.trinity.heartState);
+        this.evolution.import(data.evolution);
+        this.tasks = data.tasks || [];
+        this.trinityComplete = data.trinityComplete;
+        this.initialized = true;
+    }
+
+    /**
+     * Generate files (simulated for demo)
+     */
+    async generateFiles(fileList) {
+        console.log(`📝 Generating ${fileList.length} files...`);
+        
+        for (const file of fileList) {
+            const result = await this.process(`Generate code for ${file}`, {
+                type: 'code-generation',
+                file
+            });
+            
+            console.log(`  ✓ Generated ${file}`);
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        
+        console.log('✅ File generation complete');
+        return { success: true, filesGenerated: fileList.length };
+    }
+}
+
+export default TrinitySystem;

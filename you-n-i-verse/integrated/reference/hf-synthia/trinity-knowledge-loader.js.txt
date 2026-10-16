@@ -1,0 +1,374 @@
+// Trinity Intelligence - Knowledge Loader
+// This handles progressive loading of framework modules
+
+// Global knowledge base - populated by loaded modules
+window.TRINITY_KNOWLEDGE = {};
+window.LOADED_FRAMEWORKS = new Set();
+
+// Simulated user authentication/purchases
+// In production, replace this with: fetch('/api/user/purchases')
+const USER_PURCHASES = {
+    owned: ['trinityEngine', 'sentenceGenerator']
+    // This would come from your backend after user login
+};
+
+// Framework catalog
+const FRAMEWORK_CATALOG = {
+    trinityEngine: {
+        name: 'Trinity Engine',
+        price: '$47',
+        description: 'Complete consciousness coordinate system',
+        chunkCount: '25+ knowledge chunks',
+        file: 'trinity-engine-knowledge.js'
+    },
+    sentenceGenerator: {
+        name: 'Sentence Generator',
+        price: '$27',
+        description: 'Consciousness → language translation',
+        chunkCount: '10+ knowledge chunks',
+        file: 'sentence-generator-knowledge.js'
+    },
+    youniverse: {
+        name: 'YOU-N-I-VERSE',
+        price: '$97',
+        description: 'Full consciousness simulation',
+        chunkCount: '40+ knowledge chunks',
+        file: 'youniverse-knowledge.js'
+    },
+    paper: {
+        name: 'Paper',
+        price: '$47',
+        description: 'AI-powered app builder',
+        chunkCount: '15+ knowledge chunks',
+        file: 'paper-knowledge.js'
+    },
+    stellarProximology: {
+        name: 'Stellar Proximology',
+        price: '$67',
+        description: 'Research & pattern platform',
+        chunkCount: '20+ knowledge chunks',
+        file: 'stellar-proximology-knowledge.js'
+    },
+    foundry: {
+        name: 'Foundry',
+        price: '$37',
+        description: 'Component registry system',
+        chunkCount: '12+ knowledge chunks',
+        file: 'foundry-knowledge.js'
+    }
+};
+
+// Initialize system
+async function initializeSystem() {
+    updateStatus('Checking your purchased frameworks...');
+    
+    // Load frameworks user owns
+    await loadPurchasedFrameworks();
+    
+    // Display marketplace for unpurchased frameworks
+    displayMarketplace();
+    
+    // Enable search
+    document.getElementById('searchInput').disabled = false;
+    document.getElementById('searchBtn').disabled = false;
+    document.getElementById('searchInput').focus();
+    
+    const count = window.LOADED_FRAMEWORKS.size;
+    updateStatus(`Ready! ${count} framework${count !== 1 ? 's' : ''} loaded`);
+}
+
+async function loadPurchasedFrameworks() {
+    for (const frameworkKey of USER_PURCHASES.owned) {
+        await loadFramework(frameworkKey);
+    }
+}
+
+async function loadFramework(frameworkKey) {
+    const framework = FRAMEWORK_CATALOG[frameworkKey];
+    if (!framework) return;
+
+    updateLoadingBadge(framework.name, true);
+
+    try {
+        // Load the knowledge module
+        await loadScript(`./modules/${framework.file}`);
+        
+        window.LOADED_FRAMEWORKS.add(frameworkKey);
+        updateLoadingBadge(framework.name, false);
+        
+        console.log(`✓ Loaded ${framework.name}`);
+    } catch (error) {
+        console.error(`Failed to load ${framework.name}:`, error);
+        updateLoadingBadge(framework.name, false, true);
+    }
+}
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = () => {
+            // If file doesn't exist, load demo data instead
+            console.warn(`Could not load ${src}, using demo data`);
+            loadDemoData(src);
+            resolve();
+        };
+        document.head.appendChild(script);
+    });
+}
+
+function loadDemoData(src) {
+    // For demo purposes, load inline data
+    if (src.includes('trinity-engine')) {
+        loadTrinityEngineDemo();
+    } else if (src.includes('sentence-generator')) {
+        loadSentenceGeneratorDemo();
+    }
+}
+
+function updateStatus(message) {
+    document.getElementById('knowledgeStatus').textContent = message;
+}
+
+function updateLoadingBadge(name, loading, error = false) {
+    const container = document.getElementById('loadedFrameworks');
+    const badgeId = `badge-${name.replace(/\s/g, '-')}`;
+    
+    if (loading) {
+        const badge = document.createElement('div');
+        badge.className = 'framework-badge loading';
+        badge.id = badgeId;
+        badge.textContent = `Loading ${name}...`;
+        container.appendChild(badge);
+    } else {
+        const badge = document.getElementById(badgeId);
+        if (badge) {
+            badge.className = 'framework-badge';
+            badge.textContent = error ? `❌ ${name}` : `✓ ${name}`;
+        }
+    }
+}
+
+function displayMarketplace() {
+    const unpurchased = Object.entries(FRAMEWORK_CATALOG)
+        .filter(([key]) => !USER_PURCHASES.owned.includes(key));
+
+    if (unpurchased.length === 0) return;
+
+    const section = document.getElementById('marketplaceSection');
+    section.innerHTML = `
+        <div class="marketplace-card">
+            <div class="marketplace-title">Unlock More Knowledge</div>
+            <p style="color: #a0a0c0; margin-bottom: 1rem;">
+                Get deeper answers by purchasing additional frameworks. Each purchase downloads permanently to your device.
+            </p>
+            <div class="marketplace-grid">
+                ${unpurchased.map(([key, framework]) => `
+                    <div class="framework-card">
+                        <div class="framework-name">${framework.name}</div>
+                        <div class="framework-price">${framework.price} one-time</div>
+                        <div class="framework-chunks">${framework.chunkCount}</div>
+                        <p style="color: #a0a0c0; font-size: 0.85rem; margin-bottom: 1rem;">
+                            ${framework.description}
+                        </p>
+                        <button class="buy-button" onclick="purchaseFramework('${key}')">
+                            Purchase & Download
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+async function purchaseFramework(frameworkKey) {
+    // In production, this would:
+    // 1. Process payment via Stripe/PayPal
+    // 2. Update user's purchases in database
+    // 3. Provide download link for the knowledge module
+    
+    const framework = FRAMEWORK_CATALOG[frameworkKey];
+    alert(`Payment Integration Coming Soon!\n\nYou would purchase ${framework.name} here for ${framework.price}.\n\nAfter payment, you'd download the knowledge file (${framework.file}) which works offline forever.`);
+}
+
+// Search functionality
+function searchKnowledge() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    if (!query) return;
+
+    const results = [];
+
+    // Search through all loaded frameworks
+    for (const [frameworkKey, framework] of Object.entries(window.TRINITY_KNOWLEDGE)) {
+        for (const chunk of framework.chunks) {
+            const score = calculateRelevance(query, chunk.keywords, chunk.answer);
+            if (score > 0.2) {
+                results.push({
+                    framework: framework.name,
+                    chunk: chunk,
+                    score: score
+                });
+            }
+        }
+    }
+
+    results.sort((a, b) => b.score - a.score);
+    displayResults(query, results);
+}
+
+function calculateRelevance(query, keywords, answerText = "") {
+    let score = 0;
+    const queryWords = query.split(/\s+/);
+
+    // Exact keyword matches
+    for (const keyword of keywords) {
+        if (query.includes(keyword.toLowerCase())) {
+            score += 0.5;
+        }
+    }
+
+    // Word overlap
+    for (const word of queryWords) {
+        if (word.length < 3) continue;
+        
+        for (const keyword of keywords) {
+            if (keyword.toLowerCase().includes(word)) {
+                score += 0.2;
+            }
+        }
+
+        if (answerText && answerText.toLowerCase().includes(word)) {
+            score += 0.1;
+        }
+    }
+
+    return score;
+}
+
+function displayResults(query, results) {
+    const container = document.getElementById('answerContainer');
+    container.innerHTML = '';
+    container.classList.add('active');
+
+    if (results.length === 0) {
+        container.innerHTML = `
+            <div class="answer-card">
+                <div class="no-results">
+                    <h3 style="color: #a78bfa; margin-bottom: 1rem;">No results found</h3>
+                    <p style="margin-bottom: 1rem;">
+                        Try rephrasing your question or unlock more frameworks for deeper knowledge.
+                    </p>
+                    ${window.LOADED_FRAMEWORKS.size < Object.keys(FRAMEWORK_CATALOG).length ? 
+                        '<p style="color: #ec4899;">💎 More frameworks available below</p>' : ''}
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    // Show top 3 results
+    results.slice(0, 3).forEach(result => {
+        const card = document.createElement('div');
+        card.className = 'answer-card';
+        card.innerHTML = `
+            <div class="answer-header">
+                <div class="question-echo">${result.chunk.question}</div>
+                <div class="relevance-score">${Math.round(result.score * 100)}% match</div>
+            </div>
+            <div class="answer-content">
+                ${formatAnswer(result.chunk.answer)}
+            </div>
+            <div class="source-section">
+                <div class="source-label">Source:</div>
+                <div class="source-info">
+                    <span class="source-badge">${result.framework}</span>
+                    <span>${result.chunk.category}</span>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function formatAnswer(text) {
+    return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .split('\n')
+        .map(line => line.trim() ? `<p>${line}</p>` : '')
+        .join('');
+}
+
+function askExample(question) {
+    document.getElementById('searchInput').value = question;
+    searchKnowledge();
+}
+
+// Demo data loaders (replace with actual module files in production)
+function loadTrinityEngineDemo() {
+    window.TRINITY_KNOWLEDGE.trinityEngine = {
+        name: "Trinity Engine",
+        chunks: [
+            {
+                id: "trinity_basics",
+                keywords: ["trinity", "three planes", "mind body heart", "sidereal tropical draconic"],
+                question: "What is the Trinity system?",
+                answer: "The Trinity system maps consciousness across Mind (α - Sidereal), Body (β - Tropical), and Heart (γ - Draconic) fields. Each plane uses its own astronomical coordinate system. The three fields interact through cross-operators (CE, DE, CD) to create your complete awareness signature.",
+                category: "Core"
+            },
+            {
+                id: "gate_64",
+                keywords: ["gate 64", "confusion", "before completion"],
+                question: "What does Gate 64 mean?",
+                answer: "Gate 64 is 'Before Completion' - the gate of not-knowing that precedes clarity. It processes uncertainty into potential. The confusion isn't dysfunction - it's the field state before collapse into knowing. Pairs with Gate 63 on the polarity axis.",
+                category: "Gates"
+            },
+            {
+                id: "ctb_system",
+                keywords: ["color tone base", "ctb", "motivation"],
+                question: "How does CTB work?",
+                answer: "**Color** (1-6) determines motivation. **Tone** (1-6) determines cognition mode. **Base** (1-6) determines information geometry. Together they form a parameter vector that shapes how each gate transformation behaves.",
+                category: "CTB"
+            },
+            {
+                id: "operator_types",
+                keywords: ["operator", "vector", "matrix", "hybrid", "mutation"],
+                question: "What are operator types?",
+                answer: "**Vector** operators nudge gently. **Matrix** operators rotate perspectives. **Hybrid** operators do both simultaneously. **Nonlinear/Mutation** operators cause breakthroughs and collapse. Your type determines how consciousness processes information.",
+                category: "Operators"
+            },
+            {
+                id: "polarity",
+                keywords: ["polarity", "32 axes", "gate pairs", "mirror"],
+                question: "What is polarity?",
+                answer: "Gates exist in 32 polarity pairs. Each axis is one awareness vector with two orientations (+A and -A). Your configuration determines which pole you express. Some have **fixed polarity**, others **moving**, others **rotational**.",
+                category: "Polarity"
+            }
+        ]
+    };
+}
+
+function loadSentenceGeneratorDemo() {
+    window.TRINITY_KNOWLEDGE.sentenceGenerator = {
+        name: "Sentence Generator",
+        chunks: [
+            {
+                id: "sentence_system",
+                keywords: ["sentence", "observe prepare understand", "transitions"],
+                question: "How does Sentence Generator work?",
+                answer: "Transforms consciousness state into phrases. **Observe** = Mind (C). **Prepare** = Heart (CE). **Understand** = Mind-Body (CD). **The gate awaits** = Full collapse (CDE). Your CTB and gates determine the pattern.",
+                category: "Mechanics"
+            },
+            {
+                id: "sentence_patterns",
+                keywords: ["patterns", "variations", "listen feel realize"],
+                question: "What are sentence patterns?",
+                answer: "Patterns match operator types: **'Observe. Prepare. Understand'** for Hybrid. **'Listen. Feel. Realize'** for emotional. **'Witness. Distill. Transform'** for mutation. **'Sense. Adjust. Flow'** for vector.",
+                category: "Patterns"
+            }
+        ]
+    };
+}
+
+// Initialize on load
+window.addEventListener('DOMContentLoaded', initializeSystem);

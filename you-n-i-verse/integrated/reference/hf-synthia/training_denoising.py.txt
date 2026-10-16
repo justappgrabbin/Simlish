@@ -1,0 +1,487 @@
+"""
+Training: Self-Supervised Denoising
+====================================
+
+Teaches the GNN to understand gate patterns by training it to
+reconstruct clean activations from noisy ones.
+
+Why This Works:
+- Forces model to learn channel structure
+- Discovers gate relationships
+- Learns which activations are valid/common
+- No labeled data needed
+
+Training Strategy:
+1. Take clean gate activations from real charts
+2. Add random noise (flip 10-20% of gates)
+3. Train model to predict clean from noisy
+4. Model learns underlying patterns
+
+Usage:
+    from training_denoising import DenoisingTrainer
+    
+    trainer = DenoisingTrainer(model, graph, extractor)
+    trainer.train(chart_dataset, num_epochs=100)
+"""
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+from typing import List, Dict, Tuple
+import json
+from pathlib import Path
+
+
+class ChartDataset(Dataset):
+    """
+    Dataset of birth charts for training.
+    
+    Each sample contains:
+    - Clean gate activations (which gates are activated)
+    - Full placement data (for feature extraction)
+    - Birth info (for validation/debugging)
+    """
+    
+    def __init__(
+        self,
+        charts: List[Dict],
+        noise_prob: float = 0.15
+    ):
+        """
+        Args:
+            charts: List of chart dicts with placement data
+            noise_prob: Probability of flipping each gate activation
+        """
+        self.charts = charts
+        self.noise_prob = noise_prob
+        
+        print(f"Dataset created with {len(charts)} charts")
+        print(f"Noise probability: {noise_prob}")
+    
+    def __len__(self):
+        return len(self.charts)
+    
+    def __getitem__(self, idx):
+        chart = self.charts[idx]
+        
+        # Extract clean gate activations
+        clean_activations = self._extract_activations(chart)
+        
+        # Add noise
+        noisy_activations = self._add_noise(clean_activations)
+        
+        return {
+            'clean': clean_activations,
+            'noisy': noisy_activations,
+            'chart': chart  # Full chart for feature extraction
+        }
+    
+    def _extract_activations(self, chart: Dict) -> torch.Tensor:
+        """
+        Extract binary activation vector [64] from chart.
+        
+        1.0 if gate is activated (by any planet, any field)
+        0.0 if gate is not activated
+        """
+        activations = torch.zeros(64)
+        
+        # Check all fields
+        for field_name, field_data in chart.get('fields', {}).items():
+            for planet_name, placement_data in field_data.items():
+                if isinstance(placement_data, dict) and 'gate' in placement_data:
+                    gate = placement_data['gate']
+                    activations[gate - 1] = 1.0
+        
+        return activations
+    
+    def _add_noise(self, activations: torch.Tensor) -> torch.Tensor:
+        """
+        Add random noise by flipping gate activations.
+        
+        With probability noise_prob, flip each gate:
+        - 1.0 → 0.0 (deactivate)
+        - 0.0 → 1.0 (activate)
+        """
+        noisy = activations.clone()
+        
+        # Random mask for which gates to flip
+        flip_mask = torch.rand(64) < self.noise_prob
+        
+        # Flip selected gates
+        noisy[flip_mask] = 1.0 - noisy[flip_mask]
+        
+        return noisy
+
+
+class DenoisingTrainer:
+    """
+    Trains GNN to denoise gate activations.
+    
+    This is the foundation training that teaches the model
+    to understand gate patterns and channel structure.
+    """
+    
+    def __init__(
+        self,
+        model,
+        graph,
+        extractor,
+        learning_rate: float = 1e-3,
+        device: str = 'cpu'
+    ):
+        self.model = model.to(device)
+        self.graph = graph
+        self.extractor = extractor.to(device)
+        self.device = device
+        
+        # Optimizer
+        self.optimizer = optim.Adam(
+            list(model.parameters()) + list(extractor.parameters()),
+            lr=learning_rate
+        )
+        
+        # Loss function
+        self.criterion = nn.BCELoss()
+        
+        # Edge index (constant)
+        from consciousness_gnn import get_edge_index
+        self.edge_index = get_edge_index(graph).to(device)
+        
+        # Training history
+        self.history = {
+            'train_loss': [],
+            'val_loss': []
+        }
+    
+    @staticmethod
+    def collate_fn(batch):
+        """Custom collate function for chart data"""
+        clean = torch.stack([item['clean'] for item in batch])
+        noisy = torch.stack([item['noisy'] for item in batch])
+        charts = [item['chart'] for item in batch]
+        
+        return {
+            'clean': clean,
+            'noisy': noisy,
+            'charts': charts  # Changed from 'chart' to 'charts' for clarity
+        }
+    
+    def train_epoch(self, dataloader: DataLoader) -> float:
+        """Train for one epoch"""
+        self.model.train()
+        self.extractor.train()
+        
+        total_loss = 0.0
+        num_batches = 0
+        
+        for batch in dataloader:
+            # Get noisy and clean activations
+            noisy = batch['noisy'].to(self.device)  # [batch_size, 64]
+            clean = batch['clean'].to(self.device)  # [batch_size, 64]
+            charts = batch['charts']  # List of chart dicts
+            
+            # Process each chart in batch
+            batch_loss = 0.0
+            valid_samples = 0
+            
+            for i in range(len(charts)):
+                # Extract features from chart
+                placements = self._chart_to_placements(charts[i])
+                
+                if len(placements) == 0:
+                    continue
+                
+                features = self.extractor.extract_all_gate_features(placements)
+                sun_context = self.extractor.create_body_sun_vector(placements)
+                
+                features = features.to(self.device)
+                sun_context = sun_context.to(self.device)
+                
+                # Forward pass
+                outputs = self.model(features, self.edge_index, sun_context)
+                
+                # Get node embeddings and project to activations
+                node_embeds = outputs['node_embeddings']  # [64, hidden_dim]
+                
+                # Simple projection: mean pooling → sigmoid
+                predicted_activations = torch.sigmoid(node_embeds.mean(dim=1))  # [64]
+                
+                # Loss: predict CLEAN from NOISY input
+                loss = self.criterion(predicted_activations, clean[i])
+                
+                batch_loss += loss
+                valid_samples += 1
+            
+            if valid_samples > 0:
+                batch_loss = batch_loss / valid_samples
+                
+                # Backprop
+                self.optimizer.zero_grad()
+                batch_loss.backward()
+                
+                # Gradient clipping
+                torch.nn.utils.clip_grad_norm_(
+                    list(self.model.parameters()) + list(self.extractor.parameters()),
+                    max_norm=1.0
+                )
+                
+                self.optimizer.step()
+                
+                total_loss += batch_loss.item()
+                num_batches += 1
+        
+        return total_loss / max(num_batches, 1)
+    
+    def validate(self, dataloader: DataLoader) -> float:
+        """Validate on held-out data"""
+        self.model.eval()
+        self.extractor.eval()
+        
+        total_loss = 0.0
+        num_batches = 0
+        
+        with torch.no_grad():
+            for batch in dataloader:
+                noisy = batch['noisy'].to(self.device)
+                clean = batch['clean'].to(self.device)
+                charts = batch['charts']  # List of chart dicts
+                
+                batch_loss = 0.0
+                valid_samples = 0
+                
+                for i in range(len(charts)):
+                    placements = self._chart_to_placements(charts[i])
+                    
+                    if len(placements) == 0:
+                        continue
+                    
+                    features = self.extractor.extract_all_gate_features(placements)
+                    sun_context = self.extractor.create_body_sun_vector(placements)
+                    
+                    features = features.to(self.device)
+                    sun_context = sun_context.to(self.device)
+                    
+                    outputs = self.model(features, self.edge_index, sun_context)
+                    node_embeds = outputs['node_embeddings']
+                    predicted_activations = torch.sigmoid(node_embeds.mean(dim=1))
+                    
+                    loss = self.criterion(predicted_activations, clean[i])
+                    batch_loss += loss
+                    valid_samples += 1
+                
+                if valid_samples > 0:
+                    batch_loss = batch_loss / valid_samples
+                    total_loss += batch_loss.item()
+                    num_batches += 1
+        
+        return total_loss / max(num_batches, 1)
+    
+    def train(
+        self,
+        train_dataset: ChartDataset,
+        val_dataset: ChartDataset = None,
+        num_epochs: int = 100,
+        batch_size: int = 8,
+        save_path: str = None
+    ):
+        """
+        Full training loop.
+        
+        Args:
+            train_dataset: Training charts
+            val_dataset: Validation charts (optional)
+            num_epochs: Number of training epochs
+            batch_size: Batch size
+            save_path: Where to save best model
+        """
+        train_loader = DataLoader(
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
+            collate_fn=self.collate_fn
+        )
+        
+        val_loader = None
+        if val_dataset:
+            val_loader = DataLoader(
+                val_dataset,
+                batch_size=batch_size,
+                shuffle=False,
+                collate_fn=self.collate_fn
+            )
+        
+        best_val_loss = float('inf')
+        
+        print("\nStarting training...")
+        print(f"Epochs: {num_epochs}")
+        print(f"Batch size: {batch_size}")
+        print(f"Device: {self.device}")
+        print("="*60)
+        
+        for epoch in range(num_epochs):
+            # Train
+            train_loss = self.train_epoch(train_loader)
+            self.history['train_loss'].append(train_loss)
+            
+            # Validate
+            if val_loader:
+                val_loss = self.validate(val_loader)
+                self.history['val_loss'].append(val_loss)
+                
+                # Save best model
+                if val_loss < best_val_loss:
+                    best_val_loss = val_loss
+                    if save_path:
+                        self.save_checkpoint(save_path)
+                
+                print(f"Epoch {epoch+1}/{num_epochs} - "
+                      f"Train Loss: {train_loss:.4f} - "
+                      f"Val Loss: {val_loss:.4f}")
+            else:
+                print(f"Epoch {epoch+1}/{num_epochs} - "
+                      f"Train Loss: {train_loss:.4f}")
+        
+        print("="*60)
+        print("Training complete!")
+    
+    def save_checkpoint(self, path: str):
+        """Save model checkpoint"""
+        torch.save({
+            'model_state_dict': self.model.state_dict(),
+            'extractor_state_dict': self.extractor.state_dict(),
+            'optimizer_state_dict': self.optimizer.state_dict(),
+            'history': self.history
+        }, path)
+        print(f"Checkpoint saved to {path}")
+    
+    def load_checkpoint(self, path: str):
+        """Load model checkpoint"""
+        checkpoint = torch.load(path, map_location=self.device)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.extractor.load_state_dict(checkpoint['extractor_state_dict'])
+        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        self.history = checkpoint['history']
+        print(f"Checkpoint loaded from {path}")
+    
+    def _chart_to_placements(self, chart: Dict) -> List:
+        """Convert chart dict to Placement objects"""
+        from feature_extractor import Placement
+        
+        placements = []
+        
+        for field_name, field_data in chart.get('fields', {}).items():
+            for planet_name, placement_data in field_data.items():
+                if not isinstance(placement_data, dict) or 'gate' not in placement_data:
+                    continue
+                
+                # Determine stream (simplified)
+                stream = 'personality'  # Adjust based on your data structure
+                
+                placement = Placement(
+                    planet=planet_name,
+                    stream=stream,
+                    gate=placement_data['gate'],
+                    line=placement_data.get('line', 1),
+                    color=placement_data.get('color', 1),
+                    tone=placement_data.get('tone', 1),
+                    base=placement_data.get('base', 1),
+                    degree=placement_data.get('degree', 0.0),
+                    field=field_name
+                )
+                
+                placements.append(placement)
+        
+        return placements
+
+
+# === TESTING ===
+
+def create_synthetic_charts(num_charts: int = 50) -> List[Dict]:
+    """
+    Create synthetic charts for testing.
+    
+    In production, you'd load real chart data.
+    """
+    import random
+    
+    charts = []
+    
+    for i in range(num_charts):
+        # Random gate activations (8-12 gates typical)
+        num_activations = random.randint(8, 12)
+        activated_gates = random.sample(range(1, 65), num_activations)
+        
+        # Create chart structure
+        chart = {
+            'birth_datetime': f'1990-{random.randint(1,12):02d}-{random.randint(1,28):02d}',
+            'fields': {
+                'Being': {}
+            }
+        }
+        
+        # Add activations
+        planets = ['Sun', 'Earth', 'Moon', 'Mercury', 'Venus', 'Mars']
+        for j, gate in enumerate(activated_gates[:len(planets)]):
+            chart['fields']['Being'][planets[j]] = {
+                'gate': gate,
+                'line': random.randint(1, 6),
+                'color': random.randint(1, 6),
+                'tone': random.randint(1, 6),
+                'base': random.randint(1, 5),
+                'degree': random.uniform(0, 360)
+            }
+        
+        charts.append(chart)
+    
+    return charts
+
+
+def test_denoising_trainer():
+    """Test the denoising training loop"""
+    print("Testing Denoising Trainer\n" + "="*60)
+    
+    from consciousness_graph import create_graph
+    from feature_extractor import FeatureExtractor
+    from consciousness_gnn import ConsciousnessGNN
+    
+    # Create components
+    graph = create_graph()
+    extractor = FeatureExtractor()
+    model = ConsciousnessGNN()
+    
+    print("✓ Components created")
+    
+    # Create synthetic dataset
+    train_charts = create_synthetic_charts(30)
+    val_charts = create_synthetic_charts(10)
+    
+    train_dataset = ChartDataset(train_charts, noise_prob=0.15)
+    val_dataset = ChartDataset(val_charts, noise_prob=0.15)
+    
+    print(f"✓ Datasets created (train={len(train_dataset)}, val={len(val_dataset)})")
+    
+    # Create trainer
+    trainer = DenoisingTrainer(model, graph, extractor)
+    
+    print("✓ Trainer created")
+    
+    # Train for a few epochs (quick test)
+    print("\nRunning short training test (3 epochs)...")
+    trainer.train(
+        train_dataset=train_dataset,
+        val_dataset=val_dataset,
+        num_epochs=3,
+        batch_size=4
+    )
+    
+    # Check history
+    print(f"\nTraining history:")
+    print(f"  Train losses: {[f'{l:.4f}' for l in trainer.history['train_loss']]}")
+    print(f"  Val losses: {[f'{l:.4f}' for l in trainer.history['val_loss']]}")
+    
+    print("\n✓ Denoising trainer test complete!")
+
+
+if __name__ == "__main__":
+    test_denoising_trainer()

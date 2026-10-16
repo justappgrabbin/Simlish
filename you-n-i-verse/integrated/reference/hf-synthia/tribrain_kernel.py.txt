@@ -1,0 +1,1260 @@
+#!/usr/bin/env python3
+"""
+================================================================================
+TRIBRAIN KERNEL v1.0
+Minimal Self-Evolving Runtime
+================================================================================
+
+A stateful orchestration engine with six modules:
+1. Inquiry Engine      - Curiosity-driven question generation
+2. Tool Interface      - Safe syscall interface (immune system)
+3. Causal Matrix       - Dynamic reasoning topology
+4. State Engine        - Global mode switching
+5. Evolution Engine    - Self-modification with safety gates
+6. Snapshot Engine     - Version control for the organism
+
+This is the seed. Everything else attaches here.
+
+Usage:
+    from tribrain_kernel import TriBrainKernel
+
+    kernel = TriBrainKernel()
+
+    # Generate questions (not predictions)
+    questions = kernel.ask("consciousness", count=3)
+
+    # Use tools safely
+    result = kernel.use_tool("file_read", path="./data.txt")
+
+    # Rewire reasoning topology
+    kernel.connect(1, 2, "insight", strength=1.5)
+
+    # Switch system mode
+    kernel.cast("build")
+
+    # Self-evolve (if safety permits)
+    kernel.evolve("modulate_connection", from_brain=1, to_brain=2, value=1.8)
+
+    # Rollback if needed
+    kernel.rollback()
+
+Author: TriBrain Architecture
+Version: 1.0.0
+License: MIT
+================================================================================
+"""
+
+import json
+import hashlib
+import random
+import copy
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Any, Callable, Optional, Tuple
+from dataclasses import dataclass, field
+
+__version__ = "1.0.0"
+__all__ = ["TriBrainKernel", "SystemMode", "Question", "ToolCall", "CausalLink", "Snapshot"]
+
+
+# ================================================================================
+# MODULE 1: INQUIRY ENGINE
+# Curiosity-driven graph expansion
+# ================================================================================
+
+@dataclass
+class Question:
+    """A generated question with uncertainty tracking"""
+    id: str
+    text: str
+    topic: str
+    confidence: float  # 0.0-1.0, never 1.0 (humility by design)
+    style: str
+    created: str
+    status: str = "open"  # open, answered, obsolete
+
+    def to_dict(self) -> Dict:
+        return {
+            "id": self.id,
+            "text": self.text,
+            "topic": self.topic,
+            "confidence": self.confidence,
+            "style": self.style,
+            "created": self.created,
+            "status": self.status
+        }
+
+
+class InquiryEngine:
+    """
+    Generates questions instead of predictions.
+    Drives knowledge graph expansion through curiosity.
+
+    Key insight: The system doesn't just answer. It expands the graph.
+    Without this, the brain stagnates.
+    """
+
+    TEMPLATES = {
+        "exploratory": [
+            "What patterns emerge when observing {topic}?",
+            "How might {topic} evolve from this state?",
+            "What remains unknown about {topic}?",
+            "What would we see if we looked at {topic} from another angle?"
+        ],
+        "analytical": [
+            "What factors influence {topic}?",
+            "How do the components of {topic} relate to each other?",
+            "What assumptions underlie our understanding of {topic}?",
+            "What evidence would support or challenge ideas about {topic}?"
+        ],
+        "creative": [
+            "What if {topic} were approached differently?",
+            "What connections exist between {topic} and other domains?",
+            "What possibilities emerge from {topic}?",
+            "How might an expert from another field view {topic}?"
+        ],
+        "reflective": [
+            "What have we learned from studying {topic}?",
+            "How has our understanding of {topic} changed?",
+            "What uncertainties should we acknowledge about {topic}?",
+            "What perspectives on {topic} are we missing?"
+        ]
+    }
+
+    def __init__(self, storage_path: Path):
+        self.storage_path = Path(storage_path)
+        self.storage_path.mkdir(parents=True, exist_ok=True)
+        self.questions: List[Question] = []
+        self.topics: set = set()
+        self._load_state()
+
+    def _load_state(self):
+        """Load persisted questions"""
+        state_file = self.storage_path / "inquiry_state.json"
+        if state_file.exists():
+            try:
+                with open(state_file, 'r') as f:
+                    data = json.load(f)
+                    self.questions = [Question(**q) for q in data.get("questions", [])]
+                    self.topics = set(data.get("topics", []))
+            except Exception:
+                pass
+
+    def _save_state(self):
+        """Persist questions"""
+        state_file = self.storage_path / "inquiry_state.json"
+        with open(state_file, 'w') as f:
+            json.dump({
+                "questions": [q.to_dict() for q in self.questions],
+                "topics": list(self.topics)
+            }, f, indent=2)
+
+    def ask(self, topic: str, count: int = 3, style: str = "exploratory") -> List[Question]:
+        """
+        Generate questions, store in graph, tag uncertainty.
+
+        Args:
+            topic: Subject to generate questions about
+            count: Number of questions to generate
+            style: Question style (exploratory, analytical, creative, reflective)
+
+        Returns:
+            List of Question objects with confidence < 1.0
+        """
+        templates = self.TEMPLATES.get(style, self.TEMPLATES["exploratory"])
+        generated = []
+
+        for i in range(count):
+            template = random.choice(templates)
+            text = template.format(topic=topic)
+
+            # Confidence never reaches 1.0 (humility by design)
+            confidence = random.uniform(0.3, 0.85)
+
+            q = Question(
+                id=f"q_{datetime.now().strftime('%H%M%S')}_{i}_{random.randint(1000,9999)}",
+                text=text,
+                topic=topic,
+                confidence=confidence,
+                style=style,
+                created=datetime.now().isoformat()
+            )
+
+            self.questions.append(q)
+            generated.append(q)
+
+        self.topics.add(topic)
+        self._save_state()
+        return generated
+
+    def get_open_questions(self) -> List[Question]:
+        """Get all unanswered questions"""
+        return [q for q in self.questions if q.status == "open"]
+
+    def mark_answered(self, qid: str):
+        """Mark a question as answered"""
+        for q in self.questions:
+            if q.id == qid:
+                q.status = "answered"
+        self._save_state()
+
+    def get_curiosity_report(self) -> Dict:
+        """Report on what the system is curious about"""
+        styles = {}
+        for q in self.questions:
+            styles[q.style] = styles.get(q.style, 0) + 1
+
+        return {
+            "total_questions": len(self.questions),
+            "open_questions": len(self.get_open_questions()),
+            "topics": list(self.topics),
+            "style_distribution": styles,
+            "recent_questions": [q.text for q in self.questions[-5:]]
+        }
+
+
+# ================================================================================
+# MODULE 2: TOOL INTERFACE
+# Safe syscall interface (the immune system)
+# ================================================================================
+
+@dataclass
+class ToolCall:
+    """Record of a tool execution"""
+    tool: str
+    params: Dict
+    result: Any = None
+    timestamp: str = ""
+    success: bool = False
+
+    def to_dict(self) -> Dict:
+        return {
+            "tool": self.tool,
+            "params": self.params,
+            "result": self.result,
+            "timestamp": self.timestamp,
+            "success": self.success
+        }
+
+
+class ToolInterface:
+    """
+    The brain never touches the world directly.
+    All interaction goes through tools.
+
+    This is the immune system.
+    """
+
+    def __init__(self):
+        self.registry: Dict[str, Callable] = {}
+        self.history: List[ToolCall] = []
+        self._register_defaults()
+
+    def _register_defaults(self):
+        """Register safe default tools"""
+        self.register("file_read", self._file_read)
+        self.register("file_write", self._file_write)
+        self.register("ask_user", self._ask_user)
+        self.register("calculate", self._calculate)
+        self.register("search", self._search)
+        self.register("memory_store", self._memory_store)
+        self.register("memory_retrieve", self._memory_retrieve)
+
+    def register(self, name: str, func: Callable, description: str = ""):
+        """
+        Register a new tool.
+
+        Args:
+            name: Tool identifier
+            func: Callable that executes the tool
+            description: What the tool does
+        """
+        self.registry[name] = {
+            "function": func,
+            "description": description
+        }
+
+    def call(self, name: str, **params) -> ToolCall:
+        """
+        Execute tool, log result, return wrapped.
+
+        Args:
+            name: Tool to execute
+            **params: Parameters for the tool
+
+        Returns:
+            ToolCall with result and metadata
+        """
+        if name not in self.registry:
+            return ToolCall(
+                name, params, 
+                {"error": f"Tool '{name}' not found"}, 
+                datetime.now().isoformat(), 
+                False
+            )
+
+        try:
+            result = self.registry[name]["function"](**params)
+            call = ToolCall(
+                tool=name,
+                params=params,
+                result=result,
+                timestamp=datetime.now().isoformat(),
+                success=True
+            )
+        except Exception as e:
+            call = ToolCall(
+                tool=name,
+                params=params,
+                result={"error": str(e)},
+                timestamp=datetime.now().isoformat(),
+                success=False
+            )
+
+        self.history.append(call)
+        return call
+
+    # Default tool implementations
+    def _file_read(self, path: str) -> Dict:
+        """Read file contents"""
+        try:
+            with open(path, 'r') as f:
+                return {"content": f.read(), "success": True, "path": path}
+        except Exception as e:
+            return {"error": str(e), "success": False, "path": path}
+
+    def _file_write(self, path: str, content: str) -> Dict:
+        """Write content to file"""
+        try:
+            Path(path).parent.mkdir(parents=True, exist_ok=True)
+            with open(path, 'w') as f:
+                f.write(content)
+            return {"bytes": len(content), "success": True, "path": path}
+        except Exception as e:
+            return {"error": str(e), "success": False, "path": path}
+
+    def _ask_user(self, question: str, options: List[str] = None) -> Dict:
+        """
+        Ask the user for input.
+        In real use, would prompt interactively.
+        """
+        return {
+            "question": question,
+            "options": options or [],
+            "response": "USER_INPUT_REQUIRED",
+            "timestamp": datetime.now().isoformat(),
+            "note": "Implement UI hook here for real interaction"
+        }
+
+    def _calculate(self, expression: str) -> Dict:
+        """Safely evaluate mathematical expression"""
+        try:
+            # Safe eval with limited scope
+            allowed = {
+                "abs": abs, "max": max, "min": min, "sum": sum, 
+                "len": len, "range": range, "pow": pow
+            }
+            result = eval(expression, {"__builtins__": {}}, allowed)
+            return {"result": result, "expression": expression, "success": True}
+        except Exception as e:
+            return {"error": str(e), "expression": expression, "success": False}
+
+    def _search(self, query: str, context: str = "") -> Dict:
+        """Search through tool history"""
+        matches = []
+        for call in reversed(self.history):  # Most recent first
+            if query.lower() in str(call).lower():
+                matches.append(call.to_dict())
+            if len(matches) >= 10:
+                break
+        return {
+            "query": query,
+            "matches": len(matches),
+            "results": matches
+        }
+
+    def _memory_store(self, key: str, value: Any) -> Dict:
+        """Store in kernel memory"""
+        # Simple memory storage - in production use proper database
+        return {"stored": True, "key": key, "timestamp": datetime.now().isoformat()}
+
+    def _memory_retrieve(self, key: str) -> Dict:
+        """Retrieve from kernel memory"""
+        return {"key": key, "found": False, "note": "Implement persistent storage"}
+
+    def get_available_tools(self) -> Dict[str, str]:
+        """List all registered tools"""
+        return {name: info["description"] for name, info in self.registry.items()}
+
+
+# ================================================================================
+# MODULE 3: CAUSAL MATRIX
+# Dynamic reasoning topology
+# ================================================================================
+
+@dataclass
+class CausalLink:
+    """A directed link in the causal graph"""
+    source: str
+    target: str
+    strength: float
+    timestamp: str
+    context: Dict
+
+    def to_dict(self) -> Dict:
+        return {
+            "source": self.source,
+            "target": self.target,
+            "strength": self.strength,
+            "timestamp": self.timestamp,
+            "context": self.context
+        }
+
+
+class CausalMatrix:
+    """
+    The wiring between the three brains.
+    Changes dynamically based on system state.
+
+    This enables the system to shift between:
+    - Logical mode (B1→B2 strong)
+    - Intuitive mode (B2→B3 strong)
+    - Execution mode (B3→B1 strong)
+    """
+
+    def __init__(self):
+        self.links: Dict[str, List[CausalLink]] = {}
+        # Modulation between brains (can be changed dynamically)
+        self.brain_modulation = {
+            (1, 2): 1.0,  # B1→B2 (Librarian to Editor)
+            (2, 3): 1.0,  # B2→B3 (Editor to Deployer)
+            (3, 1): 1.0,  # B3→B1 (Deployer to Librarian)
+        }
+
+    def connect(self, from_brain: int, to_brain: int, 
+                data_type: str, strength: float = 1.0,
+                metadata: Dict = None) -> CausalLink:
+        """
+        Create connection, modulated by current topology.
+
+        Args:
+            from_brain: Source brain (1, 2, or 3)
+            to_brain: Target brain (1, 2, or 3)
+            data_type: Type of data flowing
+            strength: Base connection strength
+            metadata: Additional context
+
+        Returns:
+            CausalLink with adjusted strength
+        """
+        modulation = self.brain_modulation.get((from_brain, to_brain), 1.0)
+        adjusted_strength = min(2.0, strength * modulation)
+
+        link = CausalLink(
+            source=f"B{from_brain}_{data_type}",
+            target=f"B{to_brain}_input",
+            strength=adjusted_strength,
+            timestamp=datetime.now().isoformat(),
+            context={
+                "modulation": modulation,
+                "base_strength": strength,
+                **(metadata or {})
+            }
+        )
+
+        if link.source not in self.links:
+            self.links[link.source] = []
+        self.links[link.source].append(link)
+
+        return link
+
+    def set_modulation(self, from_brain: int, to_brain: int, value: float):
+        """
+        Change connection strength between brains.
+
+        Args:
+            from_brain: Source brain
+            to_brain: Target brain
+            value: New modulation value (0.1 to 2.0)
+        """
+        self.brain_modulation[(from_brain, to_brain)] = max(0.1, min(2.0, value))
+
+    def get_modulation(self, from_brain: int, to_brain: int) -> float:
+        """Get current modulation between brains"""
+        return self.brain_modulation.get((from_brain, to_brain), 1.0)
+
+    def get_chain(self, source: str, depth: int = 3) -> List[CausalLink]:
+        """
+        Follow causal chain from source.
+
+        Args:
+            source: Starting point
+            depth: How many hops to follow
+
+        Returns:
+            List of CausalLinks forming the chain
+        """
+        chain = []
+        current = source
+
+        for _ in range(depth):
+            if current in self.links and self.links[current]:
+                # Follow strongest link
+                strongest = max(self.links[current], key=lambda x: x.strength)
+                chain.append(strongest)
+                current = strongest.target
+            else:
+                break
+
+        return chain
+
+    def get_topology(self) -> Dict:
+        """Get current reasoning topology"""
+        return {
+            "B1→B2": self.brain_modulation[(1, 2)],
+            "B2→B3": self.brain_modulation[(2, 3)],
+            "B3→B1": self.brain_modulation[(3, 1)],
+            "total_links": sum(len(v) for v in self.links.values()),
+            "unique_sources": len(self.links)
+        }
+
+    def to_dict(self) -> Dict:
+        """Serialize causal matrix"""
+        return {
+            "modulation": {f"B{k[0]}→B{k[1]}": v for k, v in self.brain_modulation.items()},
+            "links": {
+                source: [link.to_dict() for link in links]
+                for source, links in self.links.items()
+            }
+        }
+
+
+# ================================================================================
+# MODULE 4: STATE ENGINE
+# Global system mode switch
+# ================================================================================
+
+class SystemMode:
+    """System operating modes"""
+    EXPLORE = "explore"      # High curiosity, low execution
+    BUILD = "build"          # Focused construction
+    EXECUTE = "execute"      # Deployment mode
+    SAFE = "safe"            # Maximum safety
+    RECOVER = "recover"      # Rollback mode
+    EVOLVE = "evolve"        # Self-modification mode
+
+
+class StateEngine:
+    """
+    Changes global system mode.
+    Affects autonomy, safety, exploration vs execution.
+
+    This is like casting a hexagram - it changes how the system operates.
+    """
+
+    MODES = {
+        SystemMode.EXPLORE: {
+            "autonomy": 1,       # Suggest only
+            "safety": 2,         # Medium safety
+            "exploration": 0.9,  # High exploration
+            "execution": 0.1,
+            "description": "High curiosity, learning mode"
+        },
+        SystemMode.BUILD: {
+            "autonomy": 2,       # Auto-fix low risk
+            "safety": 2,
+            "exploration": 0.5,
+            "execution": 0.7,
+            "description": "Focused construction mode"
+        },
+        SystemMode.EXECUTE: {
+            "autonomy": 0,       # Manual only
+            "safety": 3,         # High safety
+            "exploration": 0.1,
+            "execution": 0.9,
+            "description": "Deployment mode, high caution"
+        },
+        SystemMode.SAFE: {
+            "autonomy": 0,
+            "safety": 0,         # Maximum safety
+            "exploration": 0.0,
+            "execution": 0.0,
+            "description": "Emergency stop, all actions blocked"
+        },
+        SystemMode.RECOVER: {
+            "autonomy": 0,
+            "safety": 3,
+            "exploration": 0.0,
+            "execution": 0.5,
+            "description": "Recovery and rollback mode"
+        },
+        SystemMode.EVOLVE: {
+            "autonomy": 3,       # Full autonomy
+            "safety": 1,         # Lower safety for evolution
+            "exploration": 0.8,
+            "execution": 0.6,
+            "description": "Self-modification mode"
+        }
+    }
+
+    def __init__(self):
+        self.current_mode = SystemMode.EXPLORE
+        self.mode_history = []
+        self._apply_mode(self.current_mode)
+
+    def cast(self, mode: str) -> Dict:
+        """
+        Switch system mode (like casting a hexagram).
+
+        Args:
+            mode: New mode to switch to
+
+        Returns:
+            Dict with transition info
+        """
+        if mode not in self.MODES:
+            return {"error": f"Unknown mode: {mode}", "available": list(self.MODES.keys())}
+
+        old_mode = self.current_mode
+        self.current_mode = mode
+
+        self.mode_history.append({
+            "from": old_mode,
+            "to": mode,
+            "timestamp": datetime.now().isoformat()
+        })
+
+        config = self._apply_mode(mode)
+
+        return {
+            "status": "transitioned",
+            "previous": old_mode,
+            "current": mode,
+            "config": config,
+            "message": f"System shifted from {old_mode} to {mode}"
+        }
+
+    def _apply_mode(self, mode: str) -> Dict:
+        """Apply mode configuration to engine"""
+        config = self.MODES[mode]
+        self.autonomy = config["autonomy"]
+        self.safety_level = config["safety"]
+        self.exploration_rate = config["exploration"]
+        self.execution_rate = config["execution"]
+        return config
+
+    def can_execute(self, action_risk: int) -> bool:
+        """
+        Check if action allowed in current mode.
+
+        Args:
+            action_risk: Risk level of action (0-3)
+
+        Returns:
+            True if action permitted
+        """
+        return action_risk >= self.safety_level
+
+    def get_status(self) -> Dict:
+        """Get current state engine status"""
+        return {
+            "mode": self.current_mode,
+            "autonomy": self.autonomy,
+            "safety_level": self.safety_level,
+            "exploration_rate": self.exploration_rate,
+            "execution_rate": self.execution_rate,
+            "mode_history_count": len(self.mode_history)
+        }
+
+
+# ================================================================================
+# MODULE 5: EVOLUTION ENGINE
+# Self-modification with safety gates
+# ================================================================================
+
+class EvolutionEngine:
+    """
+    The dangerous button 🔴
+
+    Self-modification only happens if:
+    1. Safety level permits
+    2. Current mode allows evolution
+    3. Change is queued and snapshotted first
+
+    Without these gates, self-modification is terrifying.
+    With them, evolution becomes safe.
+    """
+
+    def __init__(self, state_engine: StateEngine):
+        self.state = state_engine
+        self.evolutions = []
+        self.pending_changes = []
+
+    def evolve(self, change_type: str, params: Dict) -> Dict:
+        """
+        Attempt self-modification.
+
+        Args:
+            change_type: Type of evolution (modulate_connection, register_tool, etc.)
+            params: Parameters for the change
+
+        Returns:
+            Dict with status and change ID
+        """
+        # Check 1: Safety level
+        if self.state.safety_level < 1:
+            return {
+                "status": "blocked",
+                "reason": f"Safety level {self.state.safety_level} too low for evolution",
+                "required": 1,
+                "change_type": change_type
+            }
+
+        # Check 2: Mode allows evolution
+        if self.state.current_mode not in [SystemMode.EVOLVE, SystemMode.BUILD]:
+            return {
+                "status": "blocked",
+                "reason": f"Current mode '{self.state.current_mode}' prohibits evolution",
+                "allowed_modes": [SystemMode.EVOLVE, SystemMode.BUILD],
+                "change_type": change_type
+            }
+
+        # Queue change (will be applied after snapshot)
+        change = {
+            "type": change_type,
+            "params": params,
+            "timestamp": datetime.now().isoformat(),
+            "id": f"evo_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000,9999)}",
+            "status": "queued"
+        }
+
+        self.pending_changes.append(change)
+
+        return {
+            "status": "queued",
+            "change_id": change["id"],
+            "change_type": change_type,
+            "message": "Change queued. Apply after snapshot.",
+            "safety_checked": True
+        }
+
+    def apply_pending(self, snapshot_engine) -> List[Dict]:
+        """
+        Apply pending changes.
+        Called automatically after snapshot.
+
+        Returns:
+            List of application results
+        """
+        results = []
+
+        for change in self.pending_changes:
+            result = self._apply_change(change)
+
+            self.evolutions.append({
+                **change,
+                "result": result,
+                "snapshot_id": snapshot_engine.current_id if snapshot_engine else None,
+                "applied_at": datetime.now().isoformat()
+            })
+
+            results.append(result)
+
+        self.pending_changes = []
+        return results
+
+    def _apply_change(self, change: Dict) -> Dict:
+        """Apply specific change types"""
+        ctype = change["type"]
+        params = change["params"]
+
+        if ctype == "modulate_connection":
+            return {
+                "type": "modulation",
+                "from_brain": params.get("from_brain"),
+                "to_brain": params.get("to_brain"),
+                "value": params.get("value"),
+                "applied": True,
+                "note": "Update causal matrix with new modulation"
+            }
+
+        elif ctype == "register_tool":
+            return {
+                "type": "tool_registration",
+                "tool_name": params.get("name"),
+                "applied": True,
+                "note": "Tool registered in interface"
+            }
+
+        elif ctype == "update_mode":
+            return {
+                "type": "mode_update",
+                "mode": params.get("mode"),
+                "applied": True,
+                "note": "Mode parameters updated"
+            }
+
+        elif ctype == "add_question_template":
+            return {
+                "type": "template_addition",
+                "style": params.get("style"),
+                "applied": True,
+                "note": "New question template added"
+            }
+
+        return {
+            "type": ctype,
+            "applied": False,
+            "error": "Unknown change type",
+            "params": params
+        }
+
+    def get_pending(self) -> List[Dict]:
+        """Get list of pending changes"""
+        return self.pending_changes
+
+    def get_history(self) -> List[Dict]:
+        """Get evolution history"""
+        return self.evolutions
+
+
+# ================================================================================
+# MODULE 6: SNAPSHOT ENGINE
+# Version control for the organism
+# ================================================================================
+
+@dataclass
+class Snapshot:
+    """Complete system state capture"""
+    id: str
+    timestamp: str
+    mode: str
+    causal_matrix: Dict
+    inquiry_state: Dict
+    tool_history: List[Dict]
+    pending_evolutions: List[Dict]
+    label: str
+
+    def to_dict(self) -> Dict:
+        return {
+            "id": self.id,
+            "timestamp": self.timestamp,
+            "mode": self.mode,
+            "causal_matrix": self.causal_matrix,
+            "inquiry_state": self.inquiry_state,
+            "tool_history": self.tool_history,
+            "pending_evolutions": self.pending_evolutions,
+            "label": self.label
+        }
+
+
+class SnapshotEngine:
+    """
+    Every upgrade becomes reversible.
+
+    The difference between:
+    - "AI experiment" (dangerous, irreversible)
+    - "Trusted system" (safe, reversible)
+
+    This is version control for the organism.
+    """
+
+    def __init__(self, storage_path: Path):
+        self.storage_path = Path(storage_path)
+        self.storage_path.mkdir(parents=True, exist_ok=True)
+        self.snapshots: List[Snapshot] = []
+        self.current_id: Optional[str] = None
+        self._load_snapshots()
+
+    def _load_snapshots(self):
+        """Load persisted snapshots"""
+        index_file = self.storage_path / "snapshot_index.json"
+        if index_file.exists():
+            try:
+                with open(index_file, 'r') as f:
+                    data = json.load(f)
+                    self.snapshots = [Snapshot(**s) for s in data.get("snapshots", [])]
+                    self.current_id = data.get("current_id")
+            except Exception:
+                pass
+
+    def _save_index(self):
+        """Save snapshot index"""
+        index_file = self.storage_path / "snapshot_index.json"
+        with open(index_file, 'w') as f:
+            json.dump({
+                "snapshots": [s.to_dict() for s in self.snapshots],
+                "current_id": self.current_id
+            }, f, indent=2)
+
+    def create(self, mode: str, causal: CausalMatrix, 
+               inquiry: InquiryEngine, tools: ToolInterface,
+               evolution: EvolutionEngine, label: str = "auto") -> Snapshot:
+        """
+        Create complete system snapshot.
+
+        Args:
+            mode: Current system mode
+            causal: Causal matrix state
+            inquiry: Inquiry engine state
+            tools: Tool interface state
+            evolution: Evolution engine state
+            label: Snapshot label
+
+        Returns:
+            Snapshot object
+        """
+        snapshot = Snapshot(
+            id=f"snap_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000,9999)}",
+            timestamp=datetime.now().isoformat(),
+            mode=mode,
+            causal_matrix=copy.deepcopy(causal.brain_modulation),
+            inquiry_state={
+                "questions": [q.to_dict() for q in inquiry.questions],
+                "topics": list(inquiry.topics)
+            },
+            tool_history=[call.to_dict() for call in tools.history[-100:]],
+            pending_evolutions=copy.deepcopy(evolution.pending_changes),
+            label=label
+        )
+
+        self.snapshots.append(snapshot)
+        self.current_id = snapshot.id
+        self._save_index()
+
+        return snapshot
+
+    def rollback(self, snapshot_id: str, 
+                 causal: CausalMatrix, inquiry: InquiryEngine,
+                 tools: ToolInterface, evolution: EvolutionEngine) -> Dict:
+        """
+        Restore system to snapshot state.
+
+        Args:
+            snapshot_id: ID of snapshot to restore
+            causal: Causal matrix to restore into
+            inquiry: Inquiry engine to restore into
+            tools: Tool interface to restore into
+            evolution: Evolution engine to restore into
+
+        Returns:
+            Dict with rollback status
+        """
+        target = next((s for s in self.snapshots if s.id == snapshot_id), None)
+        if not target:
+            return {"error": "Snapshot not found", "id": snapshot_id}
+
+        # Restore causal matrix modulation
+        causal.brain_modulation = copy.deepcopy(target.causal_matrix)
+
+        # Restore inquiry state
+        inquiry.questions = [Question(**q) for q in target.inquiry_state.get("questions", [])]
+        inquiry.topics = set(target.inquiry_state.get("topics", []))
+
+        # Restore tool history
+        tools.history = [ToolCall(**call) for call in target.tool_history]
+
+        # Restore pending evolutions
+        evolution.pending_changes = copy.deepcopy(target.pending_evolutions)
+
+        self.current_id = target.id
+
+        return {
+            "status": "rolled_back",
+            "to": snapshot_id,
+            "label": target.label,
+            "timestamp": target.timestamp,
+            "mode": target.mode
+        }
+
+    def list(self) -> List[Dict]:
+        """List available snapshots"""
+        return [{
+            "id": s.id,
+            "label": s.label,
+            "timestamp": s.timestamp,
+            "mode": s.mode
+        } for s in self.snapshots]
+
+    def get(self, snapshot_id: str) -> Optional[Snapshot]:
+        """Get specific snapshot"""
+        return next((s for s in self.snapshots if s.id == snapshot_id), None)
+
+
+# ================================================================================
+# TRIBRAIN KERNEL v1.0
+# The complete minimal runtime
+# ================================================================================
+
+class TriBrainKernel:
+    """
+    The seed. Everything else attaches here.
+
+    Six modules:
+    1. Inquiry    - asks questions (curiosity)
+    2. Tools      - interfaces with world (immune system)
+    3. Causal     - reasoning topology (wiring)
+    4. State      - mode switching (hexagram)
+    5. Evolution  - self-updates (dangerous button)
+    6. Snapshot   - rollback (safety)
+
+    This is the central nervous system.
+    """
+
+    def __init__(self, base_path: str = "./tribrain_kernel"):
+        """
+        Initialize the TriBrain Kernel.
+
+        Args:
+            base_path: Directory for persistence
+        """
+        self.path = Path(base_path)
+        self.path.mkdir(parents=True, exist_ok=True)
+
+        # Initialize six modules
+        self.inquiry = InquiryEngine(self.path / "inquiry")
+        self.tools = ToolInterface()
+        self.causal = CausalMatrix()
+        self.state = StateEngine()
+        self.evolution = EvolutionEngine(self.state)
+        self.snapshot = SnapshotEngine(self.path / "snapshots")
+
+        # Create initial snapshot
+        self.snapshot.create(
+            self.state.current_mode,
+            self.causal,
+            self.inquiry,
+            self.tools,
+            self.evolution,
+            "initialization"
+        )
+
+    # ========================================================================
+    # PUBLIC API: The Six Operations
+    # ========================================================================
+
+    def ask(self, topic: str, count: int = 3, style: str = "exploratory") -> List[Question]:
+        """
+        MODULE 1: Inquiry Engine
+        Generate questions instead of predictions.
+
+        Args:
+            topic: Subject to ask about
+            count: Number of questions
+            style: exploratory, analytical, creative, reflective
+
+        Returns:
+            List of Question objects
+        """
+        return self.inquiry.ask(topic, count, style)
+
+    def use_tool(self, name: str, **params) -> ToolCall:
+        """
+        MODULE 2: Tool Interface
+        Safe interaction with the world.
+
+        Args:
+            name: Tool to use (file_read, calculate, ask_user, etc.)
+            **params: Tool parameters
+
+        Returns:
+            ToolCall with result
+        """
+        return self.tools.call(name, **params)
+
+    def connect(self, from_brain: int, to_brain: int, 
+                data_type: str, strength: float = 1.0,
+                metadata: Dict = None) -> CausalLink:
+        """
+        MODULE 3: Causal Matrix
+        Rewire reasoning topology.
+
+        Args:
+            from_brain: Source brain (1, 2, or 3)
+            to_brain: Target brain (1, 2, or 3)
+            data_type: Type of connection
+            strength: Connection strength
+            metadata: Additional context
+
+        Returns:
+            CausalLink object
+        """
+        return self.causal.connect(from_brain, to_brain, data_type, strength, metadata)
+
+    def cast(self, mode: str) -> Dict:
+        """
+        MODULE 4: State Engine
+        Switch system mode (like casting a hexagram).
+
+        Args:
+            mode: explore, build, execute, safe, recover, evolve
+
+        Returns:
+            Dict with transition info
+        """
+        result = self.state.cast(mode)
+
+        # Update causal modulation based on mode
+        if mode == SystemMode.EXPLORE:
+            self.causal.set_modulation(1, 2, 1.5)  # Boost B1→B2 (learning)
+        elif mode == SystemMode.BUILD:
+            self.causal.set_modulation(2, 3, 1.3)  # Boost B2→B3 (building)
+        elif mode == SystemMode.EXECUTE:
+            self.causal.set_modulation(3, 1, 1.5)  # Boost B3→B1 (deploying)
+        elif mode == SystemMode.SAFE:
+            # Reduce all connections
+            self.causal.set_modulation(1, 2, 0.3)
+            self.causal.set_modulation(2, 3, 0.3)
+            self.causal.set_modulation(3, 1, 0.3)
+        elif mode == SystemMode.EVOLVE:
+            # Balanced for evolution
+            self.causal.set_modulation(1, 2, 1.2)
+            self.causal.set_modulation(2, 3, 1.2)
+            self.causal.set_modulation(3, 1, 1.2)
+
+        return result
+
+    def evolve(self, change_type: str, **params) -> Dict:
+        """
+        MODULE 5: Evolution Engine
+        Self-modify (if safety permits).
+
+        Args:
+            change_type: Type of evolution
+            **params: Evolution parameters
+
+        Returns:
+            Dict with status
+        """
+        result = self.evolution.evolve(change_type, params)
+
+        # If queued, create snapshot and apply
+        if result["status"] == "queued":
+            self.snapshot.create(
+                self.state.current_mode,
+                self.causal,
+                self.inquiry,
+                self.tools,
+                self.evolution,
+                f"pre_evolution_{change_type}"
+            )
+            self.evolution.apply_pending(self.snapshot)
+
+        return result
+
+    def rollback(self, snapshot_id: str = None) -> Dict:
+        """
+        MODULE 6: Snapshot Engine
+        Restore previous state.
+
+        Args:
+            snapshot_id: Snapshot to restore (default: last)
+
+        Returns:
+            Dict with rollback status
+        """
+        if not snapshot_id and self.snapshot.snapshots:
+            snapshot_id = self.snapshot.snapshots[-1].id
+
+        return self.snapshot.rollback(
+            snapshot_id,
+            self.causal,
+            self.inquiry,
+            self.tools,
+            self.evolution
+        )
+
+    # ========================================================================
+    # UTILITY METHODS
+    # ========================================================================
+
+    def status(self) -> Dict:
+        """Get complete system status"""
+        return {
+            "mode": self.state.get_status(),
+            "causal": self.causal.get_topology(),
+            "inquiry": {
+                "total_questions": len(self.inquiry.questions),
+                "open_questions": len(self.inquiry.get_open_questions()),
+                "topics": len(self.inquiry.topics)
+            },
+            "tools": {
+                "available": len(self.tools.registry),
+                "calls": len(self.tools.history)
+            },
+            "evolution": {
+                "pending": len(self.evolution.pending_changes),
+                "completed": len(self.evolution.evolutions)
+            },
+            "snapshots": {
+                "total": len(self.snapshot.snapshots),
+                "current": self.snapshot.current_id
+            }
+        }
+
+    def get_causal_chain(self, source: str, depth: int = 3) -> List[CausalLink]:
+        """Get causal chain from source"""
+        return self.causal.get_chain(source, depth)
+
+    def set_modulation(self, from_brain: int, to_brain: int, value: float):
+        """Directly set brain modulation"""
+        self.causal.set_modulation(from_brain, to_brain, value)
+
+
+# ================================================================================
+# CLI / DEMO
+# ================================================================================
+
+if __name__ == "__main__":
+    print("="*70)
+    print("  TRIBRAIN KERNEL v1.0")
+    print("  Minimal Self-Evolving Runtime")
+    print("="*70)
+
+    # Initialize
+    kernel = TriBrainKernel()
+
+    print("\n🧪 Running demonstration...\n")
+
+    # 1. Ask questions
+    print("1. Inquiry: ask()")
+    questions = kernel.ask("consciousness", 2, "exploratory")
+    for q in questions:
+        print(f"   ❓ {q.text[:60]}... ({q.confidence:.0%})")
+
+    # 2. Use tools
+    print("\n2. Tools: use_tool()")
+    result = kernel.use_tool("calculate", expression="sum([1,2,3,4,5])")
+    print(f"   🔧 calculate: {result.result}")
+
+    # 3. Connect brains
+    print("\n3. Causal: connect()")
+    link = kernel.connect(1, 2, "insight", 1.0)
+    print(f"   🔗 B1→B2: {link.strength:.2f}x")
+
+    # 4. Cast mode
+    print("\n4. State: cast()")
+    mode = kernel.cast(SystemMode.BUILD)
+    print(f"   ☯️  {mode['message']}")
+
+    # 5. Evolve
+    print("\n5. Evolution: evolve()")
+    evo = kernel.evolve("modulate_connection", from_brain=1, to_brain=2, value=1.8)
+    print(f"   🧬 {evo['status']}")
+
+    # 6. Rollback
+    print("\n6. Snapshot: rollback()")
+    rollback = kernel.rollback()
+    print(f"   💾 {rollback['status']}")
+
+    # Final status
+    print("\n" + "="*70)
+    print("  ✅ All six modules operational")
+    print("="*70)
+
+    status = kernel.status()
+    print(f"\n📊 Status:")
+    print(f"   Mode: {status['mode']['mode']}")
+    print(f"   Questions: {status['inquiry']['total_questions']}")
+    print(f"   Tools: {status['tools']['calls']} calls")
+    print(f"   Snapshots: {status['snapshots']['total']}")

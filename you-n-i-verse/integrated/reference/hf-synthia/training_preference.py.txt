@@ -1,0 +1,475 @@
+"""
+Training: Preference Learning
+==============================
+
+Calibrates awareness scores based on user feedback.
+
+Why This Works:
+- Users can't give absolute scores reliably
+- But they CAN compare: "Chart A has better spleen awareness than Chart B"
+- Learn from pairwise preferences using Bradley-Terry model
+- Aligns model outputs with human intuition
+
+Training Strategy:
+1. Show user two charts
+2. User says which has better awareness (Spleen/Ajna/Solar)
+3. Train model so predicted scores match preference
+4. Model learns what "good awareness" means to this user
+
+Usage:
+    from training_preference import PreferenceTrainer
+    
+    trainer = PreferenceTrainer(model, graph, extractor)
+    trainer.train(preference_dataset, num_epochs=50)
+"""
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+from typing import List, Dict, Tuple, Optional
+import random
+
+
+class PreferenceDataset(Dataset):
+    """
+    Dataset of pairwise preferences.
+    
+    Each sample contains:
+    - Chart A
+    - Chart B
+    - Preference: which chart has better awareness
+    - Awareness type: 'spleen', 'ajna', or 'solar'
+    """
+    
+    def __init__(
+        self,
+        preference_pairs: List[Dict]
+    ):
+        """
+        Args:
+            preference_pairs: List of dicts with:
+                {
+                    'chart_A': chart dict,
+                    'chart_B': chart dict,
+                    'preferred': 'A' or 'B',
+                    'awareness_type': 'spleen', 'ajna', or 'solar'
+                }
+        """
+        self.pairs = preference_pairs
+        
+        print(f"Preference dataset: {len(preference_pairs)} pairs")
+    
+    def __len__(self):
+        return len(self.pairs)
+    
+    def __getitem__(self, idx):
+        return self.pairs[idx]
+
+
+class PreferenceTrainer:
+    """
+    Trains using Bradley-Terry preference model.
+    
+    Loss: P(A > B) = sigmoid(score_A - score_B)
+    
+    If user says A > B, maximize P(A > B).
+    This teaches model to output higher scores for "better" charts.
+    """
+    
+    def __init__(
+        self,
+        model,
+        graph,
+        extractor,
+        learning_rate: float = 1e-4,
+        device: str = 'cpu'
+    ):
+        self.model = model.to(device)
+        self.graph = graph
+        self.extractor = extractor.to(device)
+        self.device = device
+        
+        # Optimizer
+        self.optimizer = optim.Adam(
+            list(model.parameters()) + list(extractor.parameters()),
+            lr=learning_rate
+        )
+        
+        # Edge index
+        from consciousness_gnn import get_edge_index
+        self.edge_index = get_edge_index(graph).to(device)
+        
+        # History
+        self.history = {
+            'train_loss': [],
+            'train_accuracy': [],
+            'val_loss': [],
+            'val_accuracy': []
+        }
+    
+    def compute_preference_loss(
+        self,
+        score_A: torch.Tensor,
+        score_B: torch.Tensor,
+        preferred: str
+    ) -> torch.Tensor:
+        """
+        Bradley-Terry preference loss.
+        
+        Args:
+            score_A: Predicted score for chart A
+            score_B: Predicted score for chart B
+            preferred: 'A' or 'B'
+            
+        Returns:
+            loss: scalar
+        """
+        # P(A > B) = sigmoid(score_A - score_B)
+        logit = score_A - score_B
+        
+        # If A preferred, maximize P(A > B)
+        # If B preferred, maximize P(B > A) = 1 - P(A > B)
+        if preferred == 'A':
+            loss = -F.logsigmoid(logit)
+        else:
+            loss = -F.logsigmoid(-logit)
+        
+        return loss
+    
+    def predict_score(
+        self,
+        chart: Dict,
+        awareness_type: str
+    ) -> torch.Tensor:
+        """
+        Predict awareness score for a chart.
+        
+        Args:
+            chart: Chart data
+            awareness_type: 'spleen', 'ajna', or 'solar'
+            
+        Returns:
+            score: scalar tensor
+        """
+        # Convert chart to placements
+        placements = self._chart_to_placements(chart)
+        
+        if len(placements) == 0:
+            return torch.tensor(0.5, device=self.device)
+        
+        # Extract features
+        features = self.extractor.extract_all_gate_features(placements)
+        sun_context = self.extractor.create_body_sun_vector(placements)
+        
+        features = features.to(self.device)
+        sun_context = sun_context.to(self.device)
+        
+        # Forward pass
+        outputs = self.model(features, self.edge_index, sun_context)
+        
+        # Get awareness score
+        score = outputs['awareness'][awareness_type]
+        
+        return score
+    
+    def train_epoch(self, dataloader: DataLoader) -> Tuple[float, float]:
+        """Train for one epoch"""
+        self.model.train()
+        self.extractor.train()
+        
+        total_loss = 0.0
+        correct = 0
+        total = 0
+        
+        for batch in dataloader:
+            batch_loss = 0.0
+            batch_correct = 0
+            batch_total = 0
+            
+            for item in batch:
+                chart_A = item['chart_A']
+                chart_B = item['chart_B']
+                preferred = item['preferred']
+                awareness_type = item['awareness_type']
+                
+                # Predict scores
+                score_A = self.predict_score(chart_A, awareness_type)
+                score_B = self.predict_score(chart_B, awareness_type)
+                
+                # Compute loss
+                loss = self.compute_preference_loss(score_A, score_B, preferred)
+                
+                batch_loss += loss
+                
+                # Check if prediction matches preference
+                if preferred == 'A':
+                    correct_pred = score_A > score_B
+                else:
+                    correct_pred = score_B > score_A
+                
+                if correct_pred:
+                    batch_correct += 1
+                batch_total += 1
+            
+            if batch_total > 0:
+                batch_loss = batch_loss / batch_total
+                
+                # Backprop
+                self.optimizer.zero_grad()
+                batch_loss.backward()
+                
+                # Gradient clipping
+                torch.nn.utils.clip_grad_norm_(
+                    list(self.model.parameters()) + list(self.extractor.parameters()),
+                    max_norm=1.0
+                )
+                
+                self.optimizer.step()
+                
+                total_loss += batch_loss.item()
+                correct += batch_correct
+                total += batch_total
+        
+        avg_loss = total_loss / max(len(dataloader), 1)
+        accuracy = correct / max(total, 1)
+        
+        return avg_loss, accuracy
+    
+    def validate(self, dataloader: DataLoader) -> Tuple[float, float]:
+        """Validate on held-out data"""
+        self.model.eval()
+        self.extractor.eval()
+        
+        total_loss = 0.0
+        correct = 0
+        total = 0
+        
+        with torch.no_grad():
+            for batch in dataloader:
+                batch_loss = 0.0
+                batch_correct = 0
+                batch_total = 0
+                
+                for item in batch:
+                    chart_A = item['chart_A']
+                    chart_B = item['chart_B']
+                    preferred = item['preferred']
+                    awareness_type = item['awareness_type']
+                    
+                    score_A = self.predict_score(chart_A, awareness_type)
+                    score_B = self.predict_score(chart_B, awareness_type)
+                    
+                    loss = self.compute_preference_loss(score_A, score_B, preferred)
+                    
+                    batch_loss += loss
+                    
+                    if preferred == 'A':
+                        correct_pred = score_A > score_B
+                    else:
+                        correct_pred = score_B > score_A
+                    
+                    if correct_pred:
+                        batch_correct += 1
+                    batch_total += 1
+                
+                if batch_total > 0:
+                    batch_loss = batch_loss / batch_total
+                    total_loss += batch_loss.item()
+                    correct += batch_correct
+                    total += batch_total
+        
+        avg_loss = total_loss / max(len(dataloader), 1)
+        accuracy = correct / max(total, 1)
+        
+        return avg_loss, accuracy
+    
+    def train(
+        self,
+        train_dataset: PreferenceDataset,
+        val_dataset: PreferenceDataset = None,
+        num_epochs: int = 50,
+        batch_size: int = 4,
+        save_path: str = None
+    ):
+        """Full training loop"""
+        train_loader = DataLoader(
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
+            collate_fn=lambda x: x  # Return list as-is
+        )
+        
+        val_loader = None
+        if val_dataset:
+            val_loader = DataLoader(
+                val_dataset,
+                batch_size=batch_size,
+                shuffle=False,
+                collate_fn=lambda x: x
+            )
+        
+        best_val_acc = 0.0
+        
+        print("\nStarting preference learning...")
+        print(f"Epochs: {num_epochs}")
+        print(f"Batch size: {batch_size}")
+        print("="*60)
+        
+        for epoch in range(num_epochs):
+            train_loss, train_acc = self.train_epoch(train_loader)
+            self.history['train_loss'].append(train_loss)
+            self.history['train_accuracy'].append(train_acc)
+            
+            if val_loader:
+                val_loss, val_acc = self.validate(val_loader)
+                self.history['val_loss'].append(val_loss)
+                self.history['val_accuracy'].append(val_acc)
+                
+                if val_acc > best_val_acc:
+                    best_val_acc = val_acc
+                    if save_path:
+                        self.save_checkpoint(save_path)
+                
+                print(f"Epoch {epoch+1}/{num_epochs} - "
+                      f"Loss: {train_loss:.4f} - "
+                      f"Acc: {train_acc:.2%} - "
+                      f"Val Loss: {val_loss:.4f} - "
+                      f"Val Acc: {val_acc:.2%}")
+            else:
+                print(f"Epoch {epoch+1}/{num_epochs} - "
+                      f"Loss: {train_loss:.4f} - "
+                      f"Acc: {train_acc:.2%}")
+        
+        print("="*60)
+        print("Preference learning complete!")
+        if val_loader:
+            print(f"Best validation accuracy: {best_val_acc:.2%}")
+    
+    def save_checkpoint(self, path: str):
+        """Save checkpoint"""
+        torch.save({
+            'model_state_dict': self.model.state_dict(),
+            'extractor_state_dict': self.extractor.state_dict(),
+            'optimizer_state_dict': self.optimizer.state_dict(),
+            'history': self.history
+        }, path)
+    
+    def load_checkpoint(self, path: str):
+        """Load checkpoint"""
+        checkpoint = torch.load(path, map_location=self.device)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.extractor.load_state_dict(checkpoint['extractor_state_dict'])
+        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        self.history = checkpoint['history']
+    
+    def _chart_to_placements(self, chart: Dict) -> List:
+        """Convert chart to placements"""
+        from feature_extractor import Placement
+        
+        placements = []
+        
+        for field_name, field_data in chart.get('fields', {}).items():
+            for planet_name, placement_data in field_data.items():
+                if not isinstance(placement_data, dict) or 'gate' not in placement_data:
+                    continue
+                
+                placement = Placement(
+                    planet=planet_name,
+                    stream='personality',
+                    gate=placement_data['gate'],
+                    line=placement_data.get('line', 1),
+                    color=placement_data.get('color', 1),
+                    tone=placement_data.get('tone', 1),
+                    base=placement_data.get('base', 1),
+                    degree=placement_data.get('degree', 0.0),
+                    field=field_name
+                )
+                
+                placements.append(placement)
+        
+        return placements
+
+
+# === TESTING ===
+
+def create_synthetic_preferences(
+    num_pairs: int = 50
+) -> List[Dict]:
+    """
+    Create synthetic preference pairs for testing.
+    
+    In production, these come from user feedback.
+    """
+    from training_denoising import create_synthetic_charts
+    
+    charts = create_synthetic_charts(num_pairs * 2)
+    preferences = []
+    
+    awareness_types = ['spleen', 'ajna', 'solar']
+    
+    for i in range(0, len(charts) - 1, 2):
+        # Random preference
+        preferred = random.choice(['A', 'B'])
+        awareness_type = random.choice(awareness_types)
+        
+        preferences.append({
+            'chart_A': charts[i],
+            'chart_B': charts[i + 1],
+            'preferred': preferred,
+            'awareness_type': awareness_type
+        })
+    
+    return preferences
+
+
+def test_preference_trainer():
+    """Test preference learning"""
+    print("Testing Preference Trainer\n" + "="*60)
+    
+    from consciousness_graph import create_graph
+    from feature_extractor import FeatureExtractor
+    from consciousness_gnn import ConsciousnessGNN
+    
+    # Create components
+    graph = create_graph()
+    extractor = FeatureExtractor()
+    model = ConsciousnessGNN()
+    
+    print("✓ Components created")
+    
+    # Create datasets
+    train_prefs = create_synthetic_preferences(30)
+    val_prefs = create_synthetic_preferences(10)
+    
+    train_dataset = PreferenceDataset(train_prefs)
+    val_dataset = PreferenceDataset(val_prefs)
+    
+    print("✓ Datasets created")
+    
+    # Create trainer
+    trainer = PreferenceTrainer(model, graph, extractor)
+    
+    print("✓ Trainer created")
+    
+    # Train for a few epochs
+    print("\nRunning short training test (3 epochs)...")
+    trainer.train(
+        train_dataset=train_dataset,
+        val_dataset=val_dataset,
+        num_epochs=3,
+        batch_size=4
+    )
+    
+    print(f"\nTraining history:")
+    print(f"  Train losses: {[f'{l:.4f}' for l in trainer.history['train_loss']]}")
+    print(f"  Train accuracy: {[f'{a:.2%}' for a in trainer.history['train_accuracy']]}")
+    print(f"  Val losses: {[f'{l:.4f}' for l in trainer.history['val_loss']]}")
+    print(f"  Val accuracy: {[f'{a:.2%}' for a in trainer.history['val_accuracy']]}")
+    
+    print("\n✓ Preference trainer test complete!")
+
+
+if __name__ == "__main__":
+    test_preference_trainer()

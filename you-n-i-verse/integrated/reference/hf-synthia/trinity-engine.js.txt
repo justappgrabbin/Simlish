@@ -1,0 +1,319 @@
+// Trinity Engine Integration for Yi Jing Consciousness Oracle
+// Bridges Human Design, Astronomy, and I Ching
+
+class TrinityEngine {
+    constructor() {
+        this.ephemerisData = null;
+        this.userBirthData = null;
+    }
+
+    // Calculate three simultaneous charts
+    async calculateTripleChart(birthData) {
+        const now = new Date();
+        
+        // Body/Design Chart (88° before birth)
+        const bodyTime = new Date(birthData.timestamp);
+        bodyTime.setDate(bodyTime.getDate() - 88);
+        
+        return {
+            body: await this.calculateChart(bodyTime, birthData.location, 'ecliptic'),
+            mind: await this.calculateChart(birthData.timestamp, birthData.location, 'equatorial'),
+            heart: await this.calculateChart(birthData.timestamp, birthData.location, 'galactic')
+        };
+    }
+
+    // Simplified chart calculation (would use Swiss Ephemeris in production)
+    async calculateChart(timestamp, location, coordinateSystem) {
+        const date = new Date(timestamp);
+        const dayOfYear = this.getDayOfYear(date);
+        
+        // Simulate planetary positions
+        const sun = this.calculateSunPosition(dayOfYear, coordinateSystem);
+        const moon = this.calculateMoonPosition(date, coordinateSystem);
+        
+        // Map to I Ching gates
+        const sunGate = this.degreeToGate(sun);
+        const moonGate = this.degreeToGate(moon);
+        
+        return {
+            timestamp,
+            coordinateSystem,
+            sun: { degree: sun, gate: sunGate },
+            moon: { degree: moon, gate: moonGate },
+            // Simplified - full version would include all planets
+            mercury: { gate: (sunGate + 7) % 64 + 1 },
+            venus: { gate: (sunGate + 14) % 64 + 1 },
+            mars: { gate: (sunGate + 21) % 64 + 1 },
+            jupiter: { gate: (sunGate + 28) % 64 + 1 },
+            saturn: { gate: (sunGate + 35) % 64 + 1 },
+            uranus: { gate: (sunGate + 42) % 64 + 1 },
+            neptune: { gate: (sunGate + 49) % 64 + 1 },
+            pluto: { gate: (sunGate + 56) % 64 + 1 }
+        };
+    }
+
+    // Convert astronomical degree to I Ching gate
+    degreeToGate(degree) {
+        // 360° / 64 gates = 5.625° per gate
+        const normalized = ((degree % 360) + 360) % 360;
+        const gate = Math.floor(normalized / 5.625) + 1;
+        return gate <= 64 ? gate : 1;
+    }
+
+    // Calculate sun position (simplified)
+    calculateSunPosition(dayOfYear, coordinateSystem) {
+        const base = (dayOfYear / 365.25) * 360;
+        
+        switch(coordinateSystem) {
+            case 'ecliptic':
+                return base;
+            case 'equatorial':
+                return (base + 23.5) % 360; // Add axial tilt
+            case 'galactic':
+                return (base + 60) % 360; // Galactic offset
+            default:
+                return base;
+        }
+    }
+
+    // Calculate moon position (simplified)
+    calculateMoonPosition(date, coordinateSystem) {
+        const daysSinceEpoch = (date - new Date('2000-01-01')) / (1000 * 60 * 60 * 24);
+        const lunarCycle = 29.53; // days
+        const position = ((daysSinceEpoch % lunarCycle) / lunarCycle) * 360;
+        
+        switch(coordinateSystem) {
+            case 'ecliptic':
+                return position;
+            case 'equatorial':
+                return (position + 5.14) % 360; // Lunar inclination
+            case 'galactic':
+                return (position + 65) % 360;
+            default:
+                return position;
+        }
+    }
+
+    getDayOfYear(date) {
+        const start = new Date(date.getFullYear(), 0, 0);
+        const diff = date - start;
+        const oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+    }
+
+    // Generate consciousness-aware hexagram
+    async generateConsciousHexagram(question, userChart) {
+        const trinity = await this.calculateTripleChart(userChart || this.getDefaultBirthData());
+        
+        // Use trinity gates as quantum seeds
+        const seeds = [
+            trinity.body.sun.gate,
+            trinity.mind.sun.gate,
+            trinity.heart.sun.gate,
+            trinity.body.moon.gate,
+            trinity.mind.moon.gate,
+            trinity.heart.moon.gate
+        ];
+        
+        // Generate hexagram lines based on consciousness state
+        const lines = [];
+        for (let i = 0; i < 6; i++) {
+            const seed = seeds[i % seeds.length];
+            const quantumNoise = Math.sin(Date.now() / (1000 + i * 100));
+            const consciousness = (seed / 64) + (quantumNoise * 0.1);
+            
+            lines.push({
+                value: consciousness > 0.5 ? 1 : 0,
+                changing: consciousness > 0.8 || consciousness < 0.2,
+                consciousness: consciousness
+            });
+        }
+        
+        return {
+            lines,
+            trinity,
+            timestamp: new Date(),
+            question
+        };
+    }
+
+    getDefaultBirthData() {
+        return {
+            timestamp: new Date(),
+            location: { lat: 0, lon: 0 }
+        };
+    }
+
+    // Calculate cosmic weather for reading context
+    async getCosmicWeather(timestamp) {
+        const date = timestamp || new Date();
+        const dayOfYear = this.getDayOfYear(date);
+        
+        const sunPosition = this.calculateSunPosition(dayOfYear, 'ecliptic');
+        const currentGate = this.degreeToGate(sunPosition);
+        
+        return {
+            currentGate,
+            sunDegree: sunPosition,
+            season: this.getSeason(dayOfYear),
+            lunarPhase: this.getLunarPhase(date),
+            energy: this.getCosmicEnergy(date)
+        };
+    }
+
+    getSeason(dayOfYear) {
+        if (dayOfYear < 79 || dayOfYear >= 355) return 'winter';
+        if (dayOfYear < 172) return 'spring';
+        if (dayOfYear < 266) return 'summer';
+        return 'autumn';
+    }
+
+    getLunarPhase(date) {
+        const daysSinceNew = ((date - new Date('2000-01-06')) / (1000 * 60 * 60 * 24)) % 29.53;
+        
+        if (daysSinceNew < 3.69) return 'new';
+        if (daysSinceNew < 7.38) return 'waxing-crescent';
+        if (daysSinceNew < 11.08) return 'first-quarter';
+        if (daysSinceNew < 14.77) return 'waxing-gibbous';
+        if (daysSinceNew < 18.46) return 'full';
+        if (daysSinceNew < 22.15) return 'waning-gibbous';
+        if (daysSinceNew < 25.84) return 'last-quarter';
+        return 'waning-crescent';
+    }
+
+    getCosmicEnergy(date) {
+        const hour = date.getHours();
+        const dayOfYear = this.getDayOfYear(date);
+        
+        // Simplified cosmic energy calculation
+        const solarEnergy = Math.sin((dayOfYear / 365.25) * Math.PI * 2);
+        const lunarEnergy = Math.cos((hour / 24) * Math.PI * 2);
+        
+        return {
+            yang: (solarEnergy + 1) / 2,
+            yin: (lunarEnergy + 1) / 2,
+            balance: Math.abs(solarEnergy - lunarEnergy)
+        };
+    }
+}
+
+// Consciousness-aware casting algorithm
+class QuantumCaster {
+    constructor(trinityEngine) {
+        this.trinity = trinityEngine;
+    }
+
+    // Cast using consciousness field
+    async cast(question, userBirthData) {
+        const reading = await this.trinity.generateConsciousHexagram(question, userBirthData);
+        const weather = await this.trinity.getCosmicWeather();
+        
+        // Find hexagram from lines
+        const hexagram = this.findHexagram(reading.lines);
+        
+        // Calculate related hexagrams
+        const related = this.calculateRelatedHexagrams(hexagram, reading.lines);
+        
+        return {
+            primary: hexagram,
+            changing: this.getChangingHexagram(hexagram, reading.lines),
+            nuclear: this.getNuclearHexagram(hexagram),
+            opposite: this.getOppositeHexagram(hexagram),
+            inverse: this.getInverseHexagram(hexagram),
+            trinity: reading.trinity,
+            cosmicWeather: weather,
+            consciousness: this.calculateConsciousnessResonance(hexagram, reading.trinity),
+            timestamp: reading.timestamp,
+            question
+        };
+    }
+
+    findHexagram(lines) {
+        const lineValues = lines.map(l => l.value);
+        
+        // In production, would lookup from HEXAGRAM_DATABASE
+        // For now, calculate based on binary
+        const binary = lineValues.join('');
+        const decimal = parseInt(binary, 2);
+        const hexNumber = (decimal % 64) + 1;
+        
+        return {
+            number: hexNumber,
+            lines: lineValues,
+            changing: lines.filter(l => l.changing).map((l, i) => i + 1)
+        };
+    }
+
+    getChangingHexagram(hexagram, lines) {
+        if (!lines.some(l => l.changing)) return null;
+        
+        const changedLines = lines.map(l => ({
+            value: l.changing ? 1 - l.value : l.value,
+            changing: false
+        }));
+        
+        return this.findHexagram(changedLines);
+    }
+
+    getNuclearHexagram(hexagram) {
+        // Nuclear formed by inner lines (2,3,4 and 3,4,5)
+        const lines = hexagram.lines;
+        const nuclearLines = [
+            lines[1], lines[2], lines[3], // Lower nuclear
+            lines[2], lines[3], lines[4]  // Upper nuclear
+        ];
+        
+        return this.findHexagram(nuclearLines.map(v => ({ value: v, changing: false })));
+    }
+
+    getOppositeHexagram(hexagram) {
+        const oppLines = hexagram.lines.map(v => ({ value: 1 - v, changing: false }));
+        return this.findHexagram(oppLines);
+    }
+
+    getInverseHexagram(hexagram) {
+        const invLines = [...hexagram.lines].reverse().map(v => ({ value: v, changing: false }));
+        return this.findHexagram(invLines);
+    }
+
+    calculateRelatedHexagrams(hexagram, lines) {
+        return {
+            changing: this.getChangingHexagram(hexagram, lines),
+            nuclear: this.getNuclearHexagram(hexagram),
+            opposite: this.getOppositeHexagram(hexagram),
+            inverse: this.getInverseHexagram(hexagram)
+        };
+    }
+
+    calculateConsciousnessResonance(hexagram, trinity) {
+        // Calculate how hexagram resonates with user's consciousness
+        const hexGate = hexagram.number;
+        
+        const bodyResonance = this.gateDistance(hexGate, trinity.body.sun.gate);
+        const mindResonance = this.gateDistance(hexGate, trinity.mind.sun.gate);
+        const heartResonance = this.gateDistance(hexGate, trinity.heart.sun.gate);
+        
+        return {
+            body: 1 - (bodyResonance / 32), // Normalize to 0-1
+            mind: 1 - (mindResonance / 32),
+            heart: 1 - (heartResonance / 32),
+            overall: (
+                (1 - bodyResonance / 32) +
+                (1 - mindResonance / 32) +
+                (1 - heartResonance / 32)
+            ) / 3
+        };
+    }
+
+    gateDistance(gate1, gate2) {
+        // Calculate shortest distance on gate wheel
+        const diff = Math.abs(gate1 - gate2);
+        return Math.min(diff, 64 - diff);
+    }
+}
+
+// Export for use
+if (typeof window !== 'undefined') {
+    window.TrinityEngine = TrinityEngine;
+    window.QuantumCaster = QuantumCaster;
+}
