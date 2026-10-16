@@ -107,3 +107,8 @@ test('address input must be an object rather than an array or primitive', () => 
   assert.throws(()=>normalizeAddress(false));
   assert.throws(()=>normalizeAddress(''));
 });
+
+test('canonical keys reject incomplete addresses', () => {
+  assert.throws(()=>canonicalAddress({mode:'macro',gate:6}));
+  assert.throws(()=>canonicalAddress({mode:'micro',gate:6,line:4,color:4,tone:4,base:2}));
+});
