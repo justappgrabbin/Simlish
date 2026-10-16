@@ -149,6 +149,7 @@ try {
     const persisted = await readProject();
     if (persisted.body !== original) throw new Error('Original Studio character project not retained');
   }, studioOriginal);
+  await page.locator('[data-view="systems"]').click();
   await page.locator('#fitnessMorphLab summary').click();
   assert.equal(await page.locator('#studioCharacterControls').evaluate(e => e.hidden), false,
     'native Computer exposes original Studio bridge');
