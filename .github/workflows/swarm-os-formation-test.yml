@@ -5,11 +5,13 @@ on:
     paths:
       - 'you-n-i-verse/formation-spine.mjs'
       - 'you-n-i-verse/formation-spine.test.mjs'
+      - 'you-n-i-verse/formation-klein.test.mjs'
       - '.github/workflows/swarm-os-formation-test.yml'
   pull_request:
     paths:
       - 'you-n-i-verse/formation-spine.mjs'
       - 'you-n-i-verse/formation-spine.test.mjs'
+      - 'you-n-i-verse/formation-klein.test.mjs'
       - '.github/workflows/swarm-os-formation-test.yml'
   workflow_dispatch:
 permissions:
@@ -27,6 +29,6 @@ jobs:
           node --check you-n-i-verse/formation-spine.mjs
           node --check you-n-i-verse/formation-spine.test.mjs
       - name: Formation morph execution tests
-        run: node --test you-n-i-verse/formation-spine.test.mjs
+        run: node --test you-n-i-verse/formation-spine.test.mjs you-n-i-verse/formation-klein.test.mjs
       - name: Existing local world bridge regression
         run: node --test you-n-i-verse/test.mjs
