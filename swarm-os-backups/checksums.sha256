@@ -1,0 +1,28 @@
+# SWARM-OS checkpoint inventory (2026-10-16)
+# Format: SHA-256  filename
+# These checksums describe LOCAL archives. Binary archive upload to GitHub is PENDING.
+ee8856462b854c5958c657a6d743ab09963503016e683823500f8f53b995b27c  resonance-repair-pass-10-idempotent-mesh.zip
+8a21586be5d0bd4fb4fd402bf2623f85065aaab9157bdec13f990ab1f517990f  resonance-repair-pass-11-stable-node-ids.zip
+1ee3c9cb32e5160d61455054bd709fa1c5490675a814a17f966ef0252099ca08  resonance-repair-pass-12-mesh-edges.zip
+1db95a33cf18e94a4657b962bfff6493baeb557070f0980b19d33129827df1f7  resonance-repair-pass-13-connected-edge-route.zip
+146c224efbb542178da4190209f906464d34a45a35387033974e1b58dc14349c  resonance-repair-pass-14-atomic-profile.zip
+ea65981746cefe9d870ebffe30a6e44ce484ddcf9f3d9ca93b62f90b526056eb  resonance-repair-pass-15-hd-address.zip
+b9b1121507f3045dfb7a2782f56f8179d7a2e0c1018b801c0fef23ccf7a4116f  resonance-repair-pass-16-claim-lab.zip
+6c57bac9f2810134d4eccb991d4bdfa42e094ac2ffe1fd8c1427b98af4d43ef8  resonance-repair-pass-17-circles-science.zip
+d77bec2ac3a46fbc513b3ac4e8f8dff2c6247df3502ff7f980613f961991eb48  resonance-repair-pass-18-circles-safeguards.zip
+9639b8dffc487e8e4a973994ac1364340ed687b1ea5316bc663229317bb9dbad  resonance-repair-pass-19-adaptive-evidence.zip
+27f33e54ae9173d19ab326614c700198a2b5a898412c7716340509507110bd95  resonance-repair-pass-2.zip
+9dea0e1ef2f4b5989d20ad8cc19f7bfa424b3be7f60685a6b8a2ea42811e9893  resonance-repair-pass-20-cube-invariants.zip
+21f6946fa5f2f3fc7634ebbb91d7f31b05f13740663db1488ed1fc403ab9918d  resonance-repair-pass-21-existing-mesh-bridge.zip
+e7c3e8fe0347690671b2544fa42ce017940c4b3682a661276069f3f7ed3751cf  resonance-repair-pass-22-klein-channel-activation.zip
+09433740e56e270e5022bc0f767920e7fed7570d4fa8bee1c604297693ef8d1a  resonance-repair-pass-23-klein-execution.zip
+5b9cec3923cee3cc9704b5573391720199dcc0505d4eb44d6efb25f69219a232  resonance-repair-pass-24-ato-klein-trace.zip
+8369d01e2ee0814c2ae481d88d2b63c8c3e743083a54a4bc33ddbc8588917516  resonance-repair-pass-25-spine-port.zip
+5b22f2fb551d591a91595071b7ca92194e443af725a019382116a81261557935  resonance-repair-pass-3.zip
+397882ce70ca54cf1f9b62af0c672311226cf4c4b767da223445178014979370  resonance-repair-pass-4-live-mesh.zip
+dd1a433fdd16658619d80c6eac6fcddb1554742329bf8e43750648c0013afd00  resonance-repair-pass-5-api-route.zip
+7671de07d4f7f8b9aacd738b37fc9f40ff2838db81eaf129cff22ee8168574dc  resonance-repair-pass-6-mounted-live-route.zip
+085931e95423e97c036bf5fd68c368ab97770877571723c583ca8ead824c2d91  resonance-repair-pass-7-source-inventory.zip
+ce02d9395d377b86bb9838f0e1dc7ba3fd91f7ab544667262749bcb93e786d06  resonance-repair-pass-8-chart-policy.zip
+b1ece1047dffe30551ee0fb7d5d64902bf6d89ec48dd17d885d55faf91a681af  resonance-repair-pass-9-persistent-mesh.zip
+d8b5b26dbbbccb69e6733a0e4f3cdcae12b218a3be353a6a0e010cfdf193f321  resonance-first-verification-and-repair.zip
