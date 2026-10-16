@@ -143,3 +143,9 @@ test('artifact mount rejects malformed capability records', () => {
     assert.throws(() => kernel.mountArtifact({address:address(6),capabilities}));
   }
 });
+
+test('artifact mount rejects an array-shaped manifest', () => {
+  const kernel = new StateSpaceKernel();
+  const malformed = Object.assign([], {address:address(6),capabilities:[]});
+  assert.throws(() => kernel.mountArtifact(malformed));
+});
