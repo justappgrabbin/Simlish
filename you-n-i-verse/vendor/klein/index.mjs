@@ -1,3 +1,4 @@
+import { canonicalAddress as canonicalSpaceAddress } from './address-space.mjs';
 export * from './boolean-ato.mjs';
 export * from './address-space.mjs';
 export * from './state-space-kernel.mjs';
@@ -105,10 +106,8 @@ export function normalizeMicroAddress(input) {
 }
 
 export function addressKey(address) {
-  const fields = address.mode === 'micro'
-    ? ['planetary','dimension','gate','line','color','tone','base','degree','minute','second','arc','zodiac','house']
-    : ['gate','line','color','tone','base'];
-  return `${address.mode}:${fields.map((field) => `${field}=${address[field]}`).join('|')}`;
+  const normalized = address?.mode === 'micro' ? normalizeMicroAddress(address) : normalizeMacroAddress(address);
+  return canonicalSpaceAddress(normalized);
 }
 
 export function canonicalStringify(value) {
