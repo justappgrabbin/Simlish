@@ -66,7 +66,8 @@ jobs:
         with:
           gradle-version: '8.9'
       - name: Install target Android build SDK
-        run: "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+        run: |
+          "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
       - name: Preserve existing Studio host and build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
       - name: Verify real APK asset entries and pinned provenance
