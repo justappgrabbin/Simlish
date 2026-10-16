@@ -25,7 +25,7 @@ await mkdir(target, { recursive: true });
 
 const files = [
   'index.html', 'computer.css', 'computer-app.mjs', 'swarm-ui.mjs',
-  'computer.html', 'computer-diagnostic.mjs',
+  'computer.html', 'computer-diagnostic.mjs', 'fitness-morph-ui.mjs',
 ];
 for (const file of files) await cp(join(source, file), join(target, file));
 await cp(join(source, 'computer-runtime'), join(target, 'computer-runtime'), { recursive: true });
@@ -44,6 +44,7 @@ const changes = {
   'computer-app.mjs': [
     ["from '/computer-runtime/", "from './computer-runtime/"],
     ["from '/swarm-ui.mjs'", "from './swarm-ui.mjs'"],
+    ["from '/fitness-morph-ui.mjs'", "from './fitness-morph-ui.mjs'"],
   ],
   'computer.html': [['src="/computer-diagnostic.mjs"', 'src="./computer-diagnostic.mjs"']],
   'computer-diagnostic.mjs': [["from'/computer-runtime/", "from'./computer-runtime/"]],
@@ -73,6 +74,12 @@ if (!inventory.some(x => x.path.endsWith('ato-core/src/index.mjs')))
   throw new Error('Real recovered ATO Core was not packaged');
 if (!inventory.some(x => x.path === 'computer-runtime/events/browser-event-emitter.mjs'))
   throw new Error('Native append-only IndexedDB event adapter was not packaged');
+if (!inventory.some(x => x.path === 'computer-runtime/services/fitness-morph.mjs'))
+  throw new Error('Real executable Simlish fitness adapter was not packaged');
+if (!inventory.some(x => x.path === 'computer-runtime/donors/verified/simlish/frame-morph.mjs'))
+  throw new Error('Original Simlish visual morph donor was not packaged');
+if (!inventory.some(x => x.path === 'computer-runtime/donors/verified/simlish/swarm-fit.mjs'))
+  throw new Error('Original Simlish CPU particle optimizer was not packaged');
 if (!inventory.some(x => x.path === 'computer-runtime/services/native-klein-memory.mjs'))
   throw new Error('Native Klein memory adapter was not packaged');
 if (inventory.some(x => /(?:node_modules|\.git\/)/.test(x.path)))
