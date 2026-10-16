@@ -89,3 +89,12 @@ test('unsupported address modes cannot masquerade as macro states', () => {
   assert.throws(()=>normalizeAddress({...address(6),mode:'other'}),error=>error.code==='INVALID_MODE');
   assert.throws(()=>canonicalAddress({...address(6),mode:'other'}),error=>error.code==='INVALID_MODE');
 });
+
+test('identity metadata is typed and canonical serialization escapes delimiters', () => {
+  const a={...address(6),scope:'user|scope',originContext:'a=b'};
+  const key=canonicalAddress(a);
+  assert.match(key,/scope=user%7Cscope/);
+  assert.match(key,/originContext=a%3Db/);
+  assert.throws(()=>normalizeAddress({...a,scope:{value:'bad'}}));
+  assert.throws(()=>normalizeAddress({...a,originContext:' '}));
+});
