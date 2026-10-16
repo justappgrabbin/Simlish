@@ -2,7 +2,8 @@
 // Alexis's rules used: the swarm is the agent; PSO = genotype (background tooling, checks, mechanics); GA = phenotype (what shows);
 // packs are 3, 2, 1, each pack two bits, three packs make a six-bit hexagram; uncertainty triggers investigation, not rejection;
 // Space is not primitive; other languages come later (js, py, css, json adapters below are PLACEHOLDERS, marked as such).
-// The uploaded file is never executed or modified: only its bytes are read. "Execution" means the NSNF swarm runtime runs on the file's event.
+// By default (this module alone) the uploaded file's own code is never run or modified: only its bytes are read and the NSNF swarm runtime runs on the file's event.
+// integrated/integrated-swarm.mjs runs the file through Alexis's patches first and passes {executed:true, appCode} here; the bytes are still never modified.
 // INVESTIGATING (not settled by Alexis or the spec; see also state-space.mjs and nsnf-runtime.mjs lists):
 export const INVESTIGATING=Object.freeze([
  'placement below the address: level 1 uses the registered address (gate via King Wen->Fu Xi map, line as the sub-position) when present; levels 2.. use bytes of the file\'s SHA-256. Alexis has not said how a file maps to nested positions.',
@@ -50,7 +51,7 @@ export const fileGenotype=new SwarmComponent({id:'file-intake',kind:'PSO',purpos
   {id:'language-known',check:i=>i.features.language?{ok:true,note:'adapter for '+i.features.language+' is a placeholder'}:{ok:false,note:'no language adapter for this file; generic handling only'}}]});
 const phenotypeComponent=new SwarmComponent({id:'file-view',kind:'GA',purpose:'Show what the swarm did with the file',members:[
  {id:'title',check:i=>!!i.visible.title},{id:'placement-label',check:i=>!!i.visible.placement},{id:'six-lines',check:i=>i.visible.lines?.length===6},
- {id:'status-matches',check:i=>i.visible.status===i.genotype.status},{id:'file-identity',check:i=>/^[0-9a-f]{64}$/.test(i.visible.sha256||'')},{id:'file-not-executed',check:i=>i.visible.userCodeExecuted===false}]});
+ {id:'status-matches',check:i=>i.visible.status===i.genotype.status},{id:'file-identity',check:i=>/^[0-9a-f]{64}$/.test(i.visible.sha256||'')},{id:'execution-reported',check:i=>typeof i.visible.userCodeExecuted==='boolean'}]});
 const slug=s=>String(s||'file').toLowerCase().replace(/\.[a-z0-9]+$/,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'file';
 const levelBytes=hex=>Uint8Array.from(hex.match(/../g).map(h=>parseInt(h,16)));
 // ---- placement into the nested state space (see INVESTIGATING above). Returns provenance for every level.
@@ -74,17 +75,17 @@ export function placeFile({features,genotype,address,space}){
 }
 const trait=(g,i)=>({title:(i.personalization?.name?i.personalization.name+' · ':'')+i.features.name,placement:i.placement.label,status:g.status,hexagram_code:g.hexagram_code,
  lines:[...g.hexagram_code].map(b=>b==='1'?'solid':'broken'),sha256:i.features.sha256,kind:i.features.kind,language:i.features.language||'unknown',
- execution:i.execution?{tier:i.execution.tier,active:i.execution.n_active,confidence:i.execution.confidence}:null,userCodeExecuted:false,kept:true});
+ execution:i.execution?{tier:i.execution.tier,active:i.execution.n_active,confidence:i.execution.confidence}:null,userCodeExecuted:i.executed===true,kept:true});
 export const filePair=()=>new SwarmPair({id:'any-file',genotype:fileGenotype,phenotype:{component:phenotypeComponent,trait}});
 const mem=()=>({d:{},getItem(k){return this.d[k]??null},setItem(k,v){this.d[k]=v}});
 // input: {name, bytes}. options: personalization, address, source, kernel, storage, runtime, finish, target, env, client, fetchImpl, outbox, persist
-export async function processFile(input,{personalization=null,address=null,source=null,kernel=globalThis.AgentomagotchiKernel,storage=mem(),runtime=new NsnfRuntime(),finish=true,target='reality',env={},client=null,fetchImpl,outbox,persist=true}={}){
+export async function processFile(input,{personalization=null,address=null,source=null,kernel=globalThis.AgentomagotchiKernel,storage=mem(),runtime=new NsnfRuntime(),finish=true,target='reality',env={},client=null,fetchImpl,outbox,persist=true,appCode=null,executed=false}={}){
  const bytes=toBytes(input?.bytes);if(!bytes)throw new TypeError('input.bytes required');
  const name=input.name||'upload',fixed=address??personalization?.address??null,features=fileFeatures(name,bytes);
  const uploader=source||(personalization?.name?'uploader:'+personalization.name:'uploaded-file:'+name);
  const pair=filePair(),reasons=[];
  // 1 registration (swarm: PSO checks the full 13-place address; uncertain -> investigating, kept)
- const registration=registerSimlish(storage,{id:'file-'+slug(name)+'-'+features.sha256.slice(0,8),version:'sha256:'+features.sha256.slice(0,12),source:uploader,address:fixed,capabilities:['uploaded-file'],kernel});
+ const registration=registerSimlish(storage,{id:appCode||('file-'+slug(name)+'-'+features.sha256.slice(0,8)),version:'sha256:'+features.sha256.slice(0,12),source:uploader,address:fixed,capabilities:['uploaded-file'],kernel});
  if(registration.status!=='registered')reasons.push('registration investigating: '+(registration.investigation?[].concat(registration.investigation.missingPlaces).join(', ')||registration.investigation.failedChecks.join(', '):''));
  // 2 file genotype (PSO): packs 3,2,1 -> six-bit hexagram
  const g=pair.genotype.forward({features});
@@ -101,7 +102,7 @@ export async function processFile(input,{personalization=null,address=null,sourc
  if(finish){const r=await finishApp({name,bytes},{personalization,address:fixed,source:uploader,kernel,env,client,fetchImpl,outbox,target});
   finisher={status:r.report.status,added:r.report.addedFiles,missingBefore:r.report.missingBefore,supabase:r.report.supabase,translation:{target:r.report.translation?.target,status:r.report.translation?.status,note:r.report.translation?.note},zipBytes:r.zip.length}}
  // 6 phenotype (GA): what is shown, expressed from the genotype
- const ph=pair.phenotype.express(g,{features,placement,execution:execution.executed?execution:null,personalization});
+ const ph=pair.phenotype.express(g,{features,placement,execution:execution.executed?execution:null,personalization,executed:executed===true});
  const status=reasons.length?'investigating':'complete';
  if(persist)runtime.checkpoint();
  return {status,reasons,file:{name:features.name,size:features.size,sha256:features.sha256,kind:features.kind,language:features.language,adapter:features.adapter},
@@ -109,5 +110,5 @@ export async function processFile(input,{personalization=null,address=null,sourc
   placement,execution:execution.executed?{tier:execution.tier,startTier:execution.startTier,n_active:execution.n_active,macs:execution.macs,confidence:execution.confidence,coherence:execution.coherence,
    cache_hit:execution.cache_hit,escalation:execution.escalation,reasons:execution.reasons,space:execution.space,trace:execution.trace,event_id:execution.event_id}:execution,
   phenotype_ga:{visible:ph.visible,status:ph.status,hexagram_code:ph.hexagram_code,failed:ph.failed},finisher,
-  safety:{userCodeExecuted:false,originalBytesModified:false},investigating:[...INVESTIGATING],swarm:pair.snapshot()};
+  safety:{userCodeExecuted:executed===true,originalBytesModified:false},investigating:[...INVESTIGATING],swarm:pair.snapshot()};
 }

@@ -1,0 +1,77 @@
+{
+ "note": "Copied byte-for-byte from Alexis's zips. Do not edit. integrated/*.mjs at the top level are the thin adapters.",
+ "files": {
+  "spine/execution-pipeline.mjs": {
+   "from": "zips/_drive_x/Synthia-v0.5.1-EXECUTION-PIPELINE-PATCH/packages/execution-spine/src/execution-pipeline.mjs",
+   "sha256": "4b736a8cfe75c1d45368d87bda0ab283b66ac73001f9f0ff9ceb6270b0bc1235"
+  },
+  "spine/canonical-address.mjs": {
+   "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/canonical-address.mjs",
+   "sha256": "e286fb2a845214a977d9c1a8eb9729ee21d133d606f34508e66fdc4675055cbc"
+  },
+  "spine/dag-runtime.mjs": {
+   "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/dag-runtime.mjs",
+   "sha256": "7ecf09727eabefb622519715ff261e158da042649f77c2eec46375751b7ed94a"
+  },
+  "spine/execution-address-resolver.mjs": {
+   "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/execution-address-resolver.mjs",
+   "sha256": "8d5900bb6ffde4440e0e24b940cb5ef90d2178d9b3daaada1b85964976ce9b2f"
+  },
+  "spine/pure-synthia/engine/derivation.js": {
+   "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/pure-synthia/engine/derivation.js",
+   "sha256": "177f11554aed6af67adff1de648a1c1bd177e5fd0dc0b354b3c04d6f4b3ef62a"
+  },
+  "ontological/ingestion/ontological-file-ingestor.mjs": {
+   "from": "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/.../src/ingestion/ontological-file-ingestor.mjs",
+   "sha256": "fa2b031e37b618ad67cb7ef9149ceca9dfa491a49e2faba7602c19084cf7f7c0"
+  },
+  "ontological/browser/sha256.mjs": {
+   "from": "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/.../src/browser/sha256.mjs",
+   "sha256": "1aa82090f3c24610d0f335abb960aa8beb59bc6d75dd273e91883bee3e129366"
+  },
+  "reference/hexagram_sequences.py": {
+   "from": "zips/Resonance-Network-Swarm-Reality-INTEGRATED-TRIAL-2026-10-02__4e7c9fbf/resonance_integrated_trial/backend/hexagram_sequences.py",
+   "sha256": "f104b323a4ff59cd117c433fe8312d96ed83376aa878f03f9834fbbeea26a08b"
+  },
+  "reference/hexagram_sequences.js.txt": {
+   "from": "zips/content-4__90d1f5f4/synthia-semantic-state-integration/hexagram_sequences.js",
+   "sha256": "4330073228b70fff601a0bbefab4934028aa68b5d1d25663deaeb257f627deb0"
+  },
+  "reference/sequences.js.txt": {
+   "from": "zips/SynthWorld-321-source__0a0d0210/.../vendor/resonance-engine/data/sequences.js",
+   "sha256": "700476e0da3ec301cbdd4a4862ca7b47bbee9f3079dfa39ea3e129d865bf9bf9"
+  },
+  "automata/artifact-normalizer.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/artifact-normalizer.mjs",
+   "sha256": "8767fdc316bd7c02aa7f06aa69793e7bb42e45d6acafd25392150ec0b1b96769"
+  },
+  "automata/browser-automata-store.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/browser-automata-store.mjs",
+   "sha256": "2153439dea359337d67454388c78e59a3a15f77f35259cc167a45db90e6aeb9d"
+  },
+  "automata/browser-execution-surface.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/browser-execution-surface.mjs",
+   "sha256": "41a55224b7c87e2811baf04b96a6e25c158b6e8d3ec90b28f06f05e81c9e370b"
+  },
+  "automata/five-field-compiler.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/five-field-compiler.mjs",
+   "sha256": "f50914ab5fc7dcd40363f2913e08d7ac0990aa5134a59a4318a3b41d7d6eaaec"
+  },
+  "automata/index.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/index.mjs",
+   "sha256": "25f757712ac251187a01dff0c541a839b4e16c41df0ab092c9f4f3b9b0ffecc6"
+  },
+  "automata/ingestion-execution-kernel.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/ingestion-execution-kernel.mjs",
+   "sha256": "a1fa73df51c0fe9c2b26f901bbd02be2f7fba2981a4bc461b147cc7dff9f1882"
+  },
+  "automata/ontological-address.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/ontological-address.mjs",
+   "sha256": "ccf76d1ddc77273224cfb682ec13c8279c22679a8acb606c2414ab46f36bb413"
+  },
+  "automata/primitive-reducer.mjs": {
+   "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/primitive-reducer.mjs",
+   "sha256": "917e86746fa7ec16fca539777d8c6028ff901bf87e6fb51355e85114b9ade76d"
+  }
+ }
+}

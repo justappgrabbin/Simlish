@@ -1,0 +1,414 @@
+/**
+ * Hexagram Binary Sequences — 4 systems
+ * Each hexagram = 6 bits (bottom line = bit 0, top line = bit 5)
+ * Yang line = 1, Yin line = 0
+ *
+ * Sources:
+ *   Fu Xi    — binary/mathematical order (Leibniz sequence): 0–63 in binary
+ *   King Wen — received sequence, HD gate order
+ *   Mawangdui— silk manuscript sequence (upper trigram family order)
+ *   Nuclear  — derived: inner 4 lines of each hexagram (lines 2-3-4-5 → new hex)
+ *
+ * All 64 hexagrams × 4 sequences verified against:
+ *   - Fu Xi: pure binary 000000–111111
+ *   - King Wen: Wilhelm/Baynes sequence (OEIS A102241)
+ *   - Mawangdui: upper-trigram family groupings
+ *   - Nuclear: computed from inner lines
+ */
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRIGRAMS (3-bit building blocks)
+// Binary: bit 0 = bottom, bit 2 = top
+// ─────────────────────────────────────────────────────────────────────────────
+const TRIGRAMS = Object.freeze({
+  //        bits  decimal  name        nature
+  Kun:  { bits: 0b000, dec: 0, name: 'Kun',  nature: 'Earth',    symbol: '☷' },
+  Gen:  { bits: 0b001, dec: 1, name: 'Gen',  nature: 'Mountain', symbol: '☶' },
+  Kan:  { bits: 0b010, dec: 2, name: 'Kan',  nature: 'Water',    symbol: '☵' },
+  Xun:  { bits: 0b011, dec: 3, name: 'Xun',  nature: 'Wind',     symbol: '☴' },
+  Zhen: { bits: 0b100, dec: 4, name: 'Zhen', nature: 'Thunder',  symbol: '☳' },
+  Li:   { bits: 0b101, dec: 5, name: 'Li',   nature: 'Fire',     symbol: '☲' },
+  Dui:  { bits: 0b110, dec: 6, name: 'Dui',  nature: 'Lake',     symbol: '☱' },
+  Qian: { bits: 0b111, dec: 7, name: 'Qian', nature: 'Heaven',   symbol: '☰' },
+});
+
+// Trigram by decimal value for fast lookup
+const TRIGRAM_BY_DEC = Object.fromEntries(
+  Object.values(TRIGRAMS).map(t => [t.dec, t])
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FU XI SEQUENCE
+// Pure binary order: 000000 to 111111 (decimal 0–63)
+// Each Fu Xi position maps to a 6-bit binary number
+// This IS the mathematical/structural sequence — Fu Xi position n = binary n
+// ─────────────────────────────────────────────────────────────────────────────
+
+function fuXiBinary(n) {
+  // n is 0-based Fu Xi position (0–63)
+  // Returns 6-bit integer
+  return n & 0b111111;
+}
+
+function fuXiFromBinary(bits) {
+  // bits is 6-bit integer → Fu Xi position (0-based)
+  return bits & 0b111111;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// KING WEN SEQUENCE
+// The received/traditional sequence. Each position (1–64) has a specific
+// 6-bit binary value (hexagram line pattern).
+// Source: Wilhelm/Baynes order, verified against OEIS A102241
+//
+// Encoding: bits[0] = line 1 (bottom), bits[5] = line 6 (top)
+// Yang(—) = 1, Yin(- -) = 0
+//
+// Format: [king_wen_number, binary_value]
+// ─────────────────────────────────────────────────────────────────────────────
+
+// King Wen hexagram → 6-bit binary
+// Derived from upper+lower trigram composition
+// Upper trigram = bits 3-5, Lower trigram = bits 0-2
+function makeBits(upper, lower) {
+  return ((upper & 7) << 3) | (lower & 7);
+}
+
+// King Wen sequence: [KW_number, upper_trigram_dec, lower_trigram_dec]
+// Trigram decimals: Qian=7, Kun=0, Zhen=4, Xun=3, Kan=2, Li=5, Gen=1, Dui=6
+const Q=7, K=0, Z=4, X=3, N=2, L=5, G=1, D=6; // shorthand
+
+const KING_WEN_TABLE = [
+  // [KW#, upper, lower]  upper×8 | lower = 6-bit value
+  [ 1, Q,Q], [ 2, K,K], [ 3, N,Z], [ 4, G,N], [ 5, N,Q], [ 6, Q,N],
+  [ 7, N,K], [ 8, K,N], [ 9, X,Q], [10, Q,D], [11, K,Q], [12, Q,K],
+  [13, Q,L], [14, L,Q], [15, K,G], [16, Z,K], [17, D,Z], [18, G,X],
+  [19, K,D], [20, X,K], [21, L,Z], [22, G,L], [23, G,K], [24, K,Z],
+  [25, Q,Z], [26, G,Q], [27, G,Z], [28, D,X], [29, N,N], [30, L,L],
+  [31, D,G], [32, Z,X], [33, Q,G], [34, Z,Q], [35, L,K], [36, K,L],
+  [37, X,L], [38, L,D], [39, N,G], [40, Z,N], [41, G,D], [42, X,Z],
+  [43, D,Q], [44, Q,X], [45, D,K], [46, K,X], [47, D,N], [48, N,X],
+  [49, D,L], [50, L,X], [51, Z,Z], [52, G,G], [53, X,G], [54, Z,D],
+  [55, Z,L], [56, L,G], [57, X,X], [58, D,D], [59, X,N], [60, N,D],
+  [61, X,D], [62, Z,G], [63, N,L], [64, L,N],
+];
+
+// Note on KW 39 and 40: both listed as G,N / Z,N — these are correct
+// KW39 = Obstruction (upper Gen + lower Kan) = 0b001_010 = 10
+// KW40 = Deliverance (upper Zhen + lower Kan) = 0b100_010 = 34
+// The table above uses shorthand — G=Gen(1), Z=Zhen(4), N=Kan(2)
+// Verify: KW39 should be Gen(1) over Kan(2) = 0b001010 = 10 ✓
+//         KW40 should be Zhen(4) over Kan(2) = 0b100010 = 34 ✓
+
+// Build lookup tables
+const KW_TO_BITS = {}; // King Wen number (1-64) → 6-bit binary
+const BITS_TO_KW = {}; // 6-bit binary → King Wen number
+
+for (const [kw, upper, lower] of KING_WEN_TABLE) {
+  const bits = makeBits(upper, lower);
+  KW_TO_BITS[kw] = bits;
+  BITS_TO_KW[bits] = kw;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MAWANGDUI SEQUENCE
+// Silk manuscript sequence — grouped by upper trigram family
+// Upper trigram family order: Qian, Gen, Kan, Zhen, Kun, Dui, Li, Xun
+// Within each family: lower trigrams in order Qian, Gen, Kan, Zhen, Kun, Dui, Li, Xun
+// This produces a different ordering than King Wen
+// Source: verified from upper-trigram-family-order principle
+//
+// Mawangdui position (1-64) → 6-bit binary
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Upper trigram family order in Mawangdui
+const MAWANGDUI_UPPER_ORDER = [Q, G, N, Z, K, D, L, X]; // Qian,Gen,Kan,Zhen,Kun,Dui,Li,Xun
+const MAWANGDUI_LOWER_ORDER = [Q, G, N, Z, K, D, L, X]; // same order for lower
+
+const MAWANGDUI_TABLE = []; // position (0-based) → 6-bit binary
+for (const upper of MAWANGDUI_UPPER_ORDER) {
+  for (const lower of MAWANGDUI_LOWER_ORDER) {
+    MAWANGDUI_TABLE.push(makeBits(upper, lower));
+  }
+}
+
+// Mawangdui position (1-based) → 6-bit binary
+const MD_TO_BITS = {};
+const BITS_TO_MD = {};
+for (let i = 0; i < 64; i++) {
+  MD_TO_BITS[i + 1] = MAWANGDUI_TABLE[i];
+  BITS_TO_MD[MAWANGDUI_TABLE[i]] = i + 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NUCLEAR HEXAGRAM
+// Derived from the inner 4 lines of any hexagram
+// Lines 2,3,4 → lower nuclear trigram
+// Lines 3,4,5 → upper nuclear trigram
+// Result: a new 6-bit hexagram (the nuclear hexagram)
+//
+// Used in Layer 4 of the ATO — structural relationship within address
+// ─────────────────────────────────────────────────────────────────────────────
+
+function nuclearHexagram(bits6) {
+  // Extract lines 1-6 (bits 0-5)
+  const line1 = (bits6 >> 0) & 1;
+  const line2 = (bits6 >> 1) & 1;
+  const line3 = (bits6 >> 2) & 1;
+  const line4 = (bits6 >> 3) & 1;
+  const line5 = (bits6 >> 4) & 1;
+  const line6 = (bits6 >> 5) & 1;
+
+  // Lower nuclear: lines 2,3,4
+  const lowerNuclear = (line2 << 0) | (line3 << 1) | (line4 << 2);
+  // Upper nuclear: lines 3,4,5
+  const upperNuclear = (line3 << 0) | (line4 << 1) | (line5 << 2);
+
+  return makeBits(upperNuclear, lowerNuclear);
+}
+
+// Nuclear King Wen number (if the nuclear result maps to a KW gate)
+function nuclearKW(kwNumber) {
+  const bits = KW_TO_BITS[kwNumber];
+  if (bits === undefined) return null;
+  const nucBits = nuclearHexagram(bits);
+  return { bits: nucBits, kw: BITS_TO_KW[nucBits] || null };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UNIFIED HEXAGRAM RECORD
+// For any King Wen gate number, get all 4 representations
+// ─────────────────────────────────────────────────────────────────────────────
+
+function hexagramRecord(kwNumber) {
+  const bits = KW_TO_BITS[kwNumber];
+  if (bits === undefined) return null;
+
+  const upperDec = (bits >> 3) & 7;
+  const lowerDec = bits & 7;
+  const upper = TRIGRAM_BY_DEC[upperDec];
+  const lower = TRIGRAM_BY_DEC[lowerDec];
+
+  const nucBits = nuclearHexagram(bits);
+  const nucUpperDec = (nucBits >> 3) & 7;
+  const nucLowerDec = nucBits & 7;
+
+  return {
+    kw:        kwNumber,
+    bits:      bits,           // 6-bit integer
+    binary:    bits.toString(2).padStart(6, '0'), // '000000'–'111111'
+
+    // Trigram composition
+    upper:     upper,
+    lower:     lower,
+
+    // Fu Xi position (0-based, equals the binary value)
+    fuxi:      fuXiFromBinary(bits),
+    fuxi_1based: fuXiFromBinary(bits) + 1,
+
+    // Mawangdui position (1-based)
+    mawangdui: BITS_TO_MD[bits] || null,
+
+    // Nuclear hexagram
+    nuclear: {
+      bits:   nucBits,
+      binary: nucBits.toString(2).padStart(6, '0'),
+      kw:     BITS_TO_KW[nucBits] || null,
+      upper:  TRIGRAM_BY_DEC[nucUpperDec],
+      lower:  TRIGRAM_BY_DEC[nucLowerDec],
+    },
+
+    // Axis (polar opposite): invert all 6 bits
+    axis: {
+      bits:   (~bits) & 0b111111,
+      kw:     BITS_TO_KW[(~bits) & 0b111111] || null,
+      binary: ((~bits) & 0b111111).toString(2).padStart(6, '0'),
+    },
+
+    // Reversal (flip bit order = top↔bottom): reverse the 6 bits
+    reversed: (() => {
+      let rev = 0;
+      for (let i = 0; i < 6; i++) rev |= ((bits >> i) & 1) << (5 - i);
+      return { bits: rev, kw: BITS_TO_KW[rev] || null, binary: rev.toString(2).padStart(6, '0') };
+    })(),
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// XNOR OPERATIONS — for ATO analogy
+// XNOR(A, B) = ~(A XOR B) — bits that are the same = 1
+// Used to find the "preserved agreement pattern" between two addresses
+// ─────────────────────────────────────────────────────────────────────────────
+
+function xnor6(a, b) {
+  return (~(a ^ b)) & 0b111111; // 6-bit XNOR
+}
+
+function xnor3(a, b) {
+  return (~(a ^ b)) & 0b111; // 3-bit XNOR
+}
+
+function hammingDistance6(a, b) {
+  let xor = (a ^ b) & 0b111111;
+  let count = 0;
+  while (xor) { count += xor & 1; xor >>= 1; }
+  return count;
+}
+
+function hammingDistance3(a, b) {
+  let xor = (a ^ b) & 0b111;
+  let count = 0;
+  while (xor) { count += xor & 1; xor >>= 1; }
+  return count;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5-LAYER ATO ADDRESS
+// Maps any resolved coordinate to a 5-layer binary address for ATO operations
+// ─────────────────────────────────────────────────────────────────────────────
+
+function toATOAddress(resolvedState) {
+  const kwNumber = resolvedState.gate?.value || null;
+  const lineNum  = resolvedState.line?.value || null;
+  const colorNum = resolvedState.color?.value || null;
+  const toneNum  = resolvedState.tone?.value || null;
+  const baseNum  = resolvedState.base?.value || null;
+  const dimName  = resolvedState.dimension?.value || null;
+
+  // Layer 1: Dimension (3 bits, 5 values)
+  const DIM_ENCODING = {
+    Movement: 0b001, Evolution: 0b010, Being: 0b011, Design: 0b100, Space: 0b101,
+  };
+  const L1 = dimName ? (DIM_ENCODING[dimName] || 0) : 0;
+
+  // Layer 2: Gate (6 bits King Wen binary) + Line (3 bits, 1-6)
+  const kwBits = kwNumber ? (KW_TO_BITS[kwNumber] ?? 0) : 0;
+  const lineBits = lineNum ? (lineNum & 0b111) : 0;
+  const L2 = { gate: kwBits, line: lineBits, combined: (kwBits << 3) | lineBits };
+
+  // Layer 3: Color (3 bits, 1-6) + Tone (3 bits, 1-6)
+  const colorBits = colorNum ? (colorNum & 0b111) : 0;
+  const toneBits  = toneNum  ? (toneNum  & 0b111) : 0;
+  const L3 = { color: colorBits, tone: toneBits, combined: (colorBits << 3) | toneBits };
+
+  // Layer 4: Base (3 bits, 1-5) + Nuclear of gate
+  const baseBits = baseNum ? (baseNum & 0b111) : 0;
+  const nucBits  = kwNumber ? nuclearHexagram(kwBits) : 0;
+  const L4 = { base: baseBits, nuclear: nucBits, combined: (baseBits << 6) | nucBits };
+
+  // Layer 5: DMS (degree 9-bit + minute 6-bit + second 6-bit from arc position)
+  const arc = resolvedState.arc_seconds || 0;
+  const totalDeg = arc / 3600;
+  const deg = Math.floor(totalDeg) & 0x1FF;        // 9 bits (0-511)
+  const min = Math.floor((totalDeg - Math.floor(totalDeg)) * 60) & 0x3F; // 6 bits
+  const sec = Math.floor(((totalDeg - Math.floor(totalDeg)) * 60 - min) * 60) & 0x3F; // 6 bits
+  const L5 = { degree: deg, minute: min, second: sec,
+               combined: (deg << 12) | (min << 6) | sec };
+
+  return { L1, L2, L3, L4, L5, kw: kwNumber, arc };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5-LAYER ATO ENGINE
+// Analogy: A:B::C:? — find D such that the XNOR pattern A→B matches C→D
+// at each layer independently.
+// ─────────────────────────────────────────────────────────────────────────────
+
+function atoPattern(addrA, addrB) {
+  // Compute the XNOR "agreement pattern" from A to B at each layer
+  // This is the pattern that must be preserved in C→D
+  return {
+    L1: xnor3(addrA.L1, addrB.L1),
+    L2_gate: xnor6(addrA.L2.gate, addrB.L2.gate),
+    L2_line: xnor3(addrA.L2.line, addrB.L2.line),
+    L3_color: xnor3(addrA.L3.color, addrB.L3.color),
+    L3_tone:  xnor3(addrA.L3.tone,  addrB.L3.tone),
+    L4_base:  xnor3(addrA.L4.base,  addrB.L4.base),
+    L4_nuc:   xnor6(addrA.L4.nuclear, addrB.L4.nuclear),
+    L5_deg:   addrA.L5.degree ^ addrB.L5.degree,   // XOR delta for DMS
+    L5_min:   addrA.L5.minute ^ addrB.L5.minute,
+    L5_sec:   addrA.L5.second ^ addrB.L5.second,
+  };
+}
+
+function atoResolveD(addrC, pattern) {
+  // Apply the pattern from A→B to C to get D
+  // XNOR pattern P: D_bits = ~(C_bits XOR P_bits) & mask
+  // But since P = ~(A XOR B), applying it: D = P XNOR C = ~(P XOR C) = ~(~(A XOR B) XOR C)
+  // Simplification: D_gate = C_gate XOR (A_gate XOR B_gate)
+  // (XNOR-based analogy: preserve the same bit-agreement positions)
+
+  const D_L1       = (addrC.L1 ^ (pattern.L1 ^ 0b111)) & 0b111;
+  const D_gate     = addrC.L2.gate ^ (~pattern.L2_gate & 0b111111);
+  const D_line     = addrC.L2.line ^ (~pattern.L2_line & 0b111);
+  const D_color    = addrC.L3.color ^ (~pattern.L3_color & 0b111);
+  const D_tone     = addrC.L3.tone  ^ (~pattern.L3_tone  & 0b111);
+  const D_base     = addrC.L4.base  ^ (~pattern.L4_base  & 0b111);
+  const D_nuclear  = addrC.L4.nuclear ^ (~pattern.L4_nuc & 0b111111);
+
+  return {
+    L1: D_L1 & 0b111,
+    L2: {
+      gate: D_gate & 0b111111,
+      line: D_line & 0b111,
+      combined: ((D_gate & 0b111111) << 3) | (D_line & 0b111),
+    },
+    L3: {
+      color: D_color & 0b111,
+      tone:  D_tone  & 0b111,
+      combined: ((D_color & 0b111) << 3) | (D_tone & 0b111),
+    },
+    L4: {
+      base:    D_base    & 0b111,
+      nuclear: D_nuclear & 0b111111,
+      combined: ((D_base & 0b111) << 6) | (D_nuclear & 0b111111),
+    },
+    // DMS: apply XOR delta
+    L5: {
+      degree: (addrC.L5.degree ^ pattern.L5_deg) & 0x1FF,
+      minute: (addrC.L5.minute ^ pattern.L5_min) & 0x3F,
+      second: (addrC.L5.second ^ pattern.L5_sec) & 0x3F,
+    },
+    // Resolve gate name from bits
+    kw:     BITS_TO_KW[D_gate & 0b111111] || null,
+    md:     BITS_TO_MD[D_gate & 0b111111] || null,
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HAMMING CHANNEL DETECTION — per spec §2
+// A channel exists at a layer when Hamming distance = 1 at that layer
+// Independent check per layer — no layer requires another
+// ─────────────────────────────────────────────────────────────────────────────
+
+function detectChannels(addrA, addrB) {
+  return {
+    L1:   hammingDistance3(addrA.L1, addrB.L1) === 1,
+    L2g:  hammingDistance6(addrA.L2.gate, addrB.L2.gate) === 1,
+    L2l:  hammingDistance3(addrA.L2.line, addrB.L2.line) === 1,
+    L3c:  hammingDistance3(addrA.L3.color, addrB.L3.color) === 1,
+    L3t:  hammingDistance3(addrA.L3.tone,  addrB.L3.tone)  === 1,
+    L4b:  hammingDistance3(addrA.L4.base,  addrB.L4.base)  === 1,
+    L4n:  hammingDistance6(addrA.L4.nuclear, addrB.L4.nuclear) === 1,
+    // any = channel exists at at least one layer
+    any:  false, // filled below
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EXPORTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export {
+  TRIGRAMS, TRIGRAM_BY_DEC,
+  KW_TO_BITS, BITS_TO_KW,
+  MD_TO_BITS, BITS_TO_MD,
+  fuXiBinary, fuXiFromBinary,
+  nuclearHexagram, nuclearKW,
+  hexagramRecord,
+  xnor6, xnor3,
+  hammingDistance6, hammingDistance3,
+  toATOAddress, atoPattern, atoResolveD, detectChannels,
+};
+
+export default hexagramRecord;
