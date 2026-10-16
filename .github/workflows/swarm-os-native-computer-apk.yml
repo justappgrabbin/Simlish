@@ -53,8 +53,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Set up Android
-        uses: android-actions/setup-android@v3
+      - name: Use preinstalled GitHub Android SDK
+        run: |
+          test -n "$ANDROID_HOME"
+          command -v sdkmanager
       - name: Set up existing Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
