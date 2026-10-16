@@ -130,3 +130,9 @@ test('macro projection rejects incomplete source coordinates', () => {
   assert.throws(()=>macroProjection({mode:'macro',gate:6}));
   assert.throws(()=>macroProjection({mode:'micro',gate:6,line:4,color:4,tone:4,base:2}));
 });
+
+test('unknown projections fail for both reads and writes', () => {
+  const kernel = new StateSpaceKernel();
+  assert.throws(() => kernel.project(address(6), 'unknown'));
+  assert.throws(() => kernel.annotate(address(6), 'unknown', 42));
+});
