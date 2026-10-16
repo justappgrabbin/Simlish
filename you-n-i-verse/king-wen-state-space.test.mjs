@@ -77,3 +77,10 @@ test('micro-address resolves without optional provenance metadata', () => {
   assert.equal(resolved.scope,undefined);
   assert.equal(resolved.originContext,undefined);
 });
+
+test('arc-second coordinate rejects values outside 0 through 99', () => {
+  const micro={...address(6),mode:'micro',planetary:'Sun',dimension:'movement',degree:25,minute:59,second:31,arc:99,zodiac:6,house:5};
+  assert.equal(normalizeAddress(micro).arc,99);
+  assert.throws(()=>normalizeAddress({...micro,arc:100}));
+  assert.throws(()=>normalizeAddress({...micro,arc:-1}));
+});
