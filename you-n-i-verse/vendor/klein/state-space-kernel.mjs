@@ -1,6 +1,5 @@
 import { completeAnalogy, hammingDistance, normalizeVector, operator, toBitString } from './boolean-ato.mjs';
 import { addressed, canonicalAddress, gateState, normalizeAddress } from './address-space.mjs';
-import { enumerateSpace } from './iching.mjs';
 
 export const PROJECTIONS = Object.freeze(['position','transformation','expression','inference','code','image','timeline','game']);
 
@@ -21,9 +20,9 @@ export class StateSpaceKernel {
   }
 
   mount64() {
-    for (const state of enumerateSpace()) {
-      const address = { mode:'macro', gate:state.number, line:1, color:1, tone:1, base:1 };
-      this.define(address, { primitive: true, hexagram: state.bits });
+    for (let gate = 1; gate <= 64; gate += 1) {
+      const address = { mode:'macro', gate, line:1, color:1, tone:1, base:1 };
+      this.define(address, { primitive: true, hexagram: gateState(address).bits });
     }
     return this;
   }
@@ -55,6 +54,7 @@ export class StateSpaceKernel {
   }
 
   project(address, projection) {
+    if (!PROJECTIONS.includes(projection)) throw new RangeError(`Unknown projection: ${projection}`);
     const state = this.get(address);
     return this.annotations.get(`${state.addressKey}::${projection}`) || Object.freeze({ state:state.addressKey, projection, value:null, unresolved:true });
   }
@@ -83,13 +83,17 @@ export class StateSpaceKernel {
   }
 
   mountArtifact(manifest) {
-    if (!manifest || typeof manifest !== 'object' || !manifest.address || !Array.isArray(manifest.capabilities)) throw new TypeError('Artifact manifest requires an address and capabilities');
-    const host = this.get(manifest.address);
+    if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest) || !manifest.address || !Array.isArray(manifest.capabilities)) throw new TypeError('Artifact manifest requires an address and capabilities');
+    if (manifest.capabilities.some(capability => !capability || typeof capability !== 'object' || Array.isArray(capability))) throw new TypeError('Capabilities must be objects');
+    const hostAddress = normalizeAddress(manifest.address, { mode:manifest.address.mode || 'macro' });
     const capabilities = manifest.capabilities.map((capability,index)=>Object.freeze({
       id:capability.id || `capability-${index}`,
       address:normalizeAddress(capability.address || manifest.address,{mode:(capability.address||manifest.address).mode||'macro'}),
       input:capability.input || 'json', output:capability.output || 'json', effect:capability.effect || 'pure', implementation:capability.implementation || null,
     }));
+    const ids = capabilities.map(capability => String(capability.id));
+    if (new Set(ids).size !== ids.length) throw new TypeError('Capability ids must be unique within an artifact');
+    const host = this.get(hostAddress);
     return Object.freeze({ id:manifest.id || `artifact:${host.addressKey}`, address:host.address, addressKey:host.addressKey, capabilities:Object.freeze(capabilities), mounted:true });
   }
 }
