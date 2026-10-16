@@ -46,7 +46,7 @@ const changes = {
     ["from '/swarm-ui.mjs'", "from './swarm-ui.mjs'"],
   ],
   'computer.html': [['src="/computer-diagnostic.mjs"', 'src="./computer-diagnostic.mjs"']],
-  'computer-diagnostic.mjs': [["from '/computer-runtime/", "from './computer-runtime/"]],
+  'computer-diagnostic.mjs': [["from'/computer-runtime/", "from'./computer-runtime/"]],
 };
 for (const [name, transformations] of Object.entries(changes)) {
   let contents = await readFile(join(target, name), 'utf8');
