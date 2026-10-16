@@ -125,3 +125,8 @@ test('core and state-space serializers agree on macro and micro addresses', () =
 test('core serializer rejects unsupported address modes', () => {
   assert.throws(()=>coreAddressKey({...address(6),mode:'unsupported'}));
 });
+
+test('macro projection rejects incomplete source coordinates', () => {
+  assert.throws(()=>macroProjection({mode:'macro',gate:6}));
+  assert.throws(()=>macroProjection({mode:'micro',gate:6,line:4,color:4,tone:4,base:2}));
+});
