@@ -68,3 +68,12 @@ test('transitions canonicalize both endpoints even when supplied keys are stale'
   space.connect(edge);
   assert.equal(space.reachable(source.address,target.address),true);
 });
+
+test('micro-address resolves without optional provenance metadata', () => {
+  const micro={...address(6),mode:'micro',planetary:'Sun',dimension:'movement',degree:25,minute:59,second:31,arc:99,zodiac:6,house:5};
+  const resolved=normalizeAddress(micro);
+  assert.equal(resolved.unresolved.length,0);
+  assert.equal(resolved.gate,6);
+  assert.equal(resolved.scope,undefined);
+  assert.equal(resolved.originContext,undefined);
+});
