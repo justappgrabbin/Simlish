@@ -121,3 +121,7 @@ test('core and state-space serializers agree on macro and micro addresses', () =
   const micro=normalizeMicroAddress({...address(6),planetary:'Sun',dimension:'movement',degree:25,minute:59,second:31,arc:99,zodiac:6,house:5});
   assert.equal(coreAddressKey(micro),canonicalAddress(micro));
 });
+
+test('core serializer rejects unsupported address modes', () => {
+  assert.throws(()=>coreAddressKey({...address(6),mode:'unsupported'}));
+});
