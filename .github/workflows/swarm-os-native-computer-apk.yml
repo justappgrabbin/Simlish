@@ -68,6 +68,11 @@ jobs:
       - name: Install target Android build SDK
         run: |
           "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Reuse existing YOU-N-I-VERSE debug signing key for upgrade compatibility
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: youniverse-debug-signing-v1
       - name: Preserve existing Studio host and build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
       - name: Verify real APK asset entries and pinned provenance
