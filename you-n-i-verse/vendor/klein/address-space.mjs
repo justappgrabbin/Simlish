@@ -19,7 +19,7 @@ export function normalizeAddress(input, { mode = input?.mode || 'macro', allowUn
     : ['gate', 'line', 'color', 'tone', 'base'];
   const unresolved = required.filter((field) => value[field] === undefined || value[field] === null || value[field] === '');
   if (unresolved.length && !allowUnresolved) throw new AddressResolutionError('UNRESOLVED_ADDRESS', 'Required address coordinates are missing', { unresolved });
-  const ranges = { gate:[1,64], line:[1,6], color:[1,6], tone:[1,6], base:[1,5], degree:[0,359], minute:[0,59], second:[0,59], zodiac:[1,12], house:[1,12] };
+  const ranges = { gate:[1,64], line:[1,6], color:[1,6], tone:[1,6], base:[1,5], degree:[0,359], minute:[0,59], second:[0,59], arc:[0,99], zodiac:[1,12], house:[1,12] };
   const invalid = Object.entries(ranges).filter(([field,[min,max]]) => value[field] !== undefined && !integer(value[field],min,max)).map(([field]) => field);
   if (invalid.length) throw new AddressResolutionError('INVALID_ADDRESS', 'Address coordinates are outside their valid ranges', { invalid });
   return Object.freeze({ mode, ...Object.fromEntries(ADDRESS_FIELDS.filter((field) => value[field] !== undefined).map((field) => [field, value[field]])), unresolved: Object.freeze(unresolved) });
