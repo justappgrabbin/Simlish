@@ -27,7 +27,7 @@ export function normalizeAddress(input, { mode = input?.mode || 'macro', allowUn
 
 export function macroProjection(address) {
   const normalized = normalizeAddress(address, { mode: address?.mode || 'macro', allowUnresolved: true });
-  return normalizeAddress(normalized, { mode: 'macro', allowUnresolved: true });
+  return normalizeAddress(Object.fromEntries(['gate', 'line', 'color', 'tone', 'base'].filter(field => normalized[field] !== undefined).map(field => [field, normalized[field]])), { mode: 'macro', allowUnresolved: true });
 }
 
 export function canonicalAddress(address) {
