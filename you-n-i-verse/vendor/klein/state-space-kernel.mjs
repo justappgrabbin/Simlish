@@ -1,6 +1,5 @@
 import { completeAnalogy, hammingDistance, normalizeVector, operator, toBitString } from './boolean-ato.mjs';
 import { addressed, canonicalAddress, gateState, normalizeAddress } from './address-space.mjs';
-import { enumerateSpace } from './iching.mjs';
 
 export const PROJECTIONS = Object.freeze(['position','transformation','expression','inference','code','image','timeline','game']);
 
@@ -21,9 +20,9 @@ export class StateSpaceKernel {
   }
 
   mount64() {
-    for (const state of enumerateSpace()) {
-      const address = { mode:'macro', gate:state.number, line:1, color:1, tone:1, base:1 };
-      this.define(address, { primitive: true, hexagram: state.bits });
+    for (let gate = 1; gate <= 64; gate += 1) {
+      const address = { mode:'macro', gate, line:1, color:1, tone:1, base:1 };
+      this.define(address, { primitive: true, hexagram: gateState(address).bits });
     }
     return this;
   }
