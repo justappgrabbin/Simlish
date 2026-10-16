@@ -63,7 +63,7 @@ export class AddressSpace {
   constructor() { this.states = new Map(); this.edges = new Map(); }
   put(state) {
     if (!state?.address) throw new AddressResolutionError('UNADDRESSED_STATE', 'State must carry an address');
-    const item = Object.freeze({ ...state, addressKey: state.addressKey || canonicalAddress(state.address) });
+    const item = Object.freeze({ ...state, addressKey: canonicalAddress(state.address) });
     this.states.set(item.addressKey, item);
     return item;
   }
