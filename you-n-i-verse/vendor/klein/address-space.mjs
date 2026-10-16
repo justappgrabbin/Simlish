@@ -14,6 +14,7 @@ const integer = (value, min, max) => Number.isInteger(value) && value >= min && 
 
 export function normalizeAddress(input, { mode = input?.mode || 'macro', allowUnresolved = false } = {}) {
   const value = input || {};
+  if (typeof value !== 'object' || Array.isArray(value)) throw new AddressResolutionError('INVALID_ADDRESS', 'Address must be an object');
   if (mode !== 'macro' && mode !== 'micro') throw new AddressResolutionError('INVALID_MODE', 'Address mode must be macro or micro');
   const required = mode === 'micro'
     ? ['planetary', 'dimension', 'gate', 'line', 'color', 'tone', 'base', 'degree', 'minute', 'second', 'arc', 'zodiac', 'house']
