@@ -41,7 +41,8 @@ public class MainActivity extends Activity {
    }
   });
   web.addJavascriptInterface(new NativeExport(),"NativeDownloads");
-  web.loadUrl(ORIGIN+"/assets/index.html");
+  String start="index.html";String requested=getIntent().getStringExtra("start");if(BuildConfig.DEBUG&&requested!=null&&requested.matches("[a-z0-9._-]+\\.html(\\?[a-z0-9=&]+)?"))start=requested; // debug builds only: lets CI open a given bundled page; whitelisted pattern, bundled assets only
+  web.loadUrl(ORIGIN+"/assets/"+start);
  }
  public class NativeExport {
   @JavascriptInterface public void analyzeFace(String encoded,int requestId){

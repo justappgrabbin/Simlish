@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Synthia · swarm assembly + chat</title>
+<style>
+:root{color-scheme:dark}body{margin:0;font:15px/1.4 system-ui,sans-serif;background:#0b0b14;color:#e8e6f5}
+header{padding:10px 14px;border-bottom:1px solid #2a2a44;display:flex;gap:10px;align-items:center;flex-wrap:wrap}header strong{letter-spacing:.08em}
+main{display:grid;gap:12px;padding:12px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+section{background:#13132181;border:1px solid #2a2a44;border-radius:10px;padding:10px;min-width:0}
+h2{margin:0 0 8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#a9a3ff}
+.bar{height:12px;background:#22223a;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:#7c6cff;width:0;transition:width .4s}
+#feed,#audit,#files{max-height:300px;overflow:auto;font:12px/1.35 ui-monospace,monospace}#feed div{padding:2px 0;border-bottom:1px solid #1d1d33}
+.think{color:#8fd3ff}.act{color:#ffd78f}.observe{color:#9dffb0}.blocked,.tamper-detected{color:#ff8f8f}.heartbeat{color:#666}
+#chatlog{max-height:300px;overflow:auto}#chatlog p{margin:6px 0}.me{color:#ffd78f}.bot{color:#cfc9ff;white-space:pre-wrap}
+input,select,button,textarea{font:inherit;background:#1b1b30;color:#e8e6f5;border:1px solid #38385e;border-radius:6px;padding:6px 8px}button{cursor:pointer}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.row input{flex:1;min-width:120px}.note{color:#9a96bd;font-size:12px}
+a{color:#a9a3ff}.ok{color:#9dffb0}.bad{color:#ff8f8f}iframe{width:100%;height:260px;border:1px solid #2a2a44;border-radius:6px;background:#fff}
+#units span{display:inline-block;width:9px;height:9px;margin:1px;border-radius:2px;background:#2a2a44}#units .done{background:#9dffb0}#units .failed{background:#ff8f8f}#units .running{background:#ffd78f}
+</style></head><body>
+<header><strong>✧ SYNTHIA</strong><span class="note">the swarm assembles this app by itself · everything runs on this device</span><a href="index.html">← studio</a></header>
+<main>
+<section><h2>Assembly progress</h2><div class="bar"><i id="pbar"></i></div><p id="ptext" class="note">starting…</p><div id="units" aria-label="one square per unit of work"></div>
+ <div class="row"><button id="start">Run</button><button id="stop">Pause</button><button id="step">One cycle</button></div>
+ <p id="pulse" class="note"></p><h2>Live feed (Think → Act → Observe)</h2><div id="feed" aria-live="polite"></div></section>
+<section><h2>Chat with Trident</h2><div id="chatlog"></div>
+ <div class="row"><input id="say" placeholder="Type to Trident (her weights, run here in JavaScript)"><select id="head"><option value="">router picks</option><option value="0">code head</option><option value="1">math head</option><option value="2">research head</option></select><button id="send">Send</button></div>
+ <p class="note" id="modelnote">loading her model…</p>
+ <h2 style="margin-top:12px">Tools (the models and the swarm use these)</h2><div id="tools" class="note"></div>
+ <div class="row"><input id="toolname" placeholder="tool, e.g. primitives.get"><input id="toolargs" placeholder='args JSON, e.g. {"id":"gate.1"}'><button id="runtool">Run</button></div><pre id="toolout" class="note" style="white-space:pre-wrap;max-height:200px;overflow:auto"></pre></section>
+<section><h2>Assembled files</h2><div id="files"></div><iframe id="viewer" title="assembled page" sandbox></iframe></section>
+<section><h2>Audit log of every self-change</h2><p id="chain" class="note"></p><div id="audit"></div><h2 style="margin-top:12px">Protected originals</h2><p id="prot" class="note"></p></section>
+</main><script type="module" src="synthia-app.mjs"></script></body></html>

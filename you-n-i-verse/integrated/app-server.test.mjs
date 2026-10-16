@@ -1,0 +1,47 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync,existsSync} from 'node:fs';import {fileURLToPath} from 'node:url';import {join,dirname} from 'node:path';
+import {createAppServer,TOOLS} from './app-server.mjs';import {AuditLog,Workspace,ProtectedOriginals,ProtectedError,LoopDetector,Heartbeat,CONSTITUTION,shaOf} from './swarm-loop.mjs';
+const ROOT=join(dirname(fileURLToPath(import.meta.url)),'..');
+const loadBytes=async p=>new Uint8Array(readFileSync(join(ROOT,p))),loadJson=async p=>JSON.parse(readFileSync(join(ROOT,p),'utf8'));
+const mem=()=>{const m=new Map();return {get:k=>m.get(k)??null,set:(k,v)=>m.set(k,v),m}};
+let tick=0;const now=()=>new Date(Date.UTC(2026,9,16,10,0,tick++)).toISOString();
+const mk=(o={})=>createAppServer({loadJson,loadBytes,now,loadModel:false,schedule:()=>0,cancel:()=>{},...o});
+test('audit log is append-only and hash chained; tampering is detected',()=>{const a=new AuditLog({now});a.record('create','a',{path:'x'});a.record('modify','b',{path:'x'});assert.ok(a.verify().ok);
+ const e=a.entries();e[0].description='changed';const b=new AuditLog({now,entries:e});assert.equal(b.verify().ok,false);assert.equal(b.verify().brokenAt,1)});
+test('protected originals cannot be written; the attempt is audited as blocked; unprotected paths are written and audited with before/after hashes',()=>{
+ const audit=new AuditLog({now}),o=new ProtectedOriginals();o.register('keep/a.txt','00');o.protectPattern('originals');const ws=new Workspace({audit,originals:o});
+ assert.throws(()=>ws.write('keep/a.txt','x'),ProtectedError);assert.throws(()=>ws.write('app/originals/z','x'),ProtectedError);assert.throws(()=>ws.write('../etc','x'),RangeError);
+ ws.write('app/a.txt','one');ws.write('app/a.txt','two');ws.write('app/a.txt','two');
+ const t=audit.entries().map(e=>e.type);assert.deepEqual(t,['blocked','blocked','create','modify']);const m=audit.entries()[3];assert.equal(m.beforeSha,shaOf('one'));assert.equal(m.afterSha,shaOf('two'))});
+test('versions can be reverted, and the revert is audited',()=>{const audit=new AuditLog({now}),ws=new Workspace({audit});ws.write('app/a','1');const v1=ws.snapshot('one');ws.write('app/a','2');ws.revert(v1.n);assert.equal(ws.text('app/a'),'1');assert.equal(audit.entries().at(-1).type,'revert')});
+test('loop detector blocks the third identical call in a row (automaton pattern)',()=>{const d=new LoopDetector();assert.equal(d.record('t','a').blocked,false);assert.equal(d.record('t','a').blocked,false);assert.equal(d.record('t','a').blocked,true);assert.equal(d.record('t','b').blocked,false)});
+test('heartbeat uses a recursive timer (never overlaps) and runs tasks on their beat interval',async()=>{const q=[];const hb=new Heartbeat({tickMs:5,schedule:(fn)=>{q.push(fn);return q.length},cancel:()=>{}});let ran=0;hb.add('t',2,async()=>{ran++});hb.start();await new Promise(r=>setTimeout(r,5));
+ for(let i=0;i<4;i++){const f=q.shift();await f();await new Promise(r=>setTimeout(r,2))}hb.stop();assert.ok(hb.beats>=4);assert.equal(ran,Math.floor(hb.beats/2));assert.equal(q.length,1,'exactly one pending timer after each beat')});
+test('the swarm assembles the whole app by itself, one unit per cycle, every unit verified, files appear, audit chain intact',async()=>{
+ const s=await mk();let guard=0;while(true){const r=await s.handle('POST','/api/loop/cycle');if(r.body.idle||++guard>200)break}
+ const st=(await s.handle('GET','/api/status')).body;assert.equal(st.loop.failed,0,JSON.stringify(Object.entries(s.loop.state).filter(([,v])=>v.status!=='done')));assert.equal(st.loop.done,st.loop.units);assert.equal(st.loop.units,73);
+ const files=(await s.handle('GET','/api/files')).body.files.map(f=>f.path);assert.equal(files.filter(p=>/app\/pages\/gate-\d+\.html$/.test(p)).length,64);assert.equal(files.filter(p=>/dimension-/.test(p)).length,5);
+ for(const p of ['app/index.html','app/SOUL.md','app/simlish/finisher-report.json','app/simlish/manifest.json'])assert.ok(files.includes(p),p);
+ assert.ok(st.audit.chain.ok);assert.ok(st.versions>=73);
+ const g1=(await s.handle('GET','/api/file?path=app/pages/gate-1.html')).body.text;assert.match(g1,/G1 The Creative/);assert.equal((g1.match(/<tr><td>\d<\/td>/g)||[]).length,6);assert.ok(!/blackBook|pdfPage|sourceLine/.test(g1),'no citations embedded in pages');
+ const feed=(await s.handle('GET','/api/feed')).body;assert.ok(feed.events.some(e=>e.phase==='think')&&feed.events.some(e=>e.phase==='act')&&feed.events.some(e=>e.phase==='observe'))});
+test('writing over a protected original through a tool is refused and logged',async()=>{const s=await mk();
+ assert.match((await s.handle('POST','/api/tool/workspace.write',{path:'integrated/primitive-functions.json',text:'x'})).body.error,/only user\//);
+ const w=await s.handle('POST','/api/tool/workspace.write',{path:'user/note.txt',text:'hello'});assert.equal(w.body.changed,true);
+ assert.throws(()=>s.workspace.write('constitution.md','x'),ProtectedError);assert.ok(s.audit.entries().some(e=>e.type==='blocked'&&e.path==='constitution.md'))});
+test('heartbeat verification detects a changed original and logs tamper-detected',async()=>{let evil=false;const lb=async p=>{const b=await loadBytes(p);if(evil&&p.endsWith('doc3-gates.json')){const c=b.slice();c[5]^=1;return c}return b};
+ const s=await mk({loadBytes:lb});evil=true;for(let i=0;i<40;i++)await s.heartbeat.beat();assert.ok(s.audit.entries().some(e=>e.type==='tamper-detected'));assert.equal(s.status().protected.ok,false)});
+test('restart restores the workspace and audit chain from storage and continues where it stopped',async()=>{const st=mem();const a=await mk({store:st});for(let i=0;i<10;i++)await a.handle('POST','/api/loop/cycle');const n=a.workspace.size,len=a.audit.length;
+ const b=await mk({store:st});assert.equal(b.workspace.size,n);assert.ok(b.audit.length>=len);assert.ok(b.audit.verify().ok);assert.equal(b.loop.progress().done,10);await b.handle('POST','/api/loop/cycle');assert.equal(b.loop.progress().done,11)});
+test('tools: primitives, address, lattice, build.finish, file.ingest (no execution unless asked)',async()=>{const s=await mk();
+ assert.equal((await s.handle('POST','/api/tool/primitives.get',{id:'gate.1'})).body.primitive.form,'The Creative');
+ assert.ok((await s.handle('POST','/api/tool/primitives.search',{q:'creative'})).body.results.length>=1);
+ const src=(await s.handle('POST','/api/tool/primitives.sources',{id:'gate.1'})).body;assert.ok(src.sources&&src.functions.length>0);
+ const a=(await s.handle('POST','/api/tool/address.fromLongitude',{longitude:193.3})).body;assert.equal(a.gate,1);assert.equal(a.line,1);
+ assert.equal((await s.handle('POST','/api/tool/address.lattice',{position:1})).body.gate,1);
+ const f=(await s.handle('POST','/api/tool/build.finish',{name:'t',files:[{path:'index.html',text:'<h1>x</h1>'}]})).body;assert.ok(f.report.addedFiles.includes('simlish/finisher-report.json'));
+ const r=(await s.handle('POST','/api/tool/file.ingest',{name:'a.js',text:'1+1',execute:false})).body;assert.ok(r.address&&r.stages.length>=10);assert.match(String(r.execution.engine),/not-run/);
+ assert.equal((await s.handle('POST','/api/tool/nope',{})).status,404);assert.ok(TOOLS.length>=9)});
+test('chat runs her Trident weights in JavaScript (skipped when the weights are absent)',{skip:!existsSync(join(ROOT,'models/trident_syntia.pt'))},async()=>{const s=await mk({loadModel:true});await s.ensureModel();
+ const r=(await s.handle('POST','/api/chat',{text:'gate 57 line 3',maxNew:8,temp:0})).body;assert.equal(typeof r.reply,'string');assert.equal(r.reply.length,8);assert.ok(Math.abs(r.router.code+r.router.math+r.router.research-1)<1e-6);assert.match(r.note,/not answer questions reliably/)});
+test('feed is incremental by sequence number, and heartbeat beats do not crowd real work out of the feed',async()=>{const s=await mk();for(let i=0;i<3;i++)await s.handle('POST','/api/loop/cycle');
+ const a=(await s.handle('GET','/api/feed?since=0')).body;assert.ok(a.events.length>=9);for(let i=0;i<30;i++)await s.heartbeat.beat();const b=(await s.handle('GET','/api/feed?since='+a.total)).body;assert.equal(b.events.length,0);assert.equal(b.total,a.total+30)});

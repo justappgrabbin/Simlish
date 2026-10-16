@@ -1,0 +1,90 @@
+name: Synthia branch APK (self-serving app)
+# Branch-only build of the self-serving Synthia app. No release, no publish, no deploy.
+on:
+  push:
+    branches: [fix/simlish-integrated-swarm-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: synthia-branch-apk-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: JavaScript tests (whole suite)
+        run: cd you-n-i-verse && node --test
+      - name: Real-browser check (headless Chrome opens the app page; the swarm must assemble 73 of 73 units)
+        run: |
+          (cd you-n-i-verse && python3 -m http.server 8765 >/dev/null 2>&1 &)
+          sleep 2
+          google-chrome --headless=new --no-sandbox --disable-gpu --enable-logging=stderr --v=0 --virtual-time-budget=200000 --dump-dom "http://localhost:8765/synthia-app.html?selftest=1" 2>chrome.err >dom.html || true
+          grep -o 'SYNTHIA_SELFTEST.*' chrome.err | head -1 | tee selftest-chrome.txt
+          grep -q 'SYNTHIA_SELFTEST PASS' selftest-chrome.txt
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Install build SDK
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Build debug APK
+        run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
+      - name: Inspect the APK (what is actually inside)
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk Synthia-debug.apk
+          ls -l Synthia-debug.apk
+          unzip -l Synthia-debug.apk | grep -E 'assets/(synthia-app\.(html|mjs)|models/trident_syntia\.pt|integrated/(app-server|swarm-loop|trident-js|arc-engine|assembly-plan)\.mjs|integrated/protected-originals\.json)' | tee apk-contents.txt
+          test "$(wc -l < apk-contents.txt)" -ge 9
+          $ANDROID_HOME/build-tools/35.0.0/aapt2 dump permissions Synthia-debug.apk | tee apk-permissions.txt
+          ! grep -q 'android.permission.INTERNET' apk-permissions.txt
+          sha256sum Synthia-debug.apk | tee Synthia-debug.apk.sha256
+      - name: Keep build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Synthia-debug-apk
+          path: |
+            Synthia-debug.apk
+            Synthia-debug.apk.sha256
+            apk-contents.txt
+            apk-permissions.txt
+            selftest-chrome.txt
+          retention-days: 30
+  emulator-selftest:
+    # Runs the built APK on an Android x86_64 emulator and reads the page's own self-test line from logcat.
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: Synthia-debug-apk
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Boot emulator, install APK, open the Synthia page, wait for SYNTHIA_SELFTEST
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          disable-animations: true
+          script: bash .github/scripts/synthia-emulator-selftest.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Synthia-emulator-selftest
+          path: emulator-selftest.txt
+          if-no-files-found: ignore
