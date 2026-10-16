@@ -36,7 +36,7 @@ export function macroProjection(address) {
 }
 
 export function canonicalAddress(address) {
-  const normalized = normalizeAddress(address, { mode: address?.mode || 'macro', allowUnresolved: true });
+  const normalized = normalizeAddress(address, { mode: address?.mode || 'macro' });
   return `${normalized.mode}:${ADDRESS_FIELDS.filter((field) => normalized[field] !== undefined).map((field) => `${field}=${encodeURIComponent(String(normalized[field]))}`).join('|')}`;
 }
 
