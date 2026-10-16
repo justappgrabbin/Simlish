@@ -1,4 +1,5 @@
 import { toBitString } from './boolean-ato.mjs';
+import { gateToLines } from './king-wen.mjs';
 
 export const ADDRESS_FIELDS = Object.freeze([
   'planetary', 'dimension', 'gate', 'line', 'color', 'tone', 'base',
@@ -54,7 +55,8 @@ export function transition(source, target, operator, { context = null, lineage =
 export function gateState(address) {
   const normalized = normalizeAddress(address, { mode: address?.mode || 'macro', allowUnresolved: true });
   if (!integer(normalized.gate, 1, 64)) throw new AddressResolutionError('UNRESOLVED_GATE', 'A Gate coordinate is required to resolve the 64-state substrate');
-  return Object.freeze({ gate: normalized.gate, index: normalized.gate - 1, bits: toBitString((normalized.gate - 1).toString(2).padStart(6, '0')) });
+  const bits = gateToLines(normalized.gate).reverse().join('');
+  return Object.freeze({ gate: normalized.gate, index: Number.parseInt(bits, 2), bits: toBitString(bits) });
 }
 
 export class AddressSpace {
