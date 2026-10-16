@@ -15,7 +15,7 @@ const integer = (value, min, max) => Number.isInteger(value) && value >= min && 
 export function normalizeAddress(input, { mode = input?.mode || 'macro', allowUnresolved = false } = {}) {
   const value = input || {};
   const required = mode === 'micro'
-    ? ADDRESS_FIELDS
+    ? ['planetary', 'dimension', 'gate', 'line', 'color', 'tone', 'base', 'degree', 'minute', 'second', 'arc', 'zodiac', 'house']
     : ['gate', 'line', 'color', 'tone', 'base'];
   const unresolved = required.filter((field) => value[field] === undefined || value[field] === null || value[field] === '');
   if (unresolved.length && !allowUnresolved) throw new AddressResolutionError('UNRESOLVED_ADDRESS', 'Required address coordinates are missing', { unresolved });
