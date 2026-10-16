@@ -84,3 +84,8 @@ test('arc-second coordinate rejects values outside 0 through 99', () => {
   assert.throws(()=>normalizeAddress({...micro,arc:100}));
   assert.throws(()=>normalizeAddress({...micro,arc:-1}));
 });
+
+test('unsupported address modes cannot masquerade as macro states', () => {
+  assert.throws(()=>normalizeAddress({...address(6),mode:'other'}),error=>error.code==='INVALID_MODE');
+  assert.throws(()=>canonicalAddress({...address(6),mode:'other'}),error=>error.code==='INVALID_MODE');
+});
