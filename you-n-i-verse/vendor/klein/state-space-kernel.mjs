@@ -54,6 +54,7 @@ export class StateSpaceKernel {
   }
 
   project(address, projection) {
+    if (!PROJECTIONS.includes(projection)) throw new RangeError(`Unknown projection: ${projection}`);
     const state = this.get(address);
     return this.annotations.get(`${state.addressKey}::${projection}`) || Object.freeze({ state:state.addressKey, projection, value:null, unresolved:true });
   }
