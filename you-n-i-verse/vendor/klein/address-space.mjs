@@ -43,8 +43,8 @@ export function addressed(value, address, { kind = 'state', provenance = null } 
 export function transition(source, target, operator, { context = null, lineage = [] } = {}) {
   if (!source?.address || !target?.address) throw new AddressResolutionError('UNADDRESSED_TRANSITION', 'Transitions require addressed source and target states');
   return Object.freeze({
-    source: source.addressKey || canonicalAddress(source.address),
-    target: target.addressKey || canonicalAddress(target.address),
+    source: canonicalAddress(source.address),
+    target: canonicalAddress(target.address),
     operator,
     context,
     lineage: Object.freeze([...lineage]),
