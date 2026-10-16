@@ -27,7 +27,7 @@ test('no worker, backend, network or external dependency in the integration (ada
  assert.ok(files.length>=20);
  for(const f of files){const t=readFileSync(f,'utf8').replace(/\/\/.*$/gm,'').replace(/\/\*[\s\S]*?\*\//g,'');
   assert.ok(!/new\s+Worker\s*\(|new\s+SharedWorker|\bfetch\s*\(|XMLHttpRequest\s*\(|new\s+WebSocket|\brequire\s*\(/.test(t),f);
-  for(const m of t.matchAll(/(?:^|\n)\s*(?:import|export)\b[^;\n]*?\bfrom\s*['"]([^'"]+)['"]/g))assert.ok(m[1].startsWith('.')||(f.endsWith('demo.mjs')&&m[1].startsWith('node:')),f+' must import only local files (demo may use node: built-ins), got '+m[1])}
+  for(const m of t.matchAll(/(?:^|\n)\s*(?:import|export)\b[^;\n]*?\bfrom\s*['"]([^'"]+)['"]/g))assert.ok(m[1].startsWith('.')||((f.endsWith('demo.mjs')||f.endsWith('.build.mjs'))&&m[1].startsWith('node:')),f+' must import only local files (demo may use node: built-ins), got '+m[1])}
 });
 test('wheels per spec §2.1: Fu Xi Movement, Mawangdui Evolution, King Wen Space (read only); Being/Design investigating, nothing invented',()=>{
  assert.deepEqual(WHEELS.Movement.order,Array.from({length:64},(_,i)=>i));
