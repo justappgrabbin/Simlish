@@ -13,7 +13,7 @@ export class AddressResolutionError extends Error {
 const integer = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
 
 export function normalizeAddress(input, { mode = input?.mode || 'macro', allowUnresolved = false } = {}) {
-  const value = input || {};
+  const value = input === null || input === undefined ? {} : input;
   if (typeof value !== 'object' || Array.isArray(value)) throw new AddressResolutionError('INVALID_ADDRESS', 'Address must be an object');
   if (mode !== 'macro' && mode !== 'micro') throw new AddressResolutionError('INVALID_MODE', 'Address mode must be macro or micro');
   const required = mode === 'micro'
