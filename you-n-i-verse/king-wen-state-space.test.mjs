@@ -149,3 +149,12 @@ test('artifact mount rejects an array-shaped manifest', () => {
   const malformed = Object.assign([], {address:address(6),capabilities:[]});
   assert.throws(() => kernel.mountArtifact(malformed));
 });
+
+test('invalid capability addresses do not mount a host state', () => {
+  const kernel = new StateSpaceKernel();
+  const host = {...address(6),line:3};
+  const key = canonicalAddress(host);
+  assert.equal(kernel.states.has(key),false);
+  assert.throws(() => kernel.mountArtifact({address:host,capabilities:[{id:'broken',address:{gate:999,line:1,color:1,tone:1,base:1}}]}));
+  assert.equal(kernel.states.has(key),false);
+});
