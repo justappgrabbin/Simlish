@@ -158,3 +158,10 @@ test('invalid capability addresses do not mount a host state', () => {
   assert.throws(() => kernel.mountArtifact({address:host,capabilities:[{id:'broken',address:{gate:999,line:1,color:1,tone:1,base:1}}]}));
   assert.equal(kernel.states.has(key),false);
 });
+
+test('invalid host address cannot mount artifact state', () => {
+  const kernel = new StateSpaceKernel();
+  const before = kernel.states.size;
+  assert.throws(() => kernel.mountArtifact({address:{...address(6),gate:100},capabilities:[]}));
+  assert.equal(kernel.states.size,before);
+});
