@@ -53,16 +53,20 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Use preinstalled GitHub Android SDK
+      - name: Locate installed Android SDK manager
         run: |
-          test -n "$ANDROID_HOME"
-          command -v sdkmanager
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          echo "SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
+          TOOL="$(find "$SDK_ROOT/cmdline-tools" -maxdepth 4 -type f -name sdkmanager -print | sort | tail -n 1)"
+          if [ -z "$TOOL" ]; then echo "Android command-line manager unavailable at $SDK_ROOT"; exit 1; fi
+          echo "SDKMANAGER=$TOOL" >> "$GITHUB_ENV"
+          "$TOOL" --version
       - name: Set up existing Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
       - name: Install target Android build SDK
-        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+        run: "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
       - name: Preserve existing Studio host and build debug APK
         run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
       - name: Verify real APK asset entries and pinned provenance
