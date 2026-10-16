@@ -85,12 +85,13 @@ export class StateSpaceKernel {
   mountArtifact(manifest) {
     if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest) || !manifest.address || !Array.isArray(manifest.capabilities)) throw new TypeError('Artifact manifest requires an address and capabilities');
     if (manifest.capabilities.some(capability => !capability || typeof capability !== 'object' || Array.isArray(capability))) throw new TypeError('Capabilities must be objects');
+    const hostAddress = normalizeAddress(manifest.address, { mode:manifest.address.mode || 'macro' });
     const capabilities = manifest.capabilities.map((capability,index)=>Object.freeze({
       id:capability.id || `capability-${index}`,
       address:normalizeAddress(capability.address || manifest.address,{mode:(capability.address||manifest.address).mode||'macro'}),
       input:capability.input || 'json', output:capability.output || 'json', effect:capability.effect || 'pure', implementation:capability.implementation || null,
     }));
-    const host = this.get(manifest.address);
+    const host = this.get(hostAddress);
     return Object.freeze({ id:manifest.id || `artifact:${host.addressKey}`, address:host.address, addressKey:host.addressKey, capabilities:Object.freeze(capabilities), mounted:true });
   }
 }
