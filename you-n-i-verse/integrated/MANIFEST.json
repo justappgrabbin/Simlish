@@ -11,7 +11,8 @@
   },
   "spine/dag-runtime.mjs": {
    "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/dag-runtime.mjs",
-   "sha256": "7ecf09727eabefb622519715ff261e158da042649f77c2eec46375751b7ed94a"
+   "sha256": "3cb43ae824ab91868f0d9fbb3e24acccf57171dc2f4356573aa14a5d2dd69797",
+   "repaired": "checkpoint frequency bounded (O(n^2) memory/time defect, see SCORECARD.md #10); the unmodified original is spine/dag-runtime.original.mjs"
   },
   "spine/execution-address-resolver.mjs": {
    "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/execution-address-resolver.mjs",
@@ -72,6 +73,10 @@
   "automata/primitive-reducer.mjs": {
    "from": "zips/automata-ingestion__152112ec/Synthia-Automata-Patch-v0.5.1/src/automata/primitive-reducer.mjs",
    "sha256": "917e86746fa7ec16fca539777d8c6028ff901bf87e6fb51355e85114b9ade76d"
+  },
+  "spine/dag-runtime.original.mjs": {
+   "from": "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/.../src/dag-runtime.mjs",
+   "sha256": "7ecf09727eabefb622519715ff261e158da042649f77c2eec46375751b7ed94a"
   }
  }
 }

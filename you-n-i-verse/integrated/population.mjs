@@ -15,7 +15,7 @@ export const POPULATION_INVESTIGATING=Object.freeze([
  'Space has no executable semantics here by design (read-only, emergent): it is never a writable cell; the composite outputs are what is read. No emergence rule for Space exists in her spec (§70).',
  'the stream layout (header, definitions, cell records) is an engineering serialization of nodes + wiring; any byte stream decodes totally (missing atoms read as 0, references wrap) so arbitrary files execute, but only well-formed streams mean what their author intended.',
  'emergent dimension of a composite = the dimension with most cells (ties by Movement, Evolution, Being, Design); six-bit composite code = fold with exchangeTrigrams. Both are engineering choices.',
- 'ABC (artificial bee colony) dynamics: no runnable ABC exists in her files; not implemented, not claimed.']);
+ 'ABC (artificial bee colony): CORRECTION of an earlier wrong entry here ("no runnable ABC exists in her files"). It exists in swarm-os-v14/x/v9/swarm_os_full.py abc_phase() and v10/swarm_os_bantu.py, and in oct7src/computer/runtime/morph-search.mjs; ported rule for rule in abc.mjs. It is not part of reorganize() below (original kept as written); dynamics-experiment.mjs measures it.']);
 import {ExecutionAddressResolver} from './spine/execution-address-resolver.mjs';
 import {StateSpace,exchangeTrigrams,flipLines,hammingNeighbors} from '../state-space.mjs';
 import {fitParticles} from '../swarm-fit.mjs';

@@ -91,7 +91,9 @@ export class IntegratedSwarm{
    stages:p.stages.map(s=>({stage:s.stage,ok:s.ok})),
    ingest,execution:summary,executedUserCode:summary.engine==='same-thread-async-function',
    address:{resolved:{key:resolved.key,basis:resolved.basis},executionDerived:{key:run.executionDerivedAddressKey,address:derived},ingest:ingest.combinatorialAddress??null,automataId:run.automata.addressId},
-   app,fold:{foldHash:p.fold.foldHash,vector:vec,fields:p.fold.fields.map(f=>({field:f.field,primitives:f.primitiveCount})),forwarding:p.fold.forwardingCount,truncatedPipelineInput:truncated},
+   app,fold:{foldHash:p.fold.foldHash,vector:vec,fields:p.fold.fields.map(f=>({field:f.field,primitives:f.primitiveCount})),forwarding:p.fold.forwardingCount,truncatedPipelineInput:truncated,
+   // DEFECT FIX: the flag above only saw maxPipelineBytes; her ExecutionAddressResolver.descend (inherited from v0.4.0, spine/execution-address-resolver.mjs line 87) exposes at most 4096 six-bit states, so larger files were silently cut. Reported here, not hidden.
+   sixBitStates:{needed:Math.ceil(pb.length*8/6),scheduled:p.primitiveGraph.nodeCount,cappedByDescend:Math.ceil(pb.length*8/6)>p.primitiveGraph.nodeCount}},
    swarm:{status:sw.status,placement:sw.placement,genotype_pso:sw.genotype_pso,phenotype_ga:sw.phenotype_ga,execution:sw.execution&&sw.execution.tier!==undefined?{tier:sw.execution.tier,n_active:sw.execution.n_active,confidence:sw.execution.confidence,event_id:sw.execution.event_id}:sw.execution,
     foldUp:up.executed?{tier:up.tier,n_active:up.n_active,confidence:up.confidence,event_id:up.event_id,space:up.space}:up,registration:sw.registration},
    wheels:{perField:wheels,placed:placedWheel,tenWings:TEN_WINGS},history:{seq:hist.seq,addressKey:hist.addressKey,entriesAtAddress:this.history.recall(resolved.key).length},

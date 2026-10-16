@@ -88,11 +88,11 @@ test('reorganization: swarm dynamics change the organization, not a finished app
  // PSO is only invoked when local change is stuck; with no examples to improve it must not change a correct organization
  const ok=await reorganize(TARGETS.pattern.atoms,ex);assert.equal(ok.log.length,0);
 });
-test('preservation: every existing primitive is inventoried by live probe; ABC is reported absent, not faked',async()=>{
+test('preservation: every existing primitive is inventoried by live probe, including ABC (found in v9/v10 and morph-search.mjs)',async()=>{
  const inv=await inventoryPrimitives(),ids=inv.map(x=>x.id);
  for(const need of ['hexagram-state (six bits, packs 3-2-1)','64 gates: King Wen <-> Fu Xi map','Hamming-1 neighbourhood (channel emergence rule)','PSO numeric fit','PSO on trainable cells','NSNF runtime (tiers, sparse activation, trace)','PSO genotype / GA phenotype pair, packs 3-2-1','Bantu 6-bit token representation (bytes <-> tokens, 3-2-1 levels)'])assert.ok(ids.some(i=>i.startsWith(need.slice(0,20))),need);
  for(const d of ['Movement','Evolution','Being','Design','Space'])assert.ok(ids.includes('dimension '+d+' wheel'));
- const bad=inv.filter(x=>!x.executable);assert.deepEqual(bad.map(x=>x.id),['ABC (artificial bee colony)']);
+ const bad=inv.filter(x=>!x.executable);assert.deepEqual(bad.map(x=>x.id),[],'every inventoried primitive, ABC included, executes');assert.ok(inv.some(x=>x.id==='ABC (artificial bee colony)'&&x.executable));
  assert.ok(inv.filter(x=>x.added).length===4&&inv.filter(x=>x.added).every(x=>/population/.test(x.id)),'only the four dimension kinds are new, flagged as added');
  assert.ok(CONNECTED_TO_EXECUTION.notConnectedToPopulationExecution.length>=4,'what is NOT connected is listed');
 });

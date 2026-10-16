@@ -6,6 +6,7 @@ import {fitParticles} from '../swarm-fit.mjs';
 import {SwarmComponent} from '../swarm-component.mjs';
 import {SwarmPair} from '../swarm-nsnf.mjs';
 import {PRIMITIVE_KINDS,WRITABLE} from './population.mjs';
+import {abcFit} from './abc.mjs';
 import {WHEELS} from './wheels.mjs';
 import {encodeBytes,decodeBytes,packsOf} from './bantu.mjs';
 import {FiveFieldCompiler,EXECUTION_FIELDS} from './automata/five-field-compiler.mjs';
@@ -25,7 +26,8 @@ export async function inventoryPrimitives(){
  out.push(await (async()=>{try{const m=new TinyMLP({dIn:8,hidden:6,dOut:4,seed:3}),data=Array.from({length:6},(_,i)=>({input:Array(8).fill(i/6),target:[1,0,0,0]}));const r=await trainWithParticleSwarm(m,data,{particles:4,iterations:2});return {id:'PSO on trainable cells',source:'nsnf-runtime.mjs trainWithParticleSwarm',executable:true,evidence:{keys:Object.keys(r||{}).slice(0,5)}}}catch(e){return {id:'PSO on trainable cells',source:'nsnf-runtime.mjs trainWithParticleSwarm',executable:false,evidence:String(e.message)}}})());
  out.push(await (async()=>{try{const r=await fitParticles({bounds:[[0,10]],initial:[1],score:x=>(x[0]-7)**2,particles:8,iterations:10});return {id:'PSO numeric fit',source:'swarm-fit.mjs',executable:true,evidence:{best:+r.values[0].toFixed(2),workers:r.workers}}}catch(e){return {id:'PSO numeric fit',source:'swarm-fit.mjs',executable:false,evidence:String(e.message)}}})());
  out.push(probe('PSO genotype / GA phenotype pair, packs 3-2-1','swarm-component.mjs, swarm-nsnf.mjs',()=>typeof SwarmComponent==='function'&&typeof SwarmPair==='function'?{classes:['SwarmComponent','SwarmPair']}:null));
- out.push({id:'ABC (artificial bee colony)',source:'none found in her files (searched zips, spec and architecture text)',executable:false,evidence:'absent: not implemented, not claimed (investigating)'});
+// DEFECT FIX: this line used to report ABC as absent ("none found in her files"). It exists: swarm-os-v14/x/v9/swarm_os_full.py abc_phase() (and v10 swarm_os_bantu.py), and oct7src/computer/runtime/morph-search.mjs. See abc.mjs.
+ out.push(probe('ABC (artificial bee colony)','abc.mjs = ports of swarm_os_full.py abc_phase() [v9] and morph-search.mjs abc() [single-axis]',()=>{const r=abcFit({bounds:[[0,63]],initial:[5],score:x=>(x[0]-9)**2,iterations:10,variant:'v9'}),q=abcFit({bounds:[[0,63]],initial:[5],score:x=>(x[0]-9)**2,iterations:10,variant:'single-axis'});return {v9:r.score,singleAxis:q.score,start:r.initialScore}}));
  out.push(probe('Bantu 6-bit token representation (bytes <-> tokens, 3-2-1 levels)','bantu/bridge.js.txt (her bridge.js lines 5-9)',()=>{const t=encodeBytes([1,200,255]);return {tokens:t,back:[...decodeBytes(t)]}}));
  out.push(probe('five execution fields (shared, knowledge, causal, dependency, stateSpace)','automata/five-field-compiler.mjs',()=>({fields:EXECUTION_FIELDS,compiles:typeof new FiveFieldCompiler().compile})));
  out.push(probe('ExecutionAddressResolver (descend to six-bit states, resolve 13-place address)','spine/execution-address-resolver.mjs',()=>{const r=new ExecutionAddressResolver();return {states:r.descend({bytes:new Uint8Array([1,2,3])}).sixBitStateCount}}));
@@ -35,4 +37,4 @@ export async function inventoryPrimitives(){
 }
 export const CONNECTED_TO_EXECUTION=Object.freeze({
  connected:['hexagram state and operators (population hexagrams, reorganize uses Hamming-1)','five dimensions + nested state space (population nodes are registered there)','ExecutionAddressResolver (resolves every organization to an address)','PSO numeric fit (reorganize)','Bantu tokens (round-trip representation of any file, packs 3-2-1)','NSNF runtime + PSO/GA swarm pair (file swarm, integrated-swarm.mjs)'],
- notConnectedToPopulationExecution:['TinyMLP trainable cells and NSNF tiers (they execute the file swarm, not the population; no cell of the population is a TinyMLP)','dimension wheels (read-only annotation; they do not select behaviour)','Space readout (no emergence rule in her spec)','ABC (absent)','Klein/Autoling tools (not copied; the UniversalExecutionBridge that hosts them needs a Web Worker)']});
+ notConnectedToPopulationExecution:['TinyMLP trainable cells and NSNF tiers (they execute the file swarm, not the population; no cell of the population is a TinyMLP)','dimension wheels (read-only annotation; they do not select behaviour)','Space readout (no emergence rule in her spec)','ABC (found and ported in abc.mjs, available as a searcher with the call shape of fitParticles; NOT wired into lifecycle reorganize, because alone it repaired 0 of 6 test corruptions)','Klein/Autoling tools (not copied; the UniversalExecutionBridge that hosts them needs a Web Worker)']});

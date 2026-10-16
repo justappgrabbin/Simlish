@@ -32,7 +32,14 @@ export async function executeDAG(nodes, executor, options = {}) {
   const checkpoints = [];
   let running = 0;
 
-  const checkpoint = () => {
+  // REPAIR (demonstrated defect, see integrated/SCORECARD.md condition 10): the original took a full structuredClone of every status/result after EVERY node,
+  // i.e. O(n^2) time and memory (her v0.5.1 pipeline ran out of memory on files of a few KB). Behavior for graphs of <= 64 nodes is unchanged (a checkpoint
+  // after every node); larger graphs take at most ~64 evenly spaced checkpoints plus the first and the last. The original is kept byte-for-byte in dag-runtime.original.mjs.
+  const every = Math.max(1, options.checkpointEvery ?? Math.ceil(nodes.length / 64));
+  let sinceCheckpoint = 0;
+  const checkpoint = (force = false) => {
+    if (!force && ++sinceCheckpoint < every) return;
+    sinceCheckpoint = 0;
     const cp = {
       timestamp: Date.now(),
       status: Object.fromEntries(status),
@@ -71,7 +78,7 @@ export async function executeDAG(nodes, executor, options = {}) {
             }
           })
           .finally(() => {
-            running--; checkpoint(); pump();
+            running--; checkpoint([...status.values()].every((x) => ['done', 'failed', 'blocked'].includes(x))); pump();
           });
       }
 
@@ -96,7 +103,7 @@ export async function executeDAG(nodes, executor, options = {}) {
       }
     };
 
-    checkpoint();
+    checkpoint(true);
     pump();
   });
 }
