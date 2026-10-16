@@ -1,0 +1,13 @@
+Byte-for-byte copies of her originals; not edited. Listed in integrated/protected-originals.json so the swarm loop can never overwrite them.
+state-space/mesh-state-space.js, constants.js, addressing.js, claim-status.js and experiments/scale/controls.js
+  from github.com/justappgrabbin/SynthAi  computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/ui/studio/src/{state-space,experiments/scale}/   (mesh-state-space.js md5 f0ca8abdb926bee5f7a80a8a5d16d0ce, identical in several of her vendor directories)
+  They are the import closure of mesh-state-space.js: 5 dimension layers x 64 gate nodes, each layer ordered by its own sequence (Movement reverse, Evolution mawangdui, Being fuxi, Design kingwen, Space complement).
+  The file's header states which assignments are UNCONFIRMED (Movement=reverse, Space=complement, Being chart) and that the Mawangdui family order is version-dependent; none of that is decided here.
+dimension-qualities.mjs
+  from the same repo  computer/donors/dream-habitat/dimension-qualities.mjs  (sha256 below). Her per-dimension macro chain and micro nature, each with the source statement id (Black Book p126).
+8ded17f32b55db30b7671749a70e9622b0f85d05ee910ab07f6da0a0c2354704  state-space/addressing.js
+092e89e3cdab43f19fa7606654db494241f2257114872ba3359eff2ba2644bfe  state-space/claim-status.js
+950e5d751a7078bb1df3ff129c6b43e68bc90a7c48a3c2484aa0624ed7ecc5f7  state-space/constants.js
+653eb7c5e3c88f6e712a0df954747c9d062d5d9e0d86ac81c982b41f970215e8  state-space/mesh-state-space.js
+8d1fbe1ba87f9c37635c3004a6bf741682349347830d7e73efb69180db787372  experiments/scale/controls.js
+483be75df766d3e38e5a70691411309cf347b89b63110ec5ef55e31f559e9ec4  dimension-qualities.mjs

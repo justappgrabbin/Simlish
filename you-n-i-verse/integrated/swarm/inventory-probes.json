@@ -1,0 +1,820 @@
+{
+ "note": "Raw results of commands run on this box on 2026-10-16 (PT) against her files. Originals untouched. hover-built:* ran in /workspace/scratch/hover-fixes-build, which is byte-identical to the original Hover v0.5.8 except for build outputs (kmge_v5_fixed/dist from tsc, ui/build, foundry/app/dist, __pycache__).",
+ "probes": [
+  {
+   "id": "pure-synthia:current-synthia-swarm.node.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node tests/current-synthia-swarm.node.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 484,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 58.352873"
+  },
+  {
+   "id": "pure-synthia:durable-restart.node.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node tests/durable-restart.node.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 746,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 331.392553"
+  },
+  {
+   "id": "pure-synthia:full-wiring.node.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node tests/full-wiring.node.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 486,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 97.676395"
+  },
+  {
+   "id": "pure-synthia:swarm-body.node.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node tests/swarm-body.node.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 174,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 54.430676"
+  },
+  {
+   "id": "pure-synthia:physiology-wiring.node.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node tests/physiology-wiring.node.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 476,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 87.368885"
+  },
+  {
+   "id": "trainable-assembly:run",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/trainable-assembly-v0.4.2",
+   "cmd": "node tests/run.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 110,
+   "tail": "PASS scientist loop | PASS training journal | 6/6 PASS"
+  },
+  {
+   "id": "trainable-assembly:core",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/trainable-assembly-v0.4.2",
+   "cmd": "node test/core-runtime.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 166,
+   "tail": "  \"autoNovelMode\": \"code\", |   \"logEntries\": 42 | }"
+  },
+  {
+   "id": "pure-synthia:world-port.node.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node tests/world-port.node.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 444,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 52.34127"
+  },
+  {
+   "id": "synthia-core:test",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-core-v1.0.0",
+   "cmd": "node --test tests/synthia-core.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 346,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 251.22806"
+  },
+  {
+   "id": "kimi-merge:smoke",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata",
+   "cmd": "node test/merged.smoke.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 381,
+   "tail": "ok   artifacts: GIF89a header + trailer + byte-deterministic | ok   artifacts: weaveArtifact -> {kind code, <name>.js, text/javascript, fnv hash} + writer list | 42 passed, 0 failed"
+  },
+  {
+   "id": "execution-spine:test",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/execution-spine-v0.4.0",
+   "cmd": "node --test tests/*.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 420,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 318.561821"
+  },
+  {
+   "id": "predictive-memory:test",
+   "cwd": "/workspace/zips/_drive_x/Synthia-Predictive-Memory-v0.1/Synthia-Predictive-Memory-v0.1",
+   "cmd": "node predictive-semantic-learning.test.js",
+   "status": "pass",
+   "code": 0,
+   "ms": 174,
+   "tail": "    } |   ] | }"
+  },
+  {
+   "id": "kimi-merge:run",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata",
+   "cmd": "node tests/run.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 961,
+   "tail": "[ports-c] 59 passed, 0 failed | [living-loop] 31 passed, 0 failed | 866 passed, 0 failed"
+  },
+  {
+   "id": "dream-swarm:test",
+   "cwd": "/workspace/zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0",
+   "cmd": "node --test tests/*.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 811,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 715.669703"
+  },
+  {
+   "id": "relational-mesh:life",
+   "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+   "cmd": "node tests/reciprocal-life.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 131,
+   "tail": "PASS reciprocal-life: Movement constraints, reciprocal conditions, verified capability growth, 64 transition identity, emergent Space"
+  },
+  {
+   "id": "relational-mesh:verify",
+   "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+   "cmd": "node VERIFY-STANDALONE.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 514,
+   "tail": "  \"talk\": \"Hey. I’m here. We can talk normally, work through code, or open the Morph state and follow how the current idea is chang\", |   \"address\": \"Saturn:Movement:G36.L1.C1.T1.B1:78°42′55″:Asc:Pisces:H12\" | }"
+  },
+  {
+   "id": "relational-mesh:relations",
+   "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+   "cmd": "node tests/relational-mesh.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 163,
+   "tail": "PASS relational mesh: perspective collapse, DEG→Mesh, cross-scale evidence, DVQ motif compression | PASS relational mesh v0.3: relation algebra, source events, positioned dimensional marks, compact motif memory"
+  },
+  {
+   "id": "universal-execution-spine:test",
+   "cwd": "/workspace/zips/_drive_x/Synthia-Universal-Execution-Spine-v0.2.0/Synthia-Universal-Execution-Spine-v0.2.0",
+   "cmd": "node --test tests/*.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 377,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 249.707391"
+  },
+  {
+   "id": "integrated-tool-factory:test",
+   "cwd": "/workspace/zips/_drive_x/integrated-tool-factory-v1_6_0",
+   "cmd": "node --test test/*.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 501,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 363.785903"
+  },
+  {
+   "id": "relational-algebra-patch:test",
+   "cwd": "/workspace/zips/_drive_x/Synthia-v0.5.5-RELATIONAL-ALGEBRA-PATCH/Synthia-v0.5.5-RELATIONAL-ALGEBRA-PATCH",
+   "cmd": "node --test test/16-relational-operator-runtime.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 229,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 126.759138"
+  },
+  {
+   "id": "pure-synthia:VERIFY-SWARM",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+   "cmd": "node VERIFY-SWARM.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 3808,
+   "tail": "# todo 0 | # duration_ms 834.425435 | SYNTHIA SWARM VERIFY: PASS"
+  },
+  {
+   "id": "movement-temporal-patch:test",
+   "cwd": "/workspace/zips/_drive_x/Synthia-v0.5.6-MOVEMENT-TEMPORAL-MESH-PATCH/Synthia-v0.5.6-MOVEMENT-TEMPORAL-MESH-PATCH",
+   "cmd": "node --test test/17-movement-temporal-experience.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 236,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 124.157989"
+  },
+  {
+   "id": "klein-mesh-v5.1:ls",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/klein-mesh-game-engine-v5.1",
+   "cmd": "ls kmge_v5_fixed",
+   "status": "pass",
+   "code": 0,
+   "ms": 3,
+   "tail": "pipeline.ts | sensory-adapter.ts | tsconfig.json"
+  },
+  {
+   "id": "dna-proportion-patch:test",
+   "cwd": "/workspace/zips/_drive_x/Synthia-v0.5.2-DNA-PROPORTION-OF-PERSPECTIVE-PATCH/Synthia-v0.5.2-DNA-PROPORTION-OF-PERSPECTIVE-PATCH",
+   "cmd": "node --test test/14-proportion-perspective-dna.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 232,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 121.01118"
+  },
+  {
+   "id": "dream-swarm:verify",
+   "cwd": "/workspace/zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0",
+   "cmd": "node scripts/verify.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 3408,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 710.395235"
+  },
+  {
+   "id": "swarm-body-v0.3.0:verify",
+   "cwd": "/workspace/zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY",
+   "cmd": "node VERIFY-SWARM.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 2318,
+   "tail": "# todo 0 | # duration_ms 519.84 | SYNTHIA SWARM VERIFY: PASS"
+  },
+  {
+   "id": "swarm-os:v12/cosmic_engine.py",
+   "cwd": "/workspace/swarm-os-v14/x",
+   "cmd": "timeout 100 python3 v12/cosmic_engine.py",
+   "status": "pass",
+   "code": 0,
+   "ms": 35,
+   "tail": "L12 Vowel:     U | L13 AX:        G57-C4-Z11-V4 | Validated: False | Air:           T=373.3K, c=387.33m/s"
+  },
+  {
+   "id": "synthia-os-runtime:test_ato_core",
+   "cwd": "/workspace/zips/synthia_os_runtime__42a15982",
+   "cmd": "node test_ato_core.js",
+   "status": "pass",
+   "code": 0,
+   "ms": 94,
+   "tail": "============================================================ | ALL TESTS COMPLETE | ============================================================"
+  },
+  {
+   "id": "swarm-os:v6/swarm_os.py",
+   "cwd": "/workspace/swarm-os-v14/x",
+   "cmd": "timeout 100 python3 v6/swarm_os.py",
+   "status": "fail",
+   "code": 1,
+   "ms": 4065,
+   "tail": "  File \"/workspace/swarm-os-v14/x/v6/swarm_os.py\", line 242, in render_picture |     import matplotlib.pyplot as plt | ModuleNotFoundError: No module named 'matplotlib'"
+  },
+  {
+   "id": "swarm-os:v9/swarm_os_full.py",
+   "cwd": "/workspace/swarm-os-v14/x",
+   "cmd": "timeout 100 python3 v9/swarm_os_full.py",
+   "status": "pass",
+   "code": 0,
+   "ms": 6462,
+   "tail": "◛⭩&◴◸⭽◓⬸⬪◼⭹ɶ◾⬮⭬⭷◯⬥⬭ɿʓʒɖ⭨⭷⭦◟◰ʊ⭺◟◩⭝⭻ʈ⬦⬞ʪɒʢ:ʃʃʦ=⬒⬢ɻ◕⬫æʯ⭓⬽⬙◸⭟⬟⭦ɞ⬢◺◓◒@%ɔ ⬘⭱⬮⬯⭒⬛⭻1ɮ⬦◿⬩◟ʭɼ⬫ʦʨʅɚɬ⭖⭡◬⭞⬓◹◵◒▁⬓⬪◶⭒ɺ◔⭨1◵●    ╠    ◯⭣⭙◲◘    ◚◉⭺ ⭱◧         | ⭷◨⬚⭛ɫ⬙◻⭶⭝◢ʜ⭬0⬞◔◭⬤◢◦ʡɗɿɪ⭘⭿ʆ⭲⭤⬠⬧⭲⭓◘⬹⬶ɛ⬫⬴◨#ʊɥʘ0◱⭑⭵⭾◑◬⬞⭻⬫ʜ◥◵◜⭹◿⭦⬚◎◩⭓⭬⭵@$▕◪◵⭠ʬæʠ1@⬞ɰ⭦⬸◟◮●ʖ◷◱⬗ɰ⬖⭘⬒⭖⬻◔◶▄ ◕⭯◼ ◸⬽⬚⬽◑◶   %  @&+$⬥ ⭳◙    ⬿              | =============="
+  },
+  {
+   "id": "swarm-os:v10/swarm_os_bantu.py",
+   "cwd": "/workspace/swarm-os-v14/x",
+   "cmd": "timeout 100 python3 v10/swarm_os_bantu.py",
+   "status": "pass",
+   "code": 0,
+   "ms": 8452,
+   "tail": "◛◞◫◿◚◎◮◬◢◙◲◼◉◢◿◩◡fln◺◪○◨◢◥◺◟◥◴◽◬◷◹◹◬◺◚○◒◽◴nap◛a◡○◔l◵◚◶sllss◯◔◸◜◼◥◽a╝◣◕◾◭sskkww◓0S◦═╗◭◗◢◧◚◟0╔├1  ◮◕◦◼  ccc                                    | ◨◤◲◓◒◖◘◾◔◑◡◪●◿◎◶◛◚◖◔◖fl●◜◰◰◙◓◼◨◦◐◱◚l●◻◒◩◵◬a◲◱◙◲a◜◠◷◪◻◺◜◖lbsf◒◖◟◡◔◸○◰a◓◡skwkkSS/SZ~g>┼◦◒◐◺◰DDD◒◣ ◣◵◡ ◕X  XX  ◑◗◹◕                             | =============="
+  },
+  {
+   "id": "hover-built:01-primitives.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/01-primitives.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1087,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 977.733171"
+  },
+  {
+   "id": "hover-built:04-organism-federation.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/04-organism-federation.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1834,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1732.400884"
+  },
+  {
+   "id": "hover-built:03-autonomy-governance.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/03-autonomy-governance.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 2519,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 2410.21003"
+  },
+  {
+   "id": "hover-built:02-live-pipelines.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/02-live-pipelines.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 4067,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 3961.218517"
+  },
+  {
+   "id": "hover-built:08-exact-recall-and-coordination.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/08-exact-recall-and-coordination.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1173,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1070.096706"
+  },
+  {
+   "id": "hover-built:09-front-screen.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/09-front-screen.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1892,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1787.801576"
+  },
+  {
+   "id": "hover-built:06-cultivation-core.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/06-cultivation-core.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 6179,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 6074.559444"
+  },
+  {
+   "id": "hover-built:10-agent-genome.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/10-agent-genome.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 931,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 834.108006"
+  },
+  {
+   "id": "hover-built:12-dna-linguistic-runtime.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/12-dna-linguistic-runtime.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1029,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 932.394582"
+  },
+  {
+   "id": "hover-built:13-dna-perception-neural-runtime.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/13-dna-perception-neural-runtime.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1049,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 944.588255"
+  },
+  {
+   "id": "hover-built:14-proportion-perspective-dna.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/14-proportion-perspective-dna.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1108,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1010.082248"
+  },
+  {
+   "id": "hover-built:11-birth-mirror-runtime.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/11-birth-mirror-runtime.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 4022,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 3903.771464"
+  },
+  {
+   "id": "hover-built:15-biological-translation-runtime.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/15-biological-translation-runtime.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1288,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1190.232336"
+  },
+  {
+   "id": "hover-built:05-twenty-task-autonomy.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/05-twenty-task-autonomy.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 12134,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 12028.744085"
+  },
+  {
+   "id": "hover-built:16-relational-operator-runtime.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/16-relational-operator-runtime.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1274,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1172.239831"
+  },
+  {
+   "id": "hover-built:19-solo-hover-shell.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/19-solo-hover-shell.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 751,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 659.98482"
+  },
+  {
+   "id": "hover-built:20-hover-task-worker.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/20-hover-task-worker.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 424,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 323.458603"
+  },
+  {
+   "id": "hover-built:17-movement-temporal-experience.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/17-movement-temporal-experience.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 2507,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 2408.260921"
+  },
+  {
+   "id": "hover-built:07-state-space-forms.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/07-state-space-forms.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 12656,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 12553.348628"
+  },
+  {
+   "id": "hover-built:android-hand-adapter.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/android-hand-adapter.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 362,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 265.216507"
+  },
+  {
+   "id": "hover-built:18-canonical-morph-integration.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/18-canonical-morph-integration.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 2393,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 2295.537087"
+  },
+  {
+   "id": "hover-built:20-solo-tool-factory.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/20-solo-tool-factory.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1167,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1060.865337"
+  },
+  {
+   "id": "hover-built:21-synthia17-resident.test.mjs",
+   "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/21-synthia17-resident.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1114,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 1015.829801"
+  },
+  {
+   "id": "hover:03-autonomy-governance.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/03-autonomy-governance.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 813,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 696.297687",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:02-live-pipelines.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/02-live-pipelines.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 819,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 703.777249",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:01-primitives.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/01-primitives.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 837,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 723.343059",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:04-organism-federation.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/04-organism-federation.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 831,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 724.782614",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:05-twenty-task-autonomy.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/05-twenty-task-autonomy.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 775,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 671.659277",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:08-exact-recall-and-coordination.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/08-exact-recall-and-coordination.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 796,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 671.601314",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:06-cultivation-core.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/06-cultivation-core.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 816,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 712.218071",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:07-state-space-forms.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/07-state-space-forms.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 825,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 726.412915",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:09-front-screen.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/09-front-screen.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 788,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 683.196199",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:10-agent-genome.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/10-agent-genome.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 869,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 750.010305",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:12-dna-linguistic-runtime.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/12-dna-linguistic-runtime.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 877,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 738.562998",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:11-birth-mirror-runtime.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/11-birth-mirror-runtime.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 926,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 825.004415",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:13-dna-perception-neural-runtime.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/13-dna-perception-neural-runtime.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 895,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 770.015407",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:15-biological-translation-runtime.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/15-biological-translation-runtime.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 772,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 672.458602",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:14-proportion-perspective-dna.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/14-proportion-perspective-dna.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 809,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 697.383598",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:16-relational-operator-runtime.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/16-relational-operator-runtime.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 834,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 736.698315",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:20-hover-task-worker.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/20-hover-task-worker.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 280,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 181.712738",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:17-movement-temporal-experience.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/17-movement-temporal-experience.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 766,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 658.850307",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:18-canonical-morph-integration.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/18-canonical-morph-integration.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 784,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 688.333677",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:19-solo-hover-shell.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/19-solo-hover-shell.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 1023,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 928.705264",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:android-hand-adapter.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/android-hand-adapter.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 383,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 279.844216",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:20-solo-tool-factory.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/20-solo-tool-factory.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 800,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 683.914385",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "hover:21-synthia17-resident.test.mjs",
+   "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "cmd": "node --test test/21-synthia17-resident.test.mjs",
+   "status": "fail",
+   "code": 1,
+   "ms": 771,
+   "tail": "# skipped 0 | # todo 0 | # duration_ms 654.559521",
+   "note": "run against the unbuilt original: fails because vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist (compiled TypeScript) is not in her copy"
+  },
+  {
+   "id": "repo-test:state-space.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test state-space.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 254,
+   "tail": "pass 10 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/abc.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/abc.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 272,
+   "tail": "pass 3 fail 0"
+  },
+  {
+   "id": "repo-test:address-resolution.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test address-resolution.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 260,
+   "tail": "pass 3 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/swarm/swarm.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/swarm/swarm.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 931,
+   "tail": "pass 13 fail 0"
+  },
+  {
+   "id": "repo-test:studio.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test studio.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 282,
+   "tail": "pass 4 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/integrated.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/integrated.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1288,
+   "tail": "pass 12 fail 0"
+  },
+  {
+   "id": "repo-test:rig-format.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test rig-format.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 244,
+   "tail": "pass 2 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/app-server.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/app-server.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1251,
+   "tail": "pass 13 fail 0"
+  },
+  {
+   "id": "repo-test:animation.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test animation.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 231,
+   "tail": "pass 2 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/population.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/population.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 598,
+   "tail": "pass 12 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/trident-js.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/trident-js.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 3880,
+   "tail": "pass 4 fail 0"
+  }
+ ]
+}

@@ -5,7 +5,7 @@ import {join,dirname} from 'node:path';import {fileURLToPath} from 'node:url';
 import {sha256} from '../sha256.mjs';
 const ROOT=join(dirname(fileURLToPath(import.meta.url)),'..');
 const walk=d=>readdirSync(join(ROOT,d)).flatMap(n=>statSync(join(ROOT,d,n)).isDirectory()?walk(d+'/'+n):[d+'/'+n]);
-const paths=['integrated/primitive-functions.json','integrated/primitive-attributes.json','integrated/primitive-sources.json','models/trident_syntia.pt','models/trident_vocab.json',...walk('integrated/reference'),...walk('vendor/isohuman')].sort();
+const paths=['integrated/primitive-functions.json','integrated/primitive-attributes.json','integrated/primitive-sources.json','models/trident_syntia.pt','models/trident_vocab.json',...walk('integrated/reference'),...walk('vendor/isohuman'),...walk('vendor/mesh'),...walk('integrated/swarm/originals')].sort();
 const files=Object.fromEntries(paths.map(p=>[p,sha256(new Uint8Array(readFileSync(join(ROOT,p))))]));
 writeFileSync(join(ROOT,'integrated/protected-originals.json'),JSON.stringify({note:'sha256 of originals the swarm loop may never modify. The constitution text is protected in code (swarm-loop.mjs CONSTITUTION). Regenerate only when an original is intentionally replaced, and say so in the commit.',files},null,1)+'\n');
 console.log(Object.keys(files).length+' originals recorded');

@@ -23,7 +23,7 @@ test('her modules are copied in byte-for-byte (manifest) and the originals are n
 });
 test('no worker, backend, network or external dependency in the integration (adapters and copied modules)',()=>{
  const scan=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?scan(join(dir,e.name)):[join(dir,e.name)]);
- const files=scan(here).filter(f=>/\.(mjs|js)$/.test(f)&&!f.endsWith('.test.mjs')&&!f.includes('/reference/'));
+ const files=scan(here).filter(f=>/\.(mjs|js)$/.test(f)&&!f.endsWith('.test.mjs')&&!f.includes('/reference/')&&(!f.includes('/swarm/originals/')||f.endsWith('-morph-search.mjs'))); // swarm/originals holds her untouched files by reference; only the one the app imports (morph-search) must satisfy these rules
  assert.ok(files.length>=20);
  for(const f of files){const t=readFileSync(f,'utf8').replace(/\/\/.*$/gm,'').replace(/\/\*[\s\S]*?\*\//g,'');
   assert.ok(!/new\s+Worker\s*\(|new\s+SharedWorker|\bfetch\s*\(|XMLHttpRequest\s*\(|new\s+WebSocket|\brequire\s*\(/.test(t),f);

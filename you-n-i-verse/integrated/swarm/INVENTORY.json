@@ -1,0 +1,2467 @@
+{
+ "schema": "synthia-swarm-inventory/1",
+ "builtOn": "2026-10-16 (PT)",
+ "statusCounts": {
+  "EXISTS-RUNS": 24,
+  "EXISTS-UNTESTED": 11,
+  "PROPOSED": 15,
+  "UNVERIFIED": 4,
+  "MISSING": 3
+ },
+ "spec": {
+  "S1": "The swarm is the code, the intelligence and the body (not a controller of conventional software)",
+  "S2": "Particles are executable: value, operator, condition, relation, memory, instruction",
+  "S3": "Three coherent morphing types: computational, cognitive, visual",
+  "S4": "Intelligence without an LLM: Klein, AUTOLING, symbolic + neural + swarm",
+  "S5": "Ingest code in many languages, export to conventional code, but EXECUTE from the swarm's own representation",
+  "S6": "Recursive composition",
+  "S7": "Memory, lineage, append-only history",
+  "S8": "Photorealism connected to authoritative swarm state (existing morph/character assets first; Gaussian splats are not executable nodes)",
+  "S9": "Local, offline, no LLM, no server, no web worker"
+ },
+ "rows": [
+  {
+   "id": "swarm-os-v6",
+   "component": "SWARM-OS v6",
+   "specItems": [
+    "S1",
+    "S3"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "swarm-os-v14/x/v6/swarm_os.py",
+     "bytes": 17930,
+     "sha256": "83f52d5668a0430fcc3ed0ce7bc64edbbffb812d15b8e7bcfd1d876d73dd1ee3",
+     "functions": [
+      {
+       "name": "class DimensionalAgent",
+       "found": true
+      },
+      {
+       "name": "class SwarmField",
+       "found": true
+      },
+      {
+       "name": "class NeighborhoodCrystallizer",
+       "found": true
+      }
+     ]
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "swarm-os:v6/swarm_os.py",
+     "status": "fail",
+     "cmd": "timeout 100 python3 v6/swarm_os.py",
+     "cwd": "/workspace/swarm-os-v14/x",
+     "result": "  File \"/workspace/swarm-os-v14/x/v6/swarm_os.py\", line 242, in render_picture |     import matplotlib.pyplot as plt | ModuleNotFoundError: No module named 'matplotlib'"
+    }
+   ],
+   "testsPassed": 0,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "python3",
+    "numpy",
+    "matplotlib"
+   ],
+   "missingConnections": [
+    "run failed here: matplotlib is not installed on this box, so v6 was not exercised (its recorded output swarm-os-v14/runs/v6out/swarm_result.json exists)"
+   ],
+   "note": "Python reference. Not in this repo as code."
+  },
+  {
+   "id": "swarm-os-v9",
+   "component": "SWARM-OS v9 (PSO+GA+ABC hybrid)",
+   "specItems": [
+    "S1",
+    "S3"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "swarm-os-v14/x/v9/swarm_os_full.py",
+     "bytes": 13242,
+     "sha256": "c2a26e522eee45929970600d8a93297a0dc1ab89d3a1dc3ab6e65ad00628eb7c",
+     "functions": [
+      {
+       "name": "class SwarmParticle",
+       "found": true
+      },
+      {
+       "name": "class FullScreenSwarm",
+       "found": true
+      },
+      {
+       "name": "def main",
+       "found": true
+      }
+     ]
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "swarm-os:v9/swarm_os_full.py",
+     "status": "pass",
+     "cmd": "timeout 100 python3 v9/swarm_os_full.py",
+     "cwd": "/workspace/swarm-os-v14/x",
+     "result": "◛⭩&◴◸⭽◓⬸⬪◼⭹ɶ◾⬮⭬⭷◯⬥⬭ɿʓʒɖ⭨⭷⭦◟◰ʊ⭺◟◩⭝⭻ʈ⬦⬞ʪɒʢ:ʃʃʦ=⬒⬢ɻ◕⬫æʯ⭓⬽⬙◸⭟⬟⭦ɞ⬢◺◓◒@%ɔ ⬘⭱⬮⬯⭒⬛⭻1ɮ⬦◿⬩◟ʭɼ⬫ʦʨʅɚɬ⭖⭡◬⭞⬓◹◵◒▁⬓⬪◶⭒ɺ◔⭨1◵●    ╠    ◯⭣⭙◲◘    ◚◉⭺ ⭱◧         | ⭷◨⬚⭛ɫ⬙◻⭶⭝◢ʜ⭬0⬞◔◭⬤◢◦ʡɗɿɪ⭘⭿ʆ⭲⭤⬠⬧⭲⭓◘⬹⬶ɛ⬫⬴◨#ʊɥʘ0◱⭑⭵⭾◑◬⬞⭻⬫ʜ◥◵◜⭹◿⭦⬚◎◩⭓⭬⭵@$▕◪◵⭠ʬæʠ1@⬞ɰ⭦⬸◟◮●ʖ◷◱⬗ɰ⬖⭘⬒⭖⬻◔◶▄ ◕⭯◼ ◸⬽⬚⬽◑◶   %  @&+$⬥ ⭳◙    ⬿              | =============="
+    },
+    {
+     "id": "repo-test:integrated/abc.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/abc.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 3 fail 0"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "python3",
+    "numpy"
+   ],
+   "missingConnections": [
+    "Python original is not connected to the app. Its ABC roles (employed .4 / onlooker .4 / scout .2) are ported in integrated/abc.mjs (AbcV9, connected); its PSO and GA phases are not ported as such: the repo has swarm-fit.mjs (PSO, numeric only) and population.mjs (GA over primitives)"
+   ],
+   "note": "ran to completion (exit 0) in 6.5 s"
+  },
+  {
+   "id": "swarm-os-v10",
+   "component": "SWARM-OS v10 Bantu",
+   "specItems": [
+    "S1",
+    "S5"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "swarm-os-v14/x/v10/swarm_os_bantu.py",
+     "bytes": 15363,
+     "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7",
+     "functions": [
+      {
+       "name": "class",
+       "found": true
+      }
+     ]
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "swarm-os:v10/swarm_os_bantu.py",
+     "status": "pass",
+     "cmd": "timeout 100 python3 v10/swarm_os_bantu.py",
+     "cwd": "/workspace/swarm-os-v14/x",
+     "result": "◛◞◫◿◚◎◮◬◢◙◲◼◉◢◿◩◡fln◺◪○◨◢◥◺◟◥◴◽◬◷◹◹◬◺◚○◒◽◴nap◛a◡○◔l◵◚◶sllss◯◔◸◜◼◥◽a╝◣◕◾◭sskkww◓0S◦═╗◭◗◢◧◚◟0╔├1  ◮◕◦◼  ccc                                    | ◨◤◲◓◒◖◘◾◔◑◡◪●◿◎◶◛◚◖◔◖fl●◜◰◰◙◓◼◨◦◐◱◚l●◻◒◩◵◬a◲◱◙◲a◜◠◷◪◻◺◜◖lbsf◒◖◟◡◔◸○◰a◓◡skwkkSS/SZ~g>┼◦◒◐◺◰DDD◒◣ ◣◵◡ ◕X  XX  ◑◗◹◕                             | =============="
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "python3",
+    "numpy"
+   ],
+   "missingConnections": [
+    "Python original not connected; the Bantu layers (binary/ascii/nato/translit/unicode) appear in repo only as primitive kind bantu-layer (6) in primitive-functions.json"
+   ],
+   "note": "ran to completion (exit 0)"
+  },
+  {
+   "id": "swarm-os-v12",
+   "component": "SWARM-OS v12 cosmic engine",
+   "specItems": [
+    "S3"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "swarm-os-v14/x/v12/cosmic_engine.py",
+     "bytes": 10500,
+     "sha256": "10cff5863f4c11f6a3b5f64e5a2279186d0c3592799d2e23022c6db1226a6f21",
+     "functions": [
+      {
+       "name": "class",
+       "found": true
+      }
+     ]
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "swarm-os:v12/cosmic_engine.py",
+     "status": "pass",
+     "cmd": "timeout 100 python3 v12/cosmic_engine.py",
+     "cwd": "/workspace/swarm-os-v14/x",
+     "result": "L12 Vowel:     U | L13 AX:        G57-C4-Z11-V4 | Validated: False | Air:           T=373.3K, c=387.33m/s"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "python3"
+   ],
+   "missingConnections": [
+    "not connected. Its angular widths use 5 bases per tone (Base_Anchor 0.0052083 deg = tone/5), see the six-vs-five reconciliation"
+   ],
+   "note": "ran (exit 0)"
+  },
+  {
+   "id": "swarm-os-v13",
+   "component": "SWARM-OS v13 (64 Bantu gates table)",
+   "specItems": [
+    "S5"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "swarm-os-v14/x/v13/bantu_64_gates.txt",
+     "bytes": 6215,
+     "sha256": "fa0fc2614b07a397a6740a04aea3715d07b1d8f92c12b65f7318e81a0312e945",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "data table only: no v13 code file exists in the zip"
+   ],
+   "note": null
+  },
+  {
+   "id": "swarm-os-v14",
+   "component": "SWARM-OS v14 (hierarchical neural Bantu swarm)",
+   "specItems": [
+    "S1",
+    "S3"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "swarm-os-v14/x/v14/expansion_summary.json",
+     "bytes": 600,
+     "sha256": "7f96277ca60b353714d6107878ab28a6d117cc408a395d060140627527f33513",
+     "functions": []
+    },
+    {
+     "path": "swarm-os-v14/swarm_os_v14_complete-1.zip",
+     "bytes": 1971301,
+     "sha256": "6fdeee7d6f881f44aac41749a9fd30c0a0c00187279e963894abd59bb8bc717e",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "the zip holds v14 OUTPUTS only (5 layer PNGs, composite PNG, expansion_summary.json). No v14 generating code is in the zip, so its numbers (99,520 virtual agents) cannot be reproduced from a file"
+   ],
+   "note": "its summary says bases_per_tone 6"
+  },
+  {
+   "id": "repair-checkpoint",
+   "component": "repair checkpoint",
+   "specItems": [],
+   "status": "UNVERIFIED",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/REPAIR-LOG.md",
+     "bytes": 809,
+     "sha256": "da005c1d81607d390a20e7c8a72b0d19d18c0d1a0ba1b8f4deb773bc9cd8d808",
+     "functions": []
+    },
+    {
+     "path": "zips/_drive_x/pure-synthia-pass4-step41-REPAIRED/README.md",
+     "bytes": 4491,
+     "sha256": "4aaafb08bf20682e17ed2361bce53798fe3e1ee1873d8472372b4156902b95ff",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "no file is named \"repair checkpoint\". Candidates: Hover docs/REPAIR-LOG.md, zips/_drive_x/pure-synthia-pass3-REPAIRED, pure-synthia-pass4-step41-REPAIRED, Synthia-v0.3.0-composition-repair-01, Synthia-Compiler-Kit-v6-SELFHEALING. Which one she means is not decided here"
+   ],
+   "note": "candidates listed, none claimed"
+  },
+  {
+   "id": "pure-synthia-swarm-body",
+   "component": "Pure Synthia Swarm Body",
+   "specItems": [
+    "S1",
+    "S7",
+    "S9"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/src/synthia/swarm/swarmBody.mjs",
+     "bytes": 10922,
+     "sha256": "ac028a699dcd333e742220fc554c446c2910ecece7a40224ac501f2d3c52f662",
+     "functions": [
+      {
+       "name": "SynthiaSwarmBody",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/SWARM-ARCHITECTURE.json",
+     "bytes": 1629,
+     "sha256": "d330e433cf62b5cebbb5f84b581793b487d6cfef2ae178bc954802c29476677f",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/VERIFY-SWARM.mjs",
+     "bytes": 497,
+     "sha256": "e638ce49fadc4e601f5bc3584edcf243775a02733a515ae071ef60523c13ce47",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "pure-synthia:VERIFY-SWARM",
+     "status": "pass",
+     "cmd": "node VERIFY-SWARM.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# todo 0 | # duration_ms 834.425435 | SYNTHIA SWARM VERIFY: PASS"
+    },
+    {
+     "id": "pure-synthia:swarm-body.node.mjs",
+     "status": "pass",
+     "cmd": "node tests/swarm-body.node.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 54.430676"
+    },
+    {
+     "id": "pure-synthia:current-synthia-swarm.node.mjs",
+     "status": "pass",
+     "cmd": "node tests/current-synthia-swarm.node.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 58.352873"
+    },
+    {
+     "id": "pure-synthia:full-wiring.node.mjs",
+     "status": "pass",
+     "cmd": "node tests/full-wiring.node.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 97.676395"
+    },
+    {
+     "id": "pure-synthia:durable-restart.node.mjs",
+     "status": "pass",
+     "cmd": "node tests/durable-restart.node.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 331.392553"
+    },
+    {
+     "id": "pure-synthia:physiology-wiring.node.mjs",
+     "status": "pass",
+     "cmd": "node tests/physiology-wiring.node.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 87.368885"
+    },
+    {
+     "id": "pure-synthia:world-port.node.mjs",
+     "status": "pass",
+     "cmd": "node tests/world-port.node.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 52.34127"
+    },
+    {
+     "id": "swarm-body-v0.3.0:verify",
+     "status": "pass",
+     "cmd": "node VERIFY-SWARM.mjs",
+     "cwd": "/workspace/zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY",
+     "result": "# todo 0 | # duration_ms 519.84 | SYNTHIA SWARM VERIFY: PASS"
+    }
+   ],
+   "testsPassed": 8,
+   "testsTotal": 8,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "NOT connected to this branch: nothing under integrated/ imports it. It coordinates 47 base processes with checkpoint/wake/restore; the integrated swarm here has the heartbeat loop and audit log instead. A connection (body processes <-> integrated/swarm area) is PROPOSED, not built"
+   ],
+   "note": "7 test files + VERIFY-SWARM pass; v0.3.0 PHYSIOLOGY zip VERIFY passes"
+  },
+  {
+   "id": "mesh-cognition-network",
+   "component": "Mesh Cognition Network",
+   "specItems": [
+    "S4"
+   ],
+   "status": "UNVERIFIED",
+   "files": [
+    {
+     "path": "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/package.json",
+     "bytes": 320,
+     "sha256": "f9a38a54c5285f283b2a7f8f2d9a83e3c7a44f95ee9ac8e15d3a2ea9fd08ecfd",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/mesh/relational-mesh.mjs",
+     "bytes": 4411,
+     "sha256": "3efd1fdf9e94f36c747d4e1ddad2b61927adaa359a171941c59dc44c7739d670",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "relational-mesh:verify",
+     "status": "pass",
+     "cmd": "node VERIFY-STANDALONE.mjs",
+     "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+     "result": "  \"talk\": \"Hey. I’m here. We can talk normally, work through code, or open the Morph state and follow how the current idea is chang\", |   \"address\": \"Saturn:Movement:G36.L1.C1.T1.B1:78°42′55″:Asc:Pisces:H12\" | }"
+    },
+    {
+     "id": "relational-mesh:relations",
+     "status": "pass",
+     "cmd": "node tests/relational-mesh.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+     "result": "PASS relational mesh: perspective collapse, DEG→Mesh, cross-scale evidence, DVQ motif compression | PASS relational mesh v0.3: relation algebra, source events, positioned dimensional marks, compact motif memory"
+    },
+    {
+     "id": "relational-mesh:life",
+     "status": "pass",
+     "cmd": "node tests/reciprocal-life.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+     "result": "PASS reciprocal-life: Movement constraints, reciprocal conditions, verified capability growth, 64 transition identity, emergent Space"
+    }
+   ],
+   "testsPassed": 3,
+   "testsTotal": 3,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "no file or doc is named \"Mesh Cognition Network\" (searched file names and contents). Candidates by function: Relational Mesh v0.3.0 (relation algebra, source events, motif memory; its three tests pass), Hover src/mesh/relational-mesh.mjs and mesh-federation.mjs, biverse shared_cognition.py + synthia-cognitive-network.sqlite3 (Python, untested)"
+   ],
+   "note": "name unresolved; the candidate runs, but it is not claimed to be this component"
+  },
+  {
+   "id": "state-space-mesh",
+   "component": "State Space Mesh",
+   "specItems": [
+    "S2",
+    "S6"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "repo:vendor/mesh/state-space/mesh-state-space.js",
+     "bytes": 14920,
+     "sha256": "653eb7c5e3c88f6e712a0df954747c9d062d5d9e0d86ac81c982b41f970215e8",
+     "functions": [
+      {
+       "name": "StateSpace",
+       "found": true
+      },
+      {
+       "name": "DimensionLayer",
+       "found": true
+      },
+      {
+       "name": "buildGateTable",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "repo:state-space.mjs",
+     "bytes": 10151,
+     "sha256": "015d088b3c9a461ce1c0c8a199d96f18adcf3f038a3b6c1d81af4e751b57e2b2",
+     "functions": [
+      {
+       "name": "hammingNeighbors",
+       "found": true
+      },
+      {
+       "name": "gateToMacro",
+       "found": true
+      },
+      {
+       "name": "macroToGate",
+       "found": true
+      },
+      {
+       "name": "StateSpace",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "repo:integrated/swarm/mesh.mjs",
+     "bytes": 13086,
+     "sha256": "99db0d2d551435fc5cc3ac7d7fcadd5355bf3469065c319f5dc65378a6cb3fef",
+     "functions": [
+      {
+       "name": "EmergentMesh",
+       "found": true
+      },
+      {
+       "name": "verifyEdges",
+       "found": true
+      },
+      {
+       "name": "potentialEdges",
+       "found": true
+      }
+     ]
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "repo-test:integrated/swarm/swarm.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/swarm/swarm.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 13 fail 0"
+    },
+    {
+     "id": "repo-test:state-space.test.mjs",
+     "status": "pass",
+     "cmd": "node --test state-space.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 10 fail 0"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "her EmergentEdgeResolver is not used (needs amplitude/phase/coherence/zodiac values that no source defines for content primitives; uses Math.random); its 33 distinct pairs differ from her 36 field_core channels"
+   ],
+   "note": "two meshes: her layered StateSpace (5 x 64) vendored byte-for-byte, and the emergent mesh built on it in this branch"
+  },
+  {
+   "id": "ato-core",
+   "component": "ATO Core",
+   "specItems": [
+    "S1",
+    "S6",
+    "S7"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-core-v1.0.0/ato-core/src/automaton.mjs",
+     "bytes": 9074,
+     "sha256": "6bea009b52bbad0d6ae37c38e0218aac3b226c47f74e37c11fa8995a5a34bdb5",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-core-v1.0.0/ato-core/src/promotion.mjs",
+     "bytes": 3016,
+     "sha256": "86870caaef06276d2631ab8c726787533ad081e1d73d076aa7531de8c629bf83",
+     "functions": []
+    },
+    {
+     "path": "zips/synthia_os_runtime__42a15982/layer1_ato_core.js",
+     "bytes": 7154,
+     "sha256": "330dc07e918e40683a58992e22d5abcf7891e89ee4bf46f8d93882ffebaf931f",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "synthia-core:test",
+     "status": "pass",
+     "cmd": "node --test tests/synthia-core.test.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-core-v1.0.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 251.22806"
+    },
+    {
+     "id": "synthia-os-runtime:test_ato_core",
+     "status": "pass",
+     "cmd": "node test_ato_core.js",
+     "cwd": "/workspace/zips/synthia_os_runtime__42a15982",
+     "result": "============================================================ | ALL TESTS COMPLETE | ============================================================"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "not imported by this branch (integrated/ has its own automata kernel under integrated/automata/)"
+   ],
+   "note": null
+  },
+  {
+   "id": "tool-factory",
+   "component": "Tool Factory",
+   "specItems": [
+    "S1",
+    "S5"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/src/synthia/toolFactory.js",
+     "bytes": 1829,
+     "sha256": "614a9827ff5b4fb7ffcf699d118a080e02f8da164863b9c9bde48f84eb9f1f1b",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/pipeline/tool-synthesizer.mjs",
+     "bytes": 8369,
+     "sha256": "528b8fb44af3f0f367cdd2bbdfa9c1898063c1ffbc34bd19cf7e650e6670154d",
+     "functions": []
+    },
+    {
+     "path": "zips/_drive_x/integrated-tool-factory-v1_6_0/package.json",
+     "bytes": 349,
+     "sha256": "146735bff98a06076020f7746be70d7e7069aba5c517b68619514f8c3a050847",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:20-solo-tool-factory.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/20-solo-tool-factory.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1060.865337"
+    },
+    {
+     "id": "integrated-tool-factory:test",
+     "status": "fail",
+     "cmd": "node --test test/*.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/integrated-tool-factory-v1_6_0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 363.785903"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "integrated-tool-factory-v1_6_0 test fails here: its test imports ../ato-core-native-test/src/index.mjs, a sibling folder that is not in her zips. The Hover tool-factory test passes only against the built copy (needs the compiled Klein engine dist)"
+   ],
+   "note": "not connected to this branch"
+  },
+  {
+   "id": "resolver",
+   "component": "Resolver (address resolution)",
+   "specItems": [
+    "S5",
+    "S7"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "repo:integrated/spine/execution-address-resolver.mjs",
+     "bytes": 6252,
+     "sha256": "8d5900bb6ffde4440e0e24b940cb5ef90d2178d9b3daaada1b85964976ce9b2f",
+     "functions": [
+      {
+       "name": "ExecutionAddressResolver",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/execution/integrated-address-resolver.mjs",
+     "bytes": 20059,
+     "sha256": "cae15116ae252534ec8c468aae1be7eadca17e0cc57b018e76ae2d768b1c15d9",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/execution-spine-v0.4.0/src/pure-synthia/sovereign-entry.js",
+     "bytes": 6552,
+     "sha256": "82152bfb168cf5e7f597e487eb786bd90c461547e6b89aff26673fbb545c0146",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "execution-spine:test",
+     "status": "pass",
+     "cmd": "node --test tests/*.test.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/execution-spine-v0.4.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 318.561821"
+    },
+    {
+     "id": "universal-execution-spine:test",
+     "status": "pass",
+     "cmd": "node --test tests/*.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/Synthia-Universal-Execution-Spine-v0.2.0/Synthia-Universal-Execution-Spine-v0.2.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 249.707391"
+    },
+    {
+     "id": "repo-test:integrated/integrated.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/integrated.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 12 fail 0"
+    },
+    {
+     "id": "repo-test:address-resolution.test.mjs",
+     "status": "pass",
+     "cmd": "node --test address-resolution.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 3 fail 0"
+    }
+   ],
+   "testsPassed": 4,
+   "testsTotal": 4,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "descend keeps 4096 six-bit states (spine line 87); no file of hers defines a way past it"
+   ],
+   "note": "connected: integrated-swarm.mjs uses it"
+  },
+  {
+   "id": "onomata",
+   "component": "Onomata",
+   "specItems": [],
+   "status": "MISSING",
+   "files": [],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "searched: file and folder names containing \"onomata\"; contents of .md/.txt/.json/.mjs/.js/.py/.ts/.tsx under /workspace (excluding venvs, scratch, node_modules). The only matches are the substring inside \"autonomata\". No Onomata source exists in her files"
+   ],
+   "note": null
+  },
+  {
+   "id": "relational-algebra",
+   "component": "Relational Algebra",
+   "specItems": [
+    "S2",
+    "S6"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/RELATIONAL-ALGEBRA-v0.5.5.md",
+     "bytes": 2604,
+     "sha256": "9410d5befd4afcce767d317dee3b70d30729364cc9fc114a5f9bcc5bc5463a55",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/mesh/relational-mesh.mjs",
+     "bytes": 4411,
+     "sha256": "3efd1fdf9e94f36c747d4e1ddad2b61927adaa359a171941c59dc44c7739d670",
+     "functions": []
+    },
+    {
+     "path": "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/package.json",
+     "bytes": 320,
+     "sha256": "f9a38a54c5285f283b2a7f8f2d9a83e3c7a44f95ee9ac8e15d3a2ea9fd08ecfd",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:16-relational-operator-runtime.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/16-relational-operator-runtime.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1172.239831"
+    },
+    {
+     "id": "relational-mesh:relations",
+     "status": "pass",
+     "cmd": "node tests/relational-mesh.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0",
+     "result": "PASS relational mesh: perspective collapse, DEG→Mesh, cross-scale evidence, DVQ motif compression | PASS relational mesh v0.3: relation algebra, source events, positioned dimensional marks, compact motif memory"
+    },
+    {
+     "id": "relational-algebra-patch:test",
+     "status": "fail",
+     "cmd": "node --test test/16-relational-operator-runtime.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/Synthia-v0.5.5-RELATIONAL-ALGEBRA-PATCH/Synthia-v0.5.5-RELATIONAL-ALGEBRA-PATCH",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 126.759138"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 3,
+   "runEvidence": null,
+   "dependencies": [
+    "node",
+    "built Klein dist for the Hover test"
+   ],
+   "missingConnections": [
+    "the v0.5.5 patch zip alone fails (it is an overlay and lacks the base files); runs only inside the full Hover tree. Not connected to this branch"
+   ],
+   "note": null
+  },
+  {
+   "id": "dna-rna-protein",
+   "component": "DNA / RNA / Protein patches",
+   "specItems": [
+    "S2",
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/DNA-RNA-PROTEIN-TRANSLATION-v0.5.3.md",
+     "bytes": 2359,
+     "sha256": "a019e9a30eccbeefd87cdf4b6642cc992883b91c87887a583dd538ed54cc6049",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/state-space/biological-translation-runtime.mjs",
+     "bytes": 13855,
+     "sha256": "8491cd1b7c30fd0c09442c6736e6a8fe1a17ef142b4e3f605c873eff0df051b0",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/AGENT-GENOME.md",
+     "bytes": 5545,
+     "sha256": "adcaa6b670332b4d6b0f91a234190a8ad3a50258a4f8246636fd5266fda1a4ee",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:12-dna-linguistic-runtime.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/12-dna-linguistic-runtime.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 932.394582"
+    },
+    {
+     "id": "hover-built:13-dna-perception-neural-runtime.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/13-dna-perception-neural-runtime.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 944.588255"
+    },
+    {
+     "id": "hover-built:14-proportion-perspective-dna.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/14-proportion-perspective-dna.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1010.082248"
+    },
+    {
+     "id": "hover-built:15-biological-translation-runtime.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/15-biological-translation-runtime.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1190.232336"
+    },
+    {
+     "id": "hover-built:10-agent-genome.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/10-agent-genome.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 834.108006"
+    }
+   ],
+   "testsPassed": 5,
+   "testsTotal": 5,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "not connected to this branch; the per-patch zips (v0.5.2) fail alone for the same overlay reason"
+   ],
+   "note": null
+  },
+  {
+   "id": "predictive-memory",
+   "component": "Predictive Memory",
+   "specItems": [
+    "S4",
+    "S7"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "zips/_drive_x/Synthia-Predictive-Memory-v0.1/Synthia-Predictive-Memory-v0.1/predictive-semantic-learning.js",
+     "bytes": 7472,
+     "sha256": "942518efae3b37f02e40441e75e7c2e6b1bfadb982cd3dc3b5523107fedef5c2",
+     "functions": []
+    },
+    {
+     "path": "zips/_drive_x/Synthia-Predictive-Memory-v0.1/Synthia-Predictive-Memory-v0.1/vqvae-generative-memory.js",
+     "bytes": 16103,
+     "sha256": "0197a545aaef0dceb99efb7c9f6a9846dc5a9d94c7f2a57805a23e50cae56ced",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "predictive-memory:test",
+     "status": "pass",
+     "cmd": "node predictive-semantic-learning.test.js",
+     "cwd": "/workspace/zips/_drive_x/Synthia-Predictive-Memory-v0.1/Synthia-Predictive-Memory-v0.1",
+     "result": "    } |   ] | }"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "not connected to this branch; the memory the branch has is the hash-chained AuditLog and HistoryLedger (append-only), not a predictive memory"
+   ],
+   "note": null
+  },
+  {
+   "id": "autopoietic-assembly",
+   "component": "Autopoietic Assembly",
+   "specItems": [
+    "S1",
+    "S6"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/trainable-assembly-v0.4.2/src/core/ato/automaton.mjs",
+     "bytes": 9074,
+     "sha256": "6bea009b52bbad0d6ae37c38e0218aac3b226c47f74e37c11fa8995a5a34bdb5",
+     "functions": []
+    },
+    {
+     "path": "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/autopoiesis/AutopoieticComposer.mjs",
+     "bytes": 6784,
+     "sha256": "fc481850b885fd45894c6362b48acd08f54e225911a4c30b71f040b17d98b6cb",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "trainable-assembly:run",
+     "status": "pass",
+     "cmd": "node tests/run.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/trainable-assembly-v0.4.2",
+     "result": "PASS scientist loop | PASS training journal | 6/6 PASS"
+    },
+    {
+     "id": "trainable-assembly:core",
+     "status": "pass",
+     "cmd": "node test/core-runtime.test.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/trainable-assembly-v0.4.2",
+     "result": "  \"autoNovelMode\": \"code\", |   \"logEntries\": 42 | }"
+    },
+    {
+     "id": "repo-test:integrated/app-server.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/app-server.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 13 fail 0"
+    }
+   ],
+   "testsPassed": 3,
+   "testsTotal": 3,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "trainable-assembly passes; AutopoieticComposer.mjs (r21.22) was not run. In this branch the self-assembly loop (swarm-loop.mjs, 73 units) is the connected counterpart"
+   ],
+   "note": null
+  },
+  {
+   "id": "generative-address-morphology",
+   "component": "Generative Address Morphology",
+   "specItems": [
+    "S3"
+   ],
+   "status": "UNVERIFIED",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/state-space/generative-grammar.js",
+     "bytes": 37296,
+     "sha256": "de1c7c9bb2c4ea9b65edd64be3052391e17544b0176836d287dbd8305968fc1b",
+     "functions": []
+    },
+    {
+     "path": "chassis-work/candidates/swarm-reality-trial/resonance_integrated_trial/integrations/biverse/human_design/generative_mesh.py",
+     "bytes": 3950,
+     "sha256": "d22f1d86e656083a65fd77732f5d525b3b8decdb097e328c68d008cb4f8e483b",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "kimi-merge:run",
+     "status": "pass",
+     "cmd": "node tests/run.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata",
+     "result": "[ports-c] 59 passed, 0 failed | [living-loop] 31 passed, 0 failed | 866 passed, 0 failed"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "no file or doc is named \"Generative Address Morphology\". Nearest by function: generative-grammar.js (kimi merge; its suite passes), generative_mesh.py (Python, untested), Hover exact-address-recall-patch, integrated/arc-engine.mjs (address from longitude, in this branch). None is claimed to be it"
+   ],
+   "note": null
+  },
+  {
+   "id": "kimi-agent-swarm",
+   "component": "Kimi Agent Swarm",
+   "specItems": [
+    "S3",
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/demo.mjs",
+     "bytes": 12359,
+     "sha256": "2743808989b6333d078044dbbb62f885a61571d3cb2ac50620adb0ed4355384b",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/tests/run.mjs",
+     "bytes": 52518,
+     "sha256": "ef017209c20bb898cd05c3f87c20edacd36abb8c02925411ee8ac2576461f6f9",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "kimi-merge:run",
+     "status": "pass",
+     "cmd": "node tests/run.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata",
+     "result": "[ports-c] 59 passed, 0 failed | [living-loop] 31 passed, 0 failed | 866 passed, 0 failed"
+    },
+    {
+     "id": "kimi-merge:smoke",
+     "status": "pass",
+     "cmd": "node test/merged.smoke.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata",
+     "result": "ok   artifacts: GIF89a header + trailer + byte-deterministic | ok   artifacts: weaveArtifact -> {kind code, <name>.js, text/javascript, fnv hash} + writer list | 42 passed, 0 failed"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "matched by name to \"Kimi Agent Automata State Space Merge\" (866 + 42 checks pass). Other Kimi packages exist (Kimi_Agent_Deployment_* zips under swarm-search) and were not run. Not connected to this branch"
+   ],
+   "note": null
+  },
+  {
+   "id": "seed-box",
+   "component": "Seed Box",
+   "specItems": [],
+   "status": "MISSING",
+   "files": [],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "searched names and contents for \"seed box\"/\"seedbox\": no hit in her source (one hit inside a tool-output text file). Similar names that are NOT claimed: The-seed repo, Synthia-Design-Dream-Seed, paper-seed-living-tree, native-seed-server.mjs"
+   ],
+   "note": null
+  },
+  {
+   "id": "dream-swarm",
+   "component": "Dream Swarm",
+   "specItems": [
+    "S1",
+    "S3",
+    "S7"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/server.mjs",
+     "bytes": 3554,
+     "sha256": "c9ce3c8f930a49b0d8e2f63f6aa024a7b6bfb98e86e796ab5232e2cb2933724b",
+     "functions": []
+    },
+    {
+     "path": "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/public/swarm-reality-engine.js",
+     "bytes": 14015,
+     "sha256": "7ce581b55401e93f97540192b63decae792ffc544d052695044bf0cf31723ca2",
+     "functions": []
+    },
+    {
+     "path": "zips/_drive/Dream-Swarm-System-v0.1.0.zip",
+     "bytes": 1358723,
+     "sha256": "c9c854ae7fcb02ef5648352c133cc896f7248af7e45856c014ecd86e92bcc2b6",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "dream-swarm:test",
+     "status": "pass",
+     "cmd": "node --test tests/*.test.mjs",
+     "cwd": "/workspace/zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 715.669703"
+    },
+    {
+     "id": "dream-swarm:verify",
+     "status": "pass",
+     "cmd": "node scripts/verify.mjs",
+     "cwd": "/workspace/zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 710.395235"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "not connected to this branch; it has a server.mjs (the spec requires no server), its browser engine file swarm-reality-engine.js was not run in a browser"
+   ],
+   "note": null
+  },
+  {
+   "id": "resonance-swarm-reality-trial",
+   "component": "Resonance Network Swarm Reality Trial",
+   "specItems": [
+    "S1",
+    "S3",
+    "S8"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "zips/_drive/Swarm-Reality-Trial-v0.1.0.zip",
+     "bytes": 17609,
+     "sha256": "b125f1d87fb3b9f1335fe8784731b96937067a162a8abf5e39c414fe00ebde74",
+     "functions": []
+    },
+    {
+     "path": "chassis-work/candidates/Resonance-Network-Swarm-Reality-INTEGRATED-TRIAL-2026-10-02.zip",
+     "bytes": 74789692,
+     "sha256": "4e7c9fbfe79ac58ffced3c9ce9764b82d18af1e6b425179e020bbbea5aa41c98",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [
+    "python",
+    "node",
+    "react"
+   ],
+   "missingConnections": [
+    "neither zip was run here (74 MB integrated trial; the 17 KB Swarm-Reality-Trial zip holds 8 files)"
+   ],
+   "note": null
+  },
+  {
+   "id": "morphing-particle-swarm",
+   "component": "Morphing Particle Swarm",
+   "specItems": [
+    "S3",
+    "S8"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "zips/_drive/morphing-particle-swarm-main.zip",
+     "bytes": 83253,
+     "sha256": "a8940019f2f4b4fb1e35799ed494b99ebc51e635adcbc7970d1f6883eeae1e0b",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [
+    "browser",
+    "three.js (CDN or local)"
+   ],
+   "missingConnections": [
+    "3 files: README.md, index.html, assets/donut.glb. A browser page: not opened here. Not connected to this branch"
+   ],
+   "note": null
+  },
+  {
+   "id": "cynthia-morph",
+   "component": "Cynthia Morph (canonical morph runtime)",
+   "specItems": [
+    "S3",
+    "S8"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/canonical-morph-runtime.mjs",
+     "bytes": 9299,
+     "sha256": "ca58f57b754a83c94806254b58da295550e728954c496a34317528aba6ad4376",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/deep-surface-morph-adapter.mjs",
+     "bytes": 1286,
+     "sha256": "52ee176dfae2df2b57cc798dfc45bbca448be098fd80541450ca2e0d89dec930",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+     "bytes": 1935,
+     "sha256": "2a1f3ac06ac366cdfc066a1f7952124e502679445311dff6c9457cc560a0d1ba",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:18-canonical-morph-integration.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/18-canonical-morph-integration.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 2295.537087"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "node",
+    "Python reference under src/morph/reference/surface-morph-python (not run)"
+   ],
+   "missingConnections": [
+    "not connected to this branch (which has photo-morph.mjs and frame-morph.mjs, tested, for image morphing)"
+   ],
+   "note": null
+  },
+  {
+   "id": "modelmaker",
+   "component": "Modelmaker (four-LLM position builder)",
+   "specItems": [
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "chassis-work/src/Stellarproximology-lab/Modelmaker-repair/app.py",
+     "bytes": 12716,
+     "sha256": "9e0f366feb1dab11d00b09f867f6a7c8151b5b7d71e07d6538c5c85a249671ff",
+     "functions": []
+    },
+    {
+     "path": "chassis-work/modelmaker-run/run_movement.py",
+     "bytes": 1695,
+     "sha256": "fdb7c29c4c3400a605926a8d50c3bcbfedd7d7b83b08e6b6eec0f82d4ebf78e7",
+     "functions": []
+    },
+    {
+     "path": "chassis-work/modelmaker-run/run-output.txt",
+     "bytes": 798,
+     "sha256": "2f0a1265e93d47a38762f30e1e265745b573d40852f987437e7054d05387af44",
+     "functions": []
+    },
+    {
+     "path": "chassis-work/modelmaker-run/movement-model/modelmaker_build.json",
+     "bytes": 669,
+     "sha256": "8d739aec6775f4fa69e1c978e3e8de8d2eb0db214149f5a38ac450d85db90211",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": "chassis-work/modelmaker-run/run-output.txt",
+   "dependencies": [
+    "python",
+    "torch/transformers"
+   ],
+   "missingConnections": [
+    "only the MOVEMENT model was built and run (run-output.txt); Evolution, Being and Design models were not. Her swarmdoc.md line 1342 says the dimension-to-model mapping is still open. Python only: not usable in the app"
+   ],
+   "note": "recorded run output, not re-run in this step"
+  },
+  {
+   "id": "trident",
+   "component": "Trident / Trinity (the model that talks)",
+   "specItems": [
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "repo:integrated/trident-js.mjs",
+     "bytes": 10688,
+     "sha256": "ccc39d9e241fc5e30a09a23346e6a2fcbada44242047d945d89bdc1c625f9c12",
+     "functions": [
+      {
+       "name": "Trident",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "repo:models/trident_syntia.pt",
+     "bytes": 14554266,
+     "sha256": "cf4885fee58391cb4d4a47035ba65a7d21d06e375b3105b535dc1225e731ea61",
+     "functions": []
+    },
+    {
+     "path": "repo:integrated/reference/hf-synthia/trinity-engine.js.txt",
+     "bytes": 11144,
+     "sha256": "4be7613a099c6fea51c5cd7ae27653420aa91a17b32f4c5aa44386fdbb46f7ab",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "repo-test:integrated/trident-js.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/trident-js.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 4 fail 0"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "the RAG gate of model.py is not ported (chunk embeddings come from rag.py). hdgnn is an address/trust resolver and does not talk"
+   ],
+   "note": "connected: app-server.mjs imports trident-js.mjs"
+  },
+  {
+   "id": "klein",
+   "component": "Klein mesh game engine v5.1",
+   "specItems": [
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/klein-mesh-game-engine.ts",
+     "bytes": 35910,
+     "sha256": "b61e4fa86e91d9597579d9262ca8a2c44ec9ab908937c5dae95c094eabb05a78",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/core-engine.ts",
+     "bytes": 34757,
+     "sha256": "ecac900b90c4254db454c5eb2da029446dc674e097e4696c5870f580a2cec50d",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:18-canonical-morph-integration.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/18-canonical-morph-integration.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 2295.537087"
+    },
+    {
+     "id": "hover-built:01-primitives.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/01-primitives.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 977.733171"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "TypeScript (tsc) to build dist"
+   ],
+   "missingConnections": [
+    "her copy has TypeScript sources only; the Hover tests fail until dist is compiled (hover:* probes show the failure; hover-built:* the pass). Not connected to this branch, and not pure JS as shipped"
+   ],
+   "note": null
+  },
+  {
+   "id": "autoling",
+   "component": "AUTOLING",
+   "specItems": [
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/hover/residents/synthia17/src/runtime/autoling.js",
+     "bytes": 19550,
+     "sha256": "5908bfb6316b206fd03f5748df0ed65f07a2c9dbd95910f8a478624e4277219e",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/automata/tools/tool-14-autoling.js",
+     "bytes": 18440,
+     "sha256": "7af4a523879ab8903bfc24102041ac8536a0f5555ab39a93fbd88de4d381b8dc",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:21-synthia17-resident.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/21-synthia17-resident.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1015.829801"
+    },
+    {
+     "id": "kimi-merge:run",
+     "status": "pass",
+     "cmd": "node tests/run.mjs",
+     "cwd": "/workspace/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata",
+     "result": "[ports-c] 59 passed, 0 failed | [living-loop] 31 passed, 0 failed | 866 passed, 0 failed"
+    }
+   ],
+   "testsPassed": 2,
+   "testsTotal": 2,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "not connected to this branch"
+   ],
+   "note": null
+  },
+  {
+   "id": "charactergen-factory",
+   "component": "CharacterGen / CharacterFactory",
+   "specItems": [
+    "S8"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "drive-drop/x-CharacterFactory-main/CharacterFactory-main/app.py",
+     "bytes": 12643,
+     "sha256": "52358eaf4e5ec2f1889c0b31759d184fa86bc455943c1c4d24f5ce977e13122f",
+     "functions": []
+    },
+    {
+     "path": "drive-drop/x-CharacterFactory-main/CharacterFactory-main/README.md",
+     "bytes": 2516,
+     "sha256": "97d6419a52f9fc218c5f1c66051acbe0ddaa71bdee95295b9a5ea596c1ddb2e7",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [
+    "python",
+    "torch",
+    "diffusers (GAN + diffusion)"
+   ],
+   "missingConnections": [
+    "CharacterFactory is a third-party research project (arXiv 2404.15677), not her code; it needs a GPU stack and cannot run in the app. \"CharacterGen\" as a separate name: nothing found"
+   ],
+   "note": "not run"
+  },
+  {
+   "id": "learned-motion-matching",
+   "component": "Learned Motion Matching",
+   "specItems": [
+    "S3",
+    "S8"
+   ],
+   "status": "MISSING",
+   "files": [],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "searched names and contents for \"motion matching\": no source in her files. Existing motion material that is NOT claimed to be it: repo animation.mjs/rig.mjs (tested), Hover src/morph"
+   ],
+   "note": null
+  },
+  {
+   "id": "you-n-i-verse",
+   "component": "YOU-N-I-VERSE (studio)",
+   "specItems": [
+    "S1",
+    "S8",
+    "S9"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "repo:index.html",
+     "bytes": 8193,
+     "sha256": "8ad08fb36e091a37da47d0c99dd026e65a84d8c2f91aebe1b1fcb10bac1e2e8d",
+     "functions": []
+    },
+    {
+     "path": "repo:studio.mjs",
+     "bytes": 30649,
+     "sha256": "af5078d6e346723f051305181d8c788fcbceb6f2a6c6bd984b52f75eb66d05b4",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "repo-test:studio.test.mjs",
+     "status": "pass",
+     "cmd": "node --test studio.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 4 fail 0"
+    },
+    {
+     "id": "repo-test:rig-format.test.mjs",
+     "status": "pass",
+     "cmd": "node --test rig-format.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 2 fail 0"
+    },
+    {
+     "id": "repo-test:animation.test.mjs",
+     "status": "pass",
+     "cmd": "node --test animation.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 2 fail 0"
+    }
+   ],
+   "testsPassed": 3,
+   "testsTotal": 3,
+   "runEvidence": null,
+   "dependencies": [
+    "node",
+    "Android WebView"
+   ],
+   "missingConnections": [
+    "photorealism is not present: the studio shows rigged/morphed characters, not photoreal output"
+   ],
+   "note": "APK built in CI with emulator self-test"
+  },
+  {
+   "id": "simlish",
+   "component": "Simlish (this repo, integrated swarm)",
+   "specItems": [
+    "S1",
+    "S5",
+    "S6",
+    "S7",
+    "S9"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "repo:integrated/integrated-swarm.mjs",
+     "bytes": 12247,
+     "sha256": "79bd69352894e8f7b6c2b004ab7553f78bfebff728fddc773bcc6c869e8d5e3a",
+     "functions": [
+      {
+       "name": "IntegratedSwarm",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "repo:integrated/swarm-loop.mjs",
+     "bytes": 13316,
+     "sha256": "81f45636515079bb0d62c5fed06b7242d52115faae8cfe295a6e454adbdf5597",
+     "functions": [
+      {
+       "name": "SwarmLoop",
+       "found": true
+      },
+      {
+       "name": "AuditLog",
+       "found": true
+      },
+      {
+       "name": "Workspace",
+       "found": true
+      },
+      {
+       "name": "ProtectedOriginals",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "repo:integrated/population.mjs",
+     "bytes": 12738,
+     "sha256": "c9c29244ebef442d774e827c9b60183b026da6a1b6b1e2e74e48d0145d9c658b",
+     "functions": [
+      {
+       "name": "Population",
+       "found": true
+      }
+     ]
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "repo-test:integrated/integrated.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/integrated.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 12 fail 0"
+    },
+    {
+     "id": "repo-test:integrated/app-server.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/app-server.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 13 fail 0"
+    },
+    {
+     "id": "repo-test:integrated/population.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/population.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 12 fail 0"
+    }
+   ],
+   "testsPassed": 3,
+   "testsTotal": 3,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "see the acceptance table for what the integrated swarm does not do"
+   ],
+   "note": null
+  },
+  {
+   "id": "synthia-os",
+   "component": "Synthia OS",
+   "specItems": [
+    "S1",
+    "S9"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "zips/synthia_os_runtime__42a15982/layer1_ato_core.js",
+     "bytes": 7154,
+     "sha256": "330dc07e918e40683a58992e22d5abcf7891e89ee4bf46f8d93882ffebaf931f",
+     "functions": []
+    },
+    {
+     "path": "zips/synthia_os_complete_v2__71b39ef3/layer1_ato_core.js",
+     "bytes": 7154,
+     "sha256": "330dc07e918e40683a58992e22d5abcf7891e89ee4bf46f8d93882ffebaf931f",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "synthia-os-runtime:test_ato_core",
+     "status": "pass",
+     "cmd": "node test_ato_core.js",
+     "cwd": "/workspace/zips/synthia_os_runtime__42a15982",
+     "result": "============================================================ | ALL TESTS COMPLETE | ============================================================"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "only layer 1 (ATO core) was run; layers above it were not"
+   ],
+   "note": null
+  },
+  {
+   "id": "synthai2",
+   "component": "SynthAi2",
+   "specItems": [],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "swarm-search/all/Synthai2/Dockerfile",
+     "bytes": 2258,
+     "sha256": "8fe725955ab8253dd1610bba14cb840fed28ffb58abd0d4145ff2fca473514a5",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [
+    "python"
+   ],
+   "missingConnections": [
+    "repo cloned under swarm-search/all/Synthai2; not run"
+   ],
+   "note": null
+  },
+  {
+   "id": "synthaiprodeploy",
+   "component": "SynthAIPRODeploy",
+   "specItems": [],
+   "status": "EXISTS-UNTESTED",
+   "files": [],
+   "dirs": [
+    {
+     "path": "swarm-search/all/SynthAIPRODeploy",
+     "exists": true,
+     "entries": 31
+    }
+   ],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "repo cloned; not run"
+   ],
+   "note": null
+  },
+  {
+   "id": "hover",
+   "component": "Hover (Synthia Solo Hover v0.5.8)",
+   "specItems": [
+    "S1",
+    "S4",
+    "S9"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/index.mjs",
+     "bytes": 5286,
+     "sha256": "47ced464690d8ca98faa3357ad9adf67a9fc5e998a485ccdd8bab850fe38d440",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/solo/solo-runtime.mjs",
+     "bytes": 3840,
+     "sha256": "850c2dd6b9e979fe3ce0b6dbb48e3a1d1f855af2ba180f9261695a27143d77e7",
+     "functions": []
+    },
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/package.json",
+     "bytes": 542,
+     "sha256": "5a674a664fe6f7ef4cbc284fbfa9a23973c4583137f0a62f60f8e46b21206fcb",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:01-primitives.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/01-primitives.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 977.733171"
+    },
+    {
+     "id": "hover-built:02-live-pipelines.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/02-live-pipelines.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 3961.218517"
+    },
+    {
+     "id": "hover-built:03-autonomy-governance.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/03-autonomy-governance.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 2410.21003"
+    },
+    {
+     "id": "hover-built:04-organism-federation.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/04-organism-federation.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1732.400884"
+    },
+    {
+     "id": "hover-built:05-twenty-task-autonomy.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/05-twenty-task-autonomy.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 12028.744085"
+    },
+    {
+     "id": "hover-built:06-cultivation-core.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/06-cultivation-core.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 6074.559444"
+    },
+    {
+     "id": "hover-built:07-state-space-forms.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/07-state-space-forms.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 12553.348628"
+    },
+    {
+     "id": "hover-built:08-exact-recall-and-coordination.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/08-exact-recall-and-coordination.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1070.096706"
+    },
+    {
+     "id": "hover-built:09-front-screen.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/09-front-screen.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1787.801576"
+    },
+    {
+     "id": "hover-built:11-birth-mirror-runtime.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/11-birth-mirror-runtime.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 3903.771464"
+    },
+    {
+     "id": "hover-built:17-movement-temporal-experience.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/17-movement-temporal-experience.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 2408.260921"
+    },
+    {
+     "id": "hover-built:20-hover-task-worker.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/20-hover-task-worker.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 323.458603"
+    },
+    {
+     "id": "hover-built:android-hand-adapter.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/android-hand-adapter.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 265.216507"
+    }
+   ],
+   "testsPassed": 13,
+   "testsTotal": 13,
+   "runEvidence": null,
+   "dependencies": [
+    "node",
+    "tsc for the Klein dist"
+   ],
+   "missingConnections": [
+    "test 19-solo-hover-shell FAILS (SoloBrowserHand.loadHTML in browser-hand-adapter.mjs: needs a browser). The unbuilt original fails 21 of 24 test files until the Klein TypeScript is compiled. Not connected to this branch"
+   ],
+   "note": "22 of 23 test files pass against the built copy"
+  },
+  {
+   "id": "echo",
+   "component": "Echo (resident)",
+   "specItems": [
+    "S4"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/solo/synthia17-resident.mjs",
+     "bytes": 3010,
+     "sha256": "27a9b3e92890dca7d224d6a3585e551a21e0f46c5f5dcde27c17e46c62908d3e",
+     "functions": []
+    },
+    {
+     "path": "oct7src/patches/echo-resident-startup-fix.patch",
+     "bytes": 3577,
+     "sha256": "0539fa73de8bc43d1d884e80c321e35cf813beb2427c000c070ec96950f3a70a",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "hover-built:21-synthia17-resident.test.mjs",
+     "status": "pass",
+     "cmd": "node --test test/21-synthia17-resident.test.mjs",
+     "cwd": "/workspace/scratch/hover-fixes-build/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "result": "# skipped 0 | # todo 0 | # duration_ms 1015.829801"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "node"
+   ],
+   "missingConnections": [
+    "the file is named synthia17 resident; the name \"Echo\" appears in the startup patch file only. Mapping to her \"Echo\" is by that patch name"
+   ],
+   "note": null
+  },
+  {
+   "id": "paper-family",
+   "component": "Paper family",
+   "specItems": [],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/execution-spine-v0.4.0/src/pure-synthia/integration/paper-runtime-sandbox.js",
+     "bytes": 8877,
+     "sha256": "be773665ceb582b147cc6ca30428edc5878f22282b87677b9b2dba72f885c7b1",
+     "functions": []
+    }
+   ],
+   "dirs": [
+    {
+     "path": "zips/_drive_x/Paper-System-Source",
+     "exists": true,
+     "entries": 4
+    },
+    {
+     "path": "zips/_drive_x/Paper-Unified-Test-Hub",
+     "exists": true,
+     "entries": 1
+    },
+    {
+     "path": "swarm-search/all/Paper-Library",
+     "exists": true,
+     "entries": 9
+    },
+    {
+     "path": "swarm-search/all/Paper-seed",
+     "exists": true,
+     "entries": 2
+    },
+    {
+     "path": "swarm-search/all/Paper-synth",
+     "exists": true,
+     "entries": 2
+    },
+    {
+     "path": "swarm-search/all/Paperlibrarycloud",
+     "exists": true,
+     "entries": 10
+    }
+   ],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "present as folders and repos; none run here"
+   ],
+   "note": null
+  },
+  {
+   "id": "resonance-science-enterprise",
+   "component": "Resonance SCIENCE / ENTERPRISE",
+   "specItems": [],
+   "status": "UNVERIFIED",
+   "files": [
+    {
+     "path": "swarm-search/all/Autopoeticagentbuild/ScienceMode.js",
+     "bytes": 8101,
+     "sha256": "43755575da4a5262d114c3496282fd9f707e08cd1e08973a33fea3c7cd6e0c25",
+     "functions": []
+    }
+   ],
+   "dirs": [
+    {
+     "path": "swarm-search/all/Resonance-Network",
+     "exists": true,
+     "entries": 13
+    },
+    {
+     "path": "swarm-search/all/Resonance_field",
+     "exists": true,
+     "entries": 2
+    }
+   ],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "\"ENTERPRISE\": no file or repo found. \"SCIENCE\": only ScienceMode.js / src/science / scientist-loop.mjs exist; whether those are \"Resonance SCIENCE\" is not decided. Not run"
+   ],
+   "note": null
+  },
+  {
+   "id": "stellar-proximology",
+   "component": "Stellar Proximology",
+   "specItems": [
+    "S4"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "chassis-work/src/Stellarproximology-lab/Modelmaker-repair/README.md",
+     "bytes": 733,
+     "sha256": "f1d1465a10d77e780ef585286b3b6ae7b95d8abc96b45b477e882dec47bfbfa7",
+     "functions": []
+    }
+   ],
+   "dirs": [
+    {
+     "path": "swarm-search/all/Stellar-proximology",
+     "exists": true,
+     "entries": 8
+    },
+    {
+     "path": "swarm-search/all/Stellarproximology-lab",
+     "exists": true,
+     "entries": 1
+    },
+    {
+     "path": "swarm-search/all/Stellarproximology.org",
+     "exists": true,
+     "entries": 96
+    }
+   ],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "repos present; the HF model repo stellarproximology/Synthia (Trident) is the part that runs, see the trident row"
+   ],
+   "note": null
+  },
+  {
+   "id": "conway-automaton",
+   "component": "Conway Automaton",
+   "specItems": [
+    "S1",
+    "S7"
+   ],
+   "status": "EXISTS-UNTESTED",
+   "files": [
+    {
+     "path": "automaton-ref/constitution.md",
+     "bytes": 1902,
+     "sha256": "d69f71832ab7c8ba6a827fd2fe988db5f76ff253d727906a95c064fe53408d8e",
+     "functions": []
+    },
+    {
+     "path": "automaton-ref/package.json",
+     "bytes": 2087,
+     "sha256": "47183198b0d7d8255b246aad19b65aef93db50f4e5775685132b0771bbfe8a37",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [],
+   "testsPassed": 0,
+   "testsTotal": 0,
+   "runEvidence": null,
+   "dependencies": [
+    "pnpm",
+    "TypeScript"
+   ],
+   "missingConnections": [
+    "reference only (MIT). Its patterns (recursive-timeout heartbeat, constitution, hash-chained audit log, loop detector, protected files) are re-implemented in integrated/swarm-loop.mjs, whose own tests pass; none of its code is packaged or run"
+   ],
+   "note": null
+  }
+ ],
+ "acceptance": [
+  {
+   "n": 1,
+   "row": "Swarm is code",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "integrated/integrated-swarm.mjs ingests any bytes into six-bit primitives and places them in five fields (measure.test.mjs mirror tests)",
+    "integrated/providers.mjs executes JS source through a guarded same-thread surface"
+   ],
+   "missing": [
+    "execution is of the original SOURCE TEXT (AsyncFunction), not of the particle representation; no file of hers defines executing from six-bit states"
+   ],
+   "notes": "MISSING for the \"execute from the swarm representation\" half; the ingest half runs"
+  },
+  {
+   "n": 2,
+   "row": "Recursive composition",
+   "status": "EXISTS-RUNS",
+   "evidence": [
+    "integrated/population.mjs (composition of primitives, Population); scorecard 3 Composition PASS",
+    "repo-test:integrated/population.test.mjs"
+   ],
+   "missing": []
+  },
+  {
+   "n": 3,
+   "row": "Arbitrary code ingestion",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "any-file-swarm.mjs fileFeatures ingests any bytes; language adapters for js, py, css, json are all implemented:false"
+   ],
+   "missing": [
+    "no language parser exists in the branch; Tree-sitter is only a research reference (not packaged)"
+   ],
+   "notes": "bytes in, structure out only for HTML/JS/CSS references (measure.mjs references())"
+  },
+  {
+   "n": 4,
+   "row": "Code creation",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "app-finisher.mjs adds missing files from a checklist (app-finisher.test.mjs)"
+   ],
+   "missing": [
+    "no creation of new program logic from intent; gameTarget and 2d adapters are not implemented stubs"
+   ]
+  },
+  {
+   "n": 5,
+   "row": "Neuro-symbolic reasoning",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "integrated/trident-js.mjs (neural, her weights) and integrated/guide.mjs (symbolic lookup) both run, separately",
+    "AUTOLING and Klein exist in her files and run there"
+   ],
+   "missing": [
+    "they are not connected to each other or to the swarm area; no reasoning step combines them"
+   ]
+  },
+  {
+   "n": 6,
+   "row": "Collective adaptation",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "integrated/abc.mjs, swarm-fit.mjs (PSO), population.mjs (GA), EmergentMesh.adapt() decay/prune (swarm.test.mjs)"
+   ],
+   "missing": [
+    "scorecard item 7 Adaptation is a FAIL: no search is driven by the mesh or by measured gaps yet; swarm-fit and abc do not use the shared primitive rules (registry sharesRules=false for swarm-fit)"
+   ]
+  },
+  {
+   "n": 7,
+   "row": "Self-modification",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "swarm-loop.mjs writes to a virtual Workspace with protected originals and a hash-chained audit log"
+   ],
+   "missing": [
+    "it assembles the app from a plan; nothing rewrites the running swarm code; no push code exists (proposals only)"
+   ]
+  },
+  {
+   "n": 8,
+   "row": "Memory continuity",
+   "status": "EXISTS-RUNS",
+   "evidence": [
+    "AuditLog hash chain, HistoryLedger (integrated-swarm), Workspace versions with revert; app-server.test.mjs"
+   ],
+   "missing": [
+    "no predictive memory is connected (Synthia-Predictive-Memory exists and its test passes, unconnected)"
+   ]
+  },
+  {
+   "n": 9,
+   "row": "Arbitrary visual morphing",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "photo-morph.mjs and frame-morph.mjs (tests exist in the repo)",
+    "Hover canonical-morph-runtime passes its test, unconnected"
+   ],
+   "missing": [
+    "morphing is image/skeleton morphing; arbitrary visual morphing driven by the swarm is not built"
+   ]
+  },
+  {
+   "n": 10,
+   "row": "Photorealism",
+   "status": "MISSING",
+   "evidence": [],
+   "missing": [
+    "no photoreal renderer or Gaussian-splat code exists in her files or this branch (searched for splat directories); CharacterFactory is a third-party GPU project"
+   ]
+  },
+  {
+   "n": 11,
+   "row": "Semantic/visual coupling",
+   "status": "PROPOSED",
+   "evidence": [
+    "primitive kinds shape (5), sense (6) and colors/sounds exist as data in primitive-functions.json",
+    "dimension-visual/core.mjs (outside the repo) hard-maps word to dimension: scorecard FAIL"
+   ],
+   "missing": [
+    "no coupling from swarm state to visuals is built; colors/sounds/shapes work is still open"
+   ]
+  },
+  {
+   "n": 12,
+   "row": "Application creation",
+   "status": "EXISTS-RUNS",
+   "evidence": [
+    "app-finisher.mjs + swarm-loop.mjs assemble 73 units; CI builds the APK; guide app and Synthia app run in the emulator"
+   ],
+   "missing": [
+    "creation is from a fixed plan (assembly-plan.mjs), not from a new request"
+   ]
+  },
+  {
+   "n": 13,
+   "row": "Local operation",
+   "status": "EXISTS-RUNS",
+   "evidence": [
+    "pure JS, no worker, no backend; measure.test.mjs asserts the manifest has no INTERNET permission",
+    "APK emulator self-tests ran offline"
+   ],
+   "missing": [
+    "trident_syntia.pt is 14.5 MB inside the APK; model load time on a phone was not measured"
+   ]
+  },
+  {
+   "n": 14,
+   "row": "Mobile delivery",
+   "status": "EXISTS-RUNS",
+   "evidence": [
+    "CI runs 38885989073 and 38895484410 built debug APKs and passed emulator self-tests (GUIDE_SELFTEST, SYNTHIA_SELFTEST)"
+   ],
+   "missing": [
+    "the build with the measurement view and swarm area is produced later in this step; release signing and phone install were not done"
+   ]
+  },
+  {
+   "n": 15,
+   "row": "Reliability",
+   "status": "EXISTS-UNTESTED",
+   "evidence": [
+    "node --test suites on the branch (counts in the final report)"
+   ],
+   "missing": [
+    "no soak/long-run test; the heartbeat loop was run for the 73-unit plan only"
+   ]
+  }
+ ],
+ "baseReconciliation": {
+  "question": "Are there five or six bases per tone?",
+  "fiveBases": [
+   {
+    "file": "drive/swarmdoc.md",
+    "line": 54,
+    "quote": "5 bases per tone",
+    "also": "line 3827: \"64 gates, 6 lines, 6 colors, 6 tones, 5 bases\""
+   },
+   {
+    "file": "research/hd-math-verification.md",
+    "line": 106,
+    "quote": "Ra Uru Hu's own article states the structure: \"Six Lines, six Colors, six Tones, five Bases.\" ... 6 x 6 x 6 x 5 = 1,080 bases per gate, 69,120 on the wheel"
+   },
+   {
+    "file": "swarm-os-v14/x/v12/cosmic_engine.py",
+    "line": 32,
+    "quote": "Base_Anchor width_deg 0.0052083 (= 5.625/6/6/6/5, i.e. tone divided by 5)"
+   },
+   {
+    "file": "synthai-read/computer/donors/recovered/you-n-i-verse-corrected/state-space-engine-v2.ported.mjs",
+    "line": 219,
+    "quote": "FIXED: 5 bases (1-5), was clamped to 6"
+   },
+   {
+    "file": "swarm-search/Back-up-/vendor/pure-synthia-v0.4.0/src/synthia/semantic-mesh/state-space/constants.js",
+    "quote": "BASE_ARCSECONDS = 18.75; // 5 bases/tone"
+   },
+   {
+    "file": "chassis-work/candidates/swarm-reality-trial/resonance_integrated_trial/integrations/biverse/human_design/degree_recursion.py",
+    "line": 40,
+    "quote": "BASE_SPAN = TONE_SPAN / 5  # 5 bases per tone -- the still-open 5-vs-6 question"
+   },
+   {
+    "file": "integrated/primitive-functions.json (this repo)",
+    "quote": "base.1 .. base.5; arc-engine.mjs DEGREES_PER_BASE = DEGREES_PER_TONE/5"
+   }
+  ],
+  "sixBases": [
+   {
+    "file": "swarm-os-v14/x/v14/expansion_summary.json",
+    "line": 8,
+    "quote": "\"bases_per_tone\": 6",
+    "arithmetic": "its totals agree with six: 99,520 virtual agents = 64 x 1,555 and 1,555 = 1+6+36+216+1,296 (six bases); five bases would give 1+6+36+216+1,080 = 1,339 per gate"
+   },
+   {
+    "file": "swarm-search/Back-up-/vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/docs/corpus/raw-sentence-breakdown.txt",
+    "line": 3594,
+    "quote": "Source: 6 bases within each tone (also \"Base (1-6)\")"
+   }
+  ],
+  "reading": "The five-base count is what her address specification (swarmdoc.md), Ra's quoted article, v12 code, the corrected state-space engine and this repo use. The six-base count appears in the v14 OUTPUT summary and in one raw older text; no v14 code is in the zip, so the 6 cannot be traced to a function. Her own degree_recursion.py calls it \"the still-open 5-vs-6 question\". This repo keeps five; v14's six is recorded here and in the guide's \"To confirm\" list as unresolved, and nothing was changed."
+ },
+ "referencesOnly": [
+  {
+   "name": "Gaussian splatting repos",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "Scallop",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "DeepProbLog",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "LNN",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "Chemlambda",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "ScaFi",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "Protelis",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "Mesa",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "PySwarms",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "MEALPY",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "DreamCoder",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "PonyGE2",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "DEAP",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "Tree-sitter",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  },
+  {
+   "name": "Comby",
+   "status": "PROPOSED",
+   "packagedHere": false,
+   "mentionsInRepoSources": []
+  }
+ ],
+ "swarmRegistry": {
+  "entries": 68,
+  "connections": {
+   "referenced": 6,
+   "not-connected": 42,
+   "in-repo-reference": 8,
+   "connected": 11,
+   "connected-copy": 1
+  },
+  "uncurated": 216,
+  "file": "integrated/swarm/registry.json"
+ },
+ "probesFile": "integrated/swarm/inventory-probes.json",
+ "rules": "EXISTS-RUNS only when a command listed in the row passed on this box (or a recorded run output exists). Nothing is called integrated because it belongs in the design: a component is connected only if registry.json says connected / connected-copy."
+}

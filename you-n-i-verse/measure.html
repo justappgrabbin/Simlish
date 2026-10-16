@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Measure by dimension</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,sans-serif;background:#0b0b14;color:#e8e6f5}
+header{padding:10px 12px;border-bottom:1px solid #2a2a44;display:flex;gap:10px;align-items:center;flex-wrap:wrap}a{color:#a9a3ff}main{padding:12px;max-width:960px;margin:auto}
+input,button{font:inherit;background:#1b1b30;color:#e8e6f5;border:1px solid #38385e;border-radius:8px;padding:9px 10px}button{cursor:pointer}button.primary{background:#5b4bd6;border-color:#7c6cff}
+.card{background:#13132181;border:1px solid #2a2a44;border-radius:12px;padding:10px 12px;margin:10px 0}.card h3{margin:0 0 6px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#a9a3ff}
+.note{color:#9a96bd;font-size:12px}.flag{color:#ffd78f;font-size:13px}.bad{color:#ff8f8f}table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 4px;border-bottom:1px solid #1d1d33;text-align:left;vertical-align:top}.scroll{overflow-x:auto}
+.bar{height:10px;background:#22223a;border-radius:5px;overflow:hidden;min-width:80px}.bar i{display:block;height:100%;background:#7c6cff}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}pre{white-space:pre-wrap;font-size:12px;max-height:300px;overflow:auto}
+</style></head><body>
+<header><strong>✧ MEASURE BY DIMENSION</strong><span class="note">runs on this device · nothing is executed, uploaded or changed</span><a href="guide.html">Guide</a><a href="synthia-app.html">Swarm &amp; chat</a><a href="index.html">Studio</a></header>
+<main>
+<div class="card"><h3>Input</h3><p class="note">Choose a file, a zip of an app, or a whole folder. Each file is reduced to six-bit primitives by her ingestor and placed in the five fields by her pipeline rule. Large inputs take a while: this runs on the page thread (no worker).</p>
+ <div class="row"><label>File or zip <input type="file" id="f" multiple></label><label>Folder <input type="file" id="d" webkitdirectory></label><button class="primary" id="go">Measure</button><button id="dl" disabled>Download JSON report</button></div><p id="err" class="bad"></p><p id="st" class="note"></p></div>
+<div id="out"></div>
+</main><script type="module" src="measure.mjs"></script></body></html>

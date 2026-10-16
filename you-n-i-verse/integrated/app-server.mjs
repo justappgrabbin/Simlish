@@ -18,6 +18,9 @@ export const TOOLS=Object.freeze([
  {name:'address.fromLongitude',route:'POST /api/tool/address.fromLongitude',description:'her sentence-engine address (gate, line, color, tone, base, DMS, zodiac, house, lattice position 1..69120) from a longitude'},
  {name:'address.lattice',route:'POST /api/tool/address.lattice',description:'lattice position <-> gate/line/color/tone/base'},
  {name:'file.ingest',route:'POST /api/tool/file.ingest',description:'her integrated swarm: ingest a file, reduce to six-bit primitives, resolve its address; executes code only when execute=true'},
+ {name:'content.measure',route:'POST /api/tool/content.measure',description:'measure any file, folder or zip by dimension (Movement, Evolution, Being, Design, Space): sizes, primitive counts, coverage, structure depth, gaps; read-only, never executes the input'},
+ {name:'swarm.registry',route:'POST /api/tool/swarm.registry',description:'the one swarm area: every swarm found (by reference with sha256), which are connected to the app, and which are not'},
+ {name:'swarm.weave',route:'POST /api/tool/swarm.weave',description:'grow the emergent mesh from any content: units interact, relations (Hamming-1, complement, reverse, exchange, nuclear, channel, same-gate-across-dimensions) become weighted edges; returns the mesh summary'},
  {name:'build.finish',route:'POST /api/tool/build.finish',description:'her app finisher: assess files against her checklist and add the missing pieces beside them'},
  {name:'workspace.write',route:'POST /api/tool/workspace.write',description:'add a file under user/ in the swarm workspace (audited; protected originals cannot be written)'},
  {name:'chart.calculate',route:'POST /api/tool/chart.calculate',description:'birth chart from date, time, IANA time zone (or UTC offset) and latitude/longitude: her SynthAi calculator (13 bodies, personality + design) with gate/line/color/tone/base, houses, aspects and the labelled standard Human Design derivations'},
@@ -57,6 +60,7 @@ export async function createAppServer({loadJson,loadBytes,store=null,now=()=>new
  const need=(o,k)=>{if(o?.[k]===undefined||o[k]===null)throw new RangeError('missing '+k);return o[k]};
  const guide=createGuide({clean,attrs}),PEOPLE='synthia.people.v1';
  const people=()=>{try{return JSON.parse(store?.get(PEOPLE)||'[]')}catch{return[]}};
+ let _area=null;const area=async()=>_area||(_area=await (await import('./swarm/index.mjs')).createSwarmArea({loadJson,primitives:clean}));
  const tool={
   'primitives.get':({id})=>{const p=P.get(need({id},'id'));if(!p)return {error:'no such primitive'};return {primitive:p,attributes:attrs[id]??null}},
   'primitives.search':({q,kind=null,limit=20})=>{const s=String(q||'').toLowerCase();return {results:clean.primitives.filter(p=>(!kind||p.kind===kind)&&(p.id.toLowerCase().includes(s)||String(p.form).toLowerCase().includes(s)||p.symbol.toLowerCase()===s)).slice(0,limit).map(p=>({id:p.id,symbol:p.symbol,kind:p.kind,form:p.form}))}},
@@ -73,6 +77,13 @@ export async function createAppServer({loadJson,loadBytes,store=null,now=()=>new
   'file.ingest':async({name,text=null,base64=null,execute=false})=>{const {IntegratedSwarm}=await import('./integrated-swarm.mjs');const bytes=text!==null?te.encode(text):unb64(need({base64},'base64'));
    const sw=new IntegratedSwarm({executeCode:!!execute}),r=await sw.execute({name:name||'upload',bytes},{executeCode:!!execute});
    return {status:r.status,reasons:r.reasons,file:r.file,execution:r.execution,address:r.address,app:r.app,fold:{foldHash:r.fold.foldHash,fields:r.fold.fields},stages:r.stages}},
+  'content.measure':async({name,files=null,text=null,base64=null,options={}})=>{const {measureContent}=await import('./measure.mjs');const toBytes=f=>f.bytes instanceof Uint8Array?f.bytes:f.text!==undefined&&f.text!==null?te.encode(f.text):unb64(need({base64:f.base64},'file base64'));
+   const input=files&&files.length===1?{name:name||files[0].path,bytes:toBytes(files[0])}:files?{name:name||'folder',files:files.map(f=>({path:need({path:f.path},'path'),bytes:toBytes(f)}))}:{name:name||'upload',bytes:text!==null?te.encode(text):unb64(need({base64},'base64'))};
+   loop.emit('observe','measuring '+(input.name),{quiet:true});return measureContent(input,{...options,primitives:clean})},
+  'swarm.registry':async({member=null}={})=>{const a=await area();return member?{member:a.members().find(m=>m.id===member)??null}:{inventory:a.inventory(),members:a.members().map(m=>({id:m.id,family:m.family,name:m.name,status:m.status,sharesRules:m.sharesRules,loadable:m.loadable,referencedBy:m.referencedBy,sha256:m.sha256.slice(0,12),origin:m.origin.path}))}},
+  'swarm.weave':async({name,files=null,text=null,base64=null,reset=false,decay=null})=>{const a=await area();if(reset)a.mesh.reset();if(decay)a.mesh.adapt({decay:Number(decay)});
+   const input=files&&files.length===1?{name:name||files[0].path,bytes:files[0].bytes instanceof Uint8Array?files[0].bytes:files[0].text!=null?te.encode(files[0].text):unb64(files[0].base64)}:files?{name:name||'folder',files:files.map(f=>({path:f.path,bytes:f.bytes instanceof Uint8Array?f.bytes:f.text!=null?te.encode(f.text):unb64(f.base64)}))}:{name:name||'upload',bytes:text!==null?te.encode(text):unb64(need({base64},'base64'))};
+   return a.weave(input)},
   'build.finish':async({name,files})=>{const r=await finishApp({name:name||'app',files:need({files},'files').map(f=>({path:f.path,data:f.text??''}))},{env:{}});return {report:r.report,files:r.files.map(f=>({path:f.path,size:f.data.length}))}},
   'workspace.write':({path,text})=>{if(!String(path).startsWith('user/'))return {error:'only user/ paths can be written by tools'};try{return ws.write(path,need({text},'text'),{actor:'tool',reason:'tool workspace.write'})}catch(e){if(e instanceof ProtectedError)return {error:e.message};throw e}}
  };

@@ -1,0 +1,29 @@
+{
+  "emergence": "MEANING CRYSTALLIZATION",
+  "lesson": "D5 agents are generating lessons from swarm experience.",
+  "final_state": {
+    "population": 69,
+    "layer_distribution": [
+      44,
+      4,
+      6,
+      5,
+      10
+    ],
+    "avg_warmth": 2.637,
+    "births": 29,
+    "lessons_generated": 478
+  },
+  "sample_lessons": [
+    "When connect and build resonate, bloom emerges. This is how resonate teaches.",
+    "When vast and self resonate, flow emerges. This is how ascend teaches.",
+    "When witness and field resonate, build emerges. This is how bloom teaches.",
+    "When weave and ascend resonate, near emerges. This is how grow teaches.",
+    "When share and flow resonate, pulse emerges. This is how emerge teaches.",
+    "When spiral and swarm resonate, warm emerges. This is how emerge teaches.",
+    "When vast and self resonate, tiny emerges. This is how see teaches.",
+    "When emerge and teach resonate, field emerges. This is how flow teaches.",
+    "When spiral and witness resonate, nurture emerges. This is how teach teaches.",
+    "When witness and field resonate, root emerges. This is how vast teaches."
+  ]
+}

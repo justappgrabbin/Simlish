@@ -4,7 +4,7 @@ set -u
 adb install -r Synthia-debug.apk
 : > emulator-selftest.txt
 fail=0
-for page in "guide.html?selftest=1:GUIDE_SELFTEST" "synthia-app.html?selftest=1:SYNTHIA_SELFTEST"; do
+for page in "guide.html?selftest=1:GUIDE_SELFTEST" "synthia-app.html?selftest=1:SYNTHIA_SELFTEST" "measure.html?selftest=1:MEASURE_SELFTEST"; do
   url="${page%%:*}"; marker="${page##*:}"
   adb logcat -c
   adb shell am force-stop app.youniverse.studio

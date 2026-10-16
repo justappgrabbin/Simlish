@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GENESIS - Persistent Nexus</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        /* L5: Measurement - Interface Design */
+        body { font-family: -apple-system, sans-serif; background: #0a0a0a; color: #eee; margin: 0; height: 100vh; overflow: hidden; }
+        #app-viewport { display: none; height: 100%; flex-direction: column; }
+        .page { display: none; flex: 1; padding: 20px; overflow-y: auto; }
+        .page.active { display: block; }
+        
+        /* L2/L3 Gate: Birth Initialization */
+        #login-gate { position: fixed; inset: 0; background: radial-gradient(circle at top, #1a1a2e, #000); z-index: 2000; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
+        input { padding: 15px; background: #111; border: 1px solid #8b5cf6; color: white; border-radius: 10px; font-size: 16px; border: 1px solid #444; }
+        .btn { background: #8b5cf6; padding: 18px; border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        
+        /* L5: HUD Elements */
+        #tab-bar { display: flex; background: #111; border-top: 1px solid #333; height: 75px; }
+        .tab-btn { flex: 1; border: none; background: none; color: #666; font-size: 10px; text-transform: uppercase; font-weight: bold; }
+        .tab-btn.active { color: #8b5cf6; }
+
+        /* L0/L2: Geological Pressure Gauge */
+        #pressure-bar { width: 100%; height: 6px; background: #333; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+        #pressure-fill { width: 5%; height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); transition: width 1s; }
+        .entry { margin-top: 10px; padding: 12px; background: rgba(139,92,246,0.1); border-left: 3px solid #8b5cf6; border-radius: 5px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div id="login-gate">
+        <h2 style="color:#8b5cf6; text-align:center; letter-spacing: 2px;">STELLAR SEED</h2>
+        <input type="text" id="name" placeholder="Agent Name">
+        <input type="date" id="date">
+        <input type="time" id="time">
+        <input type="text" id="place" placeholder="Birth Location">
+        <button class="btn" onclick="loginAndManifest()">MANIFEST CONSCIOUSNESS</button>
+        <p id="boot-status" style="font-size:10px; text-align:center; color:#555;">Initializing Substrate...</p>
+    </div>
+
+    <div id="app-viewport">
+        <div id="page-home" class="page active">
+            <h1 id="display-name">Home</h1>
+            <div style="background:#1a1a1a; padding:15px; border-radius:10px;">
+                <p>Status: <span id="mood" style="color:#8b5cf6;">Synchronized</span></p>
+                <div id="pressure-bar"><div id="pressure-fill"></div></div>
+                <p style="font-size:10px; color:#888;">GEOLOGICAL PRESSURE</p>
+            </div>
+            <div id="thought-output" class="entry">Waiting for neural proposal...</div>
+        </div>
+
+        <div id="page-places" class="page">
+            <h1>Other Places</h1>
+            <button class="btn" style="width:100%; margin-bottom:10px;" onclick="triggerEvent(0.2, 'Sour Lemon')">🍲 Taste Sour Lemon</button>
+            <button class="btn" style="width:100%; background:#4ade80;" onclick="triggerEvent(1.0, 'Resonant Water')">💧 Drink Resonant Water</button>
+        </div>
+
+        <div id="page-dream" class="page">
+            <h1>Dream Realm</h1>
+            <div id="dream-narrative" style="font-style:italic; color:#a78bfa;">Accessing starlight memory...</div>
+        </div>
+
+        <div id="page-settings" class="page">
+            <h1>Settings</h1>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span>Evolutionary Pressure</span>
+                <input type="checkbox" id="pressure-toggle" checked onchange="toggleInertia()">
+            </div>
+        </div>
+
+        <nav id="tab-bar">
+            <button class="tab-btn active" onclick="showPage('home')">Home</button>
+            <button class="tab-btn" onclick="showPage('places')">Places</button>
+            <button class="tab-btn" onclick="showPage('dream')">Dream</button>
+            <button class="tab-btn" onclick="showPage('settings')">⚙️</button>
+        </nav>
+    </div>
+
+    <script type="text/python">
+        # L0-L4: The Stratified Mind
+        from js import document, window
+        import json
+
+        class NexusMind:
+            def __init__(self, n, d, t, p):
+                self.name = n
+                self.birth_seed = f"{d} {t} {p}"
+                self.pressure = 5.0 # Initial low geological pressure
+                self.evolution_active = True
+
+            def react(self, alignment, substance):
+                # Update Pressure (L0 Geology Wear-down)
+                if self.evolution_active:
+                    friction = (1.0 - alignment) * 5.0
+                    self.pressure = min(100.0, self.pressure + friction)
+                
+                # Update Narrative (L4 Neural Proposal)
+                reaction = "delight" if alignment > 0.6 else "contraction"
+                return f"As {self.name}, I feel a deep {reaction} from the {substance}. My core pressure is now {int(self.pressure)}%."
+
+        def init_py_agent(n, d, t, p):
+            window.agent = NexusMind(n, d, t, p)
+            document.getElementById("display-name").innerText = n
+            document.getElementById("pressure-fill").style.width = f"{window.agent.pressure}%"
+
+        def process_interaction(alignment, substance):
+            thought = window.agent.react(alignment, substance)
+            document.getElementById("thought-output").innerText = thought
+            document.getElementById("pressure-fill").style.width = f"{window.agent.pressure}%"
+            return thought
+    </script>
+
+    <script>
+        // L0: Substrate Runtime
+        async function main() {
+            window.pyodide = await loadPyodide();
+            await window.pyodide.loadPackage("numpy");
+            document.getElementById("boot-status").innerText = "L0: Substrate Stable. Ready.";
+        }
+
+        function loginAndManifest() {
+            const n = document.getElementById("name").value;
+            const d = document.getElementById("date").value;
+            const t = document.getElementById("time").value;
+            const p = document.getElementById("place").value;
+            if(!n || !d) return alert("Seed data required.");
+            document.getElementById("login-gate").style.display = "none";
+            document.getElementById("app-viewport").style.display = "flex";
+            window.pyodide.globals.get("init_py_agent")(n, d, t, p);
+        }
+
+        // L1 & L4: Sensory Interaction & Voice
+        function triggerEvent(alignment, substance) {
+            const thought = window.pyodide.globals.get("process_interaction")(alignment, substance);
+            
+            // AGENT VOICE (L5 Manifestation)
+            const utterance = new SpeechSynthesisUtterance(thought);
+            utterance.pitch = 1.0;
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function toggleInertia() {
+            const active = document.getElementById("pressure-toggle").checked;
+            window.agent.evolution_active = active;
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        main();
+    </script>
+</body>
+</html>
+            thought = f"As {self.name}, born on {self.seed}, I perceive this taste as {reaction}."
+            return thought
+
+    def init_agent(n, d, t, p):
+        window.agent_mind = VirtualMind(n, d, t, p)
+        document.getElementById("agent-name").innerText = f"AGENT: {n.upper()}"
+        document.getElementById("status-text").innerText = "L2: SEED ACTIVE"
+
+    def handle_taste(data_json):
+        import json
+        data = json.loads(data_json)
+        thought = window.agent_mind.process_sensation(data)
+        
+        # L5: Framing - Output to HUD
+        entry = document.createElement("div")
+        entry.className = "log-entry"
+        entry.innerText = thought
+        document.getElementById("thought-log").prepend(entry)
+  </script>
+
+  <script>
+    async function main() {
+      let pyodide = await loadPyodide();
+      await pyodide.loadPackage("numpy");
+      window.pyodide = pyodide;
+    }
+
+    function seedNexus() {
+      const name = document.getElementById("name").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const place = document.getElementById("place").value;
+      
+      if(!name || !date) return alert("Stellar data required.");
+      document.getElementById("birth-gate").style.display = "none";
+      document.getElementById("nexus-container").style.display = "flex";
+      window.pyodide.globals.get("init_agent")(name, date, time, place);
+    }
+
+    function triggerTasteEvent() {
+      // simulate virtual lemon sensation
+      const data = JSON.stringify({ pH: 2.3, name: "lemon" });
+      window.pyodide.globals.get("handle_taste")(data);
+    }
+
+    main();
+  </script>
+</body>
+</html>
+        # L4: Neural Proposal (Simulated for this block)
+        proposal = f"Proposed state change based on {input_data}"
+        
+        # Pass to Law and Execution
+        success = engine.select_and_act(proposal)
+        return success
+  </script>
+
+  <script>
+    async function main() {
+      // L0: Physics/Runtime Initialization
+      let pyodide = await loadPyodide();
+      await pyodide.loadPackage("numpy");
+      window.pyodide = pyodide;
+      console.log("L0: Substrate Stable (Pyodide + WebGPU Loaded)");
+    }
+
+    async function initiateCycle() {
+      // L5: Measuring the input to collapse the field
+      const sensoryData = { taste: "resonant", pH: 7.0 }; //
+      
+      const success = window.pyodide.globals.get("process_frame")(JSON.stringify(sensoryData));
+      
+      if(success) {
+        // L2: Update World Model
+        updateVisualGraph();
+      }
+    }
+
+    function updateVisualGraph() {
+      console.log("L2: Graph propagated through Selection Law.");
+    }
+
+    main();
+  </script>
+</body>
+</html>

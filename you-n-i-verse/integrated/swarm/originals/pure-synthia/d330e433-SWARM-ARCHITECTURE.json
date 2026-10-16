@@ -1,0 +1,60 @@
+{
+  "version": "synthia.finished-baseline.v0.4.0",
+  "identity": {
+    "id": "synthia",
+    "visibleBodies": 1,
+    "definition": "identity + continuity + shared state-space + process relationships + memory lineage"
+  },
+  "bodyModel": "autonomata-swarm",
+  "baseProcessCount": 47,
+  "withYNIAndPhoneLinuxHands": 52,
+  "workerContract": [
+    "id",
+    "capabilities",
+    "lifecycle",
+    "owned state/checkpoint",
+    "location",
+    "maxConcurrency"
+  ],
+  "coordination": [
+    "capability discovery",
+    "task assignment",
+    "parallel dispatch",
+    "pre-effect dispatch journal",
+    "checkpoint",
+    "wake/restore",
+    "replay-safe interrupted-task recovery"
+  ],
+  "physiologyProcesses": [
+    "physiology-metabolism",
+    "physiology-inner-life",
+    "physiology-hypothesis-life",
+    "physiology-world-memory",
+    "physiology-autonomous-cycle"
+  ],
+  "worldProcess": {
+    "id": "practice-world-port",
+    "role": "replaceable practical habitat adapter",
+    "canonicalWorldOwner": false
+  },
+  "foundryProcesses": [
+    "foundry-core",
+    "foundry-selector",
+    "foundry-builder",
+    "foundry-vault"
+  ],
+  "externalHands": [
+    "YOU-N-I-VERSE DOM",
+    "YOU-N-I-VERSE browser",
+    "YOU-N-I-VERSE network",
+    "YOU-N-I-VERSE files",
+    "phone selfhosted Linux"
+  ],
+  "residence": {
+    "browserCheckpoint": "IndexedDB with fallback",
+    "linuxCheckpoint": "atomic disk JSON store",
+    "headlessDaemon": true,
+    "androidRootfsNameMismatch": "repaired in companion APK",
+    "firstBootNetworkDependency": "Alpine Node/npm + npm server dependencies are installed by Android bootstrap when absent"
+  }
+}

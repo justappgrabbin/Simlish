@@ -1,0 +1,4548 @@
+{
+ "schema": "synthia-swarm-registry/1",
+ "note": "ONE area for every swarm found. Out-of-repo items are references with sha256; copies under swarm/originals are byte-identical. Nothing merged, edited or deleted. connected/shares-rules are computed by registry.mjs from the repo import graph, not stored here.",
+ "builtFrom": {
+  "root": "/workspace",
+  "node": "v20.19.2"
+ },
+ "entries": [
+  {
+   "id": "swarm-os-v9",
+   "family": "swarm-os",
+   "name": "SWARM-OS v9 (PSO+GA+ABC hybrid, Python)",
+   "why": "Header of integrated/abc.mjs cites V9 swarm_os_full.py lines 3, 15 (\"PSO+GA+ABC Hybrid\"), 89, 132-155",
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-os-v14/x/v9/swarm_os_full.py",
+    "repo": null
+   },
+   "sha256": "c2a26e522eee45929970600d8a93297a0dc1ab89d3a1dc3ab6e65ad00628eb7c",
+   "bytes": 13242,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/c2a26e52-swarm_os_full.py",
+    "sha256": "c2a26e522eee45929970600d8a93297a0dc1ab89d3a1dc3ab6e65ad00628eb7c"
+   }
+  },
+  {
+   "id": "swarm-os-v6",
+   "family": "swarm-os",
+   "name": "SWARM-OS v6 (Python)",
+   "why": "member of swarm_os_v14_complete-1.zip",
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-os-v14/x/v6/swarm_os.py",
+    "repo": null
+   },
+   "sha256": "83f52d5668a0430fcc3ed0ce7bc64edbbffb812d15b8e7bcfd1d876d73dd1ee3",
+   "bytes": 17930,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/83f52d56-swarm_os.py",
+    "sha256": "83f52d5668a0430fcc3ed0ce7bc64edbbffb812d15b8e7bcfd1d876d73dd1ee3"
+   }
+  },
+  {
+   "id": "swarm-os-v10",
+   "family": "swarm-os",
+   "name": "SWARM-OS v10 Bantu (Python)",
+   "why": "member of swarm_os_v14_complete-1.zip; also abc.mjs cites v10 lines 13, 114, 178",
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-os-v14/x/v10/swarm_os_bantu.py",
+    "repo": null
+   },
+   "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7",
+   "bytes": 15363,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/eb303f8c-swarm_os_bantu.py",
+    "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7"
+   }
+  },
+  {
+   "id": "swarm-os-v12",
+   "family": "swarm-os",
+   "name": "SWARM-OS v12 cosmic engine (Python)",
+   "why": "member of swarm_os_v14_complete-1.zip",
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-os-v14/x/v12/cosmic_engine.py",
+    "repo": null
+   },
+   "sha256": "10cff5863f4c11f6a3b5f64e5a2279186d0c3592799d2e23022c6db1226a6f21",
+   "bytes": 10500,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/10cff586-cosmic_engine.py",
+    "sha256": "10cff5863f4c11f6a3b5f64e5a2279186d0c3592799d2e23022c6db1226a6f21"
+   }
+  },
+  {
+   "id": "swarm-os-v14-zip",
+   "family": "swarm-os",
+   "name": "SWARM-OS v14 complete (zip: v6, v9, v10, v12, v13, v14, pictures)",
+   "why": "the zip itself",
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-os-v14/swarm_os_v14_complete-1.zip",
+    "repo": null
+   },
+   "sha256": "6fdeee7d6f881f44aac41749a9fd30c0a0c00187279e963894abd59bb8bc717e",
+   "bytes": 1971301,
+   "ext": "zip",
+   "zipEntries": 32,
+   "members": [
+    {
+     "path": "v6/swarm_os.py",
+     "bytes": 17930,
+     "sha256": "83f52d5668a0430fcc3ed0ce7bc64edbbffb812d15b8e7bcfd1d876d73dd1ee3"
+    },
+    {
+     "path": "v9/swarm_os_full.py",
+     "bytes": 13242,
+     "sha256": "c2a26e522eee45929970600d8a93297a0dc1ab89d3a1dc3ab6e65ad00628eb7c"
+    },
+    {
+     "path": "v10/swarm_os_bantu.py",
+     "bytes": 15363,
+     "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7"
+    },
+    {
+     "path": "v12/cosmic_engine.py",
+     "bytes": 10500,
+     "sha256": "10cff5863f4c11f6a3b5f64e5a2279186d0c3592799d2e23022c6db1226a6f21"
+    }
+   ]
+  },
+  {
+   "id": "swarm-os-v14-run",
+   "family": "swarm-os",
+   "name": "SWARM-OS v14 run output",
+   "why": "result of running her v6",
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-os-v14/runs/v6out/swarm_result.json",
+    "repo": null
+   },
+   "sha256": "c0e082c7e1a66a7a35f377ff3e7f1ead7c9762ed1790bcda49f4b10496665467",
+   "bytes": 1145,
+   "ext": "json",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/c0e082c7-swarm_result.json",
+    "sha256": "c0e082c7e1a66a7a35f377ff3e7f1ead7c9762ed1790bcda49f4b10496665467"
+   }
+  },
+  {
+   "id": "swarm-os-pipe-v6",
+   "family": "swarm-os",
+   "name": "swarm_os.py (pipe copy)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "pipe/all/swarm_os.py",
+    "repo": null
+   },
+   "sha256": "83f52d5668a0430fcc3ed0ce7bc64edbbffb812d15b8e7bcfd1d876d73dd1ee3",
+   "bytes": 17930,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/83f52d56-swarm_os.py",
+    "sha256": "83f52d5668a0430fcc3ed0ce7bc64edbbffb812d15b8e7bcfd1d876d73dd1ee3"
+   }
+  },
+  {
+   "id": "swarm-os-pipe-v9",
+   "family": "swarm-os",
+   "name": "swarm_os_full.py (pipe copy)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "pipe/all/swarm_os_full.py",
+    "repo": null
+   },
+   "sha256": "c2a26e522eee45929970600d8a93297a0dc1ab89d3a1dc3ab6e65ad00628eb7c",
+   "bytes": 13242,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/c2a26e52-swarm_os_full.py",
+    "sha256": "c2a26e522eee45929970600d8a93297a0dc1ab89d3a1dc3ab6e65ad00628eb7c"
+   }
+  },
+  {
+   "id": "swarm-os-pipe-v10",
+   "family": "swarm-os",
+   "name": "swarm_os_bantu.py (pipe copy)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "pipe/all/swarm_os_bantu.py",
+    "repo": null
+   },
+   "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7",
+   "bytes": 15363,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/eb303f8c-swarm_os_bantu.py",
+    "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7"
+   }
+  },
+  {
+   "id": "swarm-os-doc",
+   "family": "swarm-os",
+   "name": "SWARM-OS foundational architecture (doc)",
+   "why": "in this repo",
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/docs/SWARM-OS-FOUNDATIONAL-ARCHITECTURE.md",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "a278aa30b2c51b812c8ddff032f222bdb156f699d8545642c1b6ed65632187e7",
+   "bytes": 4372,
+   "ext": "md"
+  },
+  {
+   "id": "swarm-state-space-doc",
+   "family": "swarm-os",
+   "name": "Swarm state space (doc)",
+   "why": "in this repo",
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/docs/SWARM-STATE-SPACE.md",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "ce22a7d928afc2b6172a1892d4b3f85fdebbee172953b4cc61683161342a8dbb",
+   "bytes": 4247,
+   "ext": "md"
+  },
+  {
+   "id": "swarm-finisher-doc",
+   "family": "swarm-os",
+   "name": "Swarm finisher (doc)",
+   "why": "in this repo",
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/docs/SWARM-FINISHER.md",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "bf9a64e1c969a051ce662aab0d2ad17cfc1c1a6e2eeb3d0dbaff1e7bde011a22",
+   "bytes": 1244,
+   "ext": "md"
+  },
+  {
+   "id": "swarm-pipeline-report",
+   "family": "swarm-os",
+   "name": "swarm pipeline from her files (report)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "bundle/reports/swarm-pipeline-from-her-files.md",
+    "repo": null
+   },
+   "sha256": "3feb7069657b91bb5563f3752d9ab5db1cccf959278addf58b613cf02e5d259e",
+   "bytes": 18765,
+   "ext": "md",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-os/3feb7069-swarm-pipeline-from-her-files.md",
+    "sha256": "3feb7069657b91bb5563f3752d9ab5db1cccf959278addf58b613cf02e5d259e"
+   }
+  },
+  {
+   "id": "integrated-swarm",
+   "family": "integrated",
+   "name": "Integrated swarm (ingest, pipeline, swarm, fold-up, wheels, history)",
+   "why": "entry of the morphing swarm on this branch",
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/integrated-swarm.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "79bd69352894e8f7b6c2b004ab7553f78bfebff728fddc773bcc6c869e8d5e3a",
+   "bytes": 12247,
+   "ext": "mjs"
+  },
+  {
+   "id": "swarm-loop",
+   "family": "integrated",
+   "name": "Self-assembly loop (heartbeat, workspace, audit log, protected originals)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/swarm-loop.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "81f45636515079bb0d62c5fed06b7242d52115faae8cfe295a6e454adbdf5597",
+   "bytes": 13316,
+   "ext": "mjs"
+  },
+  {
+   "id": "any-file-swarm",
+   "family": "file-swarm",
+   "name": "First swarm: any file -> registration -> state-space placement -> execution",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/any-file-swarm.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "332f09180ea3394bc7c2003b442a7a7cd23d7fe0855c875d635ad926d3498f4d",
+   "bytes": 13361,
+   "ext": "mjs"
+  },
+  {
+   "id": "registration-swarm",
+   "family": "file-swarm",
+   "name": "Registration swarm (packs 3,2,1)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/registration-swarm.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "2163a8faa3f2663f55bc5976a55e0d638f4502004c8e9d118ffca72c343ac0b1",
+   "bytes": 3365,
+   "ext": "mjs"
+  },
+  {
+   "id": "swarm-component",
+   "family": "file-swarm",
+   "name": "Swarm component (register, finisher, personalize building block)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/swarm-component.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "7f6ea0dce58fcfb3c4b8abde72ebc4a456bb4e315ea7325f005184e4d521326d",
+   "bytes": 3878,
+   "ext": "mjs"
+  },
+  {
+   "id": "swarm-nsnf",
+   "family": "file-swarm",
+   "name": "NSNF swarm pair (genotype/phenotype units, event log)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/swarm-nsnf.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "be41873f95abbf6aba277b667ce1e8a0a4f029c58154ae93f000e5d7e8621a62",
+   "bytes": 4850,
+   "ext": "mjs"
+  },
+  {
+   "id": "app-finisher",
+   "family": "file-swarm",
+   "name": "App finisher (assess against checklist, fill gaps additively)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/app-finisher.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "b29fce2bfb450a3cea707e5f03a40deb9cbc2505fc91f2735314a63b34e04102",
+   "bytes": 9128,
+   "ext": "mjs"
+  },
+  {
+   "id": "swarm-fit",
+   "family": "pso",
+   "name": "PSO numeric search (fitParticles)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/swarm-fit.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "738890595efc5ea742d53b01e6a880453286b1dc65ac95c0ccdca87d0d21d986",
+   "bytes": 2733,
+   "ext": "mjs"
+  },
+  {
+   "id": "abc",
+   "family": "abc",
+   "name": "ABC artificial bee colony (V9 role split 0.4/0.4/0.2)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/abc.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "0cec404d972035a7aada603f92bc1865268edd2b2f0a12c9be37eecd0aed411f",
+   "bytes": 6315,
+   "ext": "mjs"
+  },
+  {
+   "id": "population",
+   "family": "ga",
+   "name": "Primitive population (GA: diverse primitives, one ontology)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/population.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "c9c29244ebef442d774e827c9b60183b026da6a1b6b1e2e74e48d0145d9c658b",
+   "bytes": 12738,
+   "ext": "mjs"
+  },
+  {
+   "id": "trident-js",
+   "family": "trident",
+   "name": "Trident in pure JavaScript (reads trident_syntia.pt)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/trident-js.mjs",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "ccc39d9e241fc5e30a09a23346e6a2fcbada44242047d945d89bdc1c625f9c12",
+   "bytes": 10688,
+   "ext": "mjs"
+  },
+  {
+   "id": "trident-model",
+   "family": "trident",
+   "name": "trident_syntia.pt (her weights)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/models/trident_syntia.pt",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "cf4885fee58391cb4d4a47035ba65a7d21d06e375b3105b535dc1225e731ea61",
+   "bytes": 14554266,
+   "ext": "pt"
+  },
+  {
+   "id": "trinity-engine",
+   "family": "trident",
+   "name": "Trinity engine (JS reference copy)",
+   "why": "reference copy of HF stellarproximology/Synthia",
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/reference/hf-synthia/trinity-engine.js.txt",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "4be7613a099c6fea51c5cd7ae27653420aa91a17b32f4c5aa44386fdbb46f7ab",
+   "bytes": 11144,
+   "ext": "txt"
+  },
+  {
+   "id": "trinity-system",
+   "family": "trident",
+   "name": "Trinity system (JS reference copy)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/reference/hf-synthia/trinity-system.js.txt",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "65665f747ab941e2f85440b7c5f5b87756b918c7bff5c1ca62a32b52e7fcef84",
+   "bytes": 13586,
+   "ext": "txt"
+  },
+  {
+   "id": "trinity-knowledge-loader",
+   "family": "trident",
+   "name": "Trinity knowledge loader (JS reference copy)",
+   "why": null,
+   "origin": {
+    "kind": "repo",
+    "path": "you-n-i-verse/integrated/reference/hf-synthia/trinity-knowledge-loader.js.txt",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "854328a1836dc2907c3b22b2c8871e76be0102648231cc5084df1bba037d7d94",
+   "bytes": 14142,
+   "ext": "txt"
+  },
+  {
+   "id": "trident-onnx",
+   "family": "trident",
+   "name": "trident_single.onnx (HF download)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "hf-all/trident_single.onnx",
+    "repo": null
+   },
+   "sha256": "de11733785d7c6129382cae4849e25f8df1831736cd2c8ac8d4061bec3024d3b",
+   "bytes": 13738056,
+   "ext": "onnx"
+  },
+  {
+   "id": "hdgnn",
+   "family": "trident",
+   "name": "hdgnn (HF; address/trust resolver, does not talk)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "hf-all/hdgnn/README.md",
+    "repo": null
+   },
+   "sha256": "05d8c45945ce366f7bcd44f3901fa0846c817a9ab2579c4ce9dcc0f6cbe69b6c",
+   "bytes": 2394,
+   "ext": "md",
+   "copy": {
+    "path": "integrated/swarm/originals/trident/05d8c459-README.md",
+    "sha256": "05d8c45945ce366f7bcd44f3901fa0846c817a9ab2579c4ce9dcc0f6cbe69b6c"
+   }
+  },
+  {
+   "id": "trinity-orchestrator",
+   "family": "trident",
+   "name": "trinity-orchestrator.js (The-seed repo)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/The-seed/trinity-orchestrator.js",
+    "repo": null
+   },
+   "sha256": "5fdbb0d61bd7a0daa329133d24abee1d3e84caeea2a6fa7e3356fe89c7c80685",
+   "bytes": 12987,
+   "ext": "js",
+   "copy": {
+    "path": "integrated/swarm/originals/trident/5fdbb0d6-trinity-orchestrator.js",
+    "sha256": "5fdbb0d61bd7a0daa329133d24abee1d3e84caeea2a6fa7e3356fe89c7c80685"
+   }
+  },
+  {
+   "id": "trinity-field-py",
+   "family": "trident",
+   "name": "trinity_field.py (Dual-engine- repo)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Dual-engine-/trinity_field.py",
+    "repo": null
+   },
+   "sha256": "a2d29eb9ffaccff76ab20c2e93fe7710d50830ae0e0db038189a7ed4ec0956fe",
+   "bytes": 5947,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/trident/a2d29eb9-trinity_field.py",
+    "sha256": "a2d29eb9ffaccff76ab20c2e93fe7710d50830ae0e0db038189a7ed4ec0956fe"
+   }
+  },
+  {
+   "id": "trinity-resonance-engine",
+   "family": "trident",
+   "name": "trinity-resonance-engine.ts (Synthia- repo)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Synthia-/trinity-resonance-engine.ts",
+    "repo": null
+   },
+   "sha256": "5a76c62c52bc23fb4562e95fb55b104761a2f3c452156249a6cfbf2b414d94b2",
+   "bytes": 10072,
+   "ext": "ts",
+   "copy": {
+    "path": "integrated/swarm/originals/trident/5a76c62c-trinity-resonance-engine.ts",
+    "sha256": "5a76c62c52bc23fb4562e95fb55b104761a2f3c452156249a6cfbf2b414d94b2"
+   }
+  },
+  {
+   "id": "morph-search",
+   "family": "morph-search",
+   "name": "morph-search.mjs: local bounded ABC / PSO / GA search (JS)",
+   "why": "its own header: \"Local bounded ABC / PSO / GA search. Lower finite fitness is better.\"",
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/runtime/morph-search.mjs",
+    "repo": null
+   },
+   "sha256": "5cf53ad3690efe359f696003d21120fb3b3282dd408462c6bfd931dfbc26db2c",
+   "bytes": 7396,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/5cf53ad3-morph-search.mjs",
+    "sha256": "5cf53ad3690efe359f696003d21120fb3b3282dd408462c6bfd931dfbc26db2c"
+   }
+  },
+  {
+   "id": "morph-search-test",
+   "family": "morph-search",
+   "name": "morph-search test",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/tests/morph-search.test.mjs",
+    "repo": null
+   },
+   "sha256": "92da769cfd83750e9c7da386be7cc72c6cc1c2629c561beaa869c2b84c8286fd",
+   "bytes": 2353,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/92da769c-morph-search.test.mjs.txt",
+    "sha256": "92da769cfd83750e9c7da386be7cc72c6cc1c2629c561beaa869c2b84c8286fd"
+   }
+  },
+  {
+   "id": "realm-swarm",
+   "family": "morph-search",
+   "name": "realm-swarm.mjs: five-field projections per unit, local mesh (JS)",
+   "why": "uses StateSpaceEngine + DIMENSION_QUALITIES; not in this repo",
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/runtime/realm-swarm.mjs",
+    "repo": null
+   },
+   "sha256": "85c94c1beb2cad5da4965bcb88a226994eee9ca6d332f7e11fb98a6411a9bef0",
+   "bytes": 3281,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/85c94c1b-realm-swarm.mjs",
+    "sha256": "85c94c1beb2cad5da4965bcb88a226994eee9ca6d332f7e11fb98a6411a9bef0"
+   }
+  },
+  {
+   "id": "realm-swarm-test",
+   "family": "morph-search",
+   "name": "realm-swarm test",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/tests/realm-swarm.test.mjs",
+    "repo": null
+   },
+   "sha256": "eae1ad2b3ac67e0aa0d6de6bcabc47d4b1965799e12bcb5d84456b4fd8da7e4c",
+   "bytes": 1833,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/eae1ad2b-realm-swarm.test.mjs.txt",
+    "sha256": "eae1ad2b3ac67e0aa0d6de6bcabc47d4b1965799e12bcb5d84456b4fd8da7e4c"
+   }
+  },
+  {
+   "id": "emergent-edge-resolver",
+   "family": "morph-search",
+   "name": "EmergentEdgeResolver (36 edge types)",
+   "why": "her emergent-edge code; not in this repo",
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/donors/recovered/you-n-i-verse-corrected/emergent-edge-resolver.ported.mjs",
+    "repo": null
+   },
+   "sha256": "13dca3de92713a43c7486e356353bc7638e0ff73e64b565de14b272e0674b1b2",
+   "bytes": 37735,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/13dca3de-emergent-edge-resolver.ported.mjs",
+    "sha256": "13dca3de92713a43c7486e356353bc7638e0ff73e64b565de14b272e0674b1b2"
+   }
+  },
+  {
+   "id": "state-space-engine-v2",
+   "family": "morph-search",
+   "name": "state-space-engine-v2 (ported)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/donors/recovered/you-n-i-verse-corrected/state-space-engine-v2.ported.mjs",
+    "repo": null
+   },
+   "sha256": "d46779c3bca94e9a7f9384ee909f9af6aac900f3ad2aadfe849ac690787604b8",
+   "bytes": 14958,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/d46779c3-state-space-engine-v2.ported.mjs",
+    "sha256": "d46779c3bca94e9a7f9384ee909f9af6aac900f3ad2aadfe849ac690787604b8"
+   }
+  },
+  {
+   "id": "dimension-qualities",
+   "family": "morph-search",
+   "name": "DIMENSION_QUALITIES (Black Book p126 statements per dimension)",
+   "why": "vendored byte-for-byte into vendor/mesh/",
+   "origin": {
+    "kind": "workspace",
+    "path": "oct7src/computer/donors/dream-habitat/dimension-qualities.mjs",
+    "repo": null
+   },
+   "sha256": "483be75df766d3e38e5a70691411309cf347b89b63110ec5ef55e31f559e9ec4",
+   "bytes": 5755,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/483be75d-dimension-qualities.mjs",
+    "sha256": "483be75df766d3e38e5a70691411309cf347b89b63110ec5ef55e31f559e9ec4"
+   }
+  },
+  {
+   "id": "morphing-particle-swarm",
+   "family": "morph-search",
+   "name": "morphing-particle-swarm-main (zip)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "zips/_drive/morphing-particle-swarm-main.zip",
+    "repo": null
+   },
+   "sha256": "a8940019f2f4b4fb1e35799ed494b99ebc51e635adcbc7970d1f6883eeae1e0b",
+   "bytes": 83253,
+   "ext": "zip",
+   "zipEntries": 3,
+   "members": [
+    {
+     "path": "morphing-particle-swarm-main/README.md",
+     "bytes": 3429,
+     "sha256": "f7cb6ab32842704eead2a7efa7322387032a636583334826ed493755a4f38f65"
+    },
+    {
+     "path": "morphing-particle-swarm-main/assets/donut.glb",
+     "bytes": 194824,
+     "sha256": "4027507106c99bfdb6b46ff6cb42c258b1cb2379ad8c75c3423f67ecd899e1cf"
+    },
+    {
+     "path": "morphing-particle-swarm-main/index.html",
+     "bytes": 293022,
+     "sha256": "c830af80995f14975ba3a9d088d714c64d50e8adb940d0d9fdb4029eeba07c81"
+    }
+   ]
+  },
+  {
+   "id": "morphing-substrate",
+   "family": "morph-search",
+   "name": "MorphingSubstrate.js (Resonance-morph-os repo)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Resonance-morph-os/src/lib/MorphingSubstrate.js",
+    "repo": null
+   },
+   "sha256": "42ecf9a7eea7d3eff01c0f1e5c4db45a8b3262d2b601660dd49e3653f0424dc9",
+   "bytes": 12630,
+   "ext": "js",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/42ecf9a7-MorphingSubstrate.js",
+    "sha256": "42ecf9a7eea7d3eff01c0f1e5c4db45a8b3262d2b601660dd49e3653f0424dc9"
+   }
+  },
+  {
+   "id": "morphing-net-py",
+   "family": "morph-search",
+   "name": "morphing_net.py",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morphing_net.py",
+    "repo": null
+   },
+   "sha256": "09352e9d43c28d1a7107fd5799fbd22d346499371f0a6d7dc148121aa806118a",
+   "bytes": 66148,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/09352e9d-morphing_net.py",
+    "sha256": "09352e9d43c28d1a7107fd5799fbd22d346499371f0a6d7dc148121aa806118a"
+   }
+  },
+  {
+   "id": "morphing-net-exec",
+   "family": "morph-search",
+   "name": "MorphingNet_Execution_v1.ts (-SynthAi repo)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/-SynthAi/Src/Engine/MorphingNet_Execution_v1.ts",
+    "repo": null
+   },
+   "sha256": "9ca9f1c0a6d8bd33c1a10a56f3e1091388dcc65f52a990eaa5d309fdefb36f73",
+   "bytes": 42455,
+   "ext": "ts",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/9ca9f1c0-MorphingNet_Execution_v1.ts",
+    "sha256": "9ca9f1c0a6d8bd33c1a10a56f3e1091388dcc65f52a990eaa5d309fdefb36f73"
+   }
+  },
+  {
+   "id": "neural-morphing-engine",
+   "family": "morph-search",
+   "name": "neuralMorphingEngine.ts (SynthAi-Proto-mobile)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/SynthAi-Proto-mobile/neuralMorphingEngine.ts",
+    "repo": null
+   },
+   "sha256": "1447c1bc81aca6d5f7112635c43760557c870becaaf9329bc4ddd7b866bddbaf",
+   "bytes": 11234,
+   "ext": "ts",
+   "copy": {
+    "path": "integrated/swarm/originals/morph-search/1447c1bc-neuralMorphingEngine.ts",
+    "sha256": "1447c1bc81aca6d5f7112635c43760557c870becaaf9329bc4ddd7b866bddbaf"
+   }
+  },
+  {
+   "id": "four-llm-swarmdoc",
+   "family": "four-llm",
+   "name": "Swarm architecture doc: four active LLM positions (Movement, Being, Evolution, Design), Space emerges as the swarm; clustering and mesh formation (sections 4-7)",
+   "why": "her design doc; sections 4-7 are the spec for the mesh. Exact dimension-to-model mapping is stated OPEN in the doc itself (line 1342)",
+   "origin": {
+    "kind": "workspace",
+    "path": "drive/swarmdoc.md",
+    "repo": null
+   },
+   "sha256": "14d417c2134bbcae9464f4a0ad54a7748f8a8f706f3ef38785d4280a84ba156d",
+   "bytes": 270295,
+   "ext": "md"
+  },
+  {
+   "id": "modelmaker-app",
+   "family": "four-llm",
+   "name": "Model Maker repair app (Stellarproximology-lab)",
+   "why": "builds small local models",
+   "origin": {
+    "kind": "workspace",
+    "path": "chassis-work/src/Stellarproximology-lab/Modelmaker-repair/app.py",
+    "repo": null
+   },
+   "sha256": "9e0f366feb1dab11d00b09f867f6a7c8151b5b7d71e07d6538c5c85a249671ff",
+   "bytes": 12716,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/four-llm/9e0f366f-app.py",
+    "sha256": "9e0f366feb1dab11d00b09f867f6a7c8151b5b7d71e07d6538c5c85a249671ff"
+   }
+  },
+  {
+   "id": "modelmaker-readme",
+   "family": "four-llm",
+   "name": "Model Maker repair README",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "chassis-work/src/Stellarproximology-lab/Modelmaker-repair/README.md",
+    "repo": null
+   },
+   "sha256": "f1d1465a10d77e780ef585286b3b6ae7b95d8abc96b45b477e882dec47bfbfa7",
+   "bytes": 733,
+   "ext": "md",
+   "copy": {
+    "path": "integrated/swarm/originals/four-llm/f1d1465a-README.md",
+    "sha256": "f1d1465a10d77e780ef585286b3b6ae7b95d8abc96b45b477e882dec47bfbfa7"
+   }
+  },
+  {
+   "id": "modelmaker-movement-run",
+   "family": "four-llm",
+   "name": "Model Maker run: movement model",
+   "why": "only the movement model was run; the other three dimensions were not",
+   "origin": {
+    "kind": "workspace",
+    "path": "chassis-work/modelmaker-run/run_movement.py",
+    "repo": null
+   },
+   "sha256": "fdb7c29c4c3400a605926a8d50c3bcbfedd7d7b83b08e6b6eec0f82d4ebf78e7",
+   "bytes": 1695,
+   "ext": "py",
+   "copy": {
+    "path": "integrated/swarm/originals/four-llm/fdb7c29c-run_movement.py",
+    "sha256": "fdb7c29c4c3400a605926a8d50c3bcbfedd7d7b83b08e6b6eec0f82d4ebf78e7"
+   }
+  },
+  {
+   "id": "modelmaker-movement-build",
+   "family": "four-llm",
+   "name": "Model Maker build record (movement)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "chassis-work/modelmaker-run/movement-model/modelmaker_build.json",
+    "repo": null
+   },
+   "sha256": "8d739aec6775f4fa69e1c978e3e8de8d2eb0db214149f5a38ac450d85db90211",
+   "bytes": 669,
+   "ext": "json",
+   "copy": {
+    "path": "integrated/swarm/originals/four-llm/8d739aec-modelmaker_build.json",
+    "sha256": "8d739aec6775f4fa69e1c978e3e8de8d2eb0db214149f5a38ac450d85db90211"
+   }
+  },
+  {
+   "id": "pure-synthia-swarm-body",
+   "family": "pure-synthia",
+   "name": "swarmBody.mjs (Pure Synthia swarm body)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Back-up-/vendor/pure-synthia-v0.4.0/src/synthia/swarm/swarmBody.mjs",
+    "repo": null
+   },
+   "sha256": "ac028a699dcd333e742220fc554c446c2910ecece7a40224ac501f2d3c52f662",
+   "bytes": 10922,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/pure-synthia/ac028a69-swarmBody.mjs",
+    "sha256": "ac028a699dcd333e742220fc554c446c2910ecece7a40224ac501f2d3c52f662"
+   }
+  },
+  {
+   "id": "pure-synthia-architecture",
+   "family": "pure-synthia",
+   "name": "SWARM-ARCHITECTURE.json",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Back-up-/vendor/pure-synthia-v0.4.0/SWARM-ARCHITECTURE.json",
+    "repo": null
+   },
+   "sha256": "d330e433cf62b5cebbb5f84b581793b487d6cfef2ae178bc954802c29476677f",
+   "bytes": 1629,
+   "ext": "json",
+   "copy": {
+    "path": "integrated/swarm/originals/pure-synthia/d330e433-SWARM-ARCHITECTURE.json",
+    "sha256": "d330e433cf62b5cebbb5f84b581793b487d6cfef2ae178bc954802c29476677f"
+   }
+  },
+  {
+   "id": "pure-synthia-start",
+   "family": "pure-synthia",
+   "name": "START-SWARM.mjs",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Back-up-/vendor/pure-synthia-v0.4.0/START-SWARM.mjs",
+    "repo": null
+   },
+   "sha256": "dec04888d50ddd600214db326b59a152e53210955a06b13b492ac08186a33e83",
+   "bytes": 296,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/pure-synthia/dec04888-START-SWARM.mjs",
+    "sha256": "dec04888d50ddd600214db326b59a152e53210955a06b13b492ac08186a33e83"
+   }
+  },
+  {
+   "id": "pure-synthia-verify",
+   "family": "pure-synthia",
+   "name": "VERIFY-SWARM.mjs",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Back-up-/vendor/pure-synthia-v0.4.0/VERIFY-SWARM.mjs",
+    "repo": null
+   },
+   "sha256": "e638ce49fadc4e601f5bc3584edcf243775a02733a515ae071ef60523c13ce47",
+   "bytes": 497,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/pure-synthia/e638ce49-VERIFY-SWARM.mjs",
+    "sha256": "e638ce49fadc4e601f5bc3584edcf243775a02733a515ae071ef60523c13ce47"
+   }
+  },
+  {
+   "id": "pure-synthia-selfhosted-hand",
+   "family": "pure-synthia",
+   "name": "selfhostedSwarmHand.mjs",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Back-up-/vendor/pure-synthia-v0.4.0/host/selfhostedSwarmHand.mjs",
+    "repo": null
+   },
+   "sha256": "2558b8f134fe0909cf4a06c54e1214b787c14063e95d514e57b45393a7c947d4",
+   "bytes": 802,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/pure-synthia/2558b8f1-selfhostedSwarmHand.mjs",
+    "sha256": "2558b8f134fe0909cf4a06c54e1214b787c14063e95d514e57b45393a7c947d4"
+   }
+  },
+  {
+   "id": "pure-synthia-yni-hands",
+   "family": "pure-synthia",
+   "name": "yniSwarmHands.mjs",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/all/Back-up-/vendor/pure-synthia-v0.4.0/host/yniSwarmHands.mjs",
+    "repo": null
+   },
+   "sha256": "2b7bf567a3fc8423aea56f6f7801e13dd48c4c60ef5c60f02df29dcb7eb36741",
+   "bytes": 3978,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/pure-synthia/2b7bf567-yniSwarmHands.mjs",
+    "sha256": "2b7bf567a3fc8423aea56f6f7801e13dd48c4c60ef5c60f02df29dcb7eb36741"
+   }
+  },
+  {
+   "id": "pure-synthia-body-zip",
+   "family": "pure-synthia",
+   "name": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY.zip",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "zips/_drive/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY.zip",
+    "repo": null
+   },
+   "sha256": "187bf036384fc209b53c90a52151af9509e485e8036bf27476ddc9c1f10c148e",
+   "bytes": 1309925,
+   "ext": "zip",
+   "zipEntries": 326,
+   "members": [
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/runtime/foundry-lib.mjs",
+     "bytes": 29671,
+     "sha256": "24cd0b755cd6b37661e77a4eac4ab2d3bae2d2f2d10bd91d1cc7d45313bac4b3"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/foundryProcesses.mjs",
+     "bytes": 4577,
+     "sha256": "f6e360648450568073b09e8a80ff04da918d72e4db0965a576a966a61810f0d1"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/FOUNDRY-INTEGRATION.json",
+     "bytes": 844,
+     "sha256": "d5474bf00081753aee3d05c634560306edffbd611aff02147f013fb7a6b2f372"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/FOUNDRY-SOCKET.json",
+     "bytes": 656,
+     "sha256": "5bca4729e21d762a977c4508dd6904d7f8d9a88585e6fe1e23516d60d1c715f8"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/foundrySocket.mjs",
+     "bytes": 1754,
+     "sha256": "912bc58f2fd53895c7728f42d49c111d2db4de5ca1dafd57023aa8d957554869"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/postcss.config.js",
+     "bytes": 69,
+     "sha256": "3fc8d1c13ad963bbf7da04d59024d38cc2ad14563b36afd71bc8b43c7148dd25"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/dist/assets/index-dvOCQ8It.js",
+     "bytes": 262784,
+     "sha256": "06a565f209d685fe240480835aba5d4bce5fd813e5f7b56c37bacaf9b7ec2461"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/dist/assets/index-DdSrmwBD.css",
+     "bytes": 5174,
+     "sha256": "d1251579da155d7b0f6b7f2ca397ec8fcd440961a861dad883834c7b31df8bb1"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/dist/index.html",
+     "bytes": 454,
+     "sha256": "699eb66f88d84101616dceabe18025f15ff2519c71121fa8c501cde25f6cb6f4"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/dist/vite.svg",
+     "bytes": 1497,
+     "sha256": "4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/index.html",
+     "bytes": 356,
+     "sha256": "ae8631c19b3977b67275e5ba528c63f5798b114e5bcc7830744af1f15cdf3412"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/eslint.config.js",
+     "bytes": 616,
+     "sha256": "4efe97b16d1200fac0eaf07aa00930a8668b1f96a0be1891ace8c1e712ff0ccb"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/package.json",
+     "bytes": 890,
+     "sha256": "8f569dea2cae7617c9bf967283923ecc28b7c82ca184b0da57a36de502c02f34"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/README.md",
+     "bytes": 2651,
+     "sha256": "63e1ee48e72f0e498fd96b6042f146e02d4c0986a8bd522675eb2b11bba3927d"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/package-lock.json",
+     "bytes": 135893,
+     "sha256": "9cefbe22cfd2258ccc392799a316d3298e4185d67a0e60b53b1d35151ca99153"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/tsconfig.node.json",
+     "bytes": 653,
+     "sha256": "c3dd0fb522feba3596713f51b95bd53d781d845d24aedbfa2ac093d8b39c5120"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/tsconfig.json",
+     "bytes": 119,
+     "sha256": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/tailwind.config.js",
+     "bytes": 182,
+     "sha256": "2248bf828c19499e4a34a9d6696bc862cd53989239b7b4a61a76eef20bfacb79"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/tsconfig.app.json",
+     "bytes": 732,
+     "sha256": "922bc5bfb41bdc0768023b2487d54b3ae23c587d999024d4f32cde879ae6f4d8"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/vite.config.ts",
+     "bytes": 161,
+     "sha256": "4d36db3522a7b2dd10e0936e1004373c7ee65f10f7cd7920cd76410459c15a45"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/public/vite.svg",
+     "bytes": 1497,
+     "sha256": "4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/index.css",
+     "bytes": 329,
+     "sha256": "102e2ec40182eec72e43eee36d35929bf94841602d0d98de260371239d22bba1"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/assets/react.svg",
+     "bytes": 4126,
+     "sha256": "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/lib/llm.ts",
+     "bytes": 2160,
+     "sha256": "16563c19359839204d32a3af1a46694a8ce5be0f8bcd11aa38640aff86b51865"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/lib/glyphs.ts",
+     "bytes": 1011,
+     "sha256": "ac9c38bd35ad4f437d3c15bfa7b394aeb2ed50a4a04831604fd9934181358351"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/lib/storage.ts",
+     "bytes": 2930,
+     "sha256": "10613afefd4bb2d92aceccf97e6fa314e4f0d15a60cef10c73909680f7ccf7aa"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/lib/glyphParser.ts",
+     "bytes": 3430,
+     "sha256": "6d470d29e30b1113085f0a4e161b8f31ff79749d6831814258451fef2a8b169a"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/lib/assembler.ts",
+     "bytes": 13511,
+     "sha256": "adff89154ea9b235778b39cb44c0b9b9197a10a22bb077d15ec6d2296451cee8"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/screens/Browser.tsx",
+     "bytes": 9925,
+     "sha256": "b44e1399170bbdff5f2f1ab1d37037a408e9736d4b9f2c858eb9a8073bb10c83"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/screens/Forge.tsx",
+     "bytes": 4027,
+     "sha256": "6a304e5af6fe8d592e8f760661f7307e2d8198b256869bc7e959055f69f06df7"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/screens/Pool.tsx",
+     "bytes": 4707,
+     "sha256": "add581f3507c2d1238879b812de9a4a17fc2b18782ca4f8e43b2c7f61149a710"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/screens/Export.tsx",
+     "bytes": 438,
+     "sha256": "e3b7ad4451c57a7509deb75da7c670a33de144390c1dd0401e820911ebe66d81"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/screens/Vault.tsx",
+     "bytes": 6071,
+     "sha256": "2f17c977f0bda67cbd2cc45862b454e7bebed59dc586242eb8ed46b28a9451a6"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/components/FileDropZone.tsx",
+     "bytes": 2303,
+     "sha256": "3d00c210ee701d01a89953453df7b8195ebee3e7b523befa79e45dc2f1e7e30f"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/components/GlyphIcon.tsx",
+     "bytes": 405,
+     "sha256": "044464ac8e874e47ad510b35eba39051aa27a2634ec9e74f95c2165db4f98e56"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/components/FragmentCard.tsx",
+     "bytes": 4372,
+     "sha256": "73b5830c30e8ca9eb541c879279d98274e18acf5178fa0a1d7fb0bf40fdee2d3"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/main.tsx",
+     "bytes": 230,
+     "sha256": "6e9e5807fcbd48b75a96db5cbef36c996262196be42e6d4760dc86babbe61ad2"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/types/index.ts",
+     "bytes": 1223,
+     "sha256": "f4aea14e6b8762c7a420895e284508b2081b5cc8f574c2d51aecdcdb4f4a5408"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/src/App.tsx",
+     "bytes": 3383,
+     "sha256": "4ddcc3b4a24788ec9776b6c3b7d3f39fd9b220cf94d212ec305f72f1a2ba9fec"
+    },
+    {
+     "path": "Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/foundry/app/.gitignore",
+     "bytes": 253,
+     "sha256": "fe718e7babb14f3cbad2d97f08889b9ce5215ed3fe0e43b2b8cfbfb3b9b844e8"
+    }
+   ]
+  },
+  {
+   "id": "dream-swarm-zip",
+   "family": "dream-swarm",
+   "name": "Dream-Swarm-System-v0.1.0.zip",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "zips/_drive/Dream-Swarm-System-v0.1.0.zip",
+    "repo": null
+   },
+   "sha256": "c9c854ae7fcb02ef5648352c133cc896f7248af7e45856c014ecd86e92bcc2b6",
+   "bytes": 1358723,
+   "ext": "zip",
+   "zipEntries": 351,
+   "members": [
+    {
+     "path": "Dream-Swarm-System-v0.1.0/tests/dream-integration.test.mjs",
+     "bytes": 2872,
+     "sha256": "9812711a8f04bbd6b579db1e41fd636f2ab8e98a8192191ee5b29348321bf9de"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/scripts/verify.mjs",
+     "bytes": 524,
+     "sha256": "092fb619f01144f43ce69921e25c8756fdd1866261d9cc362cc6fa24dc755a44"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/README.md",
+     "bytes": 2506,
+     "sha256": "5d83a7f17931d5a3f34c34f293a6c820c3dc723472dd9ce5abefb1e0a9ce37d8"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/tests/current-synthia-swarm.node.mjs",
+     "bytes": 1815,
+     "sha256": "99993aabcff45fa78bcb348c1f34fb5a3c36c405d6d46738ab307b2ec1e4d2d6"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/tests/physiology-wiring.node.mjs",
+     "bytes": 3305,
+     "sha256": "f56ce46e41eeaac67e12a30e38d2e3fe02a69ee406c762f3c9374b07058d865f"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/tests/swarm-body.node.mjs",
+     "bytes": 2650,
+     "sha256": "6359f14f55216e4b2979ac0f2ca1f7a71a6b9626502ddbad258cfb1204e01781"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/tests/full-wiring.node.mjs",
+     "bytes": 8547,
+     "sha256": "ddb93349287294f88972288704adaffb685fd71846181d73b3b4f6a7995f1f3c"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/FOUNDRY-DONOR.sha256",
+     "bytes": 100,
+     "sha256": "6d9169ed04ad6661e35b084122556d8865c7fd33e6f265a5d2fd2ba8de6bd3c6"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/PHYSIOLOGY-TRANSPLANT.json",
+     "bytes": 863,
+     "sha256": "92bd6aaa275876b3fd40a0d49bf2917a4a330922c03e6d195e84457e86118221"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/SWARM-VERIFICATION.json",
+     "bytes": 1838,
+     "sha256": "f7f73adaaaa801f8e7d7ffa7543917e6f62ef715b761d8886ca3a8b52060ba95"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/UPSTREAM-SYNTHIA-VERIFY.txt",
+     "bytes": 23809,
+     "sha256": "de2d5a420839245afb7ca7fae3bf09514583ede53d82d84ad9315efc9edf2a1d"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/UPSTREAM-SYNTHIA-ALL-TESTS.txt",
+     "bytes": 43033,
+     "sha256": "92f764215dd7dce9b5bd607d25242c8e0b87bc1ef0be15ed4f152da067b7a59d"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/CANONICAL-ADDRESS.json",
+     "bytes": 488,
+     "sha256": "d8ed8154c0035a359d0c124402d99e1ce4dc47aec7b9005d324714a1ba69c103"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/FOUNDRY-VERIFY.txt",
+     "bytes": 636,
+     "sha256": "2e7379292d3e468042cc2d627fc6a19d871486d130d8d686463ce69b39a5e843"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/DONORS.json",
+     "bytes": 1301,
+     "sha256": "a423b87c7e3bbf1b1ef7184e424a78f8f7a36f0db9bda365a0deab5c4c247c68"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/PHYSIOLOGY-DONOR.sha256",
+     "bytes": 83,
+     "sha256": "7f9a34776ff5b70f21299e94a1195241ea73e0cab939f46cf14e1bfa5cd1eec9"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/FOUNDRY-DONOR.bytes",
+     "bytes": 9,
+     "sha256": "f6aa1165616e23329e757b9c353279b05a9fd63bbe8876d13b217340b1a3e768"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/README.md",
+     "bytes": 4391,
+     "sha256": "e5c4d27d98f4e435de38a8f7a6b17a8ae1c98a5d18684b70747f047bbdef6741"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/VERIFY-SWARM.mjs",
+     "bytes": 436,
+     "sha256": "7864ddc13e0b7db153a556afe26d89a9c51befbaf3344473df9f93c3b251c2be"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/extension/main.mjs",
+     "bytes": 1925,
+     "sha256": "9439fca2e9351c4036cfe765ac65b9f245deebb4727d4e02d97e71f371892bed"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/extension/sw.js",
+     "bytes": 412,
+     "sha256": "072e005a1065fd5e4af3fdb98bd37684053e17e5a7dd80c75431460fe038eed4"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/extension/manifest.webmanifest",
+     "bytes": 290,
+     "sha256": "fe124f61e5bd747f5a9a9673b2aad8598b1acf401a247b64918b996da2d9a3b1"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/extension/index.html",
+     "bytes": 1461,
+     "sha256": "37570e731ed091b930de7d02a9013ecfd700dcee3f4059c903a16019ae98775c"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/FOUNDRY-SOCKET.json",
+     "bytes": 656,
+     "sha256": "5bca4729e21d762a977c4508dd6904d7f8d9a88585e6fe1e23516d60d1c715f8"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/runtime/foundry-lib.mjs",
+     "bytes": 29671,
+     "sha256": "24cd0b755cd6b37661e77a4eac4ab2d3bae2d2f2d10bd91d1cc7d45313bac4b3"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/foundrySocket.mjs",
+     "bytes": 1754,
+     "sha256": "912bc58f2fd53895c7728f42d49c111d2db4de5ca1dafd57023aa8d957554869"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/tsconfig.app.json",
+     "bytes": 732,
+     "sha256": "922bc5bfb41bdc0768023b2487d54b3ae23c587d999024d4f32cde879ae6f4d8"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/tsconfig.json",
+     "bytes": 119,
+     "sha256": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/eslint.config.js",
+     "bytes": 616,
+     "sha256": "4efe97b16d1200fac0eaf07aa00930a8668b1f96a0be1891ace8c1e712ff0ccb"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/README.md",
+     "bytes": 2651,
+     "sha256": "63e1ee48e72f0e498fd96b6042f146e02d4c0986a8bd522675eb2b11bba3927d"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/tsconfig.node.json",
+     "bytes": 653,
+     "sha256": "c3dd0fb522feba3596713f51b95bd53d781d845d24aedbfa2ac093d8b39c5120"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/App.tsx",
+     "bytes": 3383,
+     "sha256": "4ddcc3b4a24788ec9776b6c3b7d3f39fd9b220cf94d212ec305f72f1a2ba9fec"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/components/GlyphIcon.tsx",
+     "bytes": 405,
+     "sha256": "044464ac8e874e47ad510b35eba39051aa27a2634ec9e74f95c2165db4f98e56"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/components/FragmentCard.tsx",
+     "bytes": 4372,
+     "sha256": "73b5830c30e8ca9eb541c879279d98274e18acf5178fa0a1d7fb0bf40fdee2d3"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/components/FileDropZone.tsx",
+     "bytes": 2303,
+     "sha256": "3d00c210ee701d01a89953453df7b8195ebee3e7b523befa79e45dc2f1e7e30f"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/types/index.ts",
+     "bytes": 1223,
+     "sha256": "f4aea14e6b8762c7a420895e284508b2081b5cc8f574c2d51aecdcdb4f4a5408"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/assets/react.svg",
+     "bytes": 4126,
+     "sha256": "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/screens/Forge.tsx",
+     "bytes": 4027,
+     "sha256": "6a304e5af6fe8d592e8f760661f7307e2d8198b256869bc7e959055f69f06df7"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/screens/Browser.tsx",
+     "bytes": 9925,
+     "sha256": "b44e1399170bbdff5f2f1ab1d37037a408e9736d4b9f2c858eb9a8073bb10c83"
+    },
+    {
+     "path": "Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/foundry/app/src/screens/Vault.tsx",
+     "bytes": 6071,
+     "sha256": "2f17c977f0bda67cbd2cc45862b454e7bebed59dc586242eb8ed46b28a9451a6"
+    }
+   ]
+  },
+  {
+   "id": "swarm-reality-trial-zip",
+   "family": "swarm-reality",
+   "name": "Swarm-Reality-Trial-v0.1.0.zip",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "zips/_drive/Swarm-Reality-Trial-v0.1.0.zip",
+    "repo": null
+   },
+   "sha256": "b125f1d87fb3b9f1335fe8784731b96937067a162a8abf5e39c414fe00ebde74",
+   "bytes": 17609,
+   "ext": "zip",
+   "zipEntries": 8,
+   "members": [
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/index.html",
+     "bytes": 6500,
+     "sha256": "77a6fd78f99a0c85c8565ab4479754f3dd5743424edefb781e90889d0cfc86d1"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/README.md",
+     "bytes": 1992,
+     "sha256": "922ae718e0dcf000d24fc36098a054dd1c6f083fe143cdf3835fdf119f301044"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/provenance/SOURCE_HASHES.sha256",
+     "bytes": 601,
+     "sha256": "5cc4a4283faa26c73161e915fd70cc6d049196fde166f57bcb532830d084e74e"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/provenance/EXPERIMENT_BOUNDARY.md",
+     "bytes": 1404,
+     "sha256": "1bc9c5a939f5b8a5583a9f45b39c82b14bd8554b1c07201fd9fff9ffd069e212"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/fixtures/source-scene.json",
+     "bytes": 1177,
+     "sha256": "d8ec468bee1f1e03010dd717b7a9f3da7e0bcc73d627031afb0f09562db52bd7"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/fixtures/source-agent.json",
+     "bytes": 8168,
+     "sha256": "a443f78cb5b92b4a4b747c4804c8589adddfc2c87cc28ccf77ae5107a9c23e3c"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/engine.js",
+     "bytes": 14015,
+     "sha256": "7ce581b55401e93f97540192b63decae792ffc544d052695044bf0cf31723ca2"
+    },
+    {
+     "path": "Swarm-Reality-Trial-v0.1.0/app.js",
+     "bytes": 6842,
+     "sha256": "d5f107ba37bc9577be08efd35cd98042858eedd052b915191270122fd75cd93d"
+    }
+   ]
+  },
+  {
+   "id": "resonance-swarm-reality-zip",
+   "family": "swarm-reality",
+   "name": "Resonance-Network-Swarm-Reality-INTEGRATED-TRIAL-2026-10-02.zip",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "chassis-work/candidates/Resonance-Network-Swarm-Reality-INTEGRATED-TRIAL-2026-10-02.zip",
+    "repo": null
+   },
+   "sha256": "4e7c9fbfe79ac58ffced3c9ce9764b82d18af1e6b425179e020bbbea5aa41c98",
+   "bytes": 74789692,
+   "ext": "zip",
+   "zipEntries": 2669,
+   "members": [
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/degree_recursion.py",
+     "bytes": 4055,
+     "sha256": "12d14d7813da10a1e450cb5f9a2fcfeb92aae7e925c860b90287eda63b415cc9"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/__init__.py",
+     "bytes": 3074,
+     "sha256": "b0a66869f4e18677574112a972ace3ef7b34a39f1737cd2220db907a1a42fa8e"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/relationship_reading.py",
+     "bytes": 17338,
+     "sha256": "ccbe92d7aeb86d8cc07faf913e682187f102bddf58440fb3a4d0d247867f687c"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/klein_paraphrase.py",
+     "bytes": 9026,
+     "sha256": "8f7d6cbc55fabce05d4081f589b85a427ef2270e723d1efccd8d2180e3a816ff"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/web_models.py",
+     "bytes": 4081,
+     "sha256": "3959262e11ead94050069b8a2f54f6593aeb051c26d36c5d1d7c4b88a19187a3"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/klein_monte_carlo_language_change.py",
+     "bytes": 6018,
+     "sha256": "3f76e5cd49e105a0917206c78364e2b16d3b6e9ff25e26a77023de1be23df048"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/generated_tool_101.py",
+     "bytes": 869,
+     "sha256": "dbd27f78781b949ec3d7e0a3661f982f9849b64fa37f18fb3b9b922737de42aa"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/ato_being_state.py",
+     "bytes": 16800,
+     "sha256": "cf890780b27da12f71c24fa7542975c6f097ce33ac717f05e7c5202844ad20ff"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/relationship_product.py",
+     "bytes": 19885,
+     "sha256": "b89601879932901b117cbf9ab3147c9365fe563e9b3917c2eefc0fe0cf9fc125"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/uncertainty.py",
+     "bytes": 5428,
+     "sha256": "8a787fe5179bbfe731016451c0d150376c29dc91c87e7ccf83d160d390a69c7a"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/geonatal.py",
+     "bytes": 1222,
+     "sha256": "d51ea29254aba44277b6c5f685dd79d462dbea88dac70e4ad9958017b0575d56"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/klein_diseminer.py",
+     "bytes": 7246,
+     "sha256": "cf785da1f27a35dabc213006f66f8afa0f47b9ce064f92baf68d42035e26186f"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/session.py",
+     "bytes": 1360,
+     "sha256": "10441216960c5d2c6535a72d8c3471c1ab9caba5b35956399a335c2b90bdb3f5"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/installer.py",
+     "bytes": 2266,
+     "sha256": "5d5db979dc7d72597380705428bec16d5ab6daca025ca1f019cdbddaed931552"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/generative_mesh.py",
+     "bytes": 3950,
+     "sha256": "d22f1d86e656083a65fd77732f5d525b3b8decdb097e328c68d008cb4f8e483b"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/empirical.py",
+     "bytes": 7391,
+     "sha256": "068ba41d070f7a2d9c50743739fb348ee332932380f29a12a50fdcb14413bd6b"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/english_output.py",
+     "bytes": 660,
+     "sha256": "8fc1261cc0309a740fec4793422754de395db046d394e61348a87dc3d378e4ba"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/product.py",
+     "bytes": 35696,
+     "sha256": "9777aa3096517ecc34458875ba7a9c73749ecd889af791f458f2192225701503"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/mesh_v4.py",
+     "bytes": 7374,
+     "sha256": "bbeb7e99a8cd903541295e8f3a609b2ac9ce647189243c6e2c64f35959c168e7"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/dimensional.py",
+     "bytes": 7042,
+     "sha256": "151df70fac9f4c7d17c704e3a55654ceeb1fae42455cceec9ef212c0c92cc06b"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/knowledge.py",
+     "bytes": 18580,
+     "sha256": "4ed876bce10a8e10786acba51924bcb3fab2888cf4bd3ae3adfdd9b90aac60e3"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/research_corpus.py",
+     "bytes": 4332,
+     "sha256": "d34781f59805d934e747a8eb293220809ad273ee8c154fa59f767be34a847bee"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/input.py",
+     "bytes": 11311,
+     "sha256": "2725cc0a4e823663dda957096c005ace5b0eeb2a6f3cefa374e358dc247fce2e"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/relationship.py",
+     "bytes": 3158,
+     "sha256": "bcbb07d9c971d55d6785979dabeb2657aba4a556aa010c9b46b6a505d5269696"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/local_chart.py",
+     "bytes": 10976,
+     "sha256": "cb6c46ce8d3e853df870dc96b650796275e6bdfecf352bebdd737995ab89b063"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/app_reading.py",
+     "bytes": 1998,
+     "sha256": "e73ddee3dd7c0f37743cb93d1e77b599fb6241c927f13e30a96eb5497b3a64b6"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/timing.py",
+     "bytes": 2728,
+     "sha256": "913a1a6ed2d615a54127835fadd91b1fc5daf5e9b8ea702079b38e44ed12a7ec"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/empirical_dataset.py",
+     "bytes": 6409,
+     "sha256": "befde54012a579359431be98cf990a827013a077f5170a4a04a9edf0af0431f7"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/career.py",
+     "bytes": 19005,
+     "sha256": "8511bb32bc572b80b65775b5487f0d34e80d2a3901e7d828a4bdd7e102e2deca"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/interpretation_maps.py",
+     "bytes": 48356,
+     "sha256": "725e56c365b43fe0b16e0ddbb7e1bb484689e6c5dd4d96ada11baa5b8a9f47ab"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/field_hub.py",
+     "bytes": 4152,
+     "sha256": "6b5308dc58829ad4341f11fa77fe21c39a0ee6105725be3fdce49b246e262960"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/language_contact.py",
+     "bytes": 12250,
+     "sha256": "ad29bf59fa19555a5fc9f0d9ad8106669d4c764a623ce62c59bb325f56ac82b4"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/klein_autonovel.py",
+     "bytes": 8988,
+     "sha256": "abe635e9dca1885f10628a30a44b12c3051c242e340ed122d19511210953109c"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/bodygraph.py",
+     "bytes": 24476,
+     "sha256": "6e32ebc6cf0f0ec43d73b1404bb7603c7f096aadd5d847abb7a3f2b474839945"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/klein_kuppin_grammar_learner.py",
+     "bytes": 5731,
+     "sha256": "c9bdb85a955d17d2ed68eb6a9ad2f734463297299aff154604ddd05c1ec9aaee"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/being_state.py",
+     "bytes": 7093,
+     "sha256": "9450bf05076887dfd6ba0495b201ec8f884c2825a90ba1d7d4a30872dd7b6350"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/mesh_v3.py",
+     "bytes": 7009,
+     "sha256": "cb4d0bb0d008488b5bb96d559aadb879f34c535a54b277b22a112404dc476e0b"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/klein_outline_paraphraser.py",
+     "bytes": 7742,
+     "sha256": "00a147df3a383c949f7fca46d065bcfdb1094ae7c576c5c9bf198e3486df6ade"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/web_api.py",
+     "bytes": 52410,
+     "sha256": "51319be6f43d2089e5d0dbfaddc1e63c17c2e07e9cde617468779cbbc23ed183"
+    },
+    {
+     "path": "resonance_integrated_trial/integrations/biverse/human_design/validated_learning.py",
+     "bytes": 13839,
+     "sha256": "50ac1e1a3654cf6429dfcf741eb38f31d09861df9a7b2ea42623cc366615559d"
+    }
+   ]
+  },
+  {
+   "id": "bantu-321-swarm-bridge-zip",
+   "family": "swarm-reality",
+   "name": "BANTU-321-Swarm-Bridge-v0.2.zip",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "extra/BANTU-321-Swarm-Bridge-v0.2.zip",
+    "repo": null
+   },
+   "sha256": "0fce65d24538bd110ad3589af3b22fc5c2a61f3ccd554aacda87ea05ed7eb1d4",
+   "bytes": 7955,
+   "ext": "zip",
+   "zipEntries": 5
+  },
+  {
+   "id": "contact-automata-swarm-body",
+   "family": "swarm-reality",
+   "name": "contact-automata swarmBody.mjs",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "contact-automata/src/swarmBody.mjs",
+    "repo": null
+   },
+   "sha256": "126c18b565e99903b044b05c3ec6be9082ca7849e3e9dbb71c4b3e7d87b64370",
+   "bytes": 12084,
+   "ext": "mjs",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-reality/126c18b5-swarmBody.mjs",
+    "sha256": "126c18b565e99903b044b05c3ec6be9082ca7849e3e9dbb71c4b3e7d87b64370"
+   }
+  },
+  {
+   "id": "semantic-dna-swarm",
+   "family": "swarm-reality",
+   "name": "semantic-dna-swarm.js",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "drive-pieces/content-4/synthia-semantic-state-integration/semantic-dna-swarm.js",
+    "repo": null
+   },
+   "sha256": "a7a45846064fd07c49040f61ec85e50c0c0a737a3925af88e23f02429df7ebd5",
+   "bytes": 8175,
+   "ext": "js",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-reality/a7a45846-semantic-dna-swarm.js",
+    "sha256": "a7a45846064fd07c49040f61ec85e50c0c0a737a3925af88e23f02429df7ebd5"
+   }
+  },
+  {
+   "id": "grok-swarm-directive",
+   "family": "swarm-reality",
+   "name": "GROK_SWARM_DIRECTIVE.md (Resonance North Star)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "chassis-work/candidates/north-star/Resonance-North-Star-Production/GROK_SWARM_DIRECTIVE.md",
+    "repo": null
+   },
+   "sha256": "f6bdfcdcc03f4202c205e134736fc22b6fcd7110611b65f5df72c4d63c314527",
+   "bytes": 2611,
+   "ext": "md",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-reality/f6bdfcdc-GROK_SWARM_DIRECTIVE.md",
+    "sha256": "f6bdfcdcc03f4202c205e134736fc22b6fcd7110611b65f5df72c4d63c314527"
+   }
+  },
+  {
+   "id": "alphabet-swarm-control",
+   "family": "swarm-reality",
+   "name": "11-alphabet-swarm-control.md (open question)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "research/open-questions/11-alphabet-swarm-control.md",
+    "repo": null
+   },
+   "sha256": "afe8909da8a1fefbbbcb62743a4479b099b23807ad10b6c7eac3ea1f95825324",
+   "bytes": 26648,
+   "ext": "md",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-reality/afe8909d-11-alphabet-swarm-control.md",
+    "sha256": "afe8909da8a1fefbbbcb62743a4479b099b23807ad10b6c7eac3ea1f95825324"
+   }
+  },
+  {
+   "id": "swarm-repo-readme",
+   "family": "swarm-reality",
+   "name": "Swarm repo (README + Index.html)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/Swarm/README.md",
+    "repo": null
+   },
+   "sha256": "e5b5798b31a06aba7843b6861debcd0bba771d33a8916ce244f5ea7bc20533e9",
+   "bytes": 7,
+   "ext": "md",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-reality/e5b5798b-README.md",
+    "sha256": "e5b5798b31a06aba7843b6861debcd0bba771d33a8916ce244f5ea7bc20533e9"
+   }
+  },
+  {
+   "id": "the-horde",
+   "family": "swarm-reality",
+   "name": "The-horde repo (Index.html)",
+   "why": null,
+   "origin": {
+    "kind": "workspace",
+    "path": "swarm-search/The-horde/Index.html",
+    "repo": null
+   },
+   "sha256": "2476a229c6922cccff851f23df1671d50a23976f9ce27bb411e5b0a67af9710e",
+   "bytes": 10727,
+   "ext": "html",
+   "copy": {
+    "path": "integrated/swarm/originals/swarm-reality/2476a229-Index.html",
+    "sha256": "2476a229c6922cccff851f23df1671d50a23976f9ce27bb411e5b0a67af9710e"
+   }
+  },
+  {
+   "id": "morphgnn-server",
+   "family": "morph-search",
+   "name": "morphgnn_server.py",
+   "why": "in the Simlish repo root, outside you-n-i-verse",
+   "origin": {
+    "kind": "repo",
+    "path": "morphgnn_server.py",
+    "repo": "https://github.com/justappgrabbin/Simlish"
+   },
+   "sha256": "8321a04b956d17a35af357e2cfe88c0bfa9268cfa7c1f958464c3613b6abec2d",
+   "bytes": 13742,
+   "ext": "py"
+  }
+ ],
+ "uncurated": [
+  {
+   "sha256": "7f368769c57b52dbad93ae537870a5ae5a92422fc40283c4419d5e1416843348",
+   "bytes": 8828,
+   "name": "🌌 Complete Deployment Guide - Morph Entity System.md",
+   "paths": [
+    "zips/_drive_x/Designing-a-Neural-Net-Human-DNA-Astrology/🌌 Complete Deployment Guide - Morph Entity System.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "0040fc9c1b7d3e5d0b03f2d73489c9c292093439ce0935763f17d3d702e8e9d7",
+   "bytes": 12837,
+   "name": "06-genetic-matrix-magic-squares.md",
+   "paths": [
+    "research/open-questions/06-genetic-matrix-magic-squares.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "8b2227be155c6bdd9bba4e69f9b9e21a265477af4ac4a97ec7792cef717cfce5",
+   "bytes": 5785,
+   "name": "18-canonical-morph-integration.test.mjs",
+   "paths": [
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/test/18-canonical-morph-integration.test.mjs",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/test/18-canonical-morph-integration.test.mjs",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/test/18-canonical-morph-integration.test.mjs",
+    "SynthAi/computer/hover/test/18-canonical-morph-integration.test.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/test/18-canonical-morph-integration.test.mjs",
+    "oct7src/computer/hover/test/18-canonical-morph-integration.test.mjs"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "ec6f3f4f05859111023c5539c5a29ca434bc6f40aa9b44bbc68f5bbd5f22a397",
+   "bytes": 1093,
+   "name": "AddressSwarm.tsx",
+   "paths": [
+    "oct7src/computer/donors/consciousness-realm/client/src/phone/AddressSwarm.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "2c33b3119edf79cb7ea970e3b5a49aacaa4d9013e2a0c5504f00b28ad4143748",
+   "bytes": 51348,
+   "name": "autoling_morph_engine.js",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/organs/legacy/autoling_morph_engine.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/organs/legacy/autoling_morph_engine.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/runtime/autoling_morph_engine.js",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/runtime/autoling_morph_engine.js",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/runtime/autoling_morph_engine.js",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/runtime/autoling_morph_engine.js"
+   ],
+   "count": 12
+  },
+  {
+   "sha256": "22349e37959c57449a0925d0fb12a46b8b0a3c091e36a084b1f6ba54d6898a17",
+   "bytes": 7859,
+   "name": "axis-morphnet-smart-substrate-v2-sandbox-source.zip",
+   "paths": [
+    "swarm-search/all/Civilization-/axis-morphnet-smart-substrate-v2-sandbox-source.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "fdbed1e35d591d84eacdcd63a30292ad4d2acc7cf9bf9f6e78acd52d20ec292b",
+   "bytes": 3132,
+   "name": "CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md",
+   "paths": [
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/docs/CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md",
+    "SynthAi/computer/hover/docs/CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md",
+    "oct7src/computer/hover/docs/CANONICAL-MORPH-INTEGRATION-FINAL-VERIFICATION-v0.5.7.md"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "2a1f3ac06ac366cdfc066a1f7952124e502679445311dff6c9457cc560a0d1ba",
+   "bytes": 1935,
+   "name": "CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+   "paths": [
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+    "SynthAi/computer/hover/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md",
+    "oct7src/computer/hover/docs/CANONICAL-MORPH-INTEGRATION-v0.5.7.md"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "ca58f57b754a83c94806254b58da295550e728954c496a34317528aba6ad4376",
+   "bytes": 9299,
+   "name": "canonical-morph-runtime.mjs",
+   "paths": [
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/src/morph/canonical-morph-runtime.mjs",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/src/morph/canonical-morph-runtime.mjs",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/canonical-morph-runtime.mjs",
+    "SynthAi/computer/hover/src/morph/canonical-morph-runtime.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/canonical-morph-runtime.mjs",
+    "oct7src/computer/hover/src/morph/canonical-morph-runtime.mjs"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "0e093e9f061bf84b7d4a1cae4ae58a2392fb9e6fe2dc85f928d6844789ab3438",
+   "bytes": 511,
+   "name": "check-morph-files.js",
+   "paths": [
+    "zips/morph_admin_bridge_os_maintenance__5d59d913/morph_admin_bridge/scripts/check-morph-files.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "7bb01026b3aed16d7b4aeea4525085e6f6d70b618fdf7afbd5cff459b8a3e36d",
+   "bytes": 1113,
+   "name": "CodeMorpher.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/adapters/CodeMorpher.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/adapters/CodeMorpher.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/adapters/CodeMorpher.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/adapters/CodeMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/adapters/CodeMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/adapters/CodeMorpher.mjs"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "3879b2a0999408d61ded0206246899865a24316ce67ba6b65962654ca2ae936d",
+   "bytes": 998,
+   "name": "CompositeMorpher.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/adapters/CompositeMorpher.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/adapters/CompositeMorpher.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/adapters/CompositeMorpher.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/adapters/CompositeMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/adapters/CompositeMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/adapters/CompositeMorpher.mjs"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "99993aabcff45fa78bcb348c1f34fb5a3c36c405d6d46738ab307b2ec1e4d2d6",
+   "bytes": 1815,
+   "name": "current-synthia-swarm.node.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/tests/current-synthia-swarm.node.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/tests/current-synthia-swarm.node.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/tests/current-synthia-swarm.node.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/tests/current-synthia-swarm.node.mjs",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/tests/current-synthia-swarm.node.mjs",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/tests/current-synthia-swarm.node.mjs"
+   ],
+   "count": 11
+  },
+  {
+   "sha256": "52ee176dfae2df2b57cc798dfc45bbca448be098fd80541450ca2e0d89dec930",
+   "bytes": 1286,
+   "name": "deep-surface-morph-adapter.mjs",
+   "paths": [
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/src/morph/deep-surface-morph-adapter.mjs",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/src/morph/deep-surface-morph-adapter.mjs",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/deep-surface-morph-adapter.mjs",
+    "SynthAi/computer/hover/src/morph/deep-surface-morph-adapter.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/deep-surface-morph-adapter.mjs",
+    "oct7src/computer/hover/src/morph/deep-surface-morph-adapter.mjs"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "9de6b40ef836818f3841452b3e9e034c159a200513bea42663b9614f5d8e7834",
+   "bytes": 945,
+   "name": "embodied-morph-smoke.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/tests/embodied-morph-smoke.mjs",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/tests/embodied-morph-smoke.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/tests/embodied-morph-smoke.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/tests/embodied-morph-smoke.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "769732d1b5be73408aa2008c07dc5626a508556f14d208a77d247192bb830ad2",
+   "bytes": 44259,
+   "name": "emergent-edge-resolver.ts",
+   "paths": [
+    "zips/lcm_unzipped_all_bundle__92792626/lcm_unzipped_all/synthia-runtime/emergent-edge-resolver.ts",
+    "zips/lcm_unzipped_all_bundle__92792626/lcm_unzipped_all/you-n-i-verse-corrected_4_/emergent-edge-resolver.ts",
+    "zips/you-n-i-verse-corrected__f913997b/emergent-edge-resolver.ts",
+    "SynthAi/computer/donors/recovered/you-n-i-verse-corrected/emergent-edge-resolver.ts",
+    "oct7src/computer/donors/recovered/you-n-i-verse-corrected/emergent-edge-resolver.ts",
+    "swarm-search/SynthAi/computer/donors/recovered/you-n-i-verse-corrected/emergent-edge-resolver.ts"
+   ],
+   "count": 7
+  },
+  {
+   "sha256": "f842e9bce43982f762eefc47ce2f0591c484a8e10fd38b6979c9317202017e0b",
+   "bytes": 1351,
+   "name": "GameMorpher.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/adapters/GameMorpher.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/adapters/GameMorpher.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/adapters/GameMorpher.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/adapters/GameMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/adapters/GameMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/adapters/GameMorpher.mjs"
+   ],
+   "count": 14
+  },
+  {
+   "sha256": "b6ff39552cbb9075985426263e244681ff0c5290b22da5058af1121da4c629f8",
+   "bytes": 13626,
+   "name": "GENETIC_BINARY_BLUEPRINT.md",
+   "paths": [
+    "zips/axis-phoneos-synthos-smart-sandbox-merge-v1-source__56cd52d4/merged_app/public/synthos-architecture/GENETIC_BINARY_BLUEPRINT.md",
+    "zips/final-resonance-phoneos-synthos-foundation__043273fd/final-resonance-phoneos-synthos/SYNTHOS_ARCHITECTURE/GENETIC_BINARY_BLUEPRINT.md",
+    "zips/resonance-final-merged-netlify-plasmic-pass__80f49d67/resonance-final-merged/synthos/GENETIC_BINARY_BLUEPRINT.md",
+    "zips/resonance-final-merged-netlify__970c946c/resonance-final-merged/synthos/GENETIC_BINARY_BLUEPRINT.md",
+    "zips/resonance-os-appcenter-netlify-friendly-source__50fc38c9/merged_app/public/synthos-architecture/GENETIC_BINARY_BLUEPRINT.md",
+    "zips/resonance-shell-remount-pass__cbe378a6/resonance-final-merged/synthos/GENETIC_BINARY_BLUEPRINT.md"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "e367861e865736930f94f0cd2026672836cca2c8c400bb6333e760ca3d1ce0a2",
+   "bytes": 46,
+   "name": "genetic_matrix_calculator.py",
+   "paths": [
+    "zips/_drive_x/Cynthia_Complete_Package/FileUploadUtility/genetic_matrix_calculator.py",
+    "swarm-search/all/Synthai2/attached_assets/genetic_matrix_calculator_1761745539928.py"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "ca7148937f7cf8670acee11e71950eaf5fdeb9ee3dab24a3923125f806196a43",
+   "bytes": 13080,
+   "name": "geneticBinaryEngine.ts",
+   "paths": [
+    "zips/axis-phoneos-synthos-smart-sandbox-merge-v1-source__56cd52d4/merged_app/public/synthos-architecture/geneticBinaryEngine.ts",
+    "zips/final-resonance-phoneos-synthos-foundation__043273fd/final-resonance-phoneos-synthos/SYNTHOS_ARCHITECTURE/geneticBinaryEngine.ts",
+    "zips/resonance-final-merged-netlify-plasmic-pass__80f49d67/resonance-final-merged/synthos/geneticBinaryEngine.ts",
+    "zips/resonance-final-merged-netlify__970c946c/resonance-final-merged/synthos/geneticBinaryEngine.ts",
+    "zips/resonance-os-appcenter-netlify-friendly-source__50fc38c9/merged_app/public/synthos-architecture/geneticBinaryEngine.ts",
+    "zips/resonance-shell-remount-pass__cbe378a6/resonance-final-merged/synthos/geneticBinaryEngine.ts"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "dbe88353c842273dda4e836e28b312e611286a7c179154e36b5f0f50a048132b",
+   "bytes": 24267,
+   "name": "hd_cyber_morph_design.md",
+   "paths": [
+    "oct7src/computer/donors/vqvae-ato/hd_cyber_morph_design.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "d6397c5473d0e94ba8e98b8106b20f5077bf554f2985d8ca60bef2ff3379ccdd",
+   "bytes": 57952,
+   "name": "hd_cyber_morph_engine.ts",
+   "paths": [
+    "oct7src/computer/donors/vqvae-ato/hd_cyber_morph_engine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3af94bcd79d3cf5cb1bef260424d24038e10dd179568d40bf1a2abf43f39c546",
+   "bytes": 35139,
+   "name": "hd_cyber_morph_widget.html",
+   "paths": [
+    "oct7src/computer/donors/vqvae-ato/hd_cyber_morph_widget.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "319c1f8439fb9eea90f1cdd326f4b042afb4268b825a655fbc5ba3d0a759f962",
+   "bytes": 1270,
+   "name": "IsomorphismOrgan.mjs",
+   "paths": [
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/organs/IsomorphismOrgan.mjs",
+    "SynthAi/computer/hover/residents/synthia17/src/cynthia/organs/IsomorphismOrgan.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/organs/IsomorphismOrgan.mjs",
+    "oct7src/computer/hover/residents/synthia17/src/cynthia/organs/IsomorphismOrgan.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "9766295d62a71ce0fc63fd8e11ef337aaf786b5d8f2db115b90ab99e969b528d",
+   "bytes": 41075,
+   "name": "Kimi_Agent_Deployment_Synth AI Morphing OS_v44.zip",
+   "paths": [
+    "swarm-search/all/Linux/Kimi_Agent_Deployment_Synth AI Morphing OS_v44.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "c0d28543df845df9ee718b2f2bd8b0118d446bc221d0d42b33e1b4dd40d9fafa",
+   "bytes": 22451,
+   "name": "merged_morph_engine.ts",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/merged_morph_engine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "8481de677d82e372e067974de337d7b8d75c15db811471c7aa42d487119c0820",
+   "bytes": 14050,
+   "name": "merged_useMorphStore.ts",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/merged_useMorphStore.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "bffd60deb2a328d57f1059f3274de87dbc3f3903dbc4122d3f286d5a1d82f2ec",
+   "bytes": 5153,
+   "name": "modelmaker-run.md",
+   "paths": [
+    "chassis-work/modelmaker-run.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "5d59d9136e6f32faefc9bbcfeb0ab3e9940f6f3a0f14bb3889d645d8096b575a",
+   "bytes": 42434,
+   "name": "morph_admin_bridge_os_maintenance.zip",
+   "paths": [
+    "swarm-search/all/Civilization-/morph_admin_bridge_os_maintenance.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "a965c2112a6470599a81ae0aa766d3eab4f2bae3375246e1ddccad36c50fee48",
+   "bytes": 29807,
+   "name": "morph_engine_v0.1.ts",
+   "paths": [
+    "swarm-search/all/SynthOS/morph_engine_v0.1.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "94fdf6a6cbbe2754414e359262dbcc41a785c4a36b4a47c984c6cf38ee83345b",
+   "bytes": 13661,
+   "name": "morph_entity.py",
+   "paths": [
+    "zips/_drive_x/Designing-a-Neural-Net-Human-DNA-Astrology/morph_entity.py"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "4992d8037babccabc62388c5de56c31603141fd8674b1dc720bc6c06d7513a89",
+   "bytes": 1254,
+   "name": "MORPH_EXECUTION_CHANGELOG.md",
+   "paths": [
+    "zips/_drive_x/Synthia-Kimi-Focal-StateSpace-v1.4.3/synthia_fix/MORPH_EXECUTION_CHANGELOG.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "03baf9a0ca18e6f261f0ae25ddf3e9999324c1378c7359b08bd3f4b24a5c441e",
+   "bytes": 1633,
+   "name": "MORPH_GAME_VALIDATION.json",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/MORPH_GAME_VALIDATION.json"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "94eed4c27e7818a7dcf63ac7c47ed0c623ffafdf060eeb9fa3029c345e4cd9df",
+   "bytes": 22981,
+   "name": "morph_generative_model.py",
+   "paths": [
+    "zips/morph_admin_bridge_os_maintenance__5d59d913/morph_admin_bridge/bridges/morph_generative_model.py",
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morph_generative_model (11).py"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "93e386058949423d3f10d73dde3022e10496c1d836926b08be9bfd387c4ceaff",
+   "bytes": 1979,
+   "name": "MORPH_NET_REPAIR_INSTRUCTIONS.md",
+   "paths": [
+    "zips/resonance_batch_extracted_pieces__795a7ee6/apps/morph-net-store-repair/MORPH_NET_REPAIR_INSTRUCTIONS.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "bd6e9a9d59960e5b8d06cfddcc330d7f6807537ce669a0e47c37d0d685148302",
+   "bytes": 11939,
+   "name": "morph_senn_bridge.py",
+   "paths": [
+    "zips/morph_admin_bridge_os_maintenance__5d59d913/morph_admin_bridge/bridges/morph_senn_bridge.py",
+    "swarm-search/all/-SynthAi/Src/Engine/morph_senn_bridge.py",
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morph_senn_bridge.py"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "67cc0d870381ba027b0c1253480012870dd79736112376f41f647f643bd83d89",
+   "bytes": 4567,
+   "name": "MORPH-ACCEPTANCE.md",
+   "paths": [
+    "oct7src/computer/MORPH-ACCEPTANCE.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "69b248a4854a9c4d5694e0472c70d5fb5a2e869b8e0baa747e5399c444d91f0a",
+   "bytes": 9756,
+   "name": "morph-auto-wire.yml",
+   "paths": [
+    "swarm-search/all/SynthAi.company/.github/workflows/morph-auto-wire.yml"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "7edbb70fcd082e39bbf68b01b738a2d74ab0c133198cc6377cf3bf48d0c9f69a",
+   "bytes": 7282,
+   "name": "morph-bootstrap (1).ts",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-bootstrap (1).ts",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/src/core/morph-bootstrap.ts",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morph-bootstrap (1).ts",
+    "swarm-search/all/cautious-octo-doodle/src/core/morph-bootstrap.ts"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "fc4ad100567a53ab82e5dcf4fa17fe7f44bb5542a762462efc0809a505c8989e",
+   "bytes": 22041,
+   "name": "morph-cli (7).js",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/morph-cli (7).js",
+    "swarm-search/all/SynthAi.company/morph-cli (2).js"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "80b2202fe82b5eeec50e07233f5b3ac7abd8f0dfb6334037580462de8bd1de78",
+   "bytes": 51,
+   "name": "morph-cli.js",
+   "paths": [
+    "swarm-search/all/Testing/morph-cli.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "e059c86c0d061a759f473f17595c1eb83c0d06a743870df1e3d4b3606e55123f",
+   "bytes": 2388,
+   "name": "morph-dock-governance.js",
+   "paths": [
+    "swarm-search/all/FRONTEND/morph-dock-governance.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "083fcde156e30386c55e48deae06f4525572ddc538eafefd66d098c84105f0f9",
+   "bytes": 30280,
+   "name": "morph-engine.js",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/morph-engine.js",
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/src/morph/browser/vendor/deep-surface-morph.js",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/morph-engine.js",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/morph-engine.js",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/morph-engine.js",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/morph-engine.js"
+   ],
+   "count": 21
+  },
+  {
+   "sha256": "a2f943cc953df438633406d4c9991d7fcee05c5b8f2d09ccc0604c66f4d8058c",
+   "bytes": 31605,
+   "name": "morph-engine.js",
+   "paths": [
+    "SynthAi/computer/hover/ui/morph/runtime/morph-engine.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "7b153887535dc1b5b5bee0c77e69c0b85ed419309c6e5257d8e2d12d17044b53",
+   "bytes": 37850,
+   "name": "morph-engine.ts",
+   "paths": [
+    "zips/autopoietic-os_1___d7d5154d/morph-engine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "41f6c394e1bd4ce9e2d41fd98acc787c89d8e9ea462f26acb450f5635f6b2e2b",
+   "bytes": 1672,
+   "name": "morph-execution-loop.test.mjs",
+   "paths": [
+    "zips/_drive_x/Synthia-Kimi-Focal-StateSpace-v1.4.3/synthia_fix/test/morph-execution-loop.test.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "e5f1eb3e15e1fca5ce5ae3a1f60d309af48f2ad249ace5f943323e65b2acd578",
+   "bytes": 3077,
+   "name": "morph-game-wiring-smoke.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/tests/morph-game-wiring-smoke.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "62ad2df9de7258799affa4f72471991ee7ad16c04870a5bc51356be0c6e9d2f7",
+   "bytes": 16496,
+   "name": "morph-ingestion-engine-1.zip",
+   "paths": [
+    "swarm-search/all/Kim-possible-/morph-ingestion-engine-1.zip",
+    "swarm-search/all/Kim-possible-/morph-ingestion-engine.zip"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "874fe82fca66d9f21dd5b9cc2fefccf1b33d2d5e4685a7cce5a9d21d3a568c21",
+   "bytes": 16634,
+   "name": "morph-ingestion-engine-v3-1.zip",
+   "paths": [
+    "swarm-search/all/Kim-possible-/morph-ingestion-engine-v3-1.zip",
+    "swarm-search/all/Kim-possible-/morph-ingestion-engine-v3.zip"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "a3b9870bedde7c3e57152aa541f6e7a361b043af6d13347ae35c9715e87b0dd5",
+   "bytes": 36283,
+   "name": "morph-ingestion-engine-v3.ts",
+   "paths": [
+    "zips/morph-ingestion-engine-v3-1__874fe82f/morph-ingestion-engine-v3.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "a05422fd84ed1cd99cf5b161d0b6ef88c85e1ebe3a386af7b5ee742f2e0fcf61",
+   "bytes": 41753,
+   "name": "morph-ingestion-engine.ts",
+   "paths": [
+    "zips/morph-ingestion-engine-1__62ad2df9/morph-ingestion-engine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "fb15beece39aa846de9ce101e4d55ef07bb49c224e359641432efbb7f80f069e",
+   "bytes": 1626,
+   "name": "morph-kernel-entry-v4 (5).json",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/morph-kernel-entry-v4 (5).json",
+    "swarm-search/all/SynthAi.company/morph-kernel-entry-v4 (1).json"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "dc567e9af32f44373a5c4fd0aef790caa944091e06e15af2a9946f5d3ac3443c",
+   "bytes": 2803,
+   "name": "morph-kernel.js",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morph-kernel.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "8f7912331628da6699ab8aa1d99aa10797b4a78431d81722f2c60072331961c2",
+   "bytes": 26145,
+   "name": "morph-mcp-frontend.jsx",
+   "paths": [
+    "swarm-search/all/didactic-octo-disco/legacy/morph-mcp-frontend.jsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "8449b97552e6ff63446549afa58b3752be36bac008f05197a16af04fb1f582c0",
+   "bytes": 649,
+   "name": "morph-mir-smoke.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/tests/morph-mir-smoke.mjs",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/tests/morph-mir-smoke.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/tests/morph-mir-smoke.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/tests/morph-mir-smoke.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "77a6934ae359237a9e8a0d6f225c6237ebfc041433878a9f809b294adf3b0e7b",
+   "bytes": 2645,
+   "name": "MORPH-OPTIMIZATION.md",
+   "paths": [
+    "oct7src/computer/MORPH-OPTIMIZATION.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "5af5891b5383f9066ea93fe4fdc59af36a7127b0f7f18a25a0017cf06097a887",
+   "bytes": 15703,
+   "name": "morph-orchestrator-core (1).ts",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-orchestrator-core (1).ts",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-orchestrator-core.ts",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/src/core/morph-orchestrator-core.copy.ts",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/src/core/morph-orchestrator-core.ts",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morph-orchestrator-core (1).ts",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morph-orchestrator-core.ts"
+   ],
+   "count": 8
+  },
+  {
+   "sha256": "68bc6d5fb1ffae42b4843ee661e421679fd65fd2b7bb452190c6950be42b7c23",
+   "bytes": 30390,
+   "name": "morph-orchestrator-demo (1).html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-orchestrator-demo (1).html",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morph-orchestrator-demo (1).html",
+    "swarm-search/all/didactic-octo-disco/legacy/morph-orchestrator-demo.html"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "390dab05d64ae5e6d82cafe45c40d06904237589d0c850e6cc6f7d6ac68f88e8",
+   "bytes": 51043,
+   "name": "morph-os-kernel (5).js",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/morph-os-kernel (5).js",
+    "swarm-search/all/SynthAi.company/morph-os-kernel (1).js",
+    "swarm-search/all/SynthAi.company/morph-os-kernel (2).js"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "4da827fe4f57d24e050a71c939cfca172e36593aa091100b2a5feb1d3a0a4c17",
+   "bytes": 365,
+   "name": "morph-os-kernel.js",
+   "paths": [
+    "swarm-search/all/Testing/morph-os-kernel.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6b7e584e60663a05c65662b09eb95f764e2d2a3b488ab7ca7e1f47c9bc7e45f8",
+   "bytes": 28539,
+   "name": "morph-os-shell-v2.html",
+   "paths": [
+    "swarm-search/all/Testing/Browser/morph-os-shell-v2.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "88ffb9071937834ede8744c401220b18e3e75ca4e2e8a36eacdcf7e6ac24aaa0",
+   "bytes": 59782,
+   "name": "morph-os-substrate.html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/public/apps/morph-os-substrate.html",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-os-substrate (1).html",
+    "zips/joe-resonance-unified-substrate-1__bd2cac07/source/morph-os-substrate (2).html",
+    "swarm-search/all/FRONTEND/Resonance_Beef_MorphOS/source/joe-resonance-unified-substrate-1/source/morph-os-substrate (2).html",
+    "swarm-search/all/cautious-octo-doodle/apps/morph-os-substrate.html",
+    "swarm-search/all/cautious-octo-doodle/public/apps/morph-os-substrate.html"
+   ],
+   "count": 7
+  },
+  {
+   "sha256": "e68a1dde8bb2aa29ab9993522248bd7e47a0c34f6f16aa66445ee6f21d2b169c",
+   "bytes": 12723,
+   "name": "morph-os-ui-integration.js",
+   "paths": [
+    "swarm-search/all/SynthOS/morph-os-ui-integration.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "c3483d012e13acb217fc37f102768663bb3027e180f135bb5f775803be837d48",
+   "bytes": 36833,
+   "name": "morph-os-v13.html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/public/apps/morph-os-v13.html",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-os-v13.html",
+    "swarm-search/all/cautious-octo-doodle/apps/morph-os-v13.html",
+    "swarm-search/all/cautious-octo-doodle/public/apps/morph-os-v13.html",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morph-os-v13.html"
+   ],
+   "count": 5
+  },
+  {
+   "sha256": "3d7e47150bddbcea558c0b5d32c6830339ef5ed4d1c134038daed7554cb79a18",
+   "bytes": 49103,
+   "name": "morph-os-v14-production.tsx",
+   "paths": [
+    "zips/living-os_2___abba1978/living-os/morph-os-v14-production.tsx",
+    "swarm-search/all/cuddly-computing-machine/morph-os-v14-production.tsx"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "6165260ac9e891a23e8d6314abb64975a3c5ef66abe4b38a91253ef06a16b722",
+   "bytes": 84855,
+   "name": "morph-os-v2.html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/public/apps/morph-os-v2.html",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morph-os-v2 (1).html",
+    "swarm-search/all/cautious-octo-doodle/apps/morph-os-v2.html",
+    "swarm-search/all/cautious-octo-doodle/public/apps/morph-os-v2.html",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morph-os-v2 (1).html"
+   ],
+   "count": 5
+  },
+  {
+   "sha256": "6718afe4a05557cb2e445f3d5287b5a3b45cc4817e5338dd10d40098a4d0c3db",
+   "bytes": 41645,
+   "name": "morph-os.html",
+   "paths": [
+    "swarm-search/all/SynthAi.company/public/morph-os.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6a643989603efafecf4a9976302b8591a792a860804ab7d739fe3ebb2510dd34",
+   "bytes": 1288,
+   "name": "MORPH-RESKIN-DONOR-BUILD.json",
+   "paths": [
+    "zips/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH__102791e8/Synthia-v0.5.7-CANONICAL-MORPH-INTEGRATION-PATCH/src/morph/reference/MORPH-RESKIN-DONOR-BUILD.json",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/src/morph/reference/MORPH-RESKIN-DONOR-BUILD.json",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/reference/MORPH-RESKIN-DONOR-BUILD.json",
+    "SynthAi/computer/hover/src/morph/reference/MORPH-RESKIN-DONOR-BUILD.json",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/src/morph/reference/MORPH-RESKIN-DONOR-BUILD.json",
+    "oct7src/computer/hover/src/morph/reference/MORPH-RESKIN-DONOR-BUILD.json"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "12aa2a3bd9534249f22391784b3a09ff31837b904fc33c5152905b25c4ab37d6",
+   "bytes": 14234,
+   "name": "morph-runtime-kernel.js",
+   "paths": [
+    "zips/morph_admin_bridge_os_maintenance__5d59d913/morph_admin_bridge/bridges/morph-runtime-kernel.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "569c921f5a208d9826180cdfa269d53802e22d17a5a1fa0f625e5e451b77d44e",
+   "bytes": 1856,
+   "name": "morph-schema.sql",
+   "paths": [
+    "swarm-search/all/foundryui/supabase/morph-schema.sql"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "aaa51fed738d436cbf122a8071443b48fb94209f55e9b508f44cdebdb099d806",
+   "bytes": 1189,
+   "name": "morph-schema.sql",
+   "paths": [
+    "swarm-search/all/Joe/supabase/morph-schema.sql"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "dcf582dfa796bd07909e72eec45c25776c09f661374215df0a2448db4fabcae2",
+   "bytes": 12758,
+   "name": "morph-substrate (2).zip",
+   "paths": [
+    "swarm-search/all/FRONTEND/Resonance_Beef_MorphOS/source/joe-resonance-unified-substrate-1/source/morph-substrate (2).zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "f5d5e2fee25fc1f5351072b64332f31309415e64237657b4a3ceca8bd08fb337",
+   "bytes": 12303,
+   "name": "morph-substrate (3)-1.zip",
+   "paths": [
+    "swarm-search/all/FRONTEND/Resonance_Beef_MorphOS/source/morph-substrate (3)-1.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "44f32c261733a57d78f23a6cde21538d02afc9b0b8e0c7e143f37b34c464b418",
+   "bytes": 479390,
+   "name": "morph-substrate-assembled.html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/public/apps/morph-substrate-assembled.html",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/MorphSubstrate_Assembled_PureJS.html",
+    "swarm-search/all/cautious-octo-doodle/apps/morph-substrate-assembled.html",
+    "swarm-search/all/cautious-octo-doodle/public/apps/morph-substrate-assembled.html",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/MorphSubstrate_Assembled_PureJS.html"
+   ],
+   "count": 5
+  },
+  {
+   "sha256": "19368f14939742dfd4551a7006dc1f8d2a99be4f0169773ebbb0f76c2b570eb1",
+   "bytes": 200240,
+   "name": "morph-system.html",
+   "paths": [
+    "swarm-search/all/SynthAIPro/morph-system.html",
+    "swarm-search/all/Testing/Browser/morph-system.html"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "8843195e1a2bcc0db235b11703c094dd5b911aab70a88b223709078b1b342097",
+   "bytes": 123012,
+   "name": "morph-system.html",
+   "paths": [
+    "oct7src/computer/hover/ui/deploy/interfaces/morph-system.html",
+    "oct7src/integrations/synthaipro/public/interfaces/morph-system.html"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "baa6fca50c204a0c4a8c6bb2815803314b59ecb1f6c50aa0c4cc1171058105dc",
+   "bytes": 205220,
+   "name": "morph-system.html",
+   "paths": [
+    "zips/This_is_it__e91527a0/This is it/SynthAIPro/morph-system.html",
+    "zips/This_is_it__e91527a0/This is it/SynthAIPro/public/interfaces/morph-system.html",
+    "swarm-search/all/SynthAIPRODeploy/SynthAIPro/morph-system.html",
+    "swarm-search/all/SynthAIPRODeploy/SynthAIPro/public/interfaces/morph-system.html"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "6f0d5ed2252c3138ea9c39dc79f0dd0424eb3c10cc5d8e20f67e675628569104",
+   "bytes": 13523,
+   "name": "morph-template.ts",
+   "paths": [
+    "zips/morph-ingestion-engine-1__62ad2df9/morph-template.ts",
+    "zips/morph-ingestion-engine-v3-1__874fe82f/morph-template.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "2f2258b96566be3dad77515c9f95ed869e85bcb6e9f1fadf01067ca02936a13c",
+   "bytes": 4432,
+   "name": "morph-visualizer.tsx",
+   "paths": [
+    "swarm-search/all/-SynthAi/Src/Visualizer/morph-visualizer.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "0d100ba0535b8a49c3b6d003eec8e161f36c384cb6b7d35ba7b006c64ad369b2",
+   "bytes": 171729,
+   "name": "morph.md",
+   "paths": [
+    "drive/morph.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "4ca52ed0380e084817dee5f3b88347a56f83a979ce4f6b3963b5d87a5274f415",
+   "bytes": 8095,
+   "name": "morphAnalyzer.ts",
+   "paths": [
+    "zips/Synthia-State-Space-Foundation__4c9611a0/Synthia-State-Space-Foundation/vendor/browser/docs/donors/analyzers/morphAnalyzer.ts",
+    "zips/Synthia-Universal-Browser-Execution-v1.3.7__2b5933ca/Synthia-Universal-Browser-Execution-v1.3.7/docs/donors/analyzers/morphAnalyzer.ts",
+    "zips/_drive_x/Paper-Unified-Test-Hub/Paper-Unified-Test/studio/docs/donors/analyzers/morphAnalyzer.ts",
+    "zips/_drive_x/Synthia-Kimi-Focal-StateSpace-Klein-Contact-PaperPrime-v1.3.6/docs/donors/analyzers/morphAnalyzer.ts"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "baab73ba90fbdb488a0387c6617e15836823eb38fe8386be0be8c4bf34187313",
+   "bytes": 8753,
+   "name": "morphAst.ts",
+   "paths": [
+    "zips/Synthia-State-Space-Foundation__4c9611a0/Synthia-State-Space-Foundation/vendor/browser/docs/donors/rewriters/morphAst.ts",
+    "zips/Synthia-Universal-Browser-Execution-v1.3.7__2b5933ca/Synthia-Universal-Browser-Execution-v1.3.7/docs/donors/rewriters/morphAst.ts",
+    "zips/_drive_x/Paper-Unified-Test-Hub/Paper-Unified-Test/studio/docs/donors/rewriters/morphAst.ts",
+    "zips/_drive_x/Synthia-Kimi-Focal-StateSpace-Klein-Contact-PaperPrime-v1.3.6/docs/donors/rewriters/morphAst.ts"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "32d0b0e422ca98d4b88cc480f56d9e6f011d5529149b51d720944384321be269",
+   "bytes": 36409,
+   "name": "MorphBeing.tsx",
+   "paths": [
+    "swarm-search/all/Company-files/MorphBeing.tsx",
+    "swarm-search/all/SynthAi-Proto-mobile/MorphBeing.tsx",
+    "swarm-search/all/SynthAi.company/components/MorphBeing.tsx"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "2e916519e3a62604b2fea399b8c3d000c277247dceab80ca9bc05faa50520ae0",
+   "bytes": 5415,
+   "name": "MorphBodyView.mjs",
+   "paths": [
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/visual/MorphBodyView.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/visual/MorphBodyView.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/visual/MorphBodyView.mjs"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "d6c3611a12b4be574381f0105d1cb47ec4e9452e30499e8a5f2c667628fb88e5",
+   "bytes": 11769,
+   "name": "MorphBodyView.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/visual/MorphBodyView.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "803ed7b23cb3ea4d8962a2a343ac44c9c8f52ab9d17c1cc15d62fae2b8280d76",
+   "bytes": 650,
+   "name": "MorphBus.js",
+   "paths": [
+    "swarm-search/all/Sentai-Sentai-okay-since-I-sent-her-yes-that-s-right/src/core/morph-engine/MorphBus.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "71017229fc1583839b5099524a411b8ec651bd82598d4c71de206dd5324e9c25",
+   "bytes": 10358,
+   "name": "morphbus.py",
+   "paths": [
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/runtime/morphbus.py",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/runtime/morphbus.py",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/runtime/morphbus.py",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/runtime/morphbus.py",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/runtime/morphbus.py",
+    "SynthAi/computer/hover/vendor/synthia-browser-continuation-v0.6.8/src/runtime/morphbus.py"
+   ],
+   "count": 8
+  },
+  {
+   "sha256": "c491b19a41b4af259c489a8489bb7c85d0d2be78b6a4ac534579e2bb181aca81",
+   "bytes": 1987,
+   "name": "MorphCharter.mjs",
+   "paths": [
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/morph/MorphCharter.mjs",
+    "SynthAi/computer/hover/residents/synthia17/src/cynthia/morph/MorphCharter.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/morph/MorphCharter.mjs",
+    "oct7src/computer/hover/residents/synthia17/src/cynthia/morph/MorphCharter.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "78e8dd975889e4fa223f2b2eb2d7b0891a9d85b2f74d70dc29470254335c300b",
+   "bytes": 836,
+   "name": "MorphCorrectionMemory.mjs",
+   "paths": [
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/morph/MorphCorrectionMemory.mjs",
+    "SynthAi/computer/hover/residents/synthia17/src/cynthia/morph/MorphCorrectionMemory.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/morph/MorphCorrectionMemory.mjs",
+    "oct7src/computer/hover/residents/synthia17/src/cynthia/morph/MorphCorrectionMemory.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "036c897e3c6f88bf200e0a955c75a3507feff5a4268d7eb167bb29ec10f7658d",
+   "bytes": 8733,
+   "name": "morphEngine.js",
+   "paths": [
+    "zips/Kimi-Morphing-Player-RUNTIME-WIRED__1e3c443a/youniverse/morph/morphEngine.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "276aec70c35f79ad677da346e3c3670d3e6567f902252d52bd898da5eb846cb6",
+   "bytes": 20412,
+   "name": "morphEngine.js",
+   "paths": [
+    "zips/This_is_it__e91527a0/This is it/SynthAIPro/morphEngine.js",
+    "swarm-search/all/SynthAIPRODeploy/SynthAIPro/morphEngine.js"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "d54c1b40caf4c77c3c43eb4cd531aa02d04106e69f04b6ce51ea4a2f143538f7",
+   "bytes": 19945,
+   "name": "morphEngine.js",
+   "paths": [
+    "zips/cynthia-render-engine-os-routes__18445bb8/lib/morphEngine.js",
+    "zips/cynthia-render-engine-research-canon-1__09299e1a/lib/morphEngine.js",
+    "zips/cynthia-render-engine-typed-address__8b9957ef/lib/morphEngine.js",
+    "zips/cynthia-render-engine__ed256c0b/lib/morphEngine.js",
+    "swarm-search/all/SynthAIPro/morphEngine.js",
+    "swarm-search/all/Testing/Browser/morphEngine.jsmorphEngine.js"
+   ],
+   "count": 6
+  },
+  {
+   "sha256": "47beb3f89aaf5a9753f4c7db60a00f2c01a8c9cd235f2044a61f76be2db55a4c",
+   "bytes": 9920,
+   "name": "morphEngine.mjs",
+   "paths": [
+    "zips/Kimi_Agent_Polish_App_Monetization__17b8bd49/polish/youniverse/morphEngine.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6dcc65e17ff53a51649f9731edf1d9c33fd0f2dbe8a3d5d584166751186d75ea",
+   "bytes": 2745,
+   "name": "MorphEngine.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/core/MorphEngine.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/core/MorphEngine.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/core/MorphEngine.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/core/MorphEngine.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/core/MorphEngine.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/core/MorphEngine.mjs"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "fbc5ae91dec5aa89e79f558859f21c125baeb1bc8cc19e968074213b4420170e",
+   "bytes": 4572,
+   "name": "morphEngine.ts",
+   "paths": [
+    "swarm-search/all/didactic-octo-disco/src/lib/morphEngine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "d8e7fed7ee5a54329faf112c2dab3586a49e02a1ff47f2dc7c5c0c051a083336",
+   "bytes": 8474,
+   "name": "morphEntity.ts",
+   "paths": [
+    "zips/_drive_x/Designing-a-Neural-Net-Human-DNA-Astrology/morphEntity.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "c63e24f2267850a52e50e0c4a653aca9119e0cf4981c0ca94f98da9961b6107f",
+   "bytes": 11342,
+   "name": "MorphEntityInterface.tsx",
+   "paths": [
+    "zips/_drive_x/Designing-a-Neural-Net-Human-DNA-Astrology/MorphEntityInterface.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "148feb0d2d7b20068042e7adc370b06ec4e9656fb37413ed81b0189bff420c19",
+   "bytes": 11430,
+   "name": "MorphEntityPage.tsx",
+   "paths": [
+    "zips/_drive_x/Designing-a-Neural-Net-Human-DNA-Astrology/MorphEntityPage.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "69a595a3720852144e45c4ca82eb3a3f91d87bc6e77a36c8616bce9f72e943ae",
+   "bytes": 3805,
+   "name": "MorphEntry.js",
+   "paths": [
+    "swarm-search/all/Synthai2/synthia-server/server/morph-entry/MorphEntry.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "9d8f7d6309d0b23df3a58de9e4a3ec5e507316b07d925dd4ab8aa92c4bc59588",
+   "bytes": 4615,
+   "name": "MorphEvolutionEngine.mjs",
+   "paths": [
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/morph/MorphEvolutionEngine.mjs",
+    "SynthAi/computer/hover/residents/synthia17/src/cynthia/morph/MorphEvolutionEngine.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/morph/MorphEvolutionEngine.mjs",
+    "oct7src/computer/hover/residents/synthia17/src/cynthia/morph/MorphEvolutionEngine.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "1b9aa140d94067305fb76c09f99b0a441071504bc361d504318d82640f04d714",
+   "bytes": 2336,
+   "name": "MorphExecutor.js",
+   "paths": [
+    "swarm-search/all/Synthai2/synthia-server/server/morph-entry/MorphExecutor.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "287753675859182312173e2036ee2186741afb89008bfa728d4ef23e1ea73898",
+   "bytes": 4310,
+   "name": "MorphGame.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/browser/MorphGame.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "afe903675bd50956b0cc72f50a9447c8750244e51027bf78203c505043fed619",
+   "bytes": 3387,
+   "name": "MorphGameEngine.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/browser/MorphGameEngine.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "f572b58b8d5ce21eef53d5d3f1595ad2b06aad92e3fbddcf42c09769ae8b8a5a",
+   "bytes": 12219,
+   "name": "morphgnn_offline_server.py",
+   "paths": [
+    "swarm-search/all/Simlish/morphgnn_offline_server.py"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "0975cd7feee9b21a54e2586eb48093ff546e6a20e6d668b7041cc244c707e8bd",
+   "bytes": 23552,
+   "name": "morphGNN.ts",
+   "paths": [
+    "swarm-search/all/Company-files/morphGNN.ts",
+    "swarm-search/all/SynthAi-Proto-mobile/morphGNN.ts",
+    "swarm-search/all/SynthAi.company/lib/morphGNN.ts"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "63c5810c8723c01048bca7b39fc86de41868479bc1972f70b1d33969946965f3",
+   "bytes": 7708,
+   "name": "morphic_schema.py",
+   "paths": [
+    "zips/MESSY_Modern-3__905829a9/morphic_schema.py",
+    "zips/MESSY_Modern-6__b81e53cd/morphic_schema.py",
+    "zips/MESSY_Modern-7__0a454b78/morphic_schema.py",
+    "zips/MESSY_Modern_Fixed-1__b90dc91a/MESSY_Modern_Fixed/morphic_schema.py",
+    "zips/_drive_x/MESSY_Modern_5D_Sentence_Mesh/morphic_schema.py"
+   ],
+   "count": 5
+  },
+  {
+   "sha256": "7ee05e113c2358ce28b9ad3a34caac496b1e94184a30e65622e0673b22f73065",
+   "bytes": 9574,
+   "name": "morphic_state_v31.json",
+   "paths": [
+    "zips/os_orchestrator_complete-5__de2bb001/morphic_state_v31.json",
+    "zips/os_orchestrator_complete-7__b3ff39f8/morphic_state_v31.json",
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morphic_state_v31.json"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "a69a7420f7b4682aebc5919ef5eced846b0999c2d883eca9751f092f19fd218b",
+   "bytes": 2308,
+   "name": "morphic_virtualapk.py",
+   "paths": [
+    "zips/MESSY_VirtualAPK_patch__5192222b/morphic_virtualapk.py"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "f9d6c68eaa73f0c7ea7712f85fe9e429876262457c100e97de3a14d66e773e4c",
+   "bytes": 2314,
+   "name": "morphic_virtualapk.py",
+   "paths": [
+    "zips/MESSY_Modern-3__905829a9/morphic_virtualapk.py",
+    "zips/MESSY_Modern-6__b81e53cd/morphic_virtualapk.py",
+    "zips/MESSY_Modern-7__0a454b78/morphic_virtualapk.py",
+    "zips/MESSY_Modern_Fixed-1__b90dc91a/MESSY_Modern_Fixed/morphic_virtualapk.py",
+    "zips/_drive_x/MESSY_Modern_5D_Sentence_Mesh/morphic_virtualapk.py"
+   ],
+   "count": 5
+  },
+  {
+   "sha256": "9d0873482814b1b56a5d0ecdaba5a05bac6ecf96a1ec68f0e502da8d747534af",
+   "bytes": 2483,
+   "name": "MorphicExpressionEngine.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/browser/MorphicExpressionEngine.mjs",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/browser/MorphicExpressionEngine.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/browser/MorphicExpressionEngine.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/browser/MorphicExpressionEngine.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "75ee26457024de9583676562731043b7ad6962a0d45d030994895600d79a949c",
+   "bytes": 2681,
+   "name": "MORPHING_ARCHITECTURE_NOTES.md",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/MORPHING_ARCHITECTURE_NOTES.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "50b20cbc188694114e69abb815c8d69db2ad9929d6746154b4295a95e73e9e5c",
+   "bytes": 78508,
+   "name": "morphing_net_complete.py",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morphing_net_complete.py"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "4975a3d572fe7048f374491f61dbb1cf54e92deaee810abc6f326bffef45f57e",
+   "bytes": 3881,
+   "name": "morphing_net_supabase.py",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morphing_net_supabase.py"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "b78b21f32b047f421afb484b4d435141a6497b09ffd733dd22eb7eeb64276f0d",
+   "bytes": 14882,
+   "name": "morphing-test-suite.ts",
+   "paths": [
+    "zips/Creating_a_Neural_Network_with_5-Mesh_13-Layer_Structure_2___1b8a2202/morphing-test-suite.ts",
+    "zips/Creating_a_Neural_Network_with_5-Mesh_13-Layer_Structure_4___168b62c4/morphing-test-suite.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "8c12fcc029543663f5bc623700a6e274f8799dd1e7c9f79e8042951456efba71",
+   "bytes": 9183,
+   "name": "morphingEngine.ts",
+   "paths": [
+    "zips/resonance-morph-os-kimi-channel-materialization-1__716cf95d/source/Kimi_Agent_pure_JS_analyzer/app/src/engine/morphingEngine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "af4b6c0651305184540941857afe2bf34fdc7b68d39069affeb3cc7c6b6372fa",
+   "bytes": 2698,
+   "name": "MorphingSurface.tsx",
+   "paths": [
+    "swarm-search/all/curly-bassoon/components/MorphingSurface.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "bb09ea13659b165b61235883f71e1f5a6a6cb027ae9742fe809aa59c4163872f",
+   "bytes": 29607,
+   "name": "MorphingVisualizer (1).jsx",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/MorphingVisualizer (1).jsx",
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/MorphingVisualizer.jsx",
+    "swarm-search/all/friendlyfart/MorphingVisualizer (1).jsx",
+    "swarm-search/all/friendlyfart/MorphingVisualizer.jsx"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "487c50876cfdb39c1e27be2c2278cf0502d603c7ef1108f4d704ea9bb16b5736",
+   "bytes": 28400,
+   "name": "MorphKeyboard_Source.txt",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/MorphKeyboard_Source.txt",
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/src/bridges/MorphKeyboard_Source.txt",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/MorphKeyboard_Source.txt",
+    "swarm-search/all/cautious-octo-doodle/src/bridges/MorphKeyboard_Source.txt"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "c2bc9a8c565ba98550b974ac71f7c148473669e575b0cac60624d7e9586052d2",
+   "bytes": 32499,
+   "name": "morphMemoryEngine.js",
+   "paths": [
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "cdaf88eaac403608cbb2d34606e75b1034be095e78c63cfdcbdff841d8aa9d01",
+   "bytes": 25904,
+   "name": "morphMemoryEngine.js",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.js"
+   ],
+   "count": 10
+  },
+  {
+   "sha256": "35d8796a4ea9a6fd3392827273670d810a5767cbc47c26f6bb31dcaec5a89f93",
+   "bytes": 28826,
+   "name": "morphMemoryEngine.ts",
+   "paths": [
+    "zips/This_is_it__e91527a0/This is it/SynthAIPro/morphMemoryEngine.ts",
+    "swarm-search/all/SynthAIPRODeploy/SynthAIPro/morphMemoryEngine.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "3af69a83b3c4deafe71b02419b038274373f129692bbe9474aa56a0578a40fe4",
+   "bytes": 28058,
+   "name": "morphMemoryEngine.ts",
+   "paths": [
+    "swarm-search/all/SynthAIPro/morphMemoryEngine.ts",
+    "swarm-search/all/SynthAi-Proto-mobile/morphMemoryEngine.ts",
+    "swarm-search/all/fluffy-octo-winner/Lib/morphMemoryEngine.ts"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "abbd6da68024636076974e8887871494f82f7ebb324e1113e5ff3e1c0380dc01",
+   "bytes": 28051,
+   "name": "morphMemoryEngine.ts",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.ts",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.ts",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.ts",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.ts",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.ts",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/vendor/morph-mir-system/lib/morphMemoryEngine.ts"
+   ],
+   "count": 12
+  },
+  {
+   "sha256": "21532d5e67bd664f22689d51d8c116cc66dd84cb1b8671070c05d2931abf546d",
+   "bytes": 23640,
+   "name": "MorphMemoryEngine.ts",
+   "paths": [
+    "swarm-search/all/Synthai2/client/src/engine/MorphMemoryEngine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3c948c6e203c52668e48e884862ded11629d23c2b16348af9cc73b4afcdbf1c8",
+   "bytes": 2540,
+   "name": "MorphMirAdapter.js",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/UPGRADES/adapters/MorphMirAdapter.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/UPGRADES/adapters/MorphMirAdapter.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/UPGRADES/adapters/MorphMirAdapter.js",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/UPGRADES/adapters/MorphMirAdapter.js",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/UPGRADES/adapters/MorphMirAdapter.js",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/adapters/MorphMirAdapter.js"
+   ],
+   "count": 10
+  },
+  {
+   "sha256": "6bf7f0f95941fe26005a367c0e0585811a16a9880a5279ec77184bef0b06e0ad",
+   "bytes": 6873,
+   "name": "MorphMirAdapter.js",
+   "paths": [
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/UPGRADES/adapters/MorphMirAdapter.js",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/UPGRADES/adapters/MorphMirAdapter.js"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "df5dc634e7e0ca9ae7ee8f1463a566ddc7e665acf5bfd47b3e5e74a83a3d397d",
+   "bytes": 3393,
+   "name": "MorphMirAdapter.ts",
+   "paths": [
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/UPGRADES/adapters/MorphMirAdapter.ts",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/UPGRADES/adapters/MorphMirAdapter.ts",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/UPGRADES/adapters/MorphMirAdapter.ts",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/adapters/MorphMirAdapter.ts",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/adapters/MorphMirAdapter.ts",
+    "SynthAi/computer/hover/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/adapters/MorphMirAdapter.ts"
+   ],
+   "count": 8
+  },
+  {
+   "sha256": "30695f3198fa7fe6713785b74ead97d61f7258071f8b29988d4137e66fedccd0",
+   "bytes": 8941,
+   "name": "morphNeuralNet.js",
+   "paths": [
+    "oct7src/integrations/synthaipro/src/morphNeuralNet.js",
+    "swarm-search/all/SynthAIPro/src/morphNeuralNet.js"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "f7216f627d6b52f14061ad8325d572b4c5491bf315e9dd254bbaadcd981c1da2",
+   "bytes": 9162,
+   "name": "morphNeuralNet.js",
+   "paths": [
+    "zips/This_is_it__e91527a0/This is it/SynthAIPro/src/morphNeuralNet.js",
+    "swarm-search/all/SynthAIPRODeploy/SynthAIPro/src/morphNeuralNet.js"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "cb1b4299ebbc6765ff7b67dffe5faad5659a97c1473a696ace0b83b33dec279f",
+   "bytes": 102549,
+   "name": "morphnn-resonance-os (1).html",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/morphnn-resonance-os (1).html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6daaaef523057b96556fae03e464cfa14af847596a747a9a73301ccf42a48fe0",
+   "bytes": 9310,
+   "name": "MorphoAnalyzer.js",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/vendor/resonance-engine/generators/MorphoAnalyzer.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/vendor/resonance-engine/generators/MorphoAnalyzer.js",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-browser-hand-v0.6.6-1/src/UPGRADES/vendor/src-donor/src/generators/MorphoAnalyzer.js",
+    "zips/Synthia-browser-artifact-handoff-v0.6.9_7___cbf1e8b2/src/UPGRADES/vendor/src-donor/src/generators/MorphoAnalyzer.js",
+    "zips/_drive_x/Synthia-merged-semantic-v0.6.2/merged/src/UPGRADES/vendor/src-donor/src/generators/MorphoAnalyzer.js",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/vendor/src-donor/src/generators/MorphoAnalyzer.js"
+   ],
+   "count": 12
+  },
+  {
+   "sha256": "302ae6d62034208bb9d827c49c3e37fa73ca2c02ea2f052fb6fef3f88673c7e6",
+   "bytes": 3482,
+   "name": "morphogenesis-smoke.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/tests/morphogenesis-smoke.mjs",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/tests/morphogenesis-smoke.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/tests/morphogenesis-smoke.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/tests/morphogenesis-smoke.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "de620f3ec31e9f7575b33370ea888053f2036897f18b0585b183ee2971b55f0a",
+   "bytes": 15431,
+   "name": "MorphOrchestrator.tsx",
+   "paths": [
+    "swarm-search/all/Company-files/MorphOrchestrator.tsx",
+    "swarm-search/all/SynthAi-Proto-mobile/MorphOrchestrator.tsx"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "f8399a15f2f1b16fdc6ee8a34bf4790e43eb9437260b79bc230487b59faa6276",
+   "bytes": 15328,
+   "name": "MorphOrchestrator.tsx",
+   "paths": [
+    "swarm-search/all/SynthAi.company/components/MorphOrchestrator.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "42be77d4c6b357eb5085256f9418d364811765a4ac4e3622a9e5883b154a4aa5",
+   "bytes": 9327,
+   "name": "MorphOS_Backend_Secure.tsx",
+   "paths": [
+    "swarm-search/all/SynthAi.company/src/MorphOS_Backend_Secure.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "8f1674c9b1e60045a05d1605951e98e56bb63a1e8e7aa6e2318af34655de8a36",
+   "bytes": 47550,
+   "name": "morphos_backend.py",
+   "paths": [
+    "zips/synthia-v4-full__17041fa0/synthia-v4/engines/morphos_backend.py"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "07a98e738ecd54b1874f6205a89962578d3bfbd382738c3e03e00ef7f4ed7ad3",
+   "bytes": 42549,
+   "name": "morphos-kernel.js",
+   "paths": [
+    "zips/synthia-v4-full__17041fa0/synthia-v4/static/js/morphos-kernel.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "ca96f666f8434e11588ab9c2da90726dc67efe7fe767ecd1dda72657275310ec",
+   "bytes": 51777,
+   "name": "morphos-v110-mrnn-kernel.html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/morphos-v110-mrnn-kernel.html",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/morphos-v110-mrnn-kernel.html"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "4ab507b4a6de5dcc749326ae3297a58b0f2c856ff8a6f4e0c4b8b0e439e52f2b",
+   "bytes": 15745,
+   "name": "morphos-v24-production.zip",
+   "paths": [
+    "swarm-search/all/Kim-possible-/morphos-v24-production.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "556e6389119ffdd19f07080a55fb7e50e6e0e4b391bebb5e819616ae71ca8dd6",
+   "bytes": 22399,
+   "name": "morphos-v28-core-engine-patch.js",
+   "paths": [
+    "zips/synthia-v4-full__17041fa0/synthia-v4/static/js/morphos-v28-core-engine-patch.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3c939306ce6e38cdec1c334ddb827aae0fda3363140ffa879771e489ded2bff8",
+   "bytes": 11069,
+   "name": "MorphOS.tsx",
+   "paths": [
+    "swarm-search/all/SynthAi.company/src/MorphOS.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "94c63cc8c71e3b63589d19cc02efa6b290cd28c3d98726ebbcafcf34a29e49a0",
+   "bytes": 434,
+   "name": "MorphOverlay.tsx",
+   "paths": [
+    "zips/Kimi_Agent_Phone_OS_Build_Request__ff742b0b/app/src/components/MorphOverlay.tsx",
+    "zips/axis-phoneos-synthos-smart-sandbox-merge-v1-source__56cd52d4/merged_app/src/components/MorphOverlay.tsx",
+    "zips/final-resonance-phoneos-synthos-foundation__043273fd/final-resonance-phoneos-synthos/app/src/components/MorphOverlay.tsx",
+    "zips/resonance-final-merged-netlify-plasmic-pass__80f49d67/resonance-final-merged/app/src/components/MorphOverlay.tsx",
+    "zips/resonance-final-merged-netlify__970c946c/resonance-final-merged/app/src/components/MorphOverlay.tsx",
+    "zips/resonance-os-appcenter-netlify-friendly-source__50fc38c9/merged_app/src/components/MorphOverlay.tsx"
+   ],
+   "count": 15
+  },
+  {
+   "sha256": "976efcd5e539ddf548aa3d8d453a886f3f675943bd3653ba97f25fe5d8bf195e",
+   "bytes": 3953,
+   "name": "MorphPhenotypeResolver.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/visual/MorphPhenotypeResolver.mjs",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/visual/MorphPhenotypeResolver.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/visual/MorphPhenotypeResolver.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/visual/MorphPhenotypeResolver.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "e7ff6c43cca4019082473f4058b92961d05d034f76a3b56b0b599504d6b7e406",
+   "bytes": 1651,
+   "name": "MorphRegistry.js",
+   "paths": [
+    "swarm-search/all/Synthai2/synthia-server/server/morph-entry/MorphRegistry.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "4c93432c285935fbb7c4dd3804cb624976261ba882cee0205bdba3d44196ab7d",
+   "bytes": 1363,
+   "name": "MorphRepair.js",
+   "paths": [
+    "swarm-search/all/Synthai2/synthia-server/server/morph-entry/MorphRepair.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "e8acb267fb8edf725227bf8efa7c755233d065020cf195b1e4bedbccd4d793bf",
+   "bytes": 3278,
+   "name": "morphRouter.ts",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/morphRouter.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "f5c0bf7de295abcd57dc8d8b5b082dd29e7eba7435d77d80a1ed61532bdaa285",
+   "bytes": 7763,
+   "name": "MorphSubstrate.tsx",
+   "paths": [
+    "swarm-search/all/Joe/src/MorphSubstrate.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "2013ed216c71fd2a200eb6fc0ee4fd7917cecb382d629c55662f0b3aef64bbeb",
+   "bytes": 1709,
+   "name": "MorphSvgRenderer.mjs",
+   "paths": [
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/geometry/MorphSvgRenderer.mjs",
+    "SynthAi/computer/hover/residents/synthia17/src/cynthia/geometry/MorphSvgRenderer.mjs",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/residents/synthia17/src/cynthia/geometry/MorphSvgRenderer.mjs",
+    "oct7src/computer/hover/residents/synthia17/src/cynthia/geometry/MorphSvgRenderer.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "063a362b09379446678d82791c7bd8d200ff521aceecbf433bf1c3855068ad43",
+   "bytes": 13095,
+   "name": "morphUpgrade.e2e.test.mjs",
+   "paths": [
+    "zips/Kimi-Morphing-Player-RUNTIME-WIRED__1e3c443a/youniverse/test/morphUpgrade.e2e.test.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3b9b15598d2462b696c4baef370292d219a175c0e36b8b66c24c4a5d1dd27f54",
+   "bytes": 2178,
+   "name": "MorphUtils.js",
+   "paths": [
+    "swarm-search/all/Synthai2/synthia-server/server/morph-entry/MorphUtils.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "e5c1efbc14edccbde2d2c76bd3a885d4bd0544d81ddf0f9ed5d91732329d55c7",
+   "bytes": 4451,
+   "name": "MorphWrapperFactory.js",
+   "paths": [
+    "swarm-search/all/Synthai2/synthia-server/server/morph-entry/MorphWrapperFactory.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "4151b297de82f0145009030ee46e7b7c13e11e143c7d7184f29e6856f7f3a6d1",
+   "bytes": 19449,
+   "name": "mrnn-morph-bridge.ts",
+   "paths": [
+    "swarm-search/all/-SynthAi/Src/Engine/mrnn-morph-bridge.ts",
+    "swarm-search/all/Stellarproximology.org/mrnn-morph-bridge.ts",
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/mrnn-morph-bridge.ts",
+    "swarm-search/all/friendlyfart/mrnn-morph-bridge.ts"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "5776ed083bcfc4447db94fe63ed605d41da28b2aadee1cea79adf4b9643ca501",
+   "bytes": 1636,
+   "name": "NETLIFY_MORPH_REPORT.md",
+   "paths": [
+    "zips/resonance-os-appcenter-netlify-friendly-source__50fc38c9/merged_app/NETLIFY_MORPH_REPORT.md",
+    "zips/resonance_batch_extracted_pieces__795a7ee6/apps/resonance-appcenter-recovered/NETLIFY_MORPH_REPORT.md"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "f1cd5a426e5e5b40aa3cde641f9f0ae24addea4341b01e46fa7b8f999c4bf37f",
+   "bytes": 36267,
+   "name": "NEURAL_MATRIX_MORPHING_CODE.html",
+   "paths": [
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_2___16ab3b53/NEURAL_MATRIX_MORPHING_CODE.html",
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_3___6dc6c9b1/NEURAL_MATRIX_MORPHING_CODE.html",
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_5___43f44d79/NEURAL_MATRIX_MORPHING_CODE.html"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "15981856fd895a192b96183576f234bf0b45986bba7171f47db51208da0d1cb6",
+   "bytes": 33563,
+   "name": "NEURAL_MATRIX_MORPHING_REAL.html",
+   "paths": [
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_2___16ab3b53/NEURAL_MATRIX_MORPHING_REAL.html",
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_3___6dc6c9b1/NEURAL_MATRIX_MORPHING_REAL.html",
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_5___43f44d79/NEURAL_MATRIX_MORPHING_REAL.html"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "e206f477e3df18ab762aa96e5a38a7c30c326e48bfb38b733daf048ba342dc90",
+   "bytes": 26907,
+   "name": "neural_matrix_morphing.html",
+   "paths": [
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_2___16ab3b53/neural_matrix_morphing.html",
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_3___6dc6c9b1/neural_matrix_morphing.html",
+    "zips/Building_a_Self-Integrating_AI_Neural_Matrix_in_HTML_5___43f44d79/neural_matrix_morphing.html"
+   ],
+   "count": 3
+  },
+  {
+   "sha256": "5e4301dadae47d529dd0b0e3219fac3a9f2e4e9fb2316418e1429a6d076cb568",
+   "bytes": 5420,
+   "name": "neuralMorphingRouter.ts",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/neuralMorphingRouter.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "21826bfa3dd3070784d074382f31676da29e907035811a7930605bb558d1809e",
+   "bytes": 1366667,
+   "name": "NeuralNetMorphingLimits.pdf",
+   "paths": [
+    "swarm-search/all/SynthAi-Proto-mobile/NeuralNetMorphingLimits.pdf"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3a8ba9ec67e03a09afd045e03c2425fde9f3857797a4ddec7a5e43f04f07a6fc",
+   "bytes": 23640,
+   "name": "novel_MorphMemoryEngine.ts",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/novel_MorphMemoryEngine.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6db0fcdd3ab50628e722d19a233767e951b76fab5a8c13c0cebc73e91b9d9d75",
+   "bytes": 16771,
+   "name": "novel_useMorphStore.ts",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/novel_useMorphStore.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "0d83ae547e167ba4593c6b45a488a26a799b6d05ac58775ac090d6586ccd3955",
+   "bytes": 1688,
+   "name": "orchestratorMorphStatePatch.ts",
+   "paths": [
+    "swarm-search/all/resonance-neural-net/client/src/lib/orchestratorMorphStatePatch.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "eb584c70b7984c22d925402d7f2ff62639f7c605b84368ed866c1d5a00488947",
+   "bytes": 38395,
+   "name": "os_orchestrator_v31_morphing.py",
+   "paths": [
+    "zips/os_orchestrator_complete-5__de2bb001/os_orchestrator_v31_morphing.py",
+    "zips/os_orchestrator_complete-7__b3ff39f8/os_orchestrator_v31_morphing.py"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "28e4581b5b7bcc244b1ce30a4a507602d7c2462e4d1c7265487b565f17584796",
+   "bytes": 3376,
+   "name": "ParticleEffects.tsx",
+   "paths": [
+    "oct7src/computer/donors/consciousness-realm/client/src/components/game/ParticleEffects.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "db1a801b6831b51a465805afd2b02149ca46278ae7cdbc52b83da3bbc09f4fa5",
+   "bytes": 3168,
+   "name": "Pasted-Perfect-I-see-how-shared-codon-system-ts-is-structured-it-already-has-a-GENETIC-CODE-object-mapp-1759110498289_1759110498290.txt",
+   "paths": [
+    "zips/cynthia-app_1761745435802__4c8df03d/cynthia-app/Pasted-Perfect-I-see-how-shared-codon-system-ts-is-structured-it-already-has-a-GENETIC-CODE-object-mapp-1759110498289_1759110498290.txt"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "a5027c7d7f9421e0c25cbcb7bfd68eee8be16bd5726c26c8a9a62bdfff24af78",
+   "bytes": 1725,
+   "name": "player_morph_runtime_results.txt",
+   "paths": [
+    "zips/Kimi-Morphing-Player-RUNTIME-WIRED__1e3c443a/verification/player_morph_runtime_results.txt"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6b6f41948f2fc0e2f8f4dd59b3158c3b04998351e5080b7ebc3714a0f96013e9",
+   "bytes": 6423,
+   "name": "playerMorphRuntime.e2e.test.mjs",
+   "paths": [
+    "zips/Kimi-Morphing-Player-RUNTIME-WIRED__1e3c443a/youniverse/test/playerMorphRuntime.e2e.test.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "cf64ccc33880a680f84d9aeb4d85d0d03d6c06695364e24aa937cf1591becfb0",
+   "bytes": 6336,
+   "name": "ProceduralMorph.tsx",
+   "paths": [
+    "oct7src/computer/donors/consciousness-realm/client/src/phone/ProceduralMorph.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "e6ba73e9a80b8d5e1ffb2eabaf1148800b28c1a581ca691ce10064f573c47c7f",
+   "bytes": 1096,
+   "name": "R11_EMBODIED_MORPH.md",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/R11_EMBODIED_MORPH.md",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/R11_EMBODIED_MORPH.md"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "ee7a967dba5eee94b2be19aabac4394b63cb4a19d039379afdd632b9c3b8179a",
+   "bytes": 8505,
+   "name": "R21_22_MORPH_GAME_RENDERER_HANDS.md",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/R21_22_MORPH_GAME_RENDERER_HANDS.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "a01be9d5bf4786bd35284d49052a600c8b6201d2f394a96b3df0759a0bc18df9",
+   "bytes": 2149,
+   "name": "R9_REGENERATIVE_MORPHOGENESIS.md",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/R9_REGENERATIVE_MORPHOGENESIS.md",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/R9_REGENERATIVE_MORPHOGENESIS.md"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "6f5a5dd352df951539c629b5c80418c201df444c136bdb2c62643fcd2927c409",
+   "bytes": 3749,
+   "name": "resident-semantic-morph.js",
+   "paths": [
+    "zips/_drive_x/Synthia-Kimi-Focal-StateSpace-v1.4.3/synthia_fix/src/integration/resident-semantic-morph.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3508cd42910e038d0008648547b5230e60ad7e30119faa6d2acf7da6528763cd",
+   "bytes": 319982,
+   "name": "resonance_morph.html",
+   "paths": [
+    "swarm-search/all/friendlyfart/resonance_morph.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "986f1973022092e8c3e43a0b4dc97e5bf8535e4da22051485d8da33d37d7489c",
+   "bytes": 449458,
+   "name": "resonance-beef-morphos.html",
+   "paths": [
+    "swarm-search/all/FRONTEND/Resonance_Beef_MorphOS/resonance-beef-morphos.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "7ceda6db37171d12e522a30e9d8f92462dea560c80cccc2c2e46ea92a3766191",
+   "bytes": 61139,
+   "name": "resonance-morph-os-executable-materialization.zip",
+   "paths": [
+    "swarm-search/all/Kim-possible-/resonance-morph-os-executable-materialization.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "716cf95d97d7ac8a226cf109cca28735e1da74fdec0fbb24ebd9e3d6d13472e4",
+   "bytes": 223242,
+   "name": "resonance-morph-os-kimi-channel-materialization-1.zip",
+   "paths": [
+    "swarm-search/all/Kim-possible-/resonance-morph-os-kimi-channel-materialization-1.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "684dcb0c04c91c374ff80c5e3f731bff09508cbc685528a42d4cfc78e11a3547",
+   "bytes": 229150,
+   "name": "resonance-os-morph (1).html",
+   "paths": [
+    "zips/joe-resonance-unified-substrate-1__bd2cac07/source/resonance-os-morph (1).html",
+    "zips/joe-resonance-unified-substrate-1__bd2cac07/source/resonance-os-morph.html",
+    "swarm-search/all/FRONTEND/Resonance_Beef_MorphOS/source/joe-resonance-unified-substrate-1/source/resonance-os-morph (1).html",
+    "swarm-search/all/FRONTEND/Resonance_Beef_MorphOS/source/joe-resonance-unified-substrate-1/source/resonance-os-morph.html"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "cc96f6123c1999a0d7e2a0b5705369ed6b00b9336099d594ac45eea7953e0238",
+   "bytes": 308012,
+   "name": "resonance-os-MORPH-EXECUTABLE.html",
+   "paths": [
+    "zips/resonance-morph-os-executable-materialization__7ceda6db/resonance-os-MORPH-EXECUTABLE.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3c592988dd6214f44775f1a37dff8d8fcb0485719947ad31fc0ea99c06e768f1",
+   "bytes": 293517,
+   "name": "resonance-os-MORPH-FIXED_v28_VFS_MOUNTED_ORGAN (1).html",
+   "paths": [
+    "swarm-search/all/SynthOS/resonance-os-MORPH-FIXED_v28_VFS_MOUNTED_ORGAN (1).html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "268a73f68b0bc3a29dc70868b8ca070afc6fbf420537780ac12c7877b95cda9d",
+   "bytes": 937492,
+   "name": "resonance-os-MORPH-KIMI-CHANNELS.html",
+   "paths": [
+    "zips/resonance-morph-os-kimi-channel-materialization-1__716cf95d/resonance-os-MORPH-KIMI-CHANNELS.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "02977c66df0ddb7e8257be41f1ea4b6434aaf2d1b6b6ed79ae0a785df748ebed",
+   "bytes": 1053,
+   "name": "semantic-dna-swarm.test.mjs",
+   "paths": [
+    "drive-pieces/content-4/synthia-semantic-state-integration/semantic-dna-swarm.test.mjs",
+    "zips/content-4__90d1f5f4/synthia-semantic-state-integration/semantic-dna-swarm.test.mjs"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "4035c040f11bcb5534449fceb7f2d156526af397e33d321519b54c55feaef505",
+   "bytes": 6921,
+   "name": "SOURCE-MORPH-AUDIT.md",
+   "paths": [
+    "oct7src/computer/SOURCE-MORPH-AUDIT.md"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "accfe1651bf4912537d057d744071f4a9b0c41f1c26f20dd4dd52139bc1f1a35",
+   "bytes": 1339,
+   "name": "SpriteMorpher.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/adapters/SpriteMorpher.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/adapters/SpriteMorpher.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/adapters/SpriteMorpher.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/adapters/SpriteMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/adapters/SpriteMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/adapters/SpriteMorpher.mjs"
+   ],
+   "count": 14
+  },
+  {
+   "sha256": "339af37972cc3ceaeb97ea3937110aba567f0b1dde88b47348ff040b8f253da5",
+   "bytes": 1098,
+   "name": "SWARM-ARCHITECTURE.json",
+   "paths": [
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/SWARM-ARCHITECTURE.json",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/SWARM-ARCHITECTURE.json"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "6359f14f55216e4b2979ac0f2ca1f7a71a6b9626502ddbad258cfb1204e01781",
+   "bytes": 2650,
+   "name": "swarm-body.node.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/tests/swarm-body.node.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/tests/swarm-body.node.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/tests/swarm-body.node.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/tests/swarm-body.node.mjs",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/tests/swarm-body.node.mjs",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/tests/swarm-body.node.mjs"
+   ],
+   "count": 11
+  },
+  {
+   "sha256": "7ce581b55401e93f97540192b63decae792ffc544d052695044bf0cf31723ca2",
+   "bytes": 14015,
+   "name": "swarm-reality-engine.js",
+   "paths": [
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/public/swarm-reality-engine.js"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "9755eb4f1d80204c96badc450d1967c4fcaf711a3f34d4cebf0e53ff146b2a04",
+   "bytes": 1159,
+   "name": "SWARM-VERIFICATION.json",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/provenance/SWARM-VERIFICATION.json",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/provenance/SWARM-VERIFICATION.json",
+    "zips/s58__972e1df1/Cynthia-Sovereign-v0.5.8-Android-Hands/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/provenance/SWARM-VERIFICATION.json",
+    "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/provenance/SWARM-VERIFICATION.json",
+    "SynthAi/computer/hover/vendor/pure-synthia-v0.4.0/provenance/SWARM-VERIFICATION.json",
+    "oct7src/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/pure-synthia-v0.4.0/provenance/SWARM-VERIFICATION.json"
+   ],
+   "count": 9
+  },
+  {
+   "sha256": "f7f73adaaaa801f8e7d7ffa7543917e6f62ef715b761d8886ca3a8b52060ba95",
+   "bytes": 1838,
+   "name": "SWARM-VERIFICATION.json",
+   "paths": [
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/provenance/SWARM-VERIFICATION.json",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/provenance/SWARM-VERIFICATION.json"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "80b8808f866059b17c66e36b6e0352c5295cd698aa3bca909b87f85b707d6104",
+   "bytes": 8775,
+   "name": "swarmBody.mjs",
+   "paths": [
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/swarm/swarmBody.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/swarm/swarmBody.mjs"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "219659381b8e5110919465beb55c4b3daafb497ee82e7ed5763cab015e19eef3",
+   "bytes": 283162,
+   "name": "swarmdoc.txt",
+   "paths": [
+    "drive/swarmdoc.txt"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "79d3460a6867edba48707637cdda7402272a0d7c9d2d883186f02d8478211b22",
+   "bytes": 1123,
+   "name": "SwarmRealityScreen.tsx",
+   "paths": [
+    "zips/Resonance-Network-Swarm-Reality-INTEGRATED-TRIAL-2026-10-02__4e7c9fbf/resonance_integrated_trial/frontend/src/screens/SwarmRealityScreen.tsx",
+    "chassis-work/candidates/swarm-reality-trial/resonance_integrated_trial/frontend/src/screens/SwarmRealityScreen.tsx"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "eab66023aeb6f3e7fc95c7e739e50ad358eeed3c6058a07fb1aa214275c672a7",
+   "bytes": 51336,
+   "name": "Synthia_Morph_Substrate_FULL_PureJS.html",
+   "paths": [
+    "zips/SYNTHIA_CANONICAL_BUILD_2026-05-24__1d112dda/SYNTHIA_CANONICAL_BUILD_2026-05-24/sources/originals/Synthia_Morph_Substrate_FULL_PureJS.html",
+    "swarm-search/all/cautious-octo-doodle/sources/originals/Synthia_Morph_Substrate_FULL_PureJS.html"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "03a0ea902fceaa053631ff57030cde902d489b03b4b6147c7fdd96f5b87dbc1d",
+   "bytes": 13881,
+   "name": "synthia-morph-studio.html",
+   "paths": [
+    "swarm-search/all/Royal-dungeon-/vendor/morph-studio/synthia-morph-studio.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "00b25722c3af2447b4054a64d512b6159bb063047c0bcbe7ce7ec0d4514a9792",
+   "bytes": 643,
+   "name": "TextMorpher.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/adapters/TextMorpher.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/adapters/TextMorpher.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/adapters/TextMorpher.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/adapters/TextMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/adapters/TextMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/adapters/TextMorpher.mjs"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "a48204821a64755a0fc8ffbccca52285a696f8b2e0466b53855dae8b5da07e76",
+   "bytes": 2813,
+   "name": "three-stage-morph-escalation.test.mjs",
+   "paths": [
+    "zips/_drive_x/Synthia-Kimi-Focal-StateSpace-v1.4.3/synthia_fix/test/three-stage-morph-escalation.test.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "5663527d781ab2ea8edbf99c61aedfdde1eaba61edfe47783bcb9dac1efa285b",
+   "bytes": 29915,
+   "name": "tool-16-morph-mir.js",
+   "paths": [
+    "zips/05-Synthia-Universal-Execution-Spine-v0.4.0__4b407881/Synthia-Universal-Execution-Spine-v0.4.0/src/pure-synthia/automata/tools/tool-16-morph-mir.js",
+    "zips/06-Kimi_Agent_Automata-State-Space-Merge-1-__fa3344da/pure-synthia-automata/src/automata/tools/tool-16-morph-mir.js",
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/semantic-mesh/automata/tools/tool-16-morph-mir.js",
+    "zips/Synthia-State-Space-Foundation__4c9611a0/Synthia-State-Space-Foundation/vendor/browser/src/automata/tools/tool-16-morph-mir.js",
+    "zips/Synthia-State-Space-Foundation__4c9611a0/Synthia-State-Space-Foundation/vendor/spine/src/pure-synthia/automata/tools/tool-16-morph-mir.js",
+    "zips/Synthia-Universal-Browser-Execution-v1.3.7__2b5933ca/Synthia-Universal-Browser-Execution-v1.3.7/src/automata/tools/tool-16-morph-mir.js"
+   ],
+   "count": 53
+  },
+  {
+   "sha256": "94eaf2c310e75122daa5f803b80e448d7ede10e4d48fd1da08b5c5fed92fe66f",
+   "bytes": 25920,
+   "name": "trident_monitor_morph_lens_fixed-3.html",
+   "paths": [
+    "swarm-search/all/fluffy-octo-winner/trident_monitor_morph_lens_fixed-3.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "9f780559d2b71458be63bf2ce7e15d13688df04fce84639536b6e6779b04bea0",
+   "bytes": 3992035,
+   "name": "trinity_field_theory_math_extensions-1.zip",
+   "paths": [
+    "swarm-search/all/Kim-possible-/trinity_field_theory_math_extensions-1.zip"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "53466696e3f3a95b91b7d33774b2c9e0770d03592e1b099b55a3b66cca1e13ba",
+   "bytes": 33841,
+   "name": "trinity_field_theory_math_supplement.txt",
+   "paths": [
+    "zips/trinity_field_theory_math_extensions-1__9f780559/trinity_field_theory_math_supplement.txt"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "7a2c353bc4472bd087d52e1360bec61864f562d1c37fa2ab14f834f2607730a1",
+   "bytes": 2430,
+   "name": "trinity_resonance_mvp - Copy.zip",
+   "paths": [
+    "swarm-search/all/zipville/trinity_resonance_mvp - Copy.zip",
+    "swarm-search/all/zipville/trinity_resonance_mvp.zip"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "1afc37d3c8ac5f058e55ff7e33b16e85845ec78385a04d7b75e04ff1e7cf48c7",
+   "bytes": 19417,
+   "name": "TrinityAssessment.tsx",
+   "paths": [
+    "zips/ResonanceEngine__910d9c06/ResonanceEngine/client/src/components/TrinityAssessment.tsx",
+    "zips/_drive_x/SYNTHIA_COMPLETE_WITH_MCPS_WORLD-1/resonance_engine_integrated/client/src/components/TrinityAssessment.tsx"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "933bb003e6605711901997f5b98c04c3529d936859eda41941bc6dc5cebb8b87",
+   "bytes": 5980,
+   "name": "TrinityAssessment.tsx",
+   "paths": [
+    "zips/Resonance-network_3___a2e589a4/Resonance-network/client/src/components/TrinityAssessment.tsx",
+    "chassis-work/candidates/resonance-network-3/Resonance-network/client/src/components/TrinityAssessment.tsx"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "a386ad499bc487498a87753c8a047846320b7caa411ca9a1920217748ce6e87c",
+   "bytes": 11581,
+   "name": "true-morph-engine.ts",
+   "paths": [
+    "zips/Creating_a_Neural_Network_with_5-Mesh_13-Layer_Structure_4___168b62c4/true-morph-engine.ts",
+    "zips/synthia-ready-to-deploy__3c611c16/deploy_ready_frontend/client/src/lib/true-morph-engine.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "871f3d867a8480d6ca129f0829f3e5f17af85bee5251dd8360964457758962d3",
+   "bytes": 1806,
+   "name": "UIMorphContext.tsx",
+   "paths": [
+    "zips/Building_an_Autonomous_AI_Site_Orchestrator__4d31d4f3/UIMorphContext.tsx",
+    "swarm-search/all/SynthAi-Proto-mobile/UIMorphContext.tsx"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "d9043e3346f3b695a82b44f6ee3aa6cf1bcb1b7ebd471f526ae115983070c862",
+   "bytes": 4039,
+   "name": "uiMorphRouter.ts",
+   "paths": [
+    "zips/Building_an_Autonomous_AI_Site_Orchestrator__4d31d4f3/uiMorphRouter.ts",
+    "swarm-search/all/SynthAi-Proto-mobile/uiMorphRouter.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "7cefd75ff84ae2a780264f3616e249434e660347144910a0e86577b402bde748",
+   "bytes": 5442,
+   "name": "UploadMorphCoordinator.mjs",
+   "paths": [
+    "zips/67a727d946973dd004129f1a0e398b13ea9b6fd570825c41c14c866b81c7d1fc__67a727d9/organism/organism/UploadMorphCoordinator.mjs",
+    "zips/SynthWorld-321-source__0a0d0210/synthworld_build/archive/final-source-batch/Synthia-Autopoietic-Assembly-v0.1.0-LITE-4/Synthia-Autopoietic-Assembly-v0.1.0-LITE/organism/UploadMorphCoordinator.mjs",
+    "swarm-search/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/organism/UploadMorphCoordinator.mjs",
+    "swarm-search/all/SynthAi/computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/organism/UploadMorphCoordinator.mjs"
+   ],
+   "count": 4
+  },
+  {
+   "sha256": "759243ec4ad8f525eac095f6df3c75c070d7c2606889bae1695ee33801351eda",
+   "bytes": 25123,
+   "name": "useMorphAI.ts",
+   "paths": [
+    "zips/How_to_Upgrade_and_Enhance_Kimi_Agent_AI_Builder_1___8c78fe10/How to Upgrade and Enhance Kimi Agent AI Builder (1)/Kimi_Agent_AI-PoweredReactAppBuilder/app/src/hooks/useMorphAI.ts",
+    "zips/How_to_Upgrade_and_Enhance_Kimi_Agent_AI_Builder_1___8c78fe10/How to Upgrade and Enhance Kimi Agent AI Builder (1)/useMorphAI.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "3f8b489f736badab7683a810e5559518c5ac78aa3a84b74045178c59cf93aca9",
+   "bytes": 19017,
+   "name": "useMorphStore_v2.ts",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/useMorphStore_v2.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "0afbb9bc14013c8ab254f4beba9d800f16d1e6f499810fe1b998fc8a65a95550",
+   "bytes": 21478,
+   "name": "useMorphStore_v3 (2).ts",
+   "paths": [
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/useMorphStore_v3 (2).ts",
+    "swarm-search/all/We-as-in-me-and-mCP-with-kimi-kinda-chat-nearly-enough-Joe-did-it/useMorphStore_v3.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "1e530ce94da49eab3d3fcda8fb39e78b316c30ccf213e5d3a49d25d914117b98",
+   "bytes": 9528,
+   "name": "useMorphStore.ts",
+   "paths": [
+    "swarm-search/all/Company-files/useMorphStore.ts",
+    "swarm-search/all/SynthAi-Proto-mobile/useMorphStore.ts"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "1f72b445496b42cb00268e62e7feb26bb5a951de59ca6153d664f671987e29dc",
+   "bytes": 16787,
+   "name": "useMorphStore.ts",
+   "paths": [
+    "swarm-search/all/Synthai2/client/src/lib/useMorphStore.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "54fe80b5871d9af22f64b2ff9ce910d7106c2842a591fac14435bfcf9362bbea",
+   "bytes": 8074,
+   "name": "useMorphStore.ts",
+   "paths": [
+    "swarm-search/all/SynthAi.company/hooks/useMorphStore.ts"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "7864ddc13e0b7db153a556afe26d89a9c51befbaf3344473df9f93c3b251c2be",
+   "bytes": 436,
+   "name": "VERIFY-SWARM.mjs",
+   "paths": [
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/VERIFY-SWARM.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/VERIFY-SWARM.mjs"
+   ],
+   "count": 2
+  },
+  {
+   "sha256": "383977649e2924f93276f70c76da392bd8afd92207c7ba83991b95bf10837f4c",
+   "bytes": 2099,
+   "name": "WebsiteMorpher.mjs",
+   "paths": [
+    "zips/Pure-Synthia-v0.4.0-FINISHED-BASELINE__0edab5c3/Pure-Synthia-v0.4.0-FINISHED-BASELINE/src/synthia/morph-engine/substrate/adapters/WebsiteMorpher.mjs",
+    "zips/_drive_x/Dream-Swarm-System-v0.1.0/Dream-Swarm-System-v0.1.0/vendor/pure-synthia-swarm-body/src/synthia/morph-engine/substrate/adapters/WebsiteMorpher.mjs",
+    "zips/_drive_x/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/Pure-Synthia-Swarm-Body-v0.3.0-PHYSIOLOGY/src/synthia/morph-engine/substrate/adapters/WebsiteMorpher.mjs",
+    "zips/_drive_x/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/Synthia-Integrated-Automata-v0.5.0-ONTOLOGICAL-INGEST-PATCH/vendor/pure-synthia-v0.4.0/src/synthia/morph-engine/substrate/adapters/WebsiteMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.2.0/Synthia-Relational-Mesh-v0.2.0/src/synthia/morph-engine/substrate/adapters/WebsiteMorpher.mjs",
+    "zips/_drive_x/Synthia-Relational-Mesh-v0.3.0/Synthia-Relational-Mesh-v0.3.0/src/synthia/morph-engine/substrate/adapters/WebsiteMorpher.mjs"
+   ],
+   "count": 13
+  },
+  {
+   "sha256": "f5c51c09edadcc9d95ca7dc71533d01624edee6c1e676839ec020459fe661eb5",
+   "bytes": 4414,
+   "name": "WorldSwarm.tsx",
+   "paths": [
+    "oct7src/computer/donors/consciousness-realm/client/src/phone/WorldSwarm.tsx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "21095afc91646b1e25e7ee39875ebd4aae5692e88c5e5ea30b10d7e3737bad97",
+   "bytes": 50791,
+   "name": "youniverse_house_morphed.html",
+   "paths": [
+    "zips/synthia-morph-reskin__8c69c1c5/Synthia-Morph-Reskin-v0.1.0/youniverse_house_morphed.html"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "975eb0f5ab5c082eaf59b2b4dac23b5b71505848005ef1b082726edf9d1de07d",
+   "bytes": 50812,
+   "name": "youniverse_house_morphed.html",
+   "paths": [
+    "SynthAi/computer/hover/ui/morph/youniverse_house_morphed.html"
+   ],
+   "count": 1
+  }
+ ],
+ "missingAtBuild": [],
+ "connections": {
+  "entryPoints": [
+   "integrated/app-server.mjs",
+   "integrated/integrated-swarm.mjs",
+   "integrated/swarm-loop.mjs",
+   "synthia-app.mjs",
+   "measure.mjs",
+   "integrated/swarm/index.mjs"
+  ],
+  "reachableModules": 90,
+  "byId": {
+   "swarm-os-v9": {
+    "status": "referenced",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/abc.mjs",
+     "integrated/population.mjs"
+    ]
+   },
+   "swarm-os-v6": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-os-v10": {
+    "status": "referenced",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/abc.mjs",
+     "integrated/population.mjs"
+    ]
+   },
+   "swarm-os-v12": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-os-v14-zip": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-os-v14-run": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-os-pipe-v6": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-os-pipe-v9": {
+    "status": "referenced",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/abc.mjs",
+     "integrated/population.mjs"
+    ]
+   },
+   "swarm-os-pipe-v10": {
+    "status": "referenced",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/abc.mjs",
+     "integrated/population.mjs"
+    ]
+   },
+   "swarm-os-doc": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-state-space-doc": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-finisher-doc": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-pipeline-report": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "integrated-swarm": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/integrated-swarm.mjs"
+    ],
+    "sharesRules": true,
+    "referencedBy": null
+   },
+   "swarm-loop": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/swarm-loop.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "any-file-swarm": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/swarm/index.mjs",
+     "any-file-swarm.mjs"
+    ],
+    "sharesRules": true,
+    "referencedBy": null
+   },
+   "registration-swarm": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "app-finisher.mjs",
+     "synthia-registration.mjs",
+     "registration-swarm.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "swarm-component": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "app-finisher.mjs",
+     "swarm-nsnf.mjs",
+     "swarm-component.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "swarm-nsnf": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "app-finisher.mjs",
+     "swarm-nsnf.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "app-finisher": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "app-finisher.mjs"
+    ],
+    "sharesRules": true,
+    "referencedBy": null
+   },
+   "swarm-fit": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/swarm/index.mjs",
+     "swarm-fit.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "abc": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/swarm/index.mjs",
+     "integrated/abc.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "population": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/swarm/index.mjs",
+     "integrated/population.mjs"
+    ],
+    "sharesRules": true,
+    "referencedBy": null
+   },
+   "trident-js": {
+    "status": "connected",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/trident-js.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "trident-model": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/app-server.mjs",
+     "integrated/trident-js.mjs"
+    ]
+   },
+   "trinity-engine": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "trinity-system": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "trinity-knowledge-loader": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "trident-onnx": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "hdgnn": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "trinity-orchestrator": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "trinity-field-py": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "trinity-resonance-engine": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "morph-search": {
+    "status": "connected-copy",
+    "via": [
+     "integrated/app-server.mjs",
+     "integrated/swarm/index.mjs",
+     "integrated/swarm/originals/morph-search/5cf53ad3-morph-search.mjs"
+    ],
+    "sharesRules": false,
+    "referencedBy": null
+   },
+   "morph-search-test": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "realm-swarm": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "realm-swarm-test": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "emergent-edge-resolver": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "state-space-engine-v2": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "dimension-qualities": {
+    "status": "referenced",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/swarm/mesh.mjs"
+    ]
+   },
+   "morphing-particle-swarm": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "morphing-substrate": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "morphing-net-py": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "morphing-net-exec": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "neural-morphing-engine": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "four-llm-swarmdoc": {
+    "status": "referenced",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": [
+     "integrated/swarm/index.mjs",
+     "integrated/swarm/mesh.mjs"
+    ]
+   },
+   "modelmaker-app": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "modelmaker-readme": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "modelmaker-movement-run": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "modelmaker-movement-build": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-swarm-body": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-architecture": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-start": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-verify": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-selfhosted-hand": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-yni-hands": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "pure-synthia-body-zip": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "dream-swarm-zip": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-reality-trial-zip": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "resonance-swarm-reality-zip": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "bantu-321-swarm-bridge-zip": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "contact-automata-swarm-body": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "semantic-dna-swarm": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "grok-swarm-directive": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "alphabet-swarm-control": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "swarm-repo-readme": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "the-horde": {
+    "status": "not-connected",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   },
+   "morphgnn-server": {
+    "status": "in-repo-reference",
+    "via": null,
+    "sharesRules": null,
+    "referencedBy": null
+   }
+  }
+ }
+}
