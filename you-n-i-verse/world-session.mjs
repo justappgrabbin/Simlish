@@ -15,7 +15,7 @@ function graph(mode) {
     : mode === 'Mission'
       ? ['world.impulse','world.apply','world.capture']
       : ['world.apply','world.capture'];
-  const nodes = [{id:'input'}, ...functions.map((_,i)=>({id:'step'+i})), {id:'output'}];
+  const nodes = [{id:'input'}, ...functions.slice(0,-1).map((_,i)=>({id:'step'+i})), {id:'output'}];
   const ids = nodes.map(n=>n.id);
   return {nodes,edges:functions.map((fn,i)=>({id:mode+'-'+i,from:ids[i],to:ids[i+1],functionId:fn}))};
 }
@@ -49,13 +49,15 @@ export class WorldSession {
     const registry=new FunctionRegistry();
     registry.register('world.apply', input => {
       const before=this.object(input.targetId);
+      const previousIds=new Set(this.world.objects.map(object=>object.id));
       this.world.select(input.targetId);
       if(!this.world.morphSelected(input.op))throw new Error('World engine rejected the operation');
       const after=this.object(input.targetId);
       const changed=JSON.stringify(before)!==JSON.stringify(after);
       if(!changed)throw new Error('World reported success without state change');
       this.syncObjects();
-      return {...input,before,after,changed};
+      const createdObject=this.world.objects.find(object=>!previousIds.has(object.id));
+      return {...input,before,after,changed,createdObjectId:createdObject?.id??null};
     });
     registry.register('world.impulse', input => {
       this.physics.impulse(input.targetId,1.7,-1.2);
@@ -63,7 +65,7 @@ export class WorldSession {
       return {...input,physicsSteps:18};
     });
     registry.register('world.compose', input => {
-      const created=this.world.objects.find(o=>o.id!==input.targetId && o.name===input.before.name+' copy' && !o.removed);
+      const created=input.createdObjectId&&this.world.object(input.createdObjectId);
       if(!created)throw new Error('The original world did not create a new object');
       const compositeId='formation-'+this.commands.length+'-'+created.id;
       const comp=this.physics.compose(compositeId,[input.targetId,created.id],'o_bundle');
