@@ -33,7 +33,7 @@ export function drawWorld(canvas,state,{selected='chair'}={}) {
     ctx.strokeStyle='#ffd488';ctx.lineWidth=3;ctx.stroke();
   }
   for(const o of visible) {
-    const p=point(o),scale=17*size(o.sx), tall=28*size(o.sy),depth=12*size(o.sz);
+    const p=point(o),scale=17*size(o.sx)*(1+o.morphState*.12), tall=28*size(o.sy)*(1+o.morphState*.18),depth=12*size(o.sz);
     const isSelected=o.id===selected;
     ctx.save();ctx.translate(p.x,p.y);
     ctx.shadowColor=isSelected?'#ffdca5':'#000000';ctx.shadowBlur=isSelected?18:7;
