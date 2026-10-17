@@ -53,10 +53,10 @@ export class WorldSession {
       this.world.select(input.targetId);
       if(!this.world.morphSelected(input.op))throw new Error('World engine rejected the operation');
       const after=this.object(input.targetId);
-      const changed=JSON.stringify(before)!==JSON.stringify(after);
+      const createdObject=this.world.objects.find(object=>!previousIds.has(object.id));
+      const changed=!!createdObject||JSON.stringify(before)!==JSON.stringify(after);
       if(!changed)throw new Error('World reported success without state change');
       this.syncObjects();
-      const createdObject=this.world.objects.find(object=>!previousIds.has(object.id));
       return {...input,before,after,changed,createdObjectId:createdObject?.id??null};
     });
     registry.register('world.impulse', input => {
