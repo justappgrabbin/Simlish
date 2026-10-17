@@ -13,8 +13,8 @@ test('Play changes actual Simlish object geometry through an executable ATO grap
   const change=await session.perform({mode:'Play',targetId:'chair',op:'transform'});
   assert.equal(change.changed,true);
   assert.equal(change.event.type,'MORPH');
-  assert.notEqual(change.prior.objects.find(x=>x.id==='chair').sy,
-    change.after.objects.find(x=>x.id==='chair').sy);
+  assert.notEqual(change.prior.objects.find(x=>x.id==='chair').morphState,
+    change.after.objects.find(x=>x.id==='chair').morphState);
   assert.equal(change.after.formationRevisions,2);
   assert.ok(change.formationArtifact);
   assert.ok(session.formation.history().some(e=>e.type==='formation-transformed'));
