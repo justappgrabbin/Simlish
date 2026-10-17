@@ -1,7 +1,7 @@
 name: SWARM-OS Native Computer APK
 on:
   push:
-    branches: [swarm-os-evolution-morph-apk-20261016]
+    branches: [swarm-os-evolution-morph-apk-20261016, integration/live-world-formations-20261017]
     paths:
       - 'android/**'
       - 'you-n-i-verse/**'
@@ -38,7 +38,7 @@ jobs:
           node --check android/test-local-computer.mjs
       - name: Verify original studio and SWARM-OS execution tests
         run: |
-          node --test you-n-i-verse/formation-spine.test.mjs you-n-i-verse/formation-klein.test.mjs
+          node --test you-n-i-verse/formation-spine.test.mjs you-n-i-verse/formation-klein.test.mjs you-n-i-verse/world-session.test.mjs
           node you-n-i-verse/test.mjs
           node you-n-i-verse/studio.test.mjs
           node you-n-i-verse/game-path.test.mjs
@@ -129,9 +129,9 @@ jobs:
               if (error.status !== 404) throw error;
               release = (await github.rest.repos.createRelease({
                 ...context.repo, tag_name: tag, target_commitish: context.sha,
-                name: 'SWARM-OS · YOU-N-I-VERSE + Computer Debug · ' + context.sha.slice(0, 7),
+                name: 'SWARM-OS · YOU-N-I-VERSE + Live World Debug · ' + context.sha.slice(0, 7),
                 prerelease: true,
-                body: 'Existing YOU-N-I-VERSE Android host with locally packaged SynthAi Computer, real recovered ATO/Klein formations, AUTOLING grammar, Diseminer memory, native Simlish CPU swarm lighting fitness with held-out validation, and triangle-warp morphing of actual images. History and form graphs persist across IndexedDB reload. Studio remains the first screen. All computation tested without an application backend or external LLM. This is an Android 8+ DEBUG APK, not a production release. Browser asset integration and build verified by GitHub Actions; physical-phone installation, background lifecycle and camera behavior remain unverified. SynthAi donor pin: a04c41399414f1c48f74b47f3149db73091679d6'
+                body: 'Existing YOU-N-I-VERSE Android host with locally packaged SynthAi Computer, real recovered ATO/Klein formations, AUTOLING grammar, Diseminer memory, native Simlish CPU swarm lighting fitness with held-out validation, and triangle-warp morphing of actual images. History and form graphs persist across IndexedDB reload. Studio remains the first screen. All computation tested without an application backend or external LLM. World object/particle simulation is now rendered from actual state on world.html, executable revisions preserve history; arbitrary photorealistic morphing is NOT claimed. This is an Android 8+ DEBUG APK, not a production release. Browser asset integration and build verified by GitHub Actions; physical-phone installation, background lifecycle and camera behavior remain unverified. SynthAi donor pin: a04c41399414f1c48f74b47f3149db73091679d6'
               })).data;
             }
             const name = 'SWARM-OS-YOU-N-I-VERSE-Evolution-Morph-debug.apk';

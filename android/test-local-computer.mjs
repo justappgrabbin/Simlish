@@ -130,6 +130,27 @@ try {
   assert.equal((await page.evaluate(() => window.SynthAIComputer.fitnessMorph.history())).length, 1);
   assert.ok((await page.evaluate(() => window.SynthAIComputer.formations.list().map(f => f.id)))
     .includes('simlish:frame-geometry'), 'executable frame morph persisted across native asset reload');
+  // Check the ORIGINAL world page, now visibly wired to the existing Simlish + SwarmWorld + ATO engines.
+  response = await page.goto(base + '/assets/world.html', { waitUntil: 'load' });
+  assert.equal(response.status(), 200);
+  await page.waitForFunction(() => document.getElementById('worldStatus')?.textContent.includes('local actions'));
+  const beforeWorld = await page.locator('#liveWorld').evaluate(canvas => canvas.toDataURL());
+  await page.route('**/*', route => route.abort());
+  await page.locator('#act').click();
+  await page.waitForFunction(() => document.getElementById('receipt')?.textContent.includes('Executed transform on chair'));
+  const afterWorld = await page.locator('#liveWorld').evaluate(canvas => canvas.toDataURL());
+  assert.notEqual(afterWorld, beforeWorld, 'real geometry state must visibly modify the world canvas');
+  await page.locator('[data-mode="Create"]').click();
+  await page.locator('#act').click();
+  await page.waitForFunction(() => document.getElementById('worldStatus')?.textContent.includes('1 real swarm composites'));
+  await page.locator('[data-mode="Mission"]').click();
+  await page.locator('#worldTarget').selectOption('chair');
+  await page.locator('#act').click();
+  await page.waitForFunction(() => document.getElementById('receipt')?.textContent.includes('Mission verified'));
+  await page.unroute('**/*');
+  await page.reload({waitUntil:'load'});
+  await page.waitForFunction(() => document.getElementById('worldStatus')?.textContent.includes('3 local actions'));
+  assert.match(await page.locator('#worldStatus').innerText(), /1 real swarm composites/);
   assert.deepEqual(runtimeErrors, [], 'no uncaught module or runtime errors in embedded Computer');
   assert.deepEqual(offDevice, [], 'all required modules and requests remain within packaged assets');
   console.log('Android asset-layout browser integration passed: studio > Computer > native ATO execution > offline operation > persisted restart');
