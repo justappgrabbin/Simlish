@@ -1,0 +1,44 @@
+Byte-identical copies of her files from Google Drive "youniverse-game-completed-release.zip" (Drive id 1fDvIpqkXOawi_frUGg7M5UbX5TwlMygg, 681,974 bytes; Drive also holds duplicate copies with ids starting 1qQ9eSBpx and 1Z3VpGKWv).
+zip sha256: df4ee460cc5be364841b99b7fd52fa7efb5c1fa0f4b3a40693ed9cab7ae30fea
+Only the import closure of the three game worlds, their stores/morph/renderer/WorldAdapter and her photo intake (photo/photoIngestion.js + pngDecoder.js, used to turn the chosen avatar into her visualIdentity) is copied (36 files + README/package.json + world/README.md). Not copied (still in the zip, unchanged): everything outside that closure, e.g. server.js, hub.js, public/, photo/imageTools.js + image_worker.py (Python), scripts/, test/ (her e2e suites, which pass on Node 22 against the zip), vendor/pure-synthia-automata, integration/.
+Nothing here is edited. Browser use goes through an import map to ../youniverse-games-shims (node:fs/path/crypto/zlib + Buffer stand-ins, FILLED IN).
+
+c4a11da7b3a8edafc830672873b9b38c0fafd9bccff9de39359200536be948b1  ./README.md
+1e5a8c82a8e1a6965011ae245f2db5a8a1a357ac27ff6ae9d29c258e4cc2c505  ./birth/birthDataStore.js
+8e9a024029fa2141d1e6ab3d3b509a82a8db9f7aff05f8edc9dabde216ccecc5  ./divination/bazi.js
+59a23ec3b83cee048ebceac38bd146157f3e1f45c55e51f84cb20ffe20ee436c  ./divination/destinyVector.js
+e137a82feea8d80cde77a71325087e796398a7fad69a6796fbe032129cf1cea4  ./divination/hexagramMapper.js
+0ceef8d85b7431764f0aea4b4ce1025905b53dd39de57a9ce6bfa012df9b05fe  ./games/hdRpg.js
+68130fa1732ec92b932b40f37b933b5aac886a056d6af777fce9b51bdb849706  ./games/ichingStory.js
+c824f4acda05a2c4bcd9eb5ec9b73bfda047971af391e5e5bbb335888473f855  ./games/oraclesThread/index.js
+c68dc169b3bd8e094c861964f2beb84c35dead4471fbe5204b72c83072072dbc  ./games/oraclesThread/stateManager.js
+36364a6c8cd8109a6ae98d19cc71063f1dcfdb174ab12c2349b608f9c803f836  ./iching/ichingResolver.js
+c981f50c93190ce1a2bab5b3887dd4159919436244efd084028aaff7a8225500  ./identity/continuity.js
+216975cf60a51f2f01909ed460bd4e334b8ad3c6fbeba6c099b581f335152bf9  ./klein/analogy.js
+92758a1145d81527b70037d9c72131fbc95b1f8329261f915bb9344a6bbcae67  ./klein/inheritance.js
+e87b4fe9a2db79d934985b68d5ad9a5e4c56dc1c8e8d6c8358a67e368cecfc23  ./klein/registry.js
+61eaaf80f67a1bcb533794bef485859d0a1b238a0bf19aaf0d0aaf20cb73c97b  ./klein/rules.js
+5f00fb3f84c1f0eb983446aaf162ffda0f0a602dd984f337dcc6fc3a52b95882  ./klein/units.js
+98f01bbd1dd91986154f24307dabc7cd9d42ca9805eedcaf29756553b046bbc0  ./morph/kleinOperators.js
+f7f7437ab77c8d3223c3381a8fafc6a19343f3c047f0beae98edc4553da52512  ./morph/morphEngine.js
+b5fb788965689a6d9ab86994b8611d6965a5c72e7525082bdc755f8baa8a9e57  ./novelwriter/grammar.js
+5c4ba4d35460439270ba09a58727ba112df5c1bd8e91a90be12543133ee0bd8e  ./novelwriter/neuralExpander.js
+7852c7ade1522750175f7e9f3ae1125471f34b466c9bea5887baa88683d82987  ./novelwriter/videoPromptSynthesizer.js
+8b88092e885e8c5967e8ed86ae20387ade9aceddfd6a91df35ed71d58950465f  ./package.json
+05e78ec2f88630ee5ead1831ce16237d23d2fa7409bd2990dfb4652370821f49  ./photo/photoIngestion.js
+a42bcc0a3e89411bd80c1ad64c6ecb1403109693c9638492ad52dda9fec4c2ab  ./photo/pngDecoder.js
+c49f70e53d9e94d9fbe7dbb34585be247283c206644e7dd8b6d321dbf3906614  ./render/characterRenderer.js
+9e01044e67d78b836f9d1a271db854e8c50134663b43fac90d523196864fbe37  ./render/embodimentRenderer.js
+d115b7bdd30a3006b02a6bcc08d27a3fa2e5277d4d0ef0f998a7d9a5e3ae25c4  ./resonance/embeddingSpace.js
+6d8d59ee95c94ed17fe9280478b514e4b3ad250ae3ea8537daa6a04d7b337112  ./resonance/resonanceCore.js
+b759e11c92be6439450932860310bad4f2181279d23712bb8e6a32cae97b0bde  ./seed/playerSeed.js
+894e02f76395badd3188c313745145cd51b2d82b063b69a555331dea233128f4  ./state/gameState.js
+3b7598fbc8ecbf4a45b571b6f821718bcbc7f70af4e6123b8c71c3e25ee430c8  ./state/ontologicalAddress.js
+c7b0e4973d800415728f156cefb9b3520806c2e3ebc41d7597b2fc9e57f15be0  ./util/hash.js
+0553452bd845cd2c52725b49c8c3d05ad1a24dce817cc74ee3967302245f41b1  ./util/storage.js
+a936c0f0a42408e3744da9e95570b650b9e655a7a71eaa05cf45c712e952dd2d  ./video/assetCache.js
+22e7eee4f05e4306eb0f7c1aeca91fb55664d12e22f2cb28cfc6a39a009b305d  ./video/generatorClient.js
+f069e655f7a5891ac93ae1ce9991e99e9d4ad9c5545963b8e362c289dbb0cedc  ./video/queue.js
+8011a43851ae097e66bcab4184164d7126c9df15279e387ffb92e16b6fe4243f  ./world/README.md
+49917eacf265245bf2b15b8123f6c040726f1c5cc014f6a9c7eaee7ea6dbc2ec  ./world/reactiveLoop.js
+3b8469fb718d01e52e103ba7a3c8b4c73d3474c7903055445d3cd6eca5872aa7  ./world/worldAdapter.js

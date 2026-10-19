@@ -1,0 +1,87 @@
+{
+  "pieces": [
+    {
+      "id": "mind",
+      "signals": [
+        "focus",
+        "clarity",
+        "imagination"
+      ],
+      "blocks": [
+        "if",
+        "and",
+        "or",
+        "set_drive"
+      ]
+    },
+    {
+      "id": "body",
+      "signals": [
+        "energy",
+        "fatigue",
+        "hunger"
+      ],
+      "blocks": [
+        "move_to",
+        "wait",
+        "use"
+      ]
+    },
+    {
+      "id": "heart",
+      "signals": [
+        "harmony",
+        "care",
+        "awe"
+      ],
+      "blocks": [
+        "emote",
+        "comfort",
+        "socialize"
+      ]
+    },
+    {
+      "id": "soul",
+      "signals": [
+        "purpose",
+        "music",
+        "ritual"
+      ],
+      "blocks": [
+        "light",
+        "scene",
+        "play_sfx"
+      ]
+    },
+    {
+      "id": "spirit",
+      "signals": [
+        "courage",
+        "intuition",
+        "presence"
+      ],
+      "blocks": [
+        "nudge",
+        "repair",
+        "bless"
+      ]
+    }
+  ],
+  "verbs": [
+    "build",
+    "repair",
+    "move",
+    "emote",
+    "spawn",
+    "set",
+    "light",
+    "play"
+  ],
+  "objects": [
+    "prop/tree",
+    "vfx/fireflies",
+    "sfx/wind_chimes",
+    "sky/ambient_dawn",
+    "emotion/serene"
+  ]
+}

@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YOU-N-I-VERSE · Play &amp; Build</title>
+<script type="importmap">{"imports":{"node:fs":"./vendor/youniverse-games-shims/fs.mjs","node:path":"./vendor/youniverse-games-shims/path.mjs","node:crypto":"./vendor/youniverse-games-shims/crypto.mjs","node:zlib":"./vendor/youniverse-games-shims/zlib.mjs"}}</script>
+<style>
+:root{color-scheme:dark;--top:#251038;--bottom:#090916;--accent:#ed55ca}*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,sans-serif;color:#eee8f7;background:linear-gradient(var(--top),var(--bottom)) fixed;min-height:100vh}
+header{padding:10px 12px;border-bottom:1px solid #ffffff22;display:flex;gap:10px;align-items:center;flex-wrap:wrap}header strong{letter-spacing:.06em}a{color:var(--accent)}
+main{padding:12px;max-width:960px;margin:auto}.card{background:#0008;border:1px solid #ffffff22;border-radius:12px;padding:10px 12px;margin:10px 0}.card h3{margin:0 0 6px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+input,select,button,textarea{font:inherit;background:#1b1b30;color:#eee;border:1px solid #38385e;border-radius:8px;padding:8px 10px}button{cursor:pointer;margin:2px}button.primary{background:var(--accent);color:#111;border-color:var(--accent)}
+label{display:block;margin:6px 0 2px;font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
+.note{color:#b8b2cf;font-size:12px}.flag{color:#ffd78f;font-size:12px}.ok{color:#9dffb0}.bad{color:#ff8f8f}
+#avatars{display:flex;gap:6px;overflow-x:auto}#avatars canvas{border:2px solid transparent;border-radius:8px;cursor:pointer;flex:0 0 auto}#avatars canvas.on{border-color:var(--accent)}
+.agents div,.log div{font:12px/1.35 ui-monospace,monospace;padding:2px 0;border-bottom:1px solid #ffffff11}.lesson{border-left:3px solid var(--accent);padding-left:8px}
+#morph svg{max-width:240px;height:auto}textarea{width:100%;min-height:120px;font:12px ui-monospace,monospace}
+</style></head><body>
+<header><strong>✧ YOU-N-I-VERSE · PLAY &amp; BUILD</strong><span class="note">her game worlds + swarm agents · runs on this device · no internet</span><a href="guide.html">Guide</a><a href="world.html">World</a><a href="index.html">Studio</a><a href="synthia-app.html">Swarm</a></header>
+<main>
+<section class="card"><h3>1 · Your chart</h3>
+ <div class="row"><div><label for="saved">Saved on this device</label><select id="saved"><option value="">— enter below —</option></select></div></div>
+ <div class="row"><div><label for="name">Name</label><input id="name" value=""></div><div><label for="date">Birth date</label><input id="date" type="date" value="1990-05-17"></div><div><label for="time">Time</label><input id="time" type="time" value="08:30"></div></div>
+ <div class="row"><div><label for="tz">Time zone (IANA)</label><input id="tz" value="America/Los_Angeles"></div><div><label for="lat">Latitude</label><input id="lat" value="34.05"></div><div><label for="lon">Longitude</label><input id="lon" value="-118.24"></div></div>
+</section>
+<section class="card"><h3>2 · Your avatar &amp; world</h3>
+ <p class="note">Pick the form you enter with: your Studio morph, a photo of yours, or a state from your supplied avatar board. Her photo intake turns it into your visual identity.</p>
+ <div id="avatars"></div><div class="row"><div><label for="photo">Or pick a photo</label><input id="photo" type="file" accept="image/*"></div><div><label for="theme">World theme (set once)</label><select id="theme"><option>cosmic</option><option>forest</option><option>ocean</option><option>desert</option></select></div></div>
+ <button class="primary" id="enterWorld">Enter the world</button><p id="err" class="bad"></p>
+</section>
+<section class="card" id="progCard" hidden><h3>3 · Your programme</h3><div id="prog"></div></section>
+<section class="card" id="playCard" hidden><h3>4 · Play with the agents</h3><div id="worlds"></div><div id="scene"></div><div id="morph"></div><h3>Agents</h3><div class="agents" id="agents"></div></section>
+<section class="card" id="buildCard" hidden><h3>5 · Build with the agents</h3>
+ <div class="row"><div><label for="bkind">What</label><select id="bkind"><option value="page">page</option><option value="tool">tool</option><option value="project">project</option></select></div><div><label for="btitle">Title</label><input id="btitle" value="My page"></div></div>
+ <label for="btext">Your content (it is kept exactly; the pipeline adds its pieces beside it)</label><textarea id="btext"><!doctype html><title>My page</title><h1>Hello</h1></textarea>
+ <button class="primary" id="build">Build it</button><div id="bout"></div></section>
+<section class="card" id="bodyCard" hidden><h3>Body &amp; science</h3><div id="body"></div></section>
+<section class="card"><h3>Open questions (investigating)</h3><div id="inv" class="flag"></div></section>
+</main>
+<script src="vendor/kernel.js"></script>
+<script type="module" src="play.mjs"></script></body></html>

@@ -1,0 +1,17 @@
+{
+  "name": "Generator",
+  "autonomy": 0.7,
+  "initiative": 0.3,
+  "authority": "sacral",
+  "drives": {
+    "social": 0.5,
+    "creation": 0.9,
+    "rest": 0.4,
+    "exploration": 0.6
+  },
+  "nudgeSensitivity": {
+    "environment": 0.8,
+    "dream": 0.5,
+    "symbol": 0.7
+  }
+}

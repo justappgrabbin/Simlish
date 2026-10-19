@@ -1,0 +1,19 @@
+{
+  "name": "youniverse-morph-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Persistent state-driven photo morphing and game worlds",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "doctor": "node scripts/doctor.js",
+    "test": "node scripts/test.js",
+    "test:studio": "node --test --test-isolation=none test/studio.test.mjs",
+    "check": "node scripts/check.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

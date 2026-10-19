@@ -1,0 +1,16 @@
+Byte-identical copies of her SynthWorld agent data (Godot project), from /workspace/zips/SynthWorld-321-source__0a0d0210/synthworld_build/game/data/ (her zip SynthWorld-321-source). Behaviour of Agent.gd/Utility.gd (her GDScript, Synthai2/client/public/synthworld/source/synthworld_godot_starter_7_/game/Scripts/AI/) is ported deterministically in integrated/play/agents.mjs; the .gd files are not copied.
+
+3a578bb70c686af81190188894f61a911810ac3f525430b913cfdc5f4493ef25  ./agents/cynthia_traits.json
+82bafad3cc5a87d630b79c3a31035086ea63b08754ec2a55429a12fb3fc78f49  ./agents/generator.json
+e6c10c40b6a43f4183bd92cfd10abf2708661c5a1212e425c12a8986b50c72a6  ./behaviors/utility_cook.json
+fc114431a6ddad68d1b20094b6bb1d7092a2397a151618d17d06bea751a2c66b  ./behaviors/utility_social.json
+9a48b7a54cce4026206d2cc502deb19cbd04ac84d7b8470093e1e979699e9a16  ./behaviors/utility_wander.json
+c357a5441769b2dbcd97d30f9585e332b77a045ab73acf8ac56be0c450fbd620  ./cnl/pieces_catalog.json
+0b7cfea6814536b19a88413f22e40924b7001c6ec501706cc4c1ff2aea67b869  ./cnl/sentences.txt
+fdac2c61d20802bd53d43d31fd2f6c686d5408711f854c4b378aae71127f01b3  ./commands/build.json
+deef7ce9396c9f031dc1c9e99ba2eb7b022ad109230c744103d641a9b6209f20  ./nudges.json
+295db9c53d745e2e068ea2d0e02307ee91d2d56e5113ceb9cbf7c629bdc8f3d3  ./traits/builder.json
+abc7f7661f759187b466d5cde94fd07e48034b4e517ff73f1dec62735743291d  ./traits/empath.json
+6caecc753ca59e4cc3237ca07035bcbbc5414ebf89b4ab36f0dcb3b3cc573f02  ./traits/night_owl.json
+ce8e700f124ee47a523e8245792c1858cdb3eeb0785719e9bdca38b93cf5c685  ./traits/perfectionist.json
+884784d508ec892c2fed3e8b12a5d3fa8815d6bc01850f2014309c413dfdef77  ./yijing/scenes.json
