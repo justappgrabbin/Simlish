@@ -63,3 +63,10 @@ const phenotype=new SwarmComponent({id:'adaptive-view',kind:'GA',purpose:'What t
  {id:'tools',check:i=>i.visible.tools.length>0},{id:'views',check:i=>i.visible.views.length===VIEWS.length},{id:'address',check:i=>Number.isInteger(i.visible.address.state)}]});
 export function program(chart,memory=newMemory()){const pair=new SwarmPair({id:'adaptive',genotype,phenotype:{component:phenotype,trait}}),r=pair.forward({chart,memory});
  const p=r.phenotype.visible;return {...p,status:r.status,phenotypeStatus:r.phenotype.status,fingerprint:sha256(JSON.stringify({l:p.lessons.map(x=>x.gate),t:p.tools.map(x=>x.id),v:p.views,a:p.address.gate,lv:p.level})).slice(0,16),relevance:systemRelevance(chart),investigating:INVESTIGATING,filledIn:FILLED_IN}}
+// Frames x wheels (Alexis, 2026-10-19, NOT confirmed -> INVESTIGATING; neither hypothesis is chosen).
+// Default 'current' is unchanged behaviour: every frame reads gates through her Fu Xi decimal (gateToFuXiDecimal).
+export const FRAME_WHEEL_MAPPINGS=Object.freeze({
+ current:Object.freeze({default:true,draconic:'fu-xi',tropical:'fu-xi',sidereal:'fu-xi',note:'unchanged code path'}),
+ 'hypothesis-A':Object.freeze({draconic:'king-wen',tropical:'fu-xi',sidereal:'mawangdui',note:'Draconic = King Wen, Tropical = Fu Xi, Sidereal = Mawangdui (INVESTIGATING)'}),
+ 'hypothesis-B':Object.freeze({draconic:'fu-xi',tropical:'fu-xi',sidereal:'fu-xi',note:'all three frames use Fu Xi because we are in the dimension of Being (INVESTIGATING)'})});
+export const frameWheel=(frame,mapping='current')=>{const m=FRAME_WHEEL_MAPPINGS[mapping];if(!m)throw new RangeError('unknown frame/wheel mapping '+mapping);return m[frame]??null};

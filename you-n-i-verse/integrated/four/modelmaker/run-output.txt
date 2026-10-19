@@ -1,0 +1,11 @@
+
+
+
+`loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+### Built swarm-docs
+- Parameters: **167,680**
+- Training sequences: **2,709**
+- Final loss: **5.702456**
+- Device: **cpu**
+- Push disabled.
+EXIT 0

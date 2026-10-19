@@ -88,3 +88,9 @@ Tests: `integrated/acceptance-rows.test.mjs` (8 tests, all pass; each asserts th
 | 7 Self-modification | **FAIL** | After the full plan the loop has written only app/ (tools only user/); protected originals and integrated/ code are refused. |
 | 9 Arbitrary visual morphing | **FAIL** | photo-morph runs; her youniverse MorphEngine embodiment changes with the game choice; no swarm state drives the morph. |
 | 15 Reliability | **PASS** (scope stated) | 400 loop cycles + 400 heartbeats: 0 failed, audit chain intact, originals unchanged; 120 play turns. Node only, no on-device long run. |
+
+## Open decisions added 2026-10-19 (INVESTIGATING, not decided)
+
+* **Frames × wheels:** hypothesis A (Draconic = King Wen, Tropical = Fu Xi, Sidereal = Mawangdui) vs hypothesis B (all three frames Fu Xi, "we are in the dimension of Being"). Both are selectable in `play/adaptive.mjs` `FRAME_WHEEL_MAPPINGS`; the default `current` is unchanged (Fu Xi decimal for every frame).
+* **B-H-A-N-T-U-G-H letter assignment:** which H is HTML and which is hexadecimal. Both layers are kept (`four/bhantugh.mjs`).
+* **Four primitives:** see `four/RUN-EVIDENCE.json` and `swarm/INVENTORY.md` § Four primitives.

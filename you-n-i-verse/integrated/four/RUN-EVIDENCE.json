@@ -1,0 +1,406 @@
+{
+ "generated": "four.build.mjs",
+ "docs": [
+  {
+   "id": "spec-docx",
+   "file": "Synthia_Semantic_Swarm_Master_Spec_v3.docx",
+   "drive": "1qxNrFwuV9sHBM-yQapy37ESYFQ2sO3NL",
+   "sha256": "30ef4ed536e01461a01c69b84a91ee037df950770006fb8e82dde9578260ee9f",
+   "chars": 33127
+  },
+  {
+   "id": "reassembly-md",
+   "file": "REASSEMBLY_MASTER_BUILD.md",
+   "drive": "1l4x0gpaZ9OwbF0M8M_lY0q2jocxf8lSW",
+   "sha256": "ef5b5f33e06412fcfa42f749dfa3094cb8aa484808fae68f86d1910bfbe81ad5",
+   "chars": 20962
+  },
+  {
+   "id": "cynthia-core-pdf",
+   "file": "Cynthia_core.pdf.pdftotext.txt",
+   "drive": "1HJ4C3DeMGsWrJrvGMUmPb_Uqxf8TVQJu",
+   "pdfSha256": "6dc6cf95a98386ca18fa167735e8165070312650c61b7b86da2924ee78e35589",
+   "note": "PDF not committed (2 MB); text by poppler pdftotext -layout on the box",
+   "sha256": "2f2712d72d64872152dfd78316b00083896f055a2dca63d6392d188e99d418aa",
+   "chars": 144741
+  }
+ ],
+ "primitives": {
+  "tool-factory": {
+   "spec-docx": {
+    "particles": 130,
+    "unrouted": 160,
+    "sample": {
+     "id": "tf-542cf412",
+     "primitive": "tool-factory",
+     "doc": "spec-docx",
+     "unit": 6,
+     "text": "Purpose and scope",
+     "dimension": "Movement",
+     "words": [
+      "purpose",
+      "and",
+      "scope"
+     ],
+     "source": {
+      "tool": "BigramMovementG1L4",
+      "address": null
+     }
+    }
+   },
+   "reassembly-md": {
+    "particles": 92,
+    "unrouted": 101,
+    "sample": {
+     "id": "tf-4915ac7f",
+     "primitive": "tool-factory",
+     "doc": "reassembly-md",
+     "unit": 0,
+     "text": "# Synthia / YOU-N-I-VERSE — master reassembly build",
+     "dimension": "Design",
+     "words": [
+      "synthia",
+      "you-n-i-verse",
+      "master",
+      "reassembly",
+      "build"
+     ],
+     "source": {
+      "tool": "HexagramDesignG14L6",
+      "address": "Design:G14.L6.C6.T6.B1"
+     }
+    }
+   },
+   "cynthia-core-pdf": {
+    "particles": 1298,
+    "unrouted": 2170,
+    "sample": {
+     "id": "tf-a4d76af1",
+     "primitive": "tool-factory",
+     "doc": "cynthia-core-pdf",
+     "unit": 0,
+     "text": "Here's a complete tech stack suggestion for building the Synthia Consciousness Simulator",
+     "dimension": "Design",
+     "words": [
+      "here",
+      "s",
+      "a",
+      "complete",
+      "tech",
+      "stack",
+      "suggestion",
+      "for",
+      "building",
+      "the",
+      "synthia",
+      "consciousness",
+      "simulator"
+     ],
+     "source": {
+      "tool": "HexagramDesignG14L6",
+      "address": "Design:G14.L6.C6.T6.B1"
+     }
+    }
+   }
+  },
+  "neural-builder": {
+   "spec-docx": {
+    "particles": 290,
+    "composition": {
+     "id": "composition-e61e5b25",
+     "nodes": 5,
+     "edges": 5,
+     "familiesAvailable": 36
+    },
+    "sample": {
+     "id": "nn-e309135e",
+     "primitive": "neural-builder",
+     "doc": "spec-docx",
+     "unit": 0,
+     "text": "SYNTHIA / SWARM-OS — SEMANTIC SWARM & FOUNDRY",
+     "dimension": "Movement",
+     "words": [
+      "synthia",
+      "swarm-os",
+      "semantic",
+      "swarm",
+      "foundry"
+     ],
+     "source": {
+      "composition": "composition-e61e5b25",
+      "families": [
+       "resnet",
+       "swin",
+       "perceiver",
+       "gan",
+       "resnet"
+      ],
+      "classIndex": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   },
+   "reassembly-md": {
+    "particles": 193,
+    "composition": {
+     "id": "composition-bfae58e9",
+     "nodes": 5,
+     "edges": 5,
+     "familiesAvailable": 36
+    },
+    "sample": {
+     "id": "nn-4915ac7f",
+     "primitive": "neural-builder",
+     "doc": "reassembly-md",
+     "unit": 0,
+     "text": "# Synthia / YOU-N-I-VERSE — master reassembly build",
+     "dimension": "Movement",
+     "words": [
+      "synthia",
+      "you-n-i-verse",
+      "master",
+      "reassembly",
+      "build"
+     ],
+     "source": {
+      "composition": "composition-bfae58e9",
+      "families": [
+       "cnn2d",
+       "highway",
+       "conv1d-net",
+       "unet",
+       "diffusion"
+      ],
+      "classIndex": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   },
+   "cynthia-core-pdf": {
+    "particles": 3468,
+    "composition": {
+     "id": "composition-33d57a67",
+     "nodes": 5,
+     "edges": 5,
+     "familiesAvailable": 36
+    },
+    "sample": {
+     "id": "nn-a4d76af1",
+     "primitive": "neural-builder",
+     "doc": "cynthia-core-pdf",
+     "unit": 0,
+     "text": "Here's a complete tech stack suggestion for building the Synthia Consciousness Simulator",
+     "dimension": "Being",
+     "words": [
+      "here",
+      "s",
+      "a",
+      "complete",
+      "tech",
+      "stack",
+      "suggestion",
+      "for",
+      "building",
+      "the",
+      "synthia",
+      "consciousness",
+      "simulator"
+     ],
+     "source": {
+      "composition": "composition-33d57a67",
+      "families": [
+       "graphsage",
+       "vanilla-rnn",
+       "mobilenet",
+       "highway",
+       "encoder-decoder"
+      ],
+      "classIndex": [
+       0,
+       2,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  "modelmaker": {
+   "spec-docx": {
+    "particles": 369,
+    "sample": {
+     "id": "mm-6b0e2b29",
+     "primitive": "modelmaker",
+     "doc": "spec-docx",
+     "unit": 1,
+     "text": "ion",
+     "dimension": "Being",
+     "words": [
+      "ion"
+     ],
+     "source": {
+      "tokenId": 282
+     }
+    }
+   },
+   "reassembly-md": {
+    "particles": 338,
+    "sample": {
+     "id": "mm-a21353c0",
+     "primitive": "modelmaker",
+     "doc": "reassembly-md",
+     "unit": 3,
+     "text": "ion",
+     "dimension": "Being",
+     "words": [
+      "ion"
+     ],
+     "source": {
+      "tokenId": 282
+     }
+    }
+   },
+   "cynthia-core-pdf": {
+    "particles": 428,
+    "sample": {
+     "id": "mm-e27bd6cc",
+     "primitive": "modelmaker",
+     "doc": "cynthia-core-pdf",
+     "unit": 0,
+     "text": "ion",
+     "dimension": "Being",
+     "words": [
+      "ion"
+     ],
+     "source": {
+      "tokenId": 282
+     }
+    }
+   }
+  },
+  "ato-foundry": {
+   "spec-docx": {
+    "particles": 23,
+    "parseErrors": {
+     "PARSE_INVALID_QUESTION": 264,
+     "PARSE_UNKNOWN_QUESTION": 3
+    },
+    "sample": {
+     "id": "ato-4cff1787",
+     "primitive": "ato-foundry",
+     "doc": "spec-docx",
+     "unit": 15,
+     "text": "The proposed system must remain usable without external LLMs, servers, or web workers wherever the existing browser/no-backend execution requirement applies",
+     "dimension": "Movement",
+     "words": [
+      "the",
+      "proposed",
+      "system",
+      "must",
+      "remain",
+      "usable",
+      "without",
+      "external",
+      "llms",
+      "servers",
+      "or",
+      "web",
+      "workers",
+      "wherever",
+      "existing",
+      "browser",
+      "no",
+      "backend",
+      "execution",
+      "requirement",
+      "applies"
+     ],
+     "source": {
+      "question": "WHERE",
+      "base": 1,
+      "atoRun": 1,
+      "atoAddress": "Space:G20.L2.C2.T2.B2"
+     }
+    }
+   },
+   "reassembly-md": {
+    "particles": 7,
+    "parseErrors": {
+     "PARSE_INVALID_QUESTION": 185,
+     "PARSE_UNKNOWN_QUESTION": 1
+    },
+    "sample": {
+     "id": "ato-75daf588",
+     "primitive": "ato-foundry",
+     "doc": "reassembly-md",
+     "unit": 10,
+     "text": "Do not reduce a supplied implementation to a description or reference when its executable source can be reused",
+     "dimension": "Being",
+     "words": [
+      "do",
+      "not",
+      "reduce",
+      "a",
+      "supplied",
+      "implementation",
+      "to",
+      "description",
+      "or",
+      "reference",
+      "when",
+      "its",
+      "executable",
+      "source",
+      "can",
+      "be",
+      "reused"
+     ],
+     "source": {
+      "question": "WHEN",
+      "base": 3,
+      "atoRun": 1,
+      "atoAddress": "Space:G20.L2.C2.T2.B2"
+     }
+    }
+   },
+   "cynthia-core-pdf": {
+    "particles": 264,
+    "parseErrors": {
+     "PARSE_INVALID_QUESTION": 3150,
+     "PARSE_UNKNOWN_QUESTION": 54
+    },
+    "sample": {
+     "id": "ato-b8844177",
+     "primitive": "ato-foundry",
+     "doc": "cynthia-core-pdf",
+     "unit": 199,
+     "text": "✅ What You’ve Got:",
+     "dimension": "Evolution",
+     "words": [
+      "what",
+      "you",
+      "ve",
+      "got"
+     ],
+     "source": {
+      "question": "WHAT",
+      "base": 2,
+      "atoRun": 1,
+      "atoAddress": "Space:G20.L2.C2.T2.B2"
+     }
+    }
+   }
+  }
+ }
+}

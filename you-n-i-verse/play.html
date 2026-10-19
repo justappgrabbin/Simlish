@@ -3,7 +3,7 @@
 <style>
 :root{color-scheme:dark;--top:#251038;--bottom:#090916;--accent:#ed55ca}*{box-sizing:border-box}
 body{margin:0;font:15px/1.45 system-ui,sans-serif;color:#eee8f7;background:linear-gradient(var(--top),var(--bottom)) fixed;min-height:100vh}
-header{padding:10px 12px;border-bottom:1px solid #ffffff22;display:flex;gap:10px;align-items:center;flex-wrap:wrap}header strong{letter-spacing:.06em}a{color:var(--accent)}
+header{background:#000b;padding:10px 12px;border-bottom:1px solid #ffffff22;display:flex;gap:10px;align-items:center;flex-wrap:wrap}header strong{letter-spacing:.06em}a{color:var(--accent)}
 main{padding:12px;max-width:960px;margin:auto}.card{background:#0008;border:1px solid #ffffff22;border-radius:12px;padding:10px 12px;margin:10px 0}.card h3{margin:0 0 6px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 input,select,button,textarea{font:inherit;background:#1b1b30;color:#eee;border:1px solid #38385e;border-radius:8px;padding:8px 10px}button{cursor:pointer;margin:2px}button.primary{background:var(--accent);color:#111;border-color:var(--accent)}
 label{display:block;margin:6px 0 2px;font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
@@ -11,7 +11,9 @@ label{display:block;margin:6px 0 2px;font-size:12px;color:var(--accent);text-tra
 #avatars{display:flex;gap:6px;overflow-x:auto}#avatars canvas{border:2px solid transparent;border-radius:8px;cursor:pointer;flex:0 0 auto}#avatars canvas.on{border-color:var(--accent)}
 .agents div,.log div{font:12px/1.35 ui-monospace,monospace;padding:2px 0;border-bottom:1px solid #ffffff11}.lesson{border-left:3px solid var(--accent);padding-left:8px}
 #morph svg{max-width:240px;height:auto}textarea{width:100%;min-height:120px;font:12px ui-monospace,monospace}
+body.ground-only>header,body.ground-only>main{display:none}
 </style></head><body>
+<canvas id="ground" aria-hidden="true" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;display:block"></canvas>
 <header><strong>✧ YOU-N-I-VERSE · PLAY &amp; BUILD</strong><span class="note">her game worlds + swarm agents · runs on this device · no internet</span><a href="guide.html">Guide</a><a href="world.html">World</a><a href="index.html">Studio</a><a href="synthia-app.html">Swarm</a></header>
 <main>
 <section class="card"><h3>1 · Your chart</h3>

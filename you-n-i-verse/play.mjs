@@ -11,10 +11,14 @@ import {readPersonalization} from './personalize.mjs';
 import {readProject} from './project-store.mjs';
 import {createAppServer} from './integrated/app-server.mjs';
 import {readFileSync,existsSync} from './vendor/youniverse-games-shims/fs.mjs';
+import {mountGround} from './integrated/four/field.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const loadBytes=async p=>{const r=await fetch(p);if(!r.ok)throw new Error(p+' '+r.status);return new Uint8Array(await r.arrayBuffer())};
 const loadJson=async p=>{const r=await fetch(p);if(!r.ok)throw new Error(p+' '+r.status);return r.json()};
 const store={get:k=>{try{return localStorage.getItem(k)}catch{return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch{}}};
+// Ground layer: five dimension streams of the real particles her four primitives emitted on her Drive docs (integrated/four).
+if(location.search.includes('ground=only'))document.body.classList.add('ground-only');
+const FOUR=await loadJson('./integrated/four/particles.json');const ground=mountGround($('ground'),FOUR.particles,{animate:!location.search.includes('selftest')});window.synthiaGround=ground;
 const srv=await createAppServer({loadJson,loadBytes,store,loadModel:false});window.synthiaPlay=srv;
 const call=(n,b)=>srv.handle('POST','/api/tool/'+n,b||{}).then(r=>{if(!r.ok)throw new Error(r.body.error||'failed');return r.body});
 const WORLD_COLORS={cosmic:{top:'#251038',bottom:'#090916',color:'#ed55ca'},forest:{top:'#183c29',bottom:'#06160f',color:'#54d27b'},ocean:{top:'#073f62',bottom:'#061324',color:'#44cdeb'},desert:{top:'#764a32',bottom:'#241b25',color:'#efb46c'}}; // values from studio.mjs
@@ -72,6 +76,6 @@ if(location.search.includes('selftest')){let ok=false,d={};try{
  const f0=sa.program.fingerprint,outs=[];for(const w of WORLDS){const e=await sa.enter(w);const r=await sa.choose(e.lesson.suggested);outs.push(w+':'+r.transition.outcome)}await sa.exit();
  const eb=await sb.enter('hd-rpg'),mem={d:{},getItem(k){return this.d[k]??null},setItem(k,v){this.d[k]=v}};
  const b=await sa.build({kind:'page',title:'selftest page',text:'<!doctype html><h1>t</h1>',worldTheme:'cosmic',storage:mem,write:(path,text)=>call('workspace.write',{path,text})});
- d={programA:f0,programB:sb.program.fingerprint,after:sa.program.fingerprint,outs,typeA:A.hd.type,rpgB:eb.entry.mechanics.type,transitions:sa.memory.transitions.length,chain:verifyMemory(sa.memory),built:b.written.length,status:b.report.status,agents:sa.agents.length,board:BOARD.length};
- ok=d.programA!==d.programB&&d.after!==d.programA&&d.chain&&d.transitions===WORLDS.length+1&&d.rpgB===B.hd.type&&d.built>=4&&b.written.every(w=>w.path?.startsWith('user/builds/'))}catch(e){d={error:String(e&&e.stack||e)}}
+ d={programA:f0,programB:sb.program.fingerprint,after:sa.program.fingerprint,outs,typeA:A.hd.type,rpgB:eb.entry.mechanics.type,transitions:sa.memory.transitions.length,chain:verifyMemory(sa.memory),built:b.written.length,status:b.report.status,agents:sa.agents.length,board:BOARD.length,fieldCoverage:ground.measure(),fieldParticles:FOUR.count,fieldLayers:ground.info.layers};
+ ok=d.programA!==d.programB&&d.after!==d.programA&&d.chain&&d.transitions===WORLDS.length+1&&d.rpgB===B.hd.type&&d.built>=4&&b.written.every(w=>w.path?.startsWith('user/builds/'))&&d.fieldCoverage===1&&d.fieldLayers===5&&d.fieldParticles>0}catch(e){d={error:String(e&&e.stack||e)}}
  console.log('PLAY_SELFTEST '+(ok?'PASS':'FAIL')+' '+JSON.stringify(d))}

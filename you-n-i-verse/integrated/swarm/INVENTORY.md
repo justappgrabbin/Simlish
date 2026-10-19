@@ -156,3 +156,17 @@ The five-base count is what her address specification (swarmdoc.md), Ra's quoted
 ## The 68-entry swarm registry
 
 `integrated/swarm/registry.json`: 68 swarms by reference with sha256 (referenced 6, not-connected 42, in-repo-reference 8, connected 11, connected-copy 1), plus 216 further swarm-named files found and listed so none is dropped.
+
+## Four primitives (2026-10-19 PT) — run on her Drive docs, `integrated/four/`
+
+Docs (Drive, read-only download): `Synthia_Semantic_Swarm_Master_Spec_v3.docx` (1qxNrFwu…), `REASSEMBLY_MASTER_BUILD.md` (1l4x0gpa…), `Cynthia core.pdf` (1HJ4C3De…; text via poppler pdftotext on the box, PDF itself not committed). Evidence: `four/RUN-EVIDENCE.json`; tests: `four/four.test.mjs` (18).
+
+| # | Primitive | Her code used (byte-identical in `four/originals`, sha256 in `four/PROVENANCE.json`) | Runs where | Particles docx / md / pdf |
+|---|---|---|---|---|
+| 1 | Tool factory | integrated-tool-factory v1.6.0 (`zips/_drive_x`), IntegratedToolFactory router + generate + execute | Node + WebView | 130 / 92 / 1298 (rest: router `unresolved`/`ambiguous`, her statuses) |
+| 2 | Neural net builder | pure-synthia v0.4.0 `src/synthia/neural/architectureModulation.mjs` (NeuralArchitectureRuntime: generateEmergentComposition + runComposition). Identification as "the neural net builder" is mine (INVESTIGATING): no file of hers is named that | Node + WebView | 290 / 193 / 3468 |
+| 3 | ModelMaker | Stellarproximology-lab@de9d32a `app.py` train_model(), unmodified (Python + torch, transformers 4.57.6) | box only (not in APK) | learned BPE tokens placed in units: 369 / 338 / 428 (vocab 1024, loss 6.02→5.70, 2 epochs) |
+| 4 | ATO engine + Foundry | ato-core (v0.6.8 sibling) + ATONativeBridge + pure-synthia `foundry/foundry-engine.mjs` FoundryEngine.compile | Node + WebView | 23 / 7 / 264 (only units that pass her one-question rule) |
+
+Where I looked for others: `zips/synthia-foundry-1__177c435f` (CommonJS Express + `@tensorflow/tfjs-node` NeuralFoundry — not pure JS, not used), `synthia_foundry_github_repo`, `FOUNDRY_SYNH_1` (Python `vc_llama_api.py` only), `Resonance-Foundry`, `Foundry-Glyphs` (React/TS), `neural_matrix`, the `Creating_a_Neural_Network_with_5-Mesh_13-Layer_Structure_*`/`resonance-neural-net-main*` zips, `toolFactory.js` (pure-synthia; imports `./stateSpace` without extension so it does not load in ESM — not used), Hugging Face spaces of `stellarproximology` (8 listed; none is a Foundry, neural builder or ModelMaker space; `stellarproximology/Modelmaker` is not listed publicly).
+FILLED (builder): unit split rule, particle ids (FNV-1a), neural input 4-vector and class→dimension, ModelMaker token→dimension, Foundry base→dimension, per-doc ship cap 120.

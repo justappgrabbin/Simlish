@@ -1,0 +1,188 @@
+SYNTHIA / SWARM-OS — SEMANTIC SWARM & FOUNDRY
+Master architecture, research integration, ingestion, composition, verification, and next-pass implementation specification
+Status: Approval-ready specification; no new implementation authorized by this document alone.  
+Date: 17 October 2026  
+Governing principle: The swarm is the code, the intelligence, the body, and the computer. Preserve the existing Synthia system and its original assets; verify before modifying.
+1. Purpose and scope
+This specification consolidates the user's explicit architecture corrections, dimensional pages, the four supplied Google Docs, the Blue I Ching reference, the DNA/motif/swarm research links, and the actual Semantic Swarm v2 checkpoint. The next pass must extend the existing Synthia swarm, not invent a replacement swarm, a separate backend, or a parallel architecture. Its first mission is to ingest the supplied classification sources, identify their finite qualities and relationships, resolve positions under user-supplied rules, compose through the existing mesh, and verify every placement against evidence. The long-term mission is executable recursive composition, including the construction of Foundry and further products.
+Scope discipline: A specification is not proof of implementation. Source text is evidence and vocabulary, not an automatic mandate to adopt every source's architecture. A user's direct corrections govern interpretation. No source is silently treated as experimentally validated science merely because it supplies a useful computational analogy. The proposed system must remain usable without external LLMs, servers, or web workers wherever the existing browser/no-backend execution requirement applies.
+2. Non-negotiable architecture decisions
+**ONE accumulating state space.** All imported files, semantic primitives, positional addresses, relations, provenance, histories, capabilities, swarmies, formations, and outputs refer to one logical state space. Distinct tables and views are allowed; separate competing foundational state spaces are not.
+**Four originating dimensions:** Movement, Evolution, Being, Design. Their qualities manifest through a macro/micro binary. **Space** is where embodied form is provisionally placed for this implementation, without asserting it must always be the embodiment domain. Some source pages call all five 'dimensions'; preserve that source classification separately from the user's four-plus-Space construction rule.
+**Macro/micro binary:** The macro expression remains available in the larger state space; the micro expression becomes an individual, embodied **swarmie**. Both retain a shared origin. The swarmie lives or expresses its quality, encounters other swarmies, affects and is affected by them, and can join larger formations. Original identity and experienced expression are separate fields.
+**Four foundational construction processes:** **ATO Engine, Tool Factory, Model Maker (identical to LLM Maker), Neural Encoder.** These are not products created by Foundry. They are the four processes that construct Foundry by composing the finite capabilities already available in the state space. Model Maker and LLM Maker must never be double-counted.
+**Five starter components:** the four foundational processes plus **Foundry** as the fifth, emergent constructed component. Foundry subsequently uses the same primitive capability inventory and formed processes to produce pages, programs, tools, apps, models, worlds, and other artifacts.
+**Finite capability basis, expansive compositions:** The system does not create capability ex nihilo. Novelty arises from arrangement, binding, parameterization, recombination, feedback, and execution of qualified existing capabilities. Unknown capabilities must be declared unavailable, discovered in existing assets, or added through an explicit reviewed extension.
+**Preserve and reuse:** Inspect Drive and GitHub originals, branches, patches, APKs, and zips first; clone before edits; append history; do not delete or gut functionality; do not introduce generic templates or redundant systems; do not bundle unused components.
+**Execution must be demonstrated:** A declared formation is not an executable engine. Every runtime claim requires reproducible tests, traces, and actual artifacts. Human Design is a qualitative hypothesis/measurement framework for the labs, not an automatic empirical validation of its claims.
+3. Architecture diagram
+USER-SUPPLIED SOURCES / EXISTING SYNTHIA CODE / RESEARCH
+       | ingest -> recognize -> resolve -> verify
+       v
+ONE STATE SPACE
+  finite capability registry + semantic concepts + position/address rules
+  source evidence + provenance + history + relationships + constraints
+       |
+       +--> FOUR ORIGINATING DIMENSIONS: Movement / Evolution / Being / Design
+       |       \--> MACRO (state-space expression) <--> MICRO (embodied swarmie)
+       |                                                   |
+       |                                       interactions / roles / formations
+       |                                                   |
+       +------------------- SEMANTIC SWARM / EXISTING MESH -+
+                                   |
+                        FOUR CONSTRUCTION PROCESSES
+          ATO Engine | Tool Factory | Model Maker = LLM Maker | Neural Encoder
+                                   |
+                            CONSTRUCT FOUNDRY
+                                   |
+             validated pages / programs / tools / apps / models / worlds
+                                   |
+                   evidence, results, feedback -> SAME STATE SPACE
+The diagram expresses conceptual dependency, not a claim that every arrow currently runs. The four dimensions are semantic/ontological origins; the four construction processes are functional assemblers. They are two different sets of four and must never be conflated.
+4. Semantic ontology and positional model
+4.1 Dimensional chains from user-supplied pages
+**Space / Personality Crystal / Personality:** Space -> Form -> Illusion -> Hearing -> Music -> Freedom; keynote 'I Communicate'. Another page associates Space with Personality, Presence / 'I Think'. Preserve both page-specific assertions.
+**Evolution / Personality Crystal / Mind:** Evolution -> Gravity -> Memory -> Taste -> Love -> Light; keynote 'I Remember'. Source-page nature words: Character, Separation, Nature, Integration, Spirit; Role.
+**Being / Design Crystal / Body:** Being -> Matter -> Touch -> Sex -> Survival; keynote 'I Am'. Nature words: Biology, Chemistry, Objectivity, Geometry, Trajectory; Genetics.
+**Design / Design Crystal / Ego:** Design -> Structure -> Progress -> Smell -> Life -> Art; keynote 'I Design'. Nature words: Homo Sapiens, Growth, Decay, Continuity, Manifestation; Self.
+**Movement / Magnetic Monopole / Individuality:** Movement -> Energy -> Creation -> Seeing -> Landscape -> Environment; keynote 'I Create'. Another page gives Uniqueness / 'I Define'. Nature words: Activity, Reaction, Limitation, Perspective, Relation.
+The source-page associations are attributed source statements, not scientific proof. A page also assigns Being to 'The Atom', while another assigns Body/Design Crystal; record distinct source claims without forced reconciliation.
+4.2 Five questions, axes, and address
+WHO -> Space -> Form -> Axon.
+WHAT -> Evolution -> Gravity -> Axion.
+WHERE -> Being -> Matter -> Arc-second.
+WHEN -> Movement -> Energy -> Axiom.
+WHY -> Design -> Structure -> Axis.
+Vertical: Movement / Being. Horizontal: Evolution / Space. Diagonal: Design.
+Public position fields: Center, Gate, Line, Color, Tone, Base; source models also include Zodiac, House, Axis and positional context. Private precision fields: Degree, Minute, Second. Respect the public/private boundary in user-facing output.
+Proportion of Perspective: a concept's interpretation depends on its occupied position and relations; never force one universal meaning on every appearance of a word.
+Six positions/lines: 1 Foundation—Forward Sequential; 2 Natural—Unbroken Natural; 3 Experimentation—Non-Linear/Loop; 4 Externalization—Outward Projection; 5 Projection—Universalizing; 6 Transition—Direct Terminal Leap.
+Base/Tone: 5 bases × 6 tones. Resonances: Base1 Movement ↔ Tone3 Action; Base2 Evolution ↔ Tone2 Uncertainty; Base3 Being ↔ Tone6 Acceptance; Base4 Design ↔ Tone1 Security; Base5 Space ↔ Tone6 Acceptance. Other matrix cells marked valid in supplied material, not automatically resonant. Source says resonance can amplify by 2; preserve as a specified rule requiring correct context, not a universal physical law.
+Tone/Color: T1 Security ↔ C1 Fear/C2 Hope (C6 Innocence incompatible); T2 Uncertainty ↔ C1 Fear/C2 Hope (C4 Need incompatible); T3 Action ↔ C3 Desire/C4 Need (C1 Fear incompatible); T4 Meditation ↔ C3 Desire/C4 Need (C5 Guilt incompatible); T5 Judgement ↔ C4 Need/C5 Guilt (C2 Hope incompatible); T6 Acceptance ↔ C5 Guilt/C6 Innocence (C1 Fear incompatible). All unspecified pairs are **unknown/not specified**, not inferred incompatible.
+Structural coordinates: 64 gates × 6 lines × 6 colors × 6 tones × 5 bases = **69,120** candidate addresses. These are possible structural combinations, not 69,120 verified valid embodiments. The 64 Gate archetypes, 64 six-bit I Ching states, and any 64 swarm types must remain separate identities unless an explicit source-grounded mapping links them.
+Granularity specified in source: Gate 5.625°, Line 56′15″, Color ~9′22.5″, Tone ~1′33.75″, Base ~18.75″. Validate exact arithmetic and origin/reference frame before production use; retain original precision and user privacy.
+Human Design layers: 64 gates, centers, channels, gate pairs/harmonics, lines and positions, exaltation/detriment, Black Book/word-bank material, zodiac/house and planetary associations, and biology claims where provided. Missing source mappings must remain marked incomplete, not filled by conjecture.
+5. Canonical state-space data contract
+Use existing tables and interfaces wherever possible. Proposed logical records, not a mandate to replace the existing schema:
+`source`: canonical URL/file ID, title, author/date/license where known, file hash, revision, type, extraction method, page/figure/table coordinates, original bytes pointer, confidence and limitations.
+`evidence_span`: immutable source location, original wording or data, page/row/figure/cell reference, extraction confidence, and content hash.
+`concept`: stable identity, canonical label, aliases, kind, dimensional origin, positional qualifiers, definition, source-specific interpretations.
+`relation`: subject, predicate, object, positional context, evidence spans, rule used, epistemic status (`source_explicit`, `derived`, `hypothesis`, `contradicted`, `unresolved`, `tested`), reviewer and history.
+`capability`: stable name, input/output contracts, preconditions, side effects, runtime environment, provenance, code location, executable status, tests and version.
+`origin`: originating quality and dimension; `manifestation`: paired macro/micro identities and mapping; `swarmie`: micro identity, embodied quality, current state, local interactions, role memberships, capabilities and append-only event stream.
+`formation`: composition graph, constituents, assigned roles, motif interfaces, constraints, state transitions, execution bindings, reconstruction recipe and validation results.
+`artifact`: Foundry output type, generated bytes/file, build trace, source and capability lineage, reproducibility test, runtime compatibility and delivery location.
+`test/observation`: hypothesis, method, controls, variables, qualitative and quantitative measurements, outcome, confidence, limitations, replication and negative results.
+Rules: Stable IDs; source revision awareness; no silent overwrite; deduplication by content hash without erasing multiple provenances; typed edges; append-only event records; recoverable histories; explicit unknowns and contradictions. A search hit or co-occurrence is not a validated causal relation.
+6. Five cooperating functions of the existing Synthia swarm
+6.1 Ingestion
+Accept .txt, .md, .docx, text-based .pdf, .json, .csv, .tsv, archives/repositories after safe unpacking, and eventually image/scanned PDFs. Preserve page and table structure, headings, footnotes, figure captions, glyphs, tables, classification rows, and source links. Track OCR/manual-transcription uncertainty where needed. Import incremental revisions without destructive replacement. Large-book ingestion must be resumable, bounded-memory, checkpointed, and auditable. A connector's text extraction is not necessarily the complete 6,000-page source; record actual bytes/pages covered.
+6.2 Recognition
+Extract candidate finite qualities, aliases, semantic roles, binary pairs, hierarchies, cross-references, positional labels, symbols, tables, and motifs. Distinguish exact terms, synonyms, analogies, homonyms, contradictory definitions, and unrecognized entities. Never silently promote a guessed analogy into a verified mapping.
+6.3 Positional resolution
+For each candidate answer WHAT, WHERE, WHY, WHO, WHEN where applicable; use address fields and user-supplied traversal, compatibility and perspective rules. Emit a resolution trace: evidence -> parsed claim -> applied rule -> candidate position -> alternatives -> final status. Preserve multiple valid contexts. The resolver should function without relying on an external LLM.
+6.4 Composition
+Use the existing state-space mesh and capability registry. Build motif connections only where interfaces/constraints permit. Maintain original constituent identities, relationships, and provenance. Swarmies can interact, assume roles, change formations, and affect one another. Distinguish symbolic composition from actual runnable execution. The four construction processes are the basis for assembling Foundry.
+6.5 Verification and memory
+Check source fidelity, address validity, constraint compatibility, conflicting claims, replayability, artifact execution and experimental results. Append every state transition and correction; do not destroy prior history. Provide human-readable 'why placed here' explanations with source page, exact rule, and confidence. Use an unresolved queue rather than inventing certainty.
+7. Macro/micro manifestation and swarmie lifecycle
+Identify a qualified originating quality and its four-dimensional association (or explicitly unknown association).
+Register its macro expression in the shared state space and a paired micro embodiment; preserve shared origin ID and separate state IDs.
+Instantiate a swarmie as a **real runtime instance only when an executable runtime exists**; otherwise mark it `described`/`simulated` rather than `active`.
+Expose only capabilities actually registered and supported; provide interaction interfaces and role constraints.
+Record encounters, influences, environmental context, changes in expression, and memberships. Do not silently overwrite the originating quality when behavior adapts.
+Permit swarmies to combine, split, rejoin, change role, and reconstruct formations while retaining traceable identity and history.
+Feed observations back to the same state space with source/experiment tags. Separate subjective semantic quality from measured computational behavior.
+Open design question for implementation testing: whether a swarmie's *originating quality* is immutable while its *expressed quality* changes, or whether identity-level transformation is allowed. Do not hardcode the answer without confirmation or a testable rule.
+8. Motif factory, DNA storage and reconstruction
+The existing motif_factory.py supports registration, adjacent interface-key checks, semantic assembly, a small set of DNA-sequence checks (GC ratio, homopolymers, reserved sequences, possible hairpins), validation logs and four basic tests. It is a limited computational analogy, not the full stochastic DNA motif-generation research implementation. Extend by: typed ports/keys; semantic/biological validator separation; compositional constraints and counterexamples; graph-level multi-way compatibility; reversible assembly recipes; redundant addressed packets; checksums/error detection; reconstruction under missing/corrupt members; and preservation of original constituent identities. Source the specific algorithm and constraints before claiming paper fidelity. Never equate DNA chemistry with semantics or assume a DNA motif can automatically execute code.
+9. Swarm coordination, local rules, roles, and learning
+Integrate only after inspecting existing implementations:
+Local encounter rules and interaction graphs; reproducible seeded simulations.
+Role allocation and reallocation based on capability, demand, constraints and formation requirements.
+Scheduling and task distribution; timeouts, retries, fairness and failure recovery.
+ACO-like trails, PSO-like candidate search, SDS-like partial hypothesis tests, and learned local rules as **separately measurable strategies**, not unquestioned universal mechanisms.
+Distinguish movement/visual formations from semantic, executable and neural formations; rendering styles (photorealistic, cartoon, other) are independent from identity and behavior.
+Metrics: completion, latency, resource cost, convergence, formation stability, reconstruction success, provenance coverage, error rate, and ability to recover after interruption.
+Prevent uncontrolled self-modification; gate new executable capability through validation, permission boundaries, rollback-free versioning and reproducible tests.
+10. The four construction processes and Foundry
+ATO Engine: assembly/operation orchestration, scheduling, invocation, transition handling, task graph and executable trace; exact implementation must be recovered from existing assets.
+Tool Factory: produces or binds typed tools from existing primitive capabilities, with executable interface contracts and validation.
+Model Maker = LLM Maker: assembles or configures language-model-like capability from available components and local model assets, where genuinely supported. It is one process, not two. No outside models should be silently introduced.
+Neural Encoder: encodes signals/relations/state into neural representations and transforms where a verified implementation exists; separate the symbolic encoding contract from an actually trained neural network.
+Foundry: fifth starter component constructed by the four processes, not their creator. It receives validated formation outputs and makes pages, programs, tools, apps, interfaces, worlds, or other artifacts. It must use original primitives and existing components rather than create parallel ones. Paper/Paper Seed/Paper Loom/Papermate/Notebook Paper/Cardstock, Studio/JavaShoppe, and app DNA are candidate existing Foundry capabilities to inspect and wire, not assumptions that they already work.
+Capability proof: Each process must show its code source, input contract, output contract, state-space binding, execution trace and tests. Foundry is working only after a generated artifact is executed/opened and its lineage verified.
+11. Existing system integration and preservation
+Priority recovery targets from existing Drive and GitHub: State Space Mesh; Universal Execution Spine; resolver; ATO Core/Klein Browser; Tool Factory; Onomata/automata ingestion; Synthia Autopoietic Assembly; Synthia Generative Address Morphology; Synthia DNA/RNA/Protein Translation; DNA Proportion of Perspective; Relational Algebra; Movement Temporal Mesh; Predictive Memory; Mesh Cognition Network; Model Maker; Neural Encoder; Paper family; Foundry; Hover 5.8; Echo/SynthAIPRODeploy; SynthAi2 admin app; YOU-N-I-VERSE; relevant branches and APKs. Also inspect the previously supplied Synthia v0.5.x patches and SWARM-OS repair checkpoints. This is a recovery checklist, not a claim these are all currently wired.
+Canonical repository account: https://github.com/justappgrabbin . Important names supplied by user include SynthAi, Synthai2, SynthAIPRODeploy, Synthia, SynthOS, State-space-and-execution-, LCM-State-space-, Resonance-Network, YOU-N-I-VERSE-related repositories, and https://github.com/Conway-Research/automaton . Confirm actual repository paths and branch names before editing; do not guess inaccessible repo URLs.
+Runtime requirements: browser-capable, local-first/no required backend, no web workers where user specifies, small local models only when appropriate, Klein tools (AUTOLING, Disseminator, Control of Style, Situation Router) and mesh as primary intelligence, system operational without LLMs, append-only history, phone-first Android/APK target, user-facing computer UI without exposed JSON, no unnecessary extra pages. The nine intended computer apps: Synthworld; YOU-N-I-VERSE; Foundry (Paper/Scryps and JavaShoppe); The Grove; Settings; Stellar Proximology (with Stellar Lab); Studio; Morph Chat/Phone; Indiverse. Preserve existing app behavior while wiring missing capabilities.
+12. Science, Human Design, and validation labs
+Human Design and astrology form a user-specified qualitative measurement and interpretive layer, including full gate/line/color/tone/base, centers, channels, positions, exaltation/detriment, planets, houses, aspects and relationship/group dynamics where source data permits. The system must also support genuine science labs: explicit hypotheses, variables, controls, sample provenance, negative results, repeatability, observer effects and competing explanations. Record the difference between mathematical structure, traditional symbolic interpretation, empirical correlation, and experimentally supported causal effect. The user's observations can generate hypotheses, not automatically settle them. A product claiming predictive or transformative results must test and report those claims with appropriate uncertainty.
+13. Research integration register — original links
+Primary user-owned sources
+Consciousness Causal Graph Master Architecture: https://docs.google.com/document/d/1dvrTl85zB43BXGK0H8n2YsJr-lZ5zFrzWl2bWvijKkk/edit
+isohuman: https://docs.google.com/document/d/1rv0P2PRmAHXL4gPC5sPGRhVKcp0J8zM2x1QRF7F14tw/edit
+Proportion of Perspective Working Report: https://docs.google.com/document/d/13bUu3Ya5PFaqv61BdQCTb40gDXowPW0m/edit
+Large classification / causal graph document: https://docs.google.com/document/d/1pRXTJGn5gwZvYuX2NQwKinM72HM2pU8arUS7KKK-nh0/edit
+Blue I Ching PDF: https://drive.google.com/file/d/1J-wS9wYa81af9dWgmUW_f5emZCZ1AtuQ/view
+User-supplied screenshots: 'The Crystals and the Monopole' (page 5), 'Macrocosmic/The Universe vs Microcosmic/Humanity' (page 115), four-dimension chart and related pages; retain screenshots as separate sources with their actual page identifiers.
+DNA and motif composition
+Brunmayr, Sella & Heinis, DNA data storage, generative tool for encoding motifs: https://www.researchgate.net/publication/382688591_DNA_data_storage_a_generative_tool_for_data_encoding_motifs
+FAST paper/presentation: https://www.usenix.org/conference/fast25/presentation/brunmayr
+Authors' shared resources: https://zenodo.org/records/12575601 and https://zenodo.org/records/12575387
+Cambridge DNA-storage reading: https://www.cl.cam.ac.uk/teaching/2223/Bioinfo/papers/DNA_storage.pdf
+Related DNA/I Ching preprint supplied earlier: https://doi.org/10.13140/RG.2.2.12452.60808
+Swarm, planning, reconstruction and distributed coordination
+The Mechanics of a Swarm: https://arxiv.org/html/2609.12748v2
+Swarm role-assignment article: https://pmc.ncbi.nlm.nih.gov/articles/PMC9696861/
+Fourth-order motif/task planning article: https://www.mdpi.com/2079-9292/12/3/692
+Swarm reconstruction scheduling/allocation figure: https://www.researchgate.net/figure/The-swarm-reconstruction-scheduling-allocation-algorithm_fig5_365378027
+NSF-hosted research PDF (provided twice; one canonical record): https://par.nsf.gov/servlets/purl/10541916
+AgentJet: https://arxiv.org/html/2606.04484v2
+Construction/swarm technology application: https://www.datumate.com/blog/swarm-technology-in-transportation-construction/
+Navigating the swarm / neural local rules: https://arxiv.org/abs/2407.11330
+Penn State dissertation (metadata/full text requires verification): https://etda.libraries.psu.edu/catalog/29144jfs5687
+Auburn Swarm Intelligence teaching PDF: https://www.eng.auburn.edu/~wilambm/nn/cn_org/14%20Swarm%20Intelligence_2.pdf
+Previously provided reference corpus
+User-designated PDFs include computational Bantu morphology, DNA-inspired computing and cryptography, DNA/I Ching codons, DNA linguistics, imagination and DNA, quantum-information claims about genetic code, biomolecular systems, programmable agent-cells, and DNA-functionalized molecular swarm semantics. Preserve their original filenames, citations and separate epistemic status when retrieved. These PDFs were designated as reference material, not automatic permission to change the architecture. Their complete bytes were not audited for this specification.
+14. Current verified checkpoint vs planned capabilities
+Files inspected in current workspace: /mnt/data/one_state_space/state_space.sqlite, ingest.py, motif_factory.py, source_page_chains.json, gates.csv, README.md, test_motif_factory.py, and the existing v2 ZIP. ingest.py supports TXT, MD, CSV, TSV, JSON as text; DOCX paragraphs/tables; and PDFs with extractable text; it deduplicates content hashes and records passage/known-term occurrences. Its relations_added is currently zero for newly ingested documents: it does not yet derive new source-grounded relationships automatically. seed() creates documented chains and conceptual macro/micro and formation records. motif_factory.py validates ordered motif interface keys and limited DNA constraints, records results, and offers a demonstration. Four basic tests are present, but a full system-level end-to-end validation has not been run as part of this spec. The README explicitly states that the full large document has not been ingested.
+Verified counts from previous project: 64 gate rows, 69,120 structural addresses, seeded macro/micro descriptions, basic motif definitions and assembly logging. These counts are structural; they are not evidence of an operational intelligent swarm.
+Unverified / not yet demonstrated: full 6,000-page ingestion, figure/table semantics for all pages, causal/positional resolver integration, live autonomous swarmies, role reallocation, executable four-process assembly, actual Foundry construction, neural training, LLM-making, offline APK release, real-world science-lab validation. Do not claim them complete until tested.
+Known correction needed: earlier prose described more complete dimensional chains than were initially stored; inspect actual rows and seed missing source mappings with traceable provenance. Existing formations currently describes an 'LLM-like Formation'; normalize the design to Model Maker = LLM Maker, and mark Foundry as constructed by the four processes, without destructive replacement of historical records.
+15. Next pass — gated implementation sequence
+Gate 0 — Preserve / baseline: snapshot and checksum the v2 checkpoint and original Drive/GitHub sources; record exact current SQLite schema and tests. Produce immutable before-state report.
+Gate 1 — Recover: inventory existing Synthia ingestion, mesh, resolver, ATO, Tool Factory, Model Maker/LLM Maker, Neural Encoder, and Foundry assets; distinguish implemented/wired/donor/broken/missing; inspect branches and avoid rebuilding existing capabilities.
+Gate 2 — Source coverage: import the Blue I Ching and all available classification pages with page, table and figure provenance; retain extraction completeness and limitations; create resumption checkpoints for large files.
+Gate 3 — Semantic qualification: extract dimensions, chains, 64-gate mappings, compatibility matrices, positions, symbols and candidate relationships. Classify explicit/derived/hypothesis/unresolved; compare two different pages and two different sources without collapsing their distinctions.
+Gate 4 — Positional resolver: connect the existing resolver and mesh to a typed relation/address contract. Emit an inspectable trace for each placement; test invalid/ambiguous cases and public/private fields.
+Gate 5 — Macro/micro and behavior: implement one real swarmie lifecycle in the existing runtime, including identity, local state, interaction, event history and measurable response to another swarmie. Do not simulate autonomy by changing only a database status flag.
+Gate 6 — Composition and recovery: validate a multi-swarmie formation, role assignment, reconfiguration, reconstruction and motif constraints. Measure success and failure, not just positive examples.
+Gate 7 — Four processes construct Foundry: bind the recovered ATO, Tool Factory, Model Maker/LLM Maker and Neural Encoder via finite capability contracts; demonstrate their role in constructing the existing Foundry component. Do not claim neural/LLM training unless it genuinely runs.
+Gate 8 — Foundry artifact: generate and verify one real page or executable program; include its full primitive/capability/source lineage and working offline path where applicable.
+Gate 9 — Lab and Android checks: demonstrate repeatable tests, adverse cases, resource measurements and an offline phone-first target; APK packaging only when relevant verified runtime is ready.
+Gate 10 — Delivery: publish updated ZIP/database/scripts/tests, audit report, exact file/branch provenance, known limitations, failures and next recommended pass. No placeholder screens or fake success claims.
+16. Acceptance criteria and minimum end-to-end demonstration
+The next pass must produce evidence for all claims:
+Import a selected Blue I Ching page and identify exact source/page and extraction method.
+Identify at least one explicit dimensional/positional relation, link it to its originating quality, and show source evidence.
+Compare the relation with another nonadjacent page or document; retain both formulations and unresolved differences.
+Resolve the relationship into the one state space with a reproducible WHO/WHAT/WHERE/WHEN/WHY trace where applicable.
+Demonstrate the macro/micro origin link and at least one actual runtime interaction between swarmie instances, if the recovered runtime supports it; otherwise report blocked with precise missing dependencies.
+Compose a validated formation and demonstrate failure behavior for an invalid one.
+Prove whether the four construction processes are executable/wired, donors, or missing; show actual tests rather than assuming their existence.
+If Foundry can be wired, produce an artifact and open/execute it. Otherwise deliver a specific integration blocker, not a fictional finished output.
+Verify append-only history, idempotent reingestion, conflict retention, interruption recovery, and non-destructive handling of originals.
+Include resource usage, repeatable commands, source links, hashes, test logs and an honest coverage statement (documents, pages, tables, figures and failures).
+17. Implementation safeguards and open questions
+Do not assume the Blue I Ching's text extraction captures all images/diagrams; page-image review is required where visual structure carries meaning.
+Do not interpret the user's 'binary' as a strict 0/1 digital bit unless separately specified: here it denotes macro/micro manifestation.
+Do not equate the five starter components with the five dimensional terms, or equate Model Maker with a second LLM Maker.
+Preserve ambiguity about which dimension governs embodiment outside the present Space convention.
+Preserve disagreements between source pages; no invented scientific consensus or false causal certainty.
+Clarify only when needed: transformation of swarmie originating identity versus expression; exact capability inventory and runtime contract after source audit; source-specific licensing and redistribution constraints; page completeness for the large classification document.
+Source authors' claims, user observations, and proposed computational analogies must be clearly distinguished in the UI, database and reports.
+Never perform uncontrolled external deployment, publishing, monetization, modification of live apps, or source deletion as part of this pass without explicit authorization.
+18. Definition of done
+A coherent implementation is not a diagram or a populated lookup table. It is a recoverable, source-grounded, testable, local-first Synthia capability that ingests supplied materials, understands relationships *operationally* by typed rules and verified traces, records macro/micro expressions, composes using existing primitive capabilities, and demonstrates at least one actual end-to-end formation/output—or reports precise evidence-backed blockers. All work remains inside one logical state space with preserved originals and append-only history.
+Approval boundary: This document is the proposed specification for the next pass. Approval authorizes the ordered recovery, integration, and tests above; it does not authorize discarding existing components, inventing substitute architecture, or claiming unverified intelligence.

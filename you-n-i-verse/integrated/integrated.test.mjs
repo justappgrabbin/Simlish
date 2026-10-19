@@ -25,8 +25,10 @@ test('no worker, backend, network or external dependency in the integration (ada
  const scan=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?scan(join(dir,e.name)):[join(dir,e.name)]);
  const files=scan(here).filter(f=>/\.(mjs|js)$/.test(f)&&!f.endsWith('.test.mjs')&&!f.includes('/reference/')&&(!f.includes('/swarm/originals/')||f.endsWith('-morph-search.mjs'))); // swarm/originals holds her untouched files by reference; only the one the app imports (morph-search) must satisfy these rules
  assert.ok(files.length>=20);
- for(const f of files){const t=readFileSync(f,'utf8').replace(/\/\/.*$/gm,'').replace(/\/\*[\s\S]*?\*\//g,'');
-  assert.ok(!/new\s+Worker\s*\(|new\s+SharedWorker|\bfetch\s*\(|XMLHttpRequest\s*\(|new\s+WebSocket|\brequire\s*\(/.test(t),f);
+ for(const f of files){const t=readFileSync(f,'utf8').replace(/\/\/.*$/gm,'').replace(/\/\*[\s\S]*?\*\//g,'')
+  const t2=f.endsWith('/four/originals/foundry/foundry-engine.mjs')?t.replace("require('crypto')",''):t; // her Foundry: Node-only sha256 fallback, reached only when crypto.subtle is absent (never in the WebView); her file is not edited
+
+  assert.ok(!/new\s+Worker\s*\(|new\s+SharedWorker|\bfetch\s*\(|XMLHttpRequest\s*\(|new\s+WebSocket|\brequire\s*\(/.test(t2),f);
   for(const m of t.matchAll(/(?:^|\n)\s*(?:import|export)\b[^;\n]*?\bfrom\s*['"]([^'"]+)['"]/g))assert.ok(m[1].startsWith('.')||((f.endsWith('demo.mjs')||f.endsWith('.build.mjs'))&&m[1].startsWith('node:')),f+' must import only local files (demo may use node: built-ins), got '+m[1])}
 });
 test('wheels per spec §2.1: Fu Xi Movement, Mawangdui Evolution, King Wen Space (read only); Being/Design investigating, nothing invented',()=>{

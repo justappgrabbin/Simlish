@@ -1,0 +1,251 @@
+{
+ "note": "every file under four/originals is byte-identical to the source named; four/*.mjs are the builder wrappers",
+ "modelmaker": {
+  "app": "/workspace/chassis-work/src/Stellarproximology-lab/Modelmaker-repair/app.py",
+  "repo": "justappgrabbin/Stellarproximology-lab@de9d32a",
+  "appSha256": "9e0f366feb1dab11d00b09f867f6a7c8151b5b7d71e07d6538c5c85a249671ff",
+  "note": "Python+torch, run on the box only; not shipped in the APK"
+ },
+ "originals": [
+  {
+   "path": "originals/tool-factory/src/ato-native-bridge.mjs",
+   "sha256": "3c484a57bf0221cf9a1ff05e7784113f7e7165048a357036e33b678c877c7af0",
+   "sourceSha256": "3c484a57bf0221cf9a1ff05e7784113f7e7165048a357036e33b678c877c7af0",
+   "origin": "her integrated-tool-factory v1.6.0 (Drive zip), src unchanged"
+  },
+  {
+   "path": "originals/tool-factory/src/integrated-tool-factory.mjs",
+   "sha256": "e22aefb46a5050f5212a712c1469457774a7e1e0a57b9537bbcbc75c9891a824",
+   "sourceSha256": "e22aefb46a5050f5212a712c1469457774a7e1e0a57b9537bbcbc75c9891a824",
+   "origin": "her integrated-tool-factory v1.6.0 (Drive zip), src unchanged"
+  },
+  {
+   "path": "originals/ato-core/src/activation.mjs",
+   "sha256": "a4d5237d820e9b5d754f531e348394af2e6b8b0e7f5196a5fd38f2bead372219",
+   "sourceSha256": "a4d5237d820e9b5d754f531e348394af2e6b8b0e7f5196a5fd38f2bead372219",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/address-space.mjs",
+   "sha256": "112504b2174240ab545fdab7243d62e60b7c9477f39a406919bd443dc9eee1dd",
+   "sourceSha256": "112504b2174240ab545fdab7243d62e60b7c9477f39a406919bd443dc9eee1dd",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/anomata.mjs",
+   "sha256": "91b2c1574637996244de42c1d9229425bcc2f24467599b54581a8a713e3b275c",
+   "sourceSha256": "91b2c1574637996244de42c1d9229425bcc2f24467599b54581a8a713e3b275c",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/association.mjs",
+   "sha256": "8b0d99de273beb5345b1a9166470860ff1959c09fb5ebb4c82d956692e64fee8",
+   "sourceSha256": "8b0d99de273beb5345b1a9166470860ff1959c09fb5ebb4c82d956692e64fee8",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/automaton.mjs",
+   "sha256": "6bea009b52bbad0d6ae37c38e0218aac3b226c47f74e37c11fa8995a5a34bdb5",
+   "sourceSha256": "6bea009b52bbad0d6ae37c38e0218aac3b226c47f74e37c11fa8995a5a34bdb5",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/autonomy.mjs",
+   "sha256": "ddbbbe767d2b0cd7056ec31d72a515db38d2c18e66f02d48b811f989bb918bc8",
+   "sourceSha256": "ddbbbe767d2b0cd7056ec31d72a515db38d2c18e66f02d48b811f989bb918bc8",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/boolean-ato.mjs",
+   "sha256": "ac47508bf355be809dfb3ce87eaa463527371f70da9ba9f410aefe3500d567e4",
+   "sourceSha256": "ac47508bf355be809dfb3ce87eaa463527371f70da9ba9f410aefe3500d567e4",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/bootstrap.mjs",
+   "sha256": "300881f8fb0ebaa316c2ba6fbd4c2fb9c8be720a4b3a4ca008c041e690d5863b",
+   "sourceSha256": "300881f8fb0ebaa316c2ba6fbd4c2fb9c8be720a4b3a4ca008c041e690d5863b",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/browser-form.mjs",
+   "sha256": "adb66eebd7cb3948f94bfd07f833ddb1833d37a9d232e659616da0cdb31c5dff",
+   "sourceSha256": "adb66eebd7cb3948f94bfd07f833ddb1833d37a9d232e659616da0cdb31c5dff",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/companion.mjs",
+   "sha256": "a0559685a2ce475d959a09487f643e6096284cd323dc15915e52c4344b12e21f",
+   "sourceSha256": "a0559685a2ce475d959a09487f643e6096284cd323dc15915e52c4344b12e21f",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/computational-grammar-coder.mjs",
+   "sha256": "7b4034dda1e301061a1aaf844cc25a9d4d96a0d98ba1dba40c02abf36a567d1c",
+   "sourceSha256": "7b4034dda1e301061a1aaf844cc25a9d4d96a0d98ba1dba40c02abf36a567d1c",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/emergence.mjs",
+   "sha256": "ec857e0ded2a8cab8cbd4d823057278eca080a2d30be6c6c4981da1309bb4e1c",
+   "sourceSha256": "ec857e0ded2a8cab8cbd4d823057278eca080a2d30be6c6c4981da1309bb4e1c",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/entry.mjs",
+   "sha256": "c13d3e706216c1729adbcd562ff7f8ad4e47f1b617e6d452626ce1ab2b337f94",
+   "sourceSha256": "c13d3e706216c1729adbcd562ff7f8ad4e47f1b617e6d452626ce1ab2b337f94",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/expression.mjs",
+   "sha256": "d7ba0a85e25c1397514d56ede6dcf491b540d234fc31523bf18eb69987eedfe8",
+   "sourceSha256": "d7ba0a85e25c1397514d56ede6dcf491b540d234fc31523bf18eb69987eedfe8",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/families.mjs",
+   "sha256": "37b06bf5ff2c4a13e70da1a50ae3c5f82921f4a08e90b31f7b0367c6a8fac7a7",
+   "sourceSha256": "37b06bf5ff2c4a13e70da1a50ae3c5f82921f4a08e90b31f7b0367c6a8fac7a7",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/gate-address.mjs",
+   "sha256": "a911a836dd0c30033ed7325738b33a5f9aa81627a8d72675cec253a652c1c968",
+   "sourceSha256": "a911a836dd0c30033ed7325738b33a5f9aa81627a8d72675cec253a652c1c968",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/gate-data.mjs",
+   "sha256": "dd24ad3aa87e8fedbc2ae3e47348e7cabdd7bf05d870e93d5f7c7d5b73b4e67b",
+   "sourceSha256": "dd24ad3aa87e8fedbc2ae3e47348e7cabdd7bf05d870e93d5f7c7d5b73b4e67b",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/generative-emergence.mjs",
+   "sha256": "1f26522f86e31468f3906bd565b73f4531dc73da67dffd570bc254d4a1a000ef",
+   "sourceSha256": "1f26522f86e31468f3906bd565b73f4531dc73da67dffd570bc254d4a1a000ef",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/host.mjs",
+   "sha256": "6b2622d4cf9274fc209fdf4dca24654cbd7ee82c3af611dcd553c1be06f2f115",
+   "sourceSha256": "6b2622d4cf9274fc209fdf4dca24654cbd7ee82c3af611dcd553c1be06f2f115",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/iching.mjs",
+   "sha256": "73c064adf78e19846db838de219fb34a287955dc76009461a93c2eae25777a2b",
+   "sourceSha256": "73c064adf78e19846db838de219fb34a287955dc76009461a93c2eae25777a2b",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/index.mjs",
+   "sha256": "e66e207f3b85ee14d632e5a35d2a1f202e4390c707895c1963211f8f2bcc1baf",
+   "sourceSha256": "e66e207f3b85ee14d632e5a35d2a1f202e4390c707895c1963211f8f2bcc1baf",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/interpretations.mjs",
+   "sha256": "400e14cdf3da42936ba4ba80396fda405c3113f6bc4133dddb478a54bc0a3c20",
+   "sourceSha256": "400e14cdf3da42936ba4ba80396fda405c3113f6bc4133dddb478a54bc0a3c20",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/king-wen.mjs",
+   "sha256": "74ff6042b7933cc174dce1bbeab9a061db75a66e2e149eb40e62b871943bf245",
+   "sourceSha256": "74ff6042b7933cc174dce1bbeab9a061db75a66e2e149eb40e62b871943bf245",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/klein-iching.mjs",
+   "sha256": "58d2030f5e2afddac16d519c04349318732dcaabb3f3c34578ef9a56475102ca",
+   "sourceSha256": "58d2030f5e2afddac16d519c04349318732dcaabb3f3c34578ef9a56475102ca",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/klein-tools.mjs",
+   "sha256": "415b32db25d3d59b031beebe17967dab5af177f9704d4d88c8cc5fd7fcaaab3e",
+   "sourceSha256": "415b32db25d3d59b031beebe17967dab5af177f9704d4d88c8cc5fd7fcaaab3e",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/media-renderers.mjs",
+   "sha256": "743897c2e608bc3dda5e78bd6b292877643ecb338244ff7c57c099040c0b8340",
+   "sourceSha256": "743897c2e608bc3dda5e78bd6b292877643ecb338244ff7c57c099040c0b8340",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/organism.mjs",
+   "sha256": "ceec86cc83a1ca5ff5a32391130115fbd38310e8c2023fc11ec25eb2adefbef4",
+   "sourceSha256": "ceec86cc83a1ca5ff5a32391130115fbd38310e8c2023fc11ec25eb2adefbef4",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/promotion.mjs",
+   "sha256": "86870caaef06276d2631ab8c726787533ad081e1d73d076aa7531de8c629bf83",
+   "sourceSha256": "86870caaef06276d2631ab8c726787533ad081e1d73d076aa7531de8c629bf83",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/quality-transfer.mjs",
+   "sha256": "52f2aa13a35e7595f3bb618aa6faab0ba7a6a67bb8a95e3d6c97be2d70e560a2",
+   "sourceSha256": "52f2aa13a35e7595f3bb618aa6faab0ba7a6a67bb8a95e3d6c97be2d70e560a2",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/research-browser.mjs",
+   "sha256": "ba99546d93ffa200e19570ee4e3ac2745b5772d4dc43416b35f2f6fd545c4be8",
+   "sourceSha256": "ba99546d93ffa200e19570ee4e3ac2745b5772d4dc43416b35f2f6fd545c4be8",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/shell-bridge.mjs",
+   "sha256": "342cfb68912a3e2af02501d1571f7d947da7fac008bbaffe8620cf5201992b23",
+   "sourceSha256": "342cfb68912a3e2af02501d1571f7d947da7fac008bbaffe8620cf5201992b23",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/state-space-kernel.mjs",
+   "sha256": "b3064f06c724b21a1fbdede3a991abcdda5d8d1d098b52ba7891ea165ca7de68",
+   "sourceSha256": "b3064f06c724b21a1fbdede3a991abcdda5d8d1d098b52ba7891ea165ca7de68",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/success.mjs",
+   "sha256": "ea77603b6ea8c28a1974cc50a1c3c0cca62c61bb68c7fe1f5fb00d682a1f7aff",
+   "sourceSha256": "ea77603b6ea8c28a1974cc50a1c3c0cca62c61bb68c7fe1f5fb00d682a1f7aff",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/tray.mjs",
+   "sha256": "0dd7001f52a394178856ac4b904ae77b3e160de59e3affcfddcf87ba7dd2573f",
+   "sourceSha256": "0dd7001f52a394178856ac4b904ae77b3e160de59e3affcfddcf87ba7dd2573f",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/ato-core/src/workspace.mjs",
+   "sha256": "025100b083d0f06e774d1111b730718c925a573b196b25c2c09f08ac222605f6",
+   "sourceSha256": "025100b083d0f06e774d1111b730718c925a573b196b25c2c09f08ac222605f6",
+   "origin": "her ato-core from synthia-browser-continuation-v0.6.8 (the factory sibling; see swarm/repairs/repairs.json)"
+  },
+  {
+   "path": "originals/foundry/foundry-engine.mjs",
+   "sha256": "53e0b52fbea6ccce16b85f49fa4cb60432884ef5d81d9564abbdecda399d1607",
+   "sourceSha256": "53e0b52fbea6ccce16b85f49fa4cb60432884ef5d81d9564abbdecda399d1607",
+   "origin": "her pure-synthia-v0.4.0 src/synthia/foundry (Hover v0.5.8 vendor)"
+  },
+  {
+   "path": "originals/neural/architectureModulation.mjs",
+   "sha256": "84581793329da704b60ca58bf8c30d4f0c6294c65cdb70cf3d4bdbb081516702",
+   "sourceSha256": "84581793329da704b60ca58bf8c30d4f0c6294c65cdb70cf3d4bdbb081516702",
+   "origin": "her pure-synthia-v0.4.0 src/synthia/neural (NeuralArchitectureRuntime, the neural net builder)"
+  },
+  {
+   "path": "originals/dimension-visual/dimension-visual-core.mjs",
+   "sha256": "d393d803553ba8e8f92240b52900fffd445d72691d956a1fd8f193c96a5f45df",
+   "sourceSha256": "d393d803553ba8e8f92240b52900fffd445d72691d956a1fd8f193c96a5f45df",
+   "origin": "repo reference copy of the dimension-visual core.mjs, made importable"
+  }
+ ]
+}
