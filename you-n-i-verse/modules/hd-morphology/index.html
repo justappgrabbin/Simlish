@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HD Morphology · Body, science and Human Design layers</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#panel">Skip to details</a>
+<header>
+  <h1>Body map: science and Human Design, kept apart</h1>
+  <p class="lede">Choose a center or an organ, then zoom: body → organ/gland → cell → DNA → codon → amino acid.
+  Every line is labelled with where it comes from.</p>
+  <ul class="legend" aria-label="Layer legend">
+    <li><span class="badge layer-science">SCIENCE</span> established, published science (cited)</li>
+    <li><span class="badge layer-hd">HD</span> Human Design correspondence as its texts state it, not proven</li>
+    <li><span class="badge layer-hd variant">PROJECT</span> one of your own project tables, shown beside HD</li>
+    <li><span class="badge layer-unsourced">UNSOURCED</span> filled in by this module, no source</li>
+  </ul>
+</header>
+<main>
+  <section class="map" aria-label="Body map">
+    <svg id="body" viewBox="0 0 300 640" role="group" aria-label="Body map with nine Human Design centers and science organ markers"></svg>
+    <p class="hint">Tab to a center or organ and press Enter. Esc goes back up one scale. Drawing is not to scale <span class="badge layer-unsourced">UNSOURCED</span>.</p>
+  </section>
+  <section id="panel" class="panel" aria-live="polite" tabindex="-1">
+    <nav aria-label="Scale"><ol id="scales" class="scales"></ol></nav>
+    <div id="detail"></div>
+  </section>
+</main>
+<section class="wide" aria-labelledby="gates-h"><h2 id="gates-h">64 gates</h2><div id="gates" class="gates" role="list"></div><div id="gate-detail" aria-live="polite"></div></section>
+<section class="wide" aria-labelledby="mm-h"><h2 id="mm-h">Flagged mismatches <small>(computed from the data)</small></h2><div id="mismatches"></div>
+  <details><summary>Checks that came out consistent</summary><ul id="checks"></ul></details></section>
+<section class="wide" aria-labelledby="code-h"><h2 id="code-h">Standard genetic code <span class="badge layer-science">SCIENCE</span></h2><div id="code"></div></section>
+<section class="wide" aria-labelledby="src-h"><h2 id="src-h">Sources</h2><div id="sources"></div></section>
+<footer><p>Pure JavaScript, runs offline. No LLM, no backend. Your locked rule: four primitives (Movement, Evolution, Being, Design); Space is not a primitive. This module assigns no primitive to any body part.</p></footer>
+<script type="module">import { mount } from './src/view.mjs'; mount(document);</script>
+</body>
+</html>
