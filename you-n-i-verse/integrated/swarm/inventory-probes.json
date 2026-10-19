@@ -723,7 +723,7 @@
    "cmd": "node --test state-space.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 254,
+   "ms": 257,
    "tail": "pass 10 fail 0"
   },
   {
@@ -732,7 +732,7 @@
    "cmd": "node --test integrated/abc.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 272,
+   "ms": 266,
    "tail": "pass 3 fail 0"
   },
   {
@@ -741,7 +741,7 @@
    "cmd": "node --test address-resolution.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 260,
+   "ms": 273,
    "tail": "pass 3 fail 0"
   },
   {
@@ -750,7 +750,7 @@
    "cmd": "node --test integrated/swarm/swarm.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 931,
+   "ms": 986,
    "tail": "pass 13 fail 0"
   },
   {
@@ -759,7 +759,7 @@
    "cmd": "node --test studio.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 282,
+   "ms": 269,
    "tail": "pass 4 fail 0"
   },
   {
@@ -768,7 +768,7 @@
    "cmd": "node --test integrated/integrated.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 1288,
+   "ms": 1385,
    "tail": "pass 12 fail 0"
   },
   {
@@ -777,7 +777,7 @@
    "cmd": "node --test rig-format.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 244,
+   "ms": 230,
    "tail": "pass 2 fail 0"
   },
   {
@@ -786,7 +786,7 @@
    "cmd": "node --test integrated/app-server.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 1251,
+   "ms": 1237,
    "tail": "pass 13 fail 0"
   },
   {
@@ -795,7 +795,7 @@
    "cmd": "node --test animation.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 231,
+   "ms": 218,
    "tail": "pass 2 fail 0"
   },
   {
@@ -804,7 +804,7 @@
    "cmd": "node --test integrated/population.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 598,
+   "ms": 551,
    "tail": "pass 12 fail 0"
   },
   {
@@ -813,7 +813,7 @@
    "cmd": "node --test integrated/trident-js.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 3880,
+   "ms": 3346,
    "tail": "pass 4 fail 0"
   }
  ]

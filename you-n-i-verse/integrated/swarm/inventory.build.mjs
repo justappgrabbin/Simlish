@@ -14,6 +14,7 @@ const runOne=id=>new Promise(res=>{const file=id.slice(10),t0=Date.now();let buf
 let q=[...repoIds],done=[];await Promise.all([0,1,2,3].map(async()=>{while(q.length)done.push(await runOne(q.shift()))}));
 pr.probes=pr.probes.filter(p=>!p.id.startsWith('repo-test:')).concat(done);writeFileSync(join(HERE,'inventory-probes.json'),JSON.stringify(pr,null,1));
 const probe=new Map(pr.probes.map(p=>[p.id,p]));
+if(existsSync(join(HERE,'repairs','repairs.json')))for(const r of JSON.parse(readFileSync(join(HERE,'repairs','repairs.json'),'utf8')).repairs){const v=r.results.repairedNode22||r.results.repaired;probe.set('repair:'+r.id,{id:'repair:'+r.id,cmd:v.cmd,cwd:v.cwd,status:v.exit===0&&v.fail===0?'pass':'fail',tail:`pass ${v.pass} fail ${v.fail} (repaired working copy; original unrepaired: ${r.results.originalUnrepaired.pass}/${r.results.originalUnrepaired.tests})`})}
 const abs=p=>p.startsWith('repo:')?join(REPO,p.slice(5)):join(W,p);
 const rows=[],problems=[];
 for(const r of ROWS){const files=[];for(const f of r.files){const p=abs(f.path);if(!existsSync(p)){problems.push(r.id+': file missing '+f.path);continue}const st=statSync(p),text=st.size<3e6&&/\.(m?js|py|json|md|ts)$/.test(p)?readFileSync(p,'utf8'):null;

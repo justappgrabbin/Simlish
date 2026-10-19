@@ -1,0 +1,300 @@
+{
+ "schema": "synthia-repairs/1",
+ "repairs": [
+  {
+   "id": "hover-klein-dist",
+   "problem": "Hover test files fail: vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist missing (registered-app-runtime.mjs line 5-6 require it)",
+   "original": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+   "originalUntouched": true,
+   "fix": "working copy of the whole Hover tree + dist/ from her own donor zip",
+   "source": {
+    "zip": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/trainable-assembly-v0.4.2/donors/klein-mesh-game-engine-v5.1-FIXED(2).zip",
+    "zipSha256": "03c9501646c5616458c98032defef99b8ba0c527162f73414be2373733150fb1",
+    "sourcesIdentical": [
+     {
+      "file": "ato-engine.ts",
+      "identical": true
+     },
+     {
+      "file": "core-engine.ts",
+      "identical": true
+     },
+     {
+      "file": "gamengen-adapter.ts",
+      "identical": true
+     },
+     {
+      "file": "index.ts",
+      "identical": true
+     },
+     {
+      "file": "klein-full-toolkit.ts",
+      "identical": true
+     },
+     {
+      "file": "klein-mesh-game-engine.ts",
+      "identical": true
+     },
+     {
+      "file": "pipeline.ts",
+      "identical": true
+     },
+     {
+      "file": "sensory-adapter.ts",
+      "identical": true
+     }
+    ]
+   },
+   "added": [
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/ato-engine.d.ts",
+     "bytes": 5563,
+     "sha256": "f5c1411d2051620911f2b85e54b6e7537ef155ccfa137a23f4b6c34226acf825"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/ato-engine.d.ts.map",
+     "bytes": 4392,
+     "sha256": "6f4c11e944ca987fda35bb88f70d331d275d4319d6796e5337e32b7ea5883d54"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/ato-engine.js",
+     "bytes": 20383,
+     "sha256": "bf6182d5235b96f4ee7f0019c5528433bf5046bd660e610abe533c9d93a6a5ff"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/ato-engine.js.map",
+     "bytes": 21516,
+     "sha256": "f359026e304c952dcec4ba95ad401fe760d72eb807ba2f78a32b2f5bc5b10ebb"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/core-engine.d.ts",
+     "bytes": 5661,
+     "sha256": "a63581c5b39d8eef4ee7314372b447ab087281718fcfce6f65b8f03758ee1338"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/core-engine.d.ts.map",
+     "bytes": 4678,
+     "sha256": "5cb852705880af24f8257d7910197f721c917abdac7bb6cffe41e324e0742d43"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/core-engine.js",
+     "bytes": 32875,
+     "sha256": "06e54070f8d735219a0c5872b5a60932c817008687777322a033576113c730b7"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/core-engine.js.map",
+     "bytes": 30294,
+     "sha256": "27d4250636374da4d1ba585e9de52d3e8e2f6e4dcd27dea5cdb999abfdb82fa6"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/gamengen-adapter.d.ts",
+     "bytes": 3307,
+     "sha256": "f561cf918e68c19a1144062dc73266dc5239e49e085cde00137342f60fdace35"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/gamengen-adapter.d.ts.map",
+     "bytes": 2310,
+     "sha256": "c5cc77625f9fbe960932536e94198195950b77ce624d077288072b99c87e16e4"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/gamengen-adapter.js",
+     "bytes": 4932,
+     "sha256": "f977ec2ce371105f95538b81a041035ed35aa7783457015cbf69998e2be5623c"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/gamengen-adapter.js.map",
+     "bytes": 4183,
+     "sha256": "1c9c1496ddf446be0be16504a367b6d1e8adf3b69a7bbcd8088b91488900e570"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/index.d.ts",
+     "bytes": 1743,
+     "sha256": "e8f72f8a3c8fcd598c7555b654a3e6152bb66b2e7736fa4af18ef5a5f31e3d53"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/index.d.ts.map",
+     "bytes": 1147,
+     "sha256": "e904d20cb8457607e65453b2f3755feb8573c493a2cd41aad21e13b2c74f5611"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/index.js",
+     "bytes": 6437,
+     "sha256": "34d98c6197b8fc7d0c6a134a7f5f52f135408dd690234b02cb5357559e6e54c5"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/index.js.map",
+     "bytes": 1027,
+     "sha256": "e76b955539888c5766c857b3a311e843327ec835537b01077ee292f8b026c4b0"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-full-toolkit.d.ts",
+     "bytes": 6994,
+     "sha256": "49aae0604a1e1aa80540c6d5c1d3a1e8894f059fce56b20ad45230e5270d0246"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-full-toolkit.d.ts.map",
+     "bytes": 5904,
+     "sha256": "82bebe42f86763d059fcf8b8acfdd7c8cdb616a3d36bf9257353502bbf6ef92e"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-full-toolkit.js",
+     "bytes": 32294,
+     "sha256": "4698725e4a78d3a9e0e6ad1e150093829ba2b7a6198404806e2fd02f765b9360"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-full-toolkit.js.map",
+     "bytes": 30854,
+     "sha256": "66b035e7b52a820dadb8ac874414e617b48f93a10f17041b9e2249271b88aedc"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-mesh-game-engine.d.ts",
+     "bytes": 7630,
+     "sha256": "70c7765ba8d54fa8ce563dc0059a51479ff19bbc5a7035be45d1170aba4d04b9"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-mesh-game-engine.d.ts.map",
+     "bytes": 6068,
+     "sha256": "f61f95fbb23eb98d5e61ef922c1db843ac19a6684c462e35a70d45b2edf36330"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-mesh-game-engine.js",
+     "bytes": 34228,
+     "sha256": "83abf0d87e3d651aef3a84177aefd572fc12dcb8502c39ce4e6386449b44f8e9"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/klein-mesh-game-engine.js.map",
+     "bytes": 36385,
+     "sha256": "7e08f1b85d1d2ceb1f652750592a991c2d26a29f0429d92fee5db5b28f528f03"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/pipeline.d.ts",
+     "bytes": 6442,
+     "sha256": "1d5a07a6daab29b9af3a8551125fa963938969da5bfc0b9189e7cde5e522d2e4"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/pipeline.d.ts.map",
+     "bytes": 3048,
+     "sha256": "064c7a1a66f95778a49eba0f5dfa5f9a881d54d0c6b368ab649a68366542a3cc"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/pipeline.js",
+     "bytes": 21777,
+     "sha256": "d599057d1b286a2f8ac5a24c5e4342c4f28cc821c7aa3a6e840cab8515292008"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/pipeline.js.map",
+     "bytes": 16674,
+     "sha256": "668a0fae81f40ccf1259a6edc7faff6c806ec41572e8411a4b169529974f9cb7"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/sensory-adapter.d.ts",
+     "bytes": 5349,
+     "sha256": "268ce3d77b20e98fc7998d4f9377adceb027665c643304f94cd9f8a573f93898"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/sensory-adapter.d.ts.map",
+     "bytes": 3912,
+     "sha256": "b2276244bf402273acce2eb91d4b84cafe5b9b8875a6a1c46b9abe7c2597a2a8"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/sensory-adapter.js",
+     "bytes": 10713,
+     "sha256": "c2791425be0221b5143a9cb03e896c446c7405cb039c61af2958890d0e40e822"
+    },
+    {
+     "path": "vendor/klein-mesh-game-engine-v5.1/kmge_v5_fixed/dist/sensory-adapter.js.map",
+     "bytes": 8864,
+     "sha256": "c3abb072947c6af9938f74a75c0f05a6b794fd72d07a7d3ed5c6a52b007ce38e"
+    }
+   ],
+   "results": {
+    "originalUnrepaired": {
+     "cmd": "node --test --test-concurrency=1 test/01-primitives.test.mjs test/02-live-pipelines.test.mjs test/03-autonomy-governance.test.mjs test/04-organism-federation.test.mjs test/05-twenty-task-autonomy.test.mjs test/06-cultivation-core.test.mjs test/07-state-space-forms.test.mjs test/08-exact-recall-and-coordination.test.mjs test/09-front-screen.test.mjs test/10-agent-genome.test.mjs test/11-birth-mirror-runtime.test.mjs test/12-dna-linguistic-runtime.test.mjs test/13-dna-perception-neural-runtime.test.mjs test/14-proportion-perspective-dna.test.mjs test/15-biological-translation-runtime.test.mjs test/16-relational-operator-runtime.test.mjs test/17-movement-temporal-experience.test.mjs test/18-canonical-morph-integration.test.mjs test/19-solo-hover-shell.test.mjs test/20-hover-task-worker.test.mjs test/20-solo-tool-factory.test.mjs test/21-synthia17-resident.test.mjs test/android-hand-adapter.test.mjs",
+     "cwd": "<W>/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8",
+     "exit": 1,
+     "tests": 27,
+     "pass": 6,
+     "fail": 21,
+     "ms": 13023
+    },
+    "repairedNode20": {
+     "cmd": "node --test --test-concurrency=1 test/01-primitives.test.mjs test/02-live-pipelines.test.mjs test/03-autonomy-governance.test.mjs test/04-organism-federation.test.mjs test/05-twenty-task-autonomy.test.mjs test/06-cultivation-core.test.mjs test/07-state-space-forms.test.mjs test/08-exact-recall-and-coordination.test.mjs test/09-front-screen.test.mjs test/10-agent-genome.test.mjs test/11-birth-mirror-runtime.test.mjs test/12-dna-linguistic-runtime.test.mjs test/13-dna-perception-neural-runtime.test.mjs test/14-proportion-perspective-dna.test.mjs test/15-biological-translation-runtime.test.mjs test/16-relational-operator-runtime.test.mjs test/17-movement-temporal-experience.test.mjs test/18-canonical-morph-integration.test.mjs test/19-solo-hover-shell.test.mjs test/20-hover-task-worker.test.mjs test/20-solo-tool-factory.test.mjs test/21-synthia17-resident.test.mjs test/android-hand-adapter.test.mjs",
+     "cwd": "<W>/scratch/repairs/hover-klein-dist/Synthia-Solo-Hover-v0.5.8",
+     "exit": 1,
+     "tests": 56,
+     "pass": 55,
+     "fail": 1,
+     "ms": 61249
+    },
+    "repairedNode22": {
+     "cmd": "<W>/node22/bin/node --test --test-concurrency=1 test/01-primitives.test.mjs test/02-live-pipelines.test.mjs test/03-autonomy-governance.test.mjs test/04-organism-federation.test.mjs test/05-twenty-task-autonomy.test.mjs test/06-cultivation-core.test.mjs test/07-state-space-forms.test.mjs test/08-exact-recall-and-coordination.test.mjs test/09-front-screen.test.mjs test/10-agent-genome.test.mjs test/11-birth-mirror-runtime.test.mjs test/12-dna-linguistic-runtime.test.mjs test/13-dna-perception-neural-runtime.test.mjs test/14-proportion-perspective-dna.test.mjs test/15-biological-translation-runtime.test.mjs test/16-relational-operator-runtime.test.mjs test/17-movement-temporal-experience.test.mjs test/18-canonical-morph-integration.test.mjs test/19-solo-hover-shell.test.mjs test/20-hover-task-worker.test.mjs test/20-solo-tool-factory.test.mjs test/21-synthia17-resident.test.mjs test/android-hand-adapter.test.mjs",
+     "cwd": "<W>/scratch/repairs/hover-klein-dist/Synthia-Solo-Hover-v0.5.8",
+     "exit": 0,
+     "tests": 56,
+     "pass": 56,
+     "fail": 0,
+     "ms": 48936
+    }
+   },
+   "note": "test/19-solo-hover-shell uses the global WebSocket (Chrome DevTools), which Node 20 does not define; Node >= 22 has it. Her package.json says \"node\": \">=20\", so on Node 20 that one file still fails. Not changed."
+  },
+  {
+   "id": "tool-factory-ato-sibling",
+   "problem": "1 of 9 test files fails standalone: missing sibling ato-core-native-test/ (her DATASET_PROVENANCE.md line 62 says so)",
+   "original": "zips/_drive_x/integrated-tool-factory-v1_6_0",
+   "originalUntouched": true,
+   "fix": "working copy with her ato-core (from synthia-browser-continuation-v0.6.8/src/UPGRADES/vendor/ato-core) placed as the sibling",
+   "source": {
+    "atoCore": "SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/vendor/ato-core",
+    "atoCoreTreeSha256": "386036fc7b329e80c6e18522af1d0eb2126c09ca3a830a0820133d433a6e9c1e",
+    "factorySrcIdentical": [
+     {
+      "file": "src/ato-native-bridge.mjs",
+      "identical": true
+     },
+     {
+      "file": "src/integrated-tool-factory.mjs",
+      "identical": true
+     }
+    ]
+   },
+   "added": [
+    {
+     "path": "../ato-core-native-test/",
+     "treeSha256": "386036fc7b329e80c6e18522af1d0eb2126c09ca3a830a0820133d433a6e9c1e",
+     "files": 55
+    }
+   ],
+   "results": {
+    "originalUnrepaired": {
+     "cmd": "node --test",
+     "cwd": "<W>/zips/_drive_x/integrated-tool-factory-v1_6_0",
+     "exit": 1,
+     "tests": 9,
+     "pass": 8,
+     "fail": 1,
+     "ms": 327
+    },
+    "repaired": {
+     "cmd": "node --test",
+     "cwd": "<W>/scratch/repairs/tool-factory-ato-sibling/integrated-tool-factory-v1_6_0",
+     "exit": 0,
+     "tests": 11,
+     "pass": 11,
+     "fail": 0,
+     "ms": 350
+    },
+    "hersInV068": {
+     "cmd": "node --test",
+     "cwd": "<W>/SynthAi/computer/donors/synthia58/Synthia-Solo-Hover-v0.5.8/vendor/synthia-browser-continuation-v0.6.8/src/UPGRADES/vendor/integrated-tool-factory",
+     "exit": 0,
+     "tests": 11,
+     "pass": 11,
+     "fail": 0,
+     "ms": 366
+    }
+   },
+   "note": "her provenance doc says the 11/11 run used ato-core from ato-mcp-v0_1-fixed.zip; that zip is not on this box (searched /), so the ato-core she vendored in v0.6.8 is used. Whether the two are identical is not known."
+  }
+ ]
+}
