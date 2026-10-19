@@ -1,7 +1,8 @@
 // First swarm, pure JavaScript: ANY file goes through registration -> state-space placement -> swarm execution.
 // Alexis's rules used: the swarm is the agent; PSO = genotype (background tooling, checks, mechanics); GA = phenotype (what shows);
 // packs are 3, 2, 1, each pack two bits, three packs make a six-bit hexagram; uncertainty triggers investigation, not rejection;
-// Space is not primitive; other languages come later (js, py, css, json adapters below are PLACEHOLDERS, marked as such).
+// Space is not primitive. Language adapters: js and json reduce through HER PrimitiveReducer (integrated/automata/primitive-reducer.mjs: jsStructure, flattenJson);
+// css and py are still PLACEHOLDERS (no CSS or Python parser exists in her code or specs; her spec lists "AST-style structural parsing" for L4 as not yet implemented).
 // By default (this module alone) the uploaded file's own code is never run or modified: only its bytes are read and the NSNF swarm runtime runs on the file's event.
 // integrated/integrated-swarm.mjs runs the file through Alexis's patches first and passes {executed:true, appCode} here; the bytes are still never modified.
 // INVESTIGATING (not settled by Alexis or the spec; see also state-space.mjs and nsnf-runtime.mjs lists):
@@ -10,7 +11,7 @@ export const INVESTIGATING=Object.freeze([
  'with no usable gate, level 1 uses a content-hash byte. This is a minimal stand-in, not a rule from the spec.',
  'dimension comes only from the registered address. Without one the file is held (not placed) and still executes through the encoder; nothing guesses a dimension. A Space-led address is held too, because Space is emergent and cannot be written.',
  'file features (size, entropy, printable/high/zero-byte ratios, text flag, known-type flag) are an engineering choice to give the swarm numbers to read; Alexis has not specified features.',
- 'language adapters for js, py, css and json are placeholders: only generic byte features are computed today.',
+ 'language adapters: js and json use her PrimitiveReducer (adaptLanguage); css and py are placeholders (generic byte features only).',
  'escalation: an uncertain registration/placement starts execution at tier 2 (Spec §17: ambiguity may recruit more components). Which uncertainty should recruit more is not specified.']);
 import {SwarmComponent} from './swarm-component.mjs';
 import {SwarmPair} from './swarm-nsnf.mjs';
@@ -20,13 +21,19 @@ import {finishApp} from './app-finisher.mjs';
 import {missingPlaces} from './registration-swarm.mjs';
 import {NsnfRuntime} from './nsnf-runtime.mjs';
 import {PRIMITIVE_DIMENSIONS,gateToMacro,macroToGate} from './state-space.mjs';
+import {PrimitiveReducer} from './integrated/automata/primitive-reducer.mjs';
 const te=new TextEncoder();
 export const FEATURE_NAMES=Object.freeze(['log-size','entropy','printable','newline-density','high-byte','zero-byte','is-text','known-type']);
 const MAGIC=[['zip',[0x50,0x4b,3,4]],['png',[0x89,0x50,0x4e,0x47]],['jpeg',[0xff,0xd8,0xff]],['gif',[0x47,0x49,0x46,0x38]],['pdf',[0x25,0x50,0x44,0x46]],['gzip',[0x1f,0x8b]],['wasm',[0,0x61,0x73,0x6d]],['elf',[0x7f,0x45,0x4c,0x46]]];
-// Placeholders: each language adapter is registered so it can be filled in later without changing the swarm. None parses anything yet.
+// Language adapters. js/json: her PrimitiveReducer (existing function, unchanged). css/py: placeholders until she specifies a parser.
+const HER_REDUCER='integrated/automata/primitive-reducer.mjs (her PrimitiveReducer)';
 export const LANGUAGE_ADAPTERS=Object.freeze({
- js:{ext:['js','mjs','cjs'],implemented:false,placeholder:true},py:{ext:['py'],implemented:false,placeholder:true},
- css:{ext:['css'],implemented:false,placeholder:true},json:{ext:['json'],implemented:false,placeholder:true}});
+ js:{ext:['js','mjs','cjs'],implemented:true,placeholder:false,source:HER_REDUCER+': jsStructure'},py:{ext:['py'],implemented:false,placeholder:true},
+ css:{ext:['css'],implemented:false,placeholder:true},json:{ext:['json'],implemented:true,placeholder:false,source:HER_REDUCER+': JSON.parse + flattenJson'}});
+const reducer=new PrimitiveReducer();
+// Structural reduction for a file whose language adapter is implemented; placeholders answer {implemented:false}.
+export async function adaptLanguage(name,bytes){const language=languageOf(name),a=language?LANGUAGE_ADAPTERS[language]:null;if(!a?.implemented)return {language,implemented:false,note:a?'placeholder: generic byte features only':'no adapter'};
+ const r=await reducer.reduce({name:String(name),bytes:toBytes(bytes)});const u=r.units[0];return {language,implemented:true,source:a.source,kind:u.kind,structure:u.structure,primitiveCount:r.primitiveCount,primitives:u.primitives}}
 export const languageOf=name=>{const e=String(name||'').split('.').pop().toLowerCase();return Object.entries(LANGUAGE_ADAPTERS).find(([,a])=>a.ext.includes(e))?.[0]||null};
 const toBytes=b=>b instanceof Uint8Array?b:typeof b==='string'?te.encode(b):b instanceof ArrayBuffer?new Uint8Array(b):Array.isArray(b)?Uint8Array.from(b):null;
 export function fileFeatures(name,bytes){
@@ -37,18 +44,18 @@ export function fileFeatures(name,bytes){
  let text=false;if(n&&hist[0]===0){try{new TextDecoder('utf-8',{fatal:true}).decode(b);text=true}catch{text=false}}
  const magic=MAGIC.find(([,m])=>m.every((v,i)=>b[i]===v))?.[0]||null,kind=magic||(text?'text':n?'binary':'empty'),language=languageOf(name);
  const vec=[Math.min(1,Math.log2(n+1)/32),entropy/8,n?printable/n:0,n?Math.min(1,newlines/n*20):0,n?high/n:0,n?hist[0]/n:0,text?1:0,magic?1:0];
- return {name:String(name||'upload'),size:n,sha256:sha256(b),kind,language,adapter:language?{...LANGUAGE_ADAPTERS[language],note:'placeholder: generic byte features only'}:null,entropy,textDecodable:text,vector:vec,featureNames:FEATURE_NAMES};
+ return {name:String(name||'upload'),size:n,sha256:sha256(b),kind,language,adapter:language?{...LANGUAGE_ADAPTERS[language],note:LANGUAGE_ADAPTERS[language].implemented?'structure via adaptLanguage(): '+LANGUAGE_ADAPTERS[language].source:'placeholder: generic byte features only'}:null,entropy,textDecodable:text,vector:vec,featureNames:FEATURE_NAMES};
 }
 // ---- PSO genotype for a file: six members in packs of 3, 2, 1 (swarm-component.mjs). Count-of-passes -> pack value is INVESTIGATING there.
 export const fileGenotype=new SwarmComponent({id:'file-intake',kind:'PSO',purpose:'Check that any file can be read, hashed, typed and given numbers for the swarm to execute on',
- openQuestions:['Pack-count-to-two-bits mapping and pack order are investigating, not rulings.','Language adapters are placeholders.'],
+ openQuestions:['Pack-count-to-two-bits mapping and pack order are investigating, not rulings.','css and py language adapters are placeholders.'],
  members:[
   {id:'has-bytes',check:i=>i.features.size>0},
   {id:'hashed',check:i=>/^[0-9a-f]{64}$/.test(i.features.sha256)},
   {id:'features-finite',check:i=>i.features.vector.length===8&&i.features.vector.every(Number.isFinite)},
   {id:'type-recognised',check:i=>({ok:i.features.kind!=='binary'&&i.features.kind!=='empty',note:'unrecognised '+i.features.kind+' content is kept and investigated, not rejected'})},
   {id:'readable',check:i=>i.features.textDecodable||!!(i.features.kind!=='binary'&&i.features.kind!=='empty')},
-  {id:'language-known',check:i=>i.features.language?{ok:true,note:'adapter for '+i.features.language+' is a placeholder'}:{ok:false,note:'no language adapter for this file; generic handling only'}}]});
+  {id:'language-known',check:i=>i.features.language?{ok:true,note:'adapter for '+i.features.language+(LANGUAGE_ADAPTERS[i.features.language].implemented?' uses her PrimitiveReducer':' is a placeholder')}:{ok:false,note:'no language adapter for this file; generic handling only'}}]});
 const phenotypeComponent=new SwarmComponent({id:'file-view',kind:'GA',purpose:'Show what the swarm did with the file',members:[
  {id:'title',check:i=>!!i.visible.title},{id:'placement-label',check:i=>!!i.visible.placement},{id:'six-lines',check:i=>i.visible.lines?.length===6},
  {id:'status-matches',check:i=>i.visible.status===i.genotype.status},{id:'file-identity',check:i=>/^[0-9a-f]{64}$/.test(i.visible.sha256||'')},{id:'execution-reported',check:i=>typeof i.visible.userCodeExecuted==='boolean'}]});

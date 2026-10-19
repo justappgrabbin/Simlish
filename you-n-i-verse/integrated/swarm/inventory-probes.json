@@ -723,7 +723,7 @@
    "cmd": "node --test state-space.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 257,
+   "ms": 247,
    "tail": "pass 10 fail 0"
   },
   {
@@ -732,7 +732,7 @@
    "cmd": "node --test integrated/abc.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 266,
+   "ms": 268,
    "tail": "pass 3 fail 0"
   },
   {
@@ -741,17 +741,17 @@
    "cmd": "node --test address-resolution.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 273,
+   "ms": 257,
    "tail": "pass 3 fail 0"
   },
   {
    "id": "repo-test:integrated/swarm/swarm.test.mjs",
    "cwd": "you-n-i-verse",
    "cmd": "node --test integrated/swarm/swarm.test.mjs",
-   "status": "pass",
-   "code": 0,
-   "ms": 986,
-   "tail": "pass 13 fail 0"
+   "status": "fail",
+   "code": 1,
+   "ms": 817,
+   "tail": "pass 12 fail 1"
   },
   {
    "id": "repo-test:studio.test.mjs",
@@ -759,17 +759,8 @@
    "cmd": "node --test studio.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 269,
+   "ms": 294,
    "tail": "pass 4 fail 0"
-  },
-  {
-   "id": "repo-test:integrated/integrated.test.mjs",
-   "cwd": "you-n-i-verse",
-   "cmd": "node --test integrated/integrated.test.mjs",
-   "status": "pass",
-   "code": 0,
-   "ms": 1385,
-   "tail": "pass 12 fail 0"
   },
   {
    "id": "repo-test:rig-format.test.mjs",
@@ -781,12 +772,21 @@
    "tail": "pass 2 fail 0"
   },
   {
+   "id": "repo-test:integrated/integrated.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/integrated.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 1363,
+   "tail": "pass 12 fail 0"
+  },
+  {
    "id": "repo-test:integrated/app-server.test.mjs",
    "cwd": "you-n-i-verse",
    "cmd": "node --test integrated/app-server.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 1237,
+   "ms": 1262,
    "tail": "pass 13 fail 0"
   },
   {
@@ -795,7 +795,7 @@
    "cmd": "node --test animation.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 218,
+   "ms": 241,
    "tail": "pass 2 fail 0"
   },
   {
@@ -804,8 +804,17 @@
    "cmd": "node --test integrated/population.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 551,
+   "ms": 561,
    "tail": "pass 12 fail 0"
+  },
+  {
+   "id": "repo-test:integrated/play/play.test.mjs",
+   "cwd": "you-n-i-verse",
+   "cmd": "node --test integrated/play/play.test.mjs",
+   "status": "pass",
+   "code": 0,
+   "ms": 629,
+   "tail": "pass 11 fail 0"
   },
   {
    "id": "repo-test:integrated/trident-js.test.mjs",
@@ -813,7 +822,7 @@
    "cmd": "node --test integrated/trident-js.test.mjs",
    "status": "pass",
    "code": 0,
-   "ms": 3346,
+   "ms": 3470,
    "tail": "pass 4 fail 0"
   }
  ]

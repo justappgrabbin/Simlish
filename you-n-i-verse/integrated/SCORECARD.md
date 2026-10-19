@@ -73,3 +73,18 @@ Status: **UNRESOLVED**. Six readings found in her files, kept side by side; none
 
 ## Could not verify
 * Whether the Hatcher dataset (E) is line-1-first; whether `morph-search.mjs` is hers or an assistant's; the Aug-12 correction text; any statement of huge-file/gap-finishing behaviour in her docs beyond those quoted (searched the three Docs, cached arch-doc/nsnf-spec, the change record); durable cross-session persistence of the population ledger; behaviour on Node 22 (only Node 20.19.2 run here; CI runs both).
+
+## Acceptance rows that were EXISTS-UNTESTED, now tested (2026-10-19 PT)
+
+Tests: `integrated/acceptance-rows.test.mjs` (8 tests, all pass; each asserts the measurement below). Verdicts are also in `swarm/INVENTORY.md`.
+
+| Row | Verdict | What the test measured |
+|---|---|---|
+| 1 Swarm is code | **PASS** (with a limit) | Her six-bit atoms decode to a running instance (5, 15, 42). A JS program carried as six-bit atoms round-trips losslessly and returns the same value (110). Limit: JS runs after decoding back to source text; no rule of hers executes JS directly from atoms. |
+| 3 Arbitrary code ingestion | **FAIL** | js runs, json (her JSON.parse), css/html get structure; js/json adapters in any-file-swarm now use her PrimitiveReducer. Python, Rust and other languages are still placeholders. |
+| 4 Code creation | **FAIL** | finishApp adds only scaffolding (entry/manifest/registration/scene/reality/report); no program file is created; game and 2d targets are not implemented. |
+| 5 Neuro-symbolic reasoning | **FAIL** | Trident and the guide are both hosted by app-server.mjs as separate tools; nothing passes one into the other. |
+| 6 Collective adaptation | **FAIL** | One corrupted atom: PSO alone leaves wrong bits (repaired:false); her Hamming-1 refinement repairs it. |
+| 7 Self-modification | **FAIL** | After the full plan the loop has written only app/ (tools only user/); protected originals and integrated/ code are refused. |
+| 9 Arbitrary visual morphing | **FAIL** | photo-morph runs; her youniverse MorphEngine embodiment changes with the game choice; no swarm state drives the morph. |
+| 15 Reliability | **PASS** (scope stated) | 400 loop cycles + 400 heartbeats: 0 failed, audit chain intact, originals unchanged; 120 play turns. Node only, no on-device long run. |

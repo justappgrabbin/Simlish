@@ -1,0 +1,127 @@
+--- /tmp/pfb/PRIMITIVE-FUNCTIONS.md	2026-10-19 07:35:39.956178554 -0700
++++ PRIMITIVE-FUNCTIONS.md	2026-10-19 07:35:45.028178554 -0700
+@@ -101,65 +101,65 @@
+ 
+ | fn | status | ref | origin |
+ |---|---|---|---|
+-| gateToMacro | EXISTS | state-space.mjs:34 | /r/e/p/o/ /(/b/u/i/l/t/ /f/r/o/m/ /h/e/r/ /N/S/N/F/ /s/p/e/c/ /§/2/./1/;/ /K/i/n/g/ /W/e/n/</-/>/F/u/ /X/i/ /d/a/t/a/ /v/e/n/d/o/r///k/i/n/g/w/e/n/./m/j/s/ /f/r/o/m/ /h/e/r/ /z/i/p/s/)/ |
+-| macroToGate | EXISTS | state-space.mjs:35 | /r/e/p/o/ |
+-| bitsOf | EXISTS | state-space.mjs:22 | /r/e/p/o/ |
+-| lineOf | EXISTS | state-space.mjs:25 | /r/e/p/o/ |
+-| flipLines | EXISTS | state-space.mjs:27 | /r/e/p/o/ |
+-| complement | EXISTS | state-space.mjs:28 | /r/e/p/o/ |
+-| reverseLines | EXISTS | state-space.mjs:29 | /r/e/p/o/ |
+-| exchangeTrigrams | EXISTS | state-space.mjs:30 | /r/e/p/o/ |
+-| nuclear | EXISTS | state-space.mjs:31 | /r/e/p/o/ /(/l/i/n/e/s/ /[/2/,/3/,/4/,/3/,/4/,/5/]/;/ /h/e/r/ /s/p/e/c/ /§/3/6/ /u/s/e/s/ /t/h/e/ /s/a/m/e/ /i/n/n/e/r/ /l/i/n/e/s/)/ |
+-| hammingNeighbors | EXISTS | state-space.mjs:32 | /r/e/p/o/ /(/h/e/r/ /s/p/e/c/ /§/2/:/ /H/a/m/m/i/n/g/ /d/i/s/t/a/n/c/e/ /1/)/ |
+-| wheelRank | EXISTS | integrated/wheels.mjs:37 | /r/e/p/o/ /a/d/a/p/t/e/r/ /o/f/ /h/e/r/ /h/e/x/a/g/r/a/m/_/s/e/q/u/e/n/c/e/s/./p/y/ |
+-| wheelReadout | EXISTS | integrated/wheels.mjs:40 | /r/e/p/o/ |
+-| mawangduiRuttKingWen | PROPOSED-SOURCED | integrated/mawangdui-rutt.mjs:12 | /N/E/W/ /t/h/i/s/ /t/a/s/k/:/ /R/u/t/t/'/s/ /p/r/i/n/t/e/d/ /r/u/l/e/ /+/ /T/a/b/l/e/ /1/0/ /(/b/o/o/k/ /i/n/ /h/e/r/ /D/r/i/v/e/)/;/ /r/e/p/r/o/d/u/c/e/s/ /a/l/l/ /6/4/ /o/f/ /T/a/b/l/e/ /1/0/ /(/t/e/s/t/)/;/ /N/O/T/ /d/e/c/l/a/r/e/d/ /h/e/r/s/ |
+-| packsOf | EXISTS | integrated/bantu.mjs:13 | /h/e/r/ /b/r/i/d/g/e/./j/s/ /l/a/y/o/u/t/ /(/3/-/2/-/1/,/ /t/w/o/ /b/i/t/s/ /e/a/c/h/)/ /v/i/a/ /r/e/p/o/ /a/d/a/p/t/e/r/ |
+-| encodeBytes | EXISTS | integrated/bantu.mjs:5 | /H/E/R/S/:/ /b/r/i/d/g/e/./j/s/ /l/i/n/e/s/ /5/-/9/ /c/o/p/i/e/d/ /v/e/r/b/a/t/i/m/ |
+-| decodeBytes | EXISTS | integrated/bantu.mjs:6 | /H/E/R/S/ /(/v/e/r/b/a/t/i/m/)/ |
+-| packSubstitute | PROPOSED | integrated/pack-substitute.mjs:9 | /N/E/W/ /t/h/i/s/ /t/a/s/k/,/ /d/e/r/i/v/e/d/ /(/c/o/m/p/o/s/e/d/ /o/f/ /p/a/c/k/s/O/f/ /+/ /f/l/i/p/L/i/n/e/s/)/;/ /p/l/e/a/s/e/ /c/o/n/f/i/r/m/ |
+-| resolveSyntaxMarks | EXISTS | source-syntax.mjs:132 | /r/e/p/o/,/ /t/a/b/l/e/ /t/r/a/n/s/c/r/i/b/e/d/ /f/r/o/m/ /h/e/r/ /D/r/i/v/e/ /d/o/c/ /1/x/7/x/z/z/z/a/x/g/_/S/d/h/H/M/5/u/t/e/i/Z/2/1/k/G/s/o/R/f/d/K/5/ /"/U/n/i/f/i/e/d/ /S/y/n/t/a/x/ /F/i/e/l/d/"/ |
+-| LexicalFillEngine.resolve | EXISTS | lexical-fill.mjs:11 | /r/e/p/o/,/ /s/l/o/t/ /g/r/a/m/m/a/r/ /t/r/a/n/s/c/r/i/b/e/d/ /f/r/o/m/ /h/e/r/ /T/2/3/ /g/e/n/e/r/a/t/i/v/e/-/s/l/o/t/ /g/r/a/m/m/a/r/ |
+-| fitParticles | EXISTS | swarm-fit.mjs:2 | /r/e/p/o/ /(/P/S/O/)/ |
+-| trainWithParticleSwarm | EXISTS | nsnf-runtime.mjs:61 | /r/e/p/o/ /(/P/S/O/ /o/n/ /T/i/n/y/M/L/P/,/ /N/S/N/F/ /r/u/n/t/i/m/e/)/ |
+-| TinyMLP | EXISTS | nsnf-runtime.mjs:31 | /r/e/p/o/ /(/N/S/N/F/ /c/e/l/l/)/ |
+-| GenotypeUnit | EXISTS | swarm-nsnf.mjs:24 | /r/e/p/o/ /(/P/S/O/ /g/e/n/o/t/y/p/e/)/ |
+-| PhenotypeUnit | EXISTS | swarm-nsnf.mjs:30 | /r/e/p/o/ /(/G/A/ /p/h/e/n/o/t/y/p/e/)/ |
+-| SwarmPair | EXISTS | swarm-nsnf.mjs:39 | /r/e/p/o/ |
+-| AbcV9 | EXISTS | integrated/abc.mjs:17 | /p/o/r/t/ /o/f/ /h/e/r/ /v/9/ /e/n/g/i/n/e/ /a/b/c/_/p/h/a/s/e/ /(/s/w/a/r/m/_/o/s/_/f/u/l/l/./p/y/)/ |
+-| abcFit | EXISTS | integrated/abc.mjs:58 | /p/o/r/t/ /o/f/ /h/e/r/ /v/9///v/1/0/ /A/B/C/ |
+-| Movement.kind | PROTOTYPE | integrated/population.mjs:25 | /r/e/p/o/ /(/b/u/i/l/d/e/r/'/s/ /e/x/e/c/u/t/a/b/l/e/ /r/e/a/d/i/n/g/ /o/f/ /h/e/r/ /o/n/e/-/l/i/n/e/ /r/o/l/e/ /i/n/ /t/h/e/ /o/n/t/o/l/o/g/i/c/a/l/-/i/n/g/e/s/t/ /p/a/t/c/h/;/ /n/o/t/ /c/o/n/f/i/r/m/e/d/ /b/y/ /h/e/r/)/ |
+-| Evolution.kind | PROTOTYPE | integrated/population.mjs:26 | /r/e/p/o/ /(/b/u/i/l/d/e/r/'/s/ /e/x/e/c/u/t/a/b/l/e/ /r/e/a/d/i/n/g/ /o/f/ /h/e/r/ /o/n/e/-/l/i/n/e/ /r/o/l/e/ /i/n/ /t/h/e/ /o/n/t/o/l/o/g/i/c/a/l/-/i/n/g/e/s/t/ /p/a/t/c/h/;/ /n/o/t/ /c/o/n/f/i/r/m/e/d/ /b/y/ /h/e/r/)/ |
+-| Being.kind | PROTOTYPE | integrated/population.mjs:27 | /r/e/p/o/ /(/b/u/i/l/d/e/r/'/s/ /e/x/e/c/u/t/a/b/l/e/ /r/e/a/d/i/n/g/ /o/f/ /h/e/r/ /o/n/e/-/l/i/n/e/ /r/o/l/e/ /i/n/ /t/h/e/ /o/n/t/o/l/o/g/i/c/a/l/-/i/n/g/e/s/t/ /p/a/t/c/h/;/ /n/o/t/ /c/o/n/f/i/r/m/e/d/ /b/y/ /h/e/r/)/ |
+-| Design.kind | PROTOTYPE | integrated/population.mjs:28 | /r/e/p/o/ /(/b/u/i/l/d/e/r/'/s/ /e/x/e/c/u/t/a/b/l/e/ /r/e/a/d/i/n/g/ /o/f/ /h/e/r/ /o/n/e/-/l/i/n/e/ /r/o/l/e/ /i/n/ /t/h/e/ /o/n/t/o/l/o/g/i/c/a/l/-/i/n/g/e/s/t/ /p/a/t/c/h/;/ /n/o/t/ /c/o/n/f/i/r/m/e/d/ /b/y/ /h/e/r/)/ |
+-| Instance.tick | EXISTS | integrated/population.mjs:57 | /r/e/p/o/ |
+-| ExecutionPipeline | EXISTS | integrated/spine/execution-pipeline.mjs:205 | /H/E/R/S/:/ /S/y/n/t/h/i/a/-/v/0/./5/./1/ /e/x/e/c/u/t/i/o/n/ /p/i/p/e/l/i/n/e/ /p/a/t/c/h/ |
+-| EXECUTION_PIPELINE_STAGES | EXISTS | integrated/spine/execution-pipeline.mjs:7 | /H/E/R/S/ /(/p/a/t/c/h/)/ |
+-| FiveFieldCompiler | EXISTS | integrated/automata/five-field-compiler.mjs:19 | /H/E/R/S/ /(/a/u/t/o/m/a/t/a/ /i/n/g/e/s/t/i/o/n/ /p/a/t/c/h/)/ |
+-| normalizeAddress | EXISTS | address-resolution.mjs:4 | /r/e/p/o/ /(/1/3/-/p/l/a/c/e/ /A/D/D/R/E/S/S/_/O/R/D/E/R/ /f/r/o/m/ /h/e/r/ /R/u/l/e/s/ /a/n/d/ /s/y/n/t/a/x/ /§/9/)/ |
+-| resolveAddress | EXISTS | address-resolution.mjs:9 | /r/e/p/o/ |
+-| OntologicalAddress | EXISTS | integrated/reference/OntologicalAddress.js.txt:163 | /H/E/R/S/ /(/r/e/s/o/n/a/n/c/e/-/e/n/g/i/n/e/ /c/o/r/e///O/n/t/o/l/o/g/i/c/a/l/A/d/d/r/e/s/s/./j/s/ /i/n/ /h/e/r/ /z/i/p/s/)/:/ /a/d/d/r/e/s/s/ /-/>/ /d/e/g/r/e/e/,/ /z/o/d/i/a/c/,/ /h/o/u/s/e/,/ /D/M/S/,/ /a/r/c/,/ /b/i/g/r/a/m/,/ /h/i/e/r/a/r/c/h/y/ |
+-| zodiacAt | EXISTS | integrated/reference/OntologicalAddress.js.txt:92 | /H/E/R/S/ |
+-| houseAt | EXISTS | integrated/reference/OntologicalAddress.js.txt:99 | /H/E/R/S/ |
+-| degToDMS | EXISTS | integrated/reference/OntologicalAddress.js.txt:105 | /H/E/R/S/ |
+-| arcBigram | EXISTS | integrated/reference/OntologicalAddress.js.txt:117 | /H/E/R/S/ |
+-| computeHierarchy | EXISTS | integrated/reference/OntologicalAddress.js.txt:122 | /H/E/R/S/ |
+-| changingLineTo | EXISTS | integrated/reference/OntologicalAddress.js.txt:280 | /H/E/R/S/ |
+-| DEG_PER_LINE | EXISTS | integrated/reference/OntologicalAddress.js.txt:80 | /H/E/R/S/ /(/g/a/t/e/ /5/./6/2/5/,/ /l/i/n/e/ /0/./9/3/7/5/,/ /c/o/l/o/r/ /0/./1/5/6/2/5/,/ /t/o/n/e/ /0/./0/2/6/0/4/2/,/ /b/a/s/e/ /0/./0/0/5/2/0/8/ /d/e/g/)/ |
+-| DEG_PER_COLOR | EXISTS | integrated/reference/OntologicalAddress.js.txt:81 | /H/E/R/S/ |
+-| DEG_PER_TONE | EXISTS | integrated/reference/OntologicalAddress.js.txt:82 | /H/E/R/S/ |
+-| DEG_PER_BASE | EXISTS | integrated/reference/OntologicalAddress.js.txt:83 | /H/E/R/S/ |
+-| splitLine | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:314 | /b/u/i/l/d/e/r/ /p/r/o/t/o/t/y/p/e/ /(/d/i/m/e/n/s/i/o/n/-/v/i/s/u/a/l/)/ /o/v/e/r/ /h/e/r/ /v/e/r/b/a/t/i/m/ /c/h/a/i/n/ /l/i/n/e/s/ |
+-| generateSteps | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:321 | /b/u/i/l/d/e/r/ /p/r/o/t/o/t/y/p/e/:/ /h/a/n/d/s/ /t/h/e/ /r/i/g/h/t/ /s/i/d/e/ /o/f/ /l/i/n/e/ /n/ /t/o/ /t/h/e/ /l/e/f/t/ /s/i/d/e/ /o/f/ /l/i/n/e/ /n/+/1/ /(/s/a/m/e/ /// /s/t/e/m/ /// /d/i/f/f/e/r/e/n/t/)/ |
+-| letterFunctions | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:108 | /b/u/i/l/d/e/r/ /p/r/o/t/o/t/y/p/e/ /o/f/ /h/e/r/ /s/t/a/t/e/m/e/n/t/ /"/t/h/e/ /w/o/r/d/s/ /a/s/ /t/h/e/y/ /s/i/t/ /a/r/e/ /t/h/e/ /f/u/n/c/t/i/o/n/s/"/ |
+-| layersOf | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:175 | /b/u/i/l/d/e/r/ /p/r/o/t/o/t/y/p/e/:/ /b/i/n/a/r/y/,/ /A/S/C/I/I/,/ /N/A/T/O/,/ /t/r/a/n/s/l/i/t/e/r/a/t/i/o/n/,/ /U/n/i/c/o/d/e/ /(/h/e/r/ /m/s/g/4/ /o/r/d/e/r/)/ |
+-| capitalSegments | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:351 | /b/u/i/l/d/e/r/ /p/r/o/t/o/t/y/p/e/ /o/f/ /h/e/r/ /c/a/p/i/t/a/l/s/ |
+-| vowelDim | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:431 | /b/u/i/l/d/e/r/ /p/r/o/t/o/t/y/p/e/ /o/v/e/r/ /h/e/r/ /R/u/l/e/s/ /a/n/d/ /s/y/n/t/a/x/ /§/3/ /v/o/w/e/l/ /t/a/b/l/e/ |
+-| letterColor | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:274 | /b/u/i/l/d/e/r/ /P/R/O/V/I/S/I/O/N/A/L/ /f/o/r/m/u/l/a/ /(/n/o/t/ /h/e/r/s/;/ /h/e/r/ /s/p/e/c/ /§/1/./5/ /s/a/y/s/ /c/o/l/o/r/ /i/s/ /c/o/m/p/u/t/e/d/ /f/r/o/m/ /a/r/c/ /p/o/s/i/t/i/o/n/)/ |
+-| letterHz | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:275 | /b/u/i/l/d/e/r/ /P/R/O/V/I/S/I/O/N/A/L/ /f/o/r/m/u/l/a/ /(/n/o/t/ /h/e/r/s/)/ |
+-| Yao.flip | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | /D/R/I/V/E/-/C/O/D/E/:/ /a/s/s/i/s/t/a/n/t/-/a/u/t/h/o/r/e/d/ /J/a/v/a/S/c/r/i/p/t/ /i/n/s/i/d/e/ /h/e/r/ /D/r/i/v/e/ /d/o/c/ /1/M/e/t/U/L/P/Q/G/C/l/7/U/E/o/0/y/N/Y/Q/4/j/d/y/7/x/X/y/9/o/j/o/x/2/C/R/X/h/A/h/a/f/3/0/ /(/l/i/n/e/ /-/>/ /s/e/n/s/e/,/ /f/l/i/p/,/ /r/e/f/l/e/c/t/)/ |
+-| Codon.mutate | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | /D/R/I/V/E/-/C/O/D/E/ /(/s/a/m/e/ /d/o/c/)/:/ /m/u/t/a/t/e/,/ /p/e/r/t/u/r/b/,/ /d/u/i/G/u/a/ /(/c/o/m/p/l/e/m/e/n/t/)/,/ /l/o/w/e/r///u/p/p/e/r/ /t/r/i/g/r/a/m/,/ /r/e/f/l/e/c/t/ |
+-| Center.enter | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | /D/R/I/V/E/-/C/O/D/E/ /(/s/a/m/e/ /d/o/c/)/:/ /8/ /t/r/i/g/r/a/m/ /c/e/n/t/e/r/s/ /+/ /T/a/i/j/i/,/ /e/n/t/e/r/ /b/y/ /n/e/a/r/e/s/t/ /H/a/m/m/i/n/g/ /v/a/c/a/n/c/y/ |
++| gateToMacro | EXISTS | state-space.mjs:34 | repo (built from her NSNF spec §2.1; King Wen<->Fu Xi data vendor/kingwen.mjs from her zips) |
++| macroToGate | EXISTS | state-space.mjs:35 | repo |
++| bitsOf | EXISTS | state-space.mjs:22 | repo |
++| lineOf | EXISTS | state-space.mjs:25 | repo |
++| flipLines | EXISTS | state-space.mjs:27 | repo |
++| complement | EXISTS | state-space.mjs:28 | repo |
++| reverseLines | EXISTS | state-space.mjs:29 | repo |
++| exchangeTrigrams | EXISTS | state-space.mjs:30 | repo |
++| nuclear | EXISTS | state-space.mjs:31 | repo (lines [2,3,4,3,4,5]; her spec §36 uses the same inner lines) |
++| hammingNeighbors | EXISTS | state-space.mjs:32 | repo (her spec §2: Hamming distance 1) |
++| wheelRank | EXISTS | integrated/wheels.mjs:37 | repo adapter of her hexagram_sequences.py |
++| wheelReadout | EXISTS | integrated/wheels.mjs:40 | repo |
++| mawangduiRuttKingWen | PROPOSED-SOURCED | integrated/mawangdui-rutt.mjs:12 | NEW this task: Rutt's printed rule + Table 10 (book in her Drive); reproduces all 64 of Table 10 (test); NOT declared hers |
++| packsOf | EXISTS | integrated/bantu.mjs:13 | her bridge.js layout (3-2-1, two bits each) via repo adapter |
++| encodeBytes | EXISTS | integrated/bantu.mjs:5 | HERS: bridge.js lines 5-9 copied verbatim |
++| decodeBytes | EXISTS | integrated/bantu.mjs:6 | HERS (verbatim) |
++| packSubstitute | PROPOSED | integrated/pack-substitute.mjs:9 | NEW this task, derived (composed of packsOf + flipLines); please confirm |
++| resolveSyntaxMarks | EXISTS | source-syntax.mjs:132 | repo, table transcribed from her Drive doc 1x7xzzzaxg_SdhHM5uteiZ21kGsoRfdK5 "Unified Syntax Field" |
++| LexicalFillEngine.resolve | EXISTS | lexical-fill.mjs:11 | repo, slot grammar transcribed from her T23 generative-slot grammar |
++| fitParticles | EXISTS | swarm-fit.mjs:2 | repo (PSO) |
++| trainWithParticleSwarm | EXISTS | nsnf-runtime.mjs:61 | repo (PSO on TinyMLP, NSNF runtime) |
++| TinyMLP | EXISTS | nsnf-runtime.mjs:31 | repo (NSNF cell) |
++| GenotypeUnit | EXISTS | swarm-nsnf.mjs:24 | repo (PSO genotype) |
++| PhenotypeUnit | EXISTS | swarm-nsnf.mjs:30 | repo (GA phenotype) |
++| SwarmPair | EXISTS | swarm-nsnf.mjs:39 | repo |
++| AbcV9 | EXISTS | integrated/abc.mjs:17 | port of her v9 engine abc_phase (swarm_os_full.py) |
++| abcFit | EXISTS | integrated/abc.mjs:58 | port of her v9/v10 ABC |
++| Movement.kind | PROTOTYPE | integrated/population.mjs:25 | repo (builder's executable reading of her one-line role in the ontological-ingest patch; not confirmed by her) |
++| Evolution.kind | PROTOTYPE | integrated/population.mjs:26 | repo (builder's executable reading of her one-line role in the ontological-ingest patch; not confirmed by her) |
++| Being.kind | PROTOTYPE | integrated/population.mjs:27 | repo (builder's executable reading of her one-line role in the ontological-ingest patch; not confirmed by her) |
++| Design.kind | PROTOTYPE | integrated/population.mjs:28 | repo (builder's executable reading of her one-line role in the ontological-ingest patch; not confirmed by her) |
++| Instance.tick | EXISTS | integrated/population.mjs:57 | repo |
++| ExecutionPipeline | EXISTS | integrated/spine/execution-pipeline.mjs:205 | HERS: Synthia-v0.5.1 execution pipeline patch |
++| EXECUTION_PIPELINE_STAGES | EXISTS | integrated/spine/execution-pipeline.mjs:7 | HERS (patch) |
++| FiveFieldCompiler | EXISTS | integrated/automata/five-field-compiler.mjs:19 | HERS (automata ingestion patch) |
++| normalizeAddress | EXISTS | address-resolution.mjs:4 | repo (13-place ADDRESS_ORDER from her Rules and syntax §9) |
++| resolveAddress | EXISTS | address-resolution.mjs:9 | repo |
++| OntologicalAddress | EXISTS | integrated/reference/OntologicalAddress.js.txt:163 | HERS (resonance-engine core/OntologicalAddress.js in her zips): address -> degree, zodiac, house, DMS, arc, bigram, hierarchy |
++| zodiacAt | EXISTS | integrated/reference/OntologicalAddress.js.txt:92 | HERS |
++| houseAt | EXISTS | integrated/reference/OntologicalAddress.js.txt:99 | HERS |
++| degToDMS | EXISTS | integrated/reference/OntologicalAddress.js.txt:105 | HERS |
++| arcBigram | EXISTS | integrated/reference/OntologicalAddress.js.txt:117 | HERS |
++| computeHierarchy | EXISTS | integrated/reference/OntologicalAddress.js.txt:122 | HERS |
++| changingLineTo | EXISTS | integrated/reference/OntologicalAddress.js.txt:280 | HERS |
++| DEG_PER_LINE | EXISTS | integrated/reference/OntologicalAddress.js.txt:80 | HERS (gate 5.625, line 0.9375, color 0.15625, tone 0.026042, base 0.005208 deg) |
++| DEG_PER_COLOR | EXISTS | integrated/reference/OntologicalAddress.js.txt:81 | HERS |
++| DEG_PER_TONE | EXISTS | integrated/reference/OntologicalAddress.js.txt:82 | HERS |
++| DEG_PER_BASE | EXISTS | integrated/reference/OntologicalAddress.js.txt:83 | HERS |
++| splitLine | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:314 | builder prototype (dimension-visual) over her verbatim chain lines |
++| generateSteps | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:321 | builder prototype: hands the right side of line n to the left side of line n+1 (same / stem / different) |
++| letterFunctions | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:108 | builder prototype of her statement "the words as they sit are the functions" |
++| layersOf | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:175 | builder prototype: binary, ASCII, NATO, transliteration, Unicode (her msg4 order) |
++| capitalSegments | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:351 | builder prototype of her capitals |
++| vowelDim | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:431 | builder prototype over her Rules and syntax §3 vowel table |
++| letterColor | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:274 | builder PROVISIONAL formula (not hers; her spec §1.5 says color is computed from arc position) |
++| letterHz | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:275 | builder PROVISIONAL formula (not hers) |
++| Yao.flip | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | DRIVE-CODE: assistant-authored JavaScript inside her Drive doc 1MetULPQGCl7UEo0yNYQ4jdy7xXy9ojox2CRXhAhaf30 (line -> sense, flip, reflect) |
++| Codon.mutate | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | DRIVE-CODE (same doc): mutate, perturb, duiGua (complement), lower/upper trigram, reflect |
++| Center.enter | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | DRIVE-CODE (same doc): 8 trigram centers + Taiji, enter by nearest Hamming vacancy |
+ 
+ ## 64 gates (dimension tie = her doc3 anchor map, one configuration)
+ 

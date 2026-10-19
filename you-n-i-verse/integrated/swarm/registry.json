@@ -285,8 +285,8 @@
     "path": "you-n-i-verse/any-file-swarm.mjs",
     "repo": "https://github.com/justappgrabbin/Simlish"
    },
-   "sha256": "332f09180ea3394bc7c2003b442a7a7cd23d7fe0855c875d635ad926d3498f4d",
-   "bytes": 13361,
+   "sha256": "bf08e1c002faaeb3e247cc235507203f5effda7face4ec2383bd9eba0e2345f7",
+   "bytes": 14671,
    "ext": "mjs"
   },
   {
@@ -2012,6 +2012,24 @@
    "count": 7
   },
   {
+   "sha256": "befc561b17f6c79abfec7d4da1f4a83b07b1bc9cc3fb8b6aaa9ef867f0cc33eb",
+   "bytes": 3583,
+   "name": "frame-morph.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/frame-morph.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "6ef3cb03fcb2ac13284bcb71aa73b09410205462966a3a05abafd2ba89617abc",
+   "bytes": 800,
+   "name": "frame-morph.test.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/frame-morph.test.mjs"
+   ],
+   "count": 1
+  },
+  {
    "sha256": "f842e9bce43982f762eefc47ce2f0591c484a8e10fd38b6979c9317202017e0b",
    "bytes": 1351,
    "name": "GameMorpher.mjs",
@@ -2048,6 +2066,24 @@
     "swarm-search/all/Synthai2/attached_assets/genetic_matrix_calculator_1761745539928.py"
    ],
    "count": 2
+  },
+  {
+   "sha256": "7ca879a7f7f52d915b4cee2b8d8611dc025246b1897e5d8c88a7edab14e34734",
+   "bytes": 3652,
+   "name": "genetic-code.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/modules/hd-morphology/data/genetic-code.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "00a2988e3c6cf2bbfac01d38853f0533729b94b9decf3c8fe9ae37765de4eeda",
+   "bytes": 1557,
+   "name": "genetic-code.test.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/modules/hd-morphology/test/genetic-code.test.mjs"
+   ],
+   "count": 1
   },
   {
    "sha256": "ca7148937f7cf8670acee11e71950eaf5fdeb9ee3dab24a3923125f806196a43",
@@ -2798,6 +2834,16 @@
    "count": 6
   },
   {
+   "sha256": "f7f7437ab77c8d3223c3381a8fafc6a19343f3c047f0beae98edc4553da52512",
+   "bytes": 9214,
+   "name": "morphEngine.js",
+   "paths": [
+    "zips/games/yv/youniverse/morph/morphEngine.js",
+    "zips/games/yvt/youniverse/morph/morphEngine.js"
+   ],
+   "count": 2
+  },
+  {
    "sha256": "47beb3f89aaf5a9753f4c7db60a00f2c01a8c9cd235f2044a61f76be2db55a4c",
    "bytes": 9920,
    "name": "morphEngine.mjs",
@@ -2909,9 +2955,10 @@
    "bytes": 12219,
    "name": "morphgnn_offline_server.py",
    "paths": [
+    "chassis-work/src/Simlish/morphgnn_offline_server.py",
     "swarm-search/all/Simlish/morphgnn_offline_server.py"
    ],
-   "count": 1
+   "count": 2
   },
   {
    "sha256": "0975cd7feee9b21a54e2586eb48093ff546e6a20e6d668b7041cc244c707e8bd",
@@ -3389,6 +3436,16 @@
    "count": 1
   },
   {
+   "sha256": "c39e3b522b53ccdc12658c23075367c9d451b645affbeca7a8f0a401e504c42a",
+   "bytes": 13138,
+   "name": "morphUpgrade.e2e.test.mjs",
+   "paths": [
+    "zips/games/yv/youniverse/test/morphUpgrade.e2e.test.mjs",
+    "zips/games/yvt/youniverse/test/morphUpgrade.e2e.test.mjs"
+   ],
+   "count": 2
+  },
+  {
    "sha256": "3b9b15598d2462b696c4baef370292d219a175c0e36b8b66c24c4a5d1dd27f54",
    "bytes": 2178,
    "name": "MorphUtils.js",
@@ -3531,6 +3588,24 @@
    "name": "Pasted-Perfect-I-see-how-shared-codon-system-ts-is-structured-it-already-has-a-GENETIC-CODE-object-mapp-1759110498289_1759110498290.txt",
    "paths": [
     "zips/cynthia-app_1761745435802__4c8df03d/cynthia-app/Pasted-Perfect-I-see-how-shared-codon-system-ts-is-structured-it-already-has-a-GENETIC-CODE-object-mapp-1759110498289_1759110498290.txt"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "9d47428d39ff2ca4f97386ba3c99f1cf51d020aeb9a49648494fe83841998af4",
+   "bytes": 8001,
+   "name": "photo-morph.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/photo-morph.mjs"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "3592b7bb829579e2bc8ec250cb858a3851309abd5c4294f836872ac3807e18da",
+   "bytes": 655,
+   "name": "photo-morph.test.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/photo-morph.test.mjs"
    ],
    "count": 1
   },
@@ -3732,6 +3807,15 @@
    "count": 11
   },
   {
+   "sha256": "25dc1048fbaef1314c83efd166950f5071ce59f01bf8eedb174d94c33c3aa2c1",
+   "bytes": 1033,
+   "name": "swarm-fit.test.mjs",
+   "paths": [
+    "chassis-work/src/Simlish/you-n-i-verse/swarm-fit.test.mjs"
+   ],
+   "count": 1
+  },
+  {
    "sha256": "7ce581b55401e93f97540192b63decae792ffc544d052695044bf0cf31723ca2",
    "bytes": 14015,
    "name": "swarm-reality-engine.js",
@@ -3847,7 +3931,7 @@
     "zips/Synthia-State-Space-Foundation__4c9611a0/Synthia-State-Space-Foundation/vendor/spine/src/pure-synthia/automata/tools/tool-16-morph-mir.js",
     "zips/Synthia-Universal-Browser-Execution-v1.3.7__2b5933ca/Synthia-Universal-Browser-Execution-v1.3.7/src/automata/tools/tool-16-morph-mir.js"
    ],
-   "count": 53
+   "count": 55
   },
   {
    "sha256": "94eaf2c310e75122daa5f803b80e448d7ede10e4d48fd1da08b5c5fed92fe66f",

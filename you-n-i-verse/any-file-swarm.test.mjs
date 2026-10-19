@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import './vendor/kernel.js';
-import {processFile,fileFeatures,placeFile,languageOf,LANGUAGE_ADAPTERS,FEATURE_NAMES,INVESTIGATING} from './any-file-swarm.mjs';
+import {adaptLanguage,processFile,fileFeatures,placeFile,languageOf,LANGUAGE_ADAPTERS,FEATURE_NAMES,INVESTIGATING} from './any-file-swarm.mjs';
 import {NsnfRuntime} from './nsnf-runtime.mjs';
 import {StateSpace,gateToMacro} from './state-space.mjs';
 import {writeZip} from './zip-lite.mjs';
@@ -18,9 +18,13 @@ test('features: 8 finite numbers in [0,1] for any file; kinds and languages are 
  assert.equal(languageOf('a.MJS'),'js');assert.equal(languageOf('a.py'),'py');assert.equal(languageOf('a.css'),'css');assert.equal(languageOf('a.json'),'json');assert.equal(languageOf('a.rs'),null);
  assert.throws(()=>fileFeatures('x',123),/bytes/);
 });
-test('language adapters for js, py, css and json are placeholders, honestly marked',()=>{
- assert.deepEqual(Object.keys(LANGUAGE_ADAPTERS),['js','py','css','json']);assert.ok(Object.values(LANGUAGE_ADAPTERS).every(a=>a.implemented===false&&a.placeholder===true));
- assert.match(fileFeatures('a.py',te.encode('x')).adapter.note,/placeholder/);assert.equal(fileFeatures('a.rs',te.encode('x')).adapter,null);assert.ok(INVESTIGATING.some(x=>/placeholders/.test(x)));
+test('language adapters: js and json reduce through her PrimitiveReducer; css and py stay placeholders, honestly marked',async()=>{
+ assert.deepEqual(Object.keys(LANGUAGE_ADAPTERS),['js','py','css','json']);
+ assert.deepEqual(Object.entries(LANGUAGE_ADAPTERS).map(([k,a])=>[k,a.implemented,a.placeholder]),[['js',true,false],['py',false,true],['css',false,true],['json',true,false]]);
+ const js=await adaptLanguage('a.mjs',te.encode("import x from './x.mjs';export function add(a,b){return a+b}"));assert.equal(js.implemented,true);assert.deepEqual(js.structure.dependencies,['./x.mjs']);assert.deepEqual(js.structure.definitions,['add']);assert.ok(js.structure.moduleSyntax);
+ const j=await adaptLanguage('a.json',te.encode('{"a":{"b":[1,2]}}'));assert.equal(j.implemented,true);assert.ok(j.primitives.length>1);
+ for(const f of ['a.py','a.css'])assert.equal((await adaptLanguage(f,te.encode('x'))).implemented,false);
+ assert.match(fileFeatures('a.py',te.encode('x')).adapter.note,/placeholder/);assert.match(fileFeatures('a.js',te.encode('x')).adapter.note,/PrimitiveReducer/);assert.equal(fileFeatures('a.rs',te.encode('x')).adapter,null);assert.ok(INVESTIGATING.some(x=>/placeholders/.test(x)));
 });
 test('ANY file goes registration -> placement -> execution -> phenotype without throwing or being rejected',async()=>{
  const runtime=new NsnfRuntime();

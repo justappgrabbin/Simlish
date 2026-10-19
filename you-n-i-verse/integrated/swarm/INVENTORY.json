@@ -2,7 +2,7 @@
  "schema": "synthia-swarm-inventory/1",
  "builtOn": "2026-10-16 (PT)",
  "statusCounts": {
-  "EXISTS-RUNS": 24,
+  "EXISTS-RUNS": 26,
   "EXISTS-UNTESTED": 11,
   "PROPOSED": 15,
   "UNVERIFIED": 4,
@@ -538,10 +538,10 @@
    "tests": [
     {
      "id": "repo-test:integrated/swarm/swarm.test.mjs",
-     "status": "pass",
+     "status": "fail",
      "cmd": "node --test integrated/swarm/swarm.test.mjs",
      "cwd": "you-n-i-verse",
-     "result": "pass 13 fail 0"
+     "result": "pass 12 fail 1"
     },
     {
      "id": "repo-test:state-space.test.mjs",
@@ -551,7 +551,7 @@
      "result": "pass 10 fail 0"
     }
    ],
-   "testsPassed": 2,
+   "testsPassed": 1,
    "testsTotal": 2,
    "runEvidence": null,
    "dependencies": [
@@ -2146,18 +2146,127 @@
     "reference only (MIT). Its patterns (recursive-timeout heartbeat, constitution, hash-chained audit log, loop detector, protected files) are re-implemented in integrated/swarm-loop.mjs, whose own tests pass; none of its code is packaged or run"
    ],
    "note": null
+  },
+  {
+   "id": "youniverse-games",
+   "component": "YOU-N-I-VERSE · Cynthia Morph Game (her Node games app: HD RPG, I Ching Story, Oracle's Thread)",
+   "specItems": [
+    "S3",
+    "S8"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "zips/games/yv/youniverse/world/worldAdapter.js",
+     "bytes": 3724,
+     "sha256": "3b8469fb718d01e52e103ba7a3c8b4c73d3474c7903055445d3cd6eca5872aa7",
+     "functions": [
+      {
+       "name": "class WorldAdapter",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "zips/games/yv/youniverse/games/hdRpg.js",
+     "bytes": 9679,
+     "sha256": "0ceef8d85b7431764f0aea4b4ce1025905b53dd39de57a9ce6bfa012df9b05fe",
+     "functions": [
+      {
+       "name": "function create",
+       "found": true
+      }
+     ]
+    },
+    {
+     "path": "repo:vendor/youniverse-games/PROVENANCE.txt",
+     "bytes": 4521,
+     "sha256": "97b807b928e5768b06a1a7e7a7402e704e58b9dc0c3d2d5db06d10767e604b4d",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "repo-test:integrated/play/play.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/play/play.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 11 fail 0"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [
+    "node:fs/path/crypto/zlib (browser shims, filled in)"
+   ],
+   "missingConnections": [
+    "CONNECTED this round: vendored byte-identical (import closure) and wrapped by integrated/play/games-host.mjs; her hub.js, server.js, photo/imageTools.js (Python) and test/ are not copied; her oracles-thread reads the current time for changing lines"
+   ],
+   "note": "Drive youniverse-game-completed-release.zip (id 1fDvIpqkXOawi_frUGg7M5UbX5TwlMygg)"
+  },
+  {
+   "id": "synthworld-agents",
+   "component": "SynthWorld agents (her Godot data + Agent.gd/Utility.gd)",
+   "specItems": [
+    "S1"
+   ],
+   "status": "EXISTS-RUNS",
+   "files": [
+    {
+     "path": "zips/SynthWorld-321-source__0a0d0210/synthworld_build/game/data/agents/generator.json",
+     "bytes": 278,
+     "sha256": "82bafad3cc5a87d630b79c3a31035086ea63b08754ec2a55429a12fb3fc78f49",
+     "functions": []
+    },
+    {
+     "path": "swarm-search/all/Synthai2/client/public/synthworld/source/synthworld_godot_starter_7_/game/Scripts/AI/Utility.gd",
+     "bytes": 654,
+     "sha256": "9c3571196a6b7a0e232760276838f68ec142c38658b3e9be4874a5a96d60227a",
+     "functions": []
+    },
+    {
+     "path": "repo:vendor/synthworld-data/PROVENANCE.txt",
+     "bytes": 1676,
+     "sha256": "4fb6f42dc24ddc78dcd166d8137f2a65f7a49e76ed3186408a7311a196058edb",
+     "functions": []
+    }
+   ],
+   "dirs": [],
+   "tests": [
+    {
+     "id": "repo-test:integrated/play/play.test.mjs",
+     "status": "pass",
+     "cmd": "node --test integrated/play/play.test.mjs",
+     "cwd": "you-n-i-verse",
+     "result": "pass 11 fail 0"
+    }
+   ],
+   "testsPassed": 1,
+   "testsTotal": 1,
+   "runEvidence": null,
+   "dependencies": [],
+   "missingConnections": [
+    "CONNECTED this round: data vendored byte-identical; Agent.gd decision/effects ported to integrated/play/agents.mjs deterministically (her rng.randomize wander direction replaced by the turn number, filled in); agent count per level and trait order are filled in"
+   ],
+   "note": null
   }
  ],
  "acceptance": [
   {
    "n": 1,
    "row": "Swarm is code",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "PASS",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 1: her six-bit atoms decode to a running instance (5, 15, 42); a JS program carried as six-bit atoms round-trips losslessly and runs with the same result",
     "integrated/integrated-swarm.mjs ingests any bytes into six-bit primitives and places them in five fields (measure.test.mjs mirror tests)",
     "integrated/providers.mjs executes JS source through a guarded same-thread surface"
    ],
    "missing": [
+    "limit: JS runs after the atoms are decoded back to source text; no rule of hers executes JS directly from atoms",
     "execution is of the original SOURCE TEXT (AsyncFunction), not of the particle representation; no file of hers defines executing from six-bit states"
    ],
    "notes": "MISSING for the \"execute from the swarm representation\" half; the ingest half runs"
@@ -2175,11 +2284,15 @@
   {
    "n": 3,
    "row": "Arbitrary code ingestion",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "FAIL",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 3: js (runs), json (her JSON.parse), css/html (structural) get structure; any-file-swarm js/json adapters now use her PrimitiveReducer",
     "any-file-swarm.mjs fileFeatures ingests any bytes; language adapters for js, py, css, json are all implemented:false"
    ],
    "missing": [
+    "python, rust and other languages are placeholders (adapter:python (placeholder)); css has no parser of hers",
     "no language parser exists in the branch; Tree-sitter is only a research reference (not packaged)"
    ],
    "notes": "bytes in, structure out only for HTML/JS/CSS references (measure.mjs references())"
@@ -2187,45 +2300,61 @@
   {
    "n": 4,
    "row": "Code creation",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "FAIL",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 4: finishApp adds only scaffolding files (simlish/entry.html, manifest, registration, scene, reality, report)",
     "app-finisher.mjs adds missing files from a checklist (app-finisher.test.mjs)"
    ],
    "missing": [
+    "no program logic is created from intent; game and 2d targets are not implemented (no spec of hers for them)",
     "no creation of new program logic from intent; gameTarget and 2d adapters are not implemented stubs"
    ]
   },
   {
    "n": 5,
    "row": "Neuro-symbolic reasoning",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "FAIL",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 5: Trident (neural) and the guide (symbolic) are both hosted by integrated/app-server.mjs as separate tools",
     "integrated/trident-js.mjs (neural, her weights) and integrated/guide.mjs (symbolic lookup) both run, separately",
     "AUTOLING and Klein exist in her files and run there"
    ],
    "missing": [
+    "no function passes one's output into the other",
     "they are not connected to each other or to the swarm area; no reasoning step combines them"
    ]
   },
   {
    "n": 6,
    "row": "Collective adaptation",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "FAIL",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 6: one corrupted atom of the number target: PSO alone (reorganize refineRounds:0) leaves wrong bits, repaired:false; with her Hamming-1 refinement repaired:true",
     "integrated/abc.mjs, swarm-fit.mjs (PSO), population.mjs (GA), EmergentMesh.adapt() decay/prune (swarm.test.mjs)"
    ],
    "missing": [
+    "collective (PSO/ABC) search alone does not adapt the organisation",
     "scorecard item 7 Adaptation is a FAIL: no search is driven by the mesh or by measured gaps yet; swarm-fit and abc do not use the shared primitive rules (registry sharesRules=false for swarm-fit)"
    ]
   },
   {
    "n": 7,
    "row": "Self-modification",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "FAIL",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 7: after the full 73-unit plan the loop has written only app/ (and tools only user/); protected originals and integrated/ code throw ProtectedError / are refused",
     "swarm-loop.mjs writes to a virtual Workspace with protected originals and a hash-chained audit log"
    ],
    "missing": [
+    "nothing rewrites the running swarm code",
     "it assembles the app from a plan; nothing rewrites the running swarm code; no push code exists (proposals only)"
    ]
   },
@@ -2243,12 +2372,16 @@
   {
    "n": 9,
    "row": "Arbitrary visual morphing",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "FAIL",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 9: photo-morph affineTriangle runs; her youniverse MorphEngine embodiment changes with the game choice (play session)",
     "photo-morph.mjs and frame-morph.mjs (tests exist in the repo)",
     "Hover canonical-morph-runtime passes its test, unconnected"
    ],
    "missing": [
+    "no swarm state drives the morph",
     "morphing is image/skeleton morphing; arbitrary visual morphing driven by the swarm is not built"
    ]
   },
@@ -2310,11 +2443,15 @@
   {
    "n": 15,
    "row": "Reliability",
-   "status": "EXISTS-UNTESTED",
+   "status": "EXISTS-RUNS",
+   "verdict": "PASS",
    "evidence": [
+    "repo-test:integrated/acceptance-rows.test.mjs",
+    "row 15: soak of 400 loop cycles + 400 heartbeats (0 failed, audit chain intact, originals unchanged) and 120 play turns",
     "node --test suites on the branch (counts in the final report)"
    ],
    "missing": [
+    "scope: a soak in Node only; no on-device long run",
     "no soak/long-run test; the heartbeat loop was run for the 73-unit plan only"
    ]
   }
@@ -2419,7 +2556,9 @@
    "name": "Mesa",
    "status": "PROPOSED",
    "packagedHere": false,
-   "mentionsInRepoSources": []
+   "mentionsInRepoSources": [
+    "vendor/youniverse-games/state/gameState.js"
+   ]
   },
   {
    "name": "PySwarms",

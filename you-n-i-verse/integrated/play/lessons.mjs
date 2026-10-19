@@ -11,7 +11,8 @@ export function lessonFor(world,{program,entry,chart}){const t=program.lessons,p
  if(world==='hd-rpg'){const m=entry.mechanics,l=pick(0);return {world,need:l,chart:kn(l.gate,l.line),
    game:`Decision mechanic: ${m.decisionMechanic}; NPCs meet you with ${m.npcInteractionStyle}; connection: ${m.connectionMechanic}.`,
    practise:`Use the ability of gate ${l.gate} (your ${l.why.join(', ')||'gate'}).`,suggested:{type:'use-ability',abilityGate:l.gate},filled:GAME_LESSON_FILL}}
- if(world==='iching-story'){const h=entry.hexagramInPlay;return {world,need:{gate:h.number,line:h.line},chart:kn(h.number,h.line),game:entry.conflict,
+ if(world==='iching-story'){const sc=entry.hexagramInPlay?entry:entry.scene||{},h=sc.hexagramInPlay||{number:program.address.gate,line:program.address.line}; // re-entry returns her last scene, whose hexagram sits under .scene
+  return {world,need:{gate:h.number,line:h.line},chart:kn(h.number,h.line),game:sc.conflict??null,
    practise:'Read the situation through your hexagram in play before you choose.',suggested:'observe',filled:GAME_LESSON_FILL}}
  if(world==='oracles-thread'){const e=entry.bazi?.elements,l=pick(1);return {world,need:l,chart:kn(l.gate,l.line),
    game:e?`Your birth pillars run ${e.dominant}-dominant and ${e.weakest}-starved.`:null,practise:'Wait, gesture or combine — watch which band your act lands in.',suggested:{mode:'wait'},filled:GAME_LESSON_FILL}}

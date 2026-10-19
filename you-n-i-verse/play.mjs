@@ -44,7 +44,7 @@ function showProgram(){const p=S.program;$('progCard').hidden=false;
 function showAgents(list){$('agents').innerHTML=S.agents.map(a=>`<div><b>${esc(a.name)}</b> <span class="note">swarm hexagram ${a.hexagram_code} · authority ${esc(a.authority)}</span></div>`).join('')+(list||[]).map(x=>`<div>${esc(x.line)}</div>`).join('')}
 function showMorph(r){const id=r?.morph?.embodimentId||r?.entry?.morph?.embodimentId;const p='/youniverse/renders/'+S.player.playerId+'-'+id+'.svg';$('morph').innerHTML=id&&existsSync(p)?readFileSync(p):''}
 function choicesFor(world,entry){if(world==='hd-rpg'){const m=entry.mechanics||{};return [...new Map((m.abilities||[]).map(a=>[a.canonicalGate,a])).values()].map(a=>({label:'Use '+a.name,c:{type:'use-ability',abilityGate:a.canonicalGate}})).concat((m.pathways||[]).map(p=>({label:'Traverse '+p.name,c:{type:'traverse',channel:p.channel}})),[{label:'Confront the shadow',c:{type:'confront',target:'shadow'}}])}
- if(world==='iching-story')return (entry.choices||[]).map(x=>({label:x.label,c:x.id}));
+ if(world==='iching-story')return (entry.choices||entry.scene?.choices||[]).map(x=>({label:x.label,c:x.id}));
  if(world==='oracles-thread')return [{label:'Wait in stillness',c:{mode:'wait'}},...['sky-arc','lake-crescent','flame-flick','thunder-stomp','wind-sweep','water-trickle','mountain-press','earth-open'].map(g=>({label:'Gesture '+g,c:{mode:'gesture',symbol:g}})),...((entry.availableEntities||entry.journey?.session_state?.available_entities)||[]).slice(0,6).map(e=>({label:'Touch '+e,c:{mode:'click',entity:e}}))];
  if(world==='line-walk')return entry.moves.map(m=>({label:`Line ${m.line}: ${m.label} → gate ${m.toGate}`,c:{line:m.line}}));return []}
 let lastEntry=null;
