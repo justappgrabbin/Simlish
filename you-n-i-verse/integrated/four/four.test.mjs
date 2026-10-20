@@ -66,7 +66,8 @@ test('sound: real voices from glyph qualities, muted by default', () => {
   const ps = JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles; const S = streams(ps); const v = soundVoices(S, 0, 50);
   assert.equal(v.length, 5); assert.ok(v.every((h) => h >= 20 && h <= 20000)); const snd = createSound(null); assert.equal(snd.muted, true); assert.equal(snd.unmute(), false);
 });
-test('shape is drawn: the field paints the glyph hexagram bars', () => {
-  const S = streams(JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles); let rects = 0; const ctx = { set fillStyle(v) {}, set font(v) {}, set textBaseline(v) {}, set globalAlpha(v) {}, set globalCompositeOperation(v) {}, fillText() {}, fillRect() { rects++; } };
-  const info = drawField(ctx, 70, 24, S, 0); assert.ok(rects >= info.cols * info.rows * 7);
+test('texture is drawn: the Movement ground paints the two Govinda p. ix trigram signs of every cell', () => {
+  const S = streams(JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles); let rects = 0; const signs = new Set(['○', '□', '∪', '⌅', '△', '▽', '⊻', '∩']); let drawn = 0;
+  const ctx = { set fillStyle(v) {}, set font(v) {}, set textBaseline(v) {}, set globalAlpha(v) {}, set globalCompositeOperation(v) {}, fillText(t) { if (signs.has(t)) drawn++; }, fillRect() { rects++; } };
+  const info = drawField(ctx, 70, 24, S, 0); assert.equal(rects, info.cols * info.rows); assert.equal(drawn, info.cols * info.rows * 2);
 });

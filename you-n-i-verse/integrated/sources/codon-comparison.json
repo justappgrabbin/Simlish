@@ -1,0 +1,1881 @@
+{
+ "note": "Differences only; no source is preferred. Schönberger = Govinda p.64 table with the repo King Wen<->Fu Xi table.",
+ "sources": {
+  "lcm": {
+   "repo": "/workspace/apps/LCM-State-space-",
+   "ref": "fill/lcm-20261019:extracted/session_build-1/codonMapping.js",
+   "sha256": "0d1364a2d6ad98428c23f63be3e4129e93a58ea3903d09c729bebf3e586a252e"
+  },
+  "hdMorphology": {
+   "repo": "/workspace/simlish-audit",
+   "ref": "origin/feat/hd-morphology-body-layer:you-n-i-verse/modules/hd-morphology/data/her-sources.mjs",
+   "sha256": "6a85bdc2a85190161d9ad4acdd1942079cfeefc4ed21e6b15a00c9a6d98d83cb"
+  }
+ },
+ "mismatchCounts": {
+  "lcm": 1,
+  "geneKeys": 1,
+  "donorHdJs": 58,
+  "dnaHdCompilerCodon": 61,
+  "dnaHdCompilerAA": 58,
+  "synthaiRuleCodon": 56
+ },
+ "rows": [
+  {
+   "gate": 1,
+   "schonberger": {
+    "codon": "AAA",
+    "aminoPrinted": "Lys",
+    "one": "K"
+   },
+   "standardOfThatCodon": "K",
+   "lcmCodonMapping": [
+    "K"
+   ],
+   "geneKeys": "K",
+   "donorHdJs": "M",
+   "dnaHdCompiler": {
+    "codon": "AAA",
+    "aa": "K"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CCC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": false,
+    "dnaHdCompilerAA": false,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 2,
+   "schonberger": {
+    "codon": "UUU",
+    "aminoPrinted": "Phe",
+    "one": "F"
+   },
+   "standardOfThatCodon": "F",
+   "lcmCodonMapping": [
+    "F"
+   ],
+   "geneKeys": "F",
+   "donorHdJs": "I",
+   "dnaHdCompiler": {
+    "codon": "AAC",
+    "aa": "N"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UUU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 3,
+   "schonberger": {
+    "codon": "CUC",
+    "aminoPrinted": "Leu",
+    "one": "L"
+   },
+   "standardOfThatCodon": "L",
+   "lcmCodonMapping": [
+    "L"
+   ],
+   "geneKeys": "L",
+   "donorHdJs": "L",
+   "dnaHdCompiler": {
+    "codon": "AAG",
+    "aa": "K"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AUA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": false,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 4,
+   "schonberger": {
+    "codon": "GUG",
+    "aminoPrinted": "Val",
+    "one": "V"
+   },
+   "standardOfThatCodon": "V",
+   "lcmCodonMapping": [
+    "V"
+   ],
+   "geneKeys": "V",
+   "donorHdJs": "F",
+   "dnaHdCompiler": {
+    "codon": "AAU",
+    "aa": "N"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GUG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 5,
+   "schonberger": {
+    "codon": "ACC",
+    "aminoPrinted": "Thr",
+    "one": "T"
+   },
+   "standardOfThatCodon": "T",
+   "lcmCodonMapping": [
+    "T"
+   ],
+   "geneKeys": "T",
+   "donorHdJs": "S",
+   "dnaHdCompiler": {
+    "codon": "ACA",
+    "aa": "T"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CAA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": false,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 6,
+   "schonberger": {
+    "codon": "GGA",
+    "aminoPrinted": "Gly",
+    "one": "G"
+   },
+   "standardOfThatCodon": "G",
+   "lcmCodonMapping": [
+    "G"
+   ],
+   "geneKeys": "G",
+   "donorHdJs": "Y",
+   "dnaHdCompiler": {
+    "codon": "ACC",
+    "aa": "T"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GGC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 7,
+   "schonberger": {
+    "codon": "GUU",
+    "aminoPrinted": "Val",
+    "one": "V"
+   },
+   "standardOfThatCodon": "V",
+   "lcmCodonMapping": [
+    "V"
+   ],
+   "geneKeys": "V",
+   "donorHdJs": "G",
+   "dnaHdCompiler": {
+    "codon": "ACG",
+    "aa": "T"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GUU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 8,
+   "schonberger": {
+    "codon": "UUC",
+    "aminoPrinted": "Phe",
+    "one": "F"
+   },
+   "standardOfThatCodon": "F",
+   "lcmCodonMapping": [
+    "F"
+   ],
+   "geneKeys": "F",
+   "donorHdJs": "A",
+   "dnaHdCompiler": {
+    "codon": "ACU",
+    "aa": "T"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UUA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 9,
+   "schonberger": {
+    "codon": "ACA",
+    "aminoPrinted": "Thr",
+    "one": "T"
+   },
+   "standardOfThatCodon": "T",
+   "lcmCodonMapping": [
+    "T"
+   ],
+   "geneKeys": "T",
+   "donorHdJs": "V",
+   "dnaHdCompiler": {
+    "codon": "AGA",
+    "aa": "R"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CAC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 10,
+   "schonberger": {
+    "codon": "AGA",
+    "aminoPrinted": "Arg",
+    "one": "R"
+   },
+   "standardOfThatCodon": "R",
+   "lcmCodonMapping": [
+    "R"
+   ],
+   "geneKeys": "R",
+   "donorHdJs": "T",
+   "dnaHdCompiler": {
+    "codon": "AGC",
+    "aa": "S"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CGC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 11,
+   "schonberger": {
+    "codon": "ACU",
+    "aminoPrinted": "Thr",
+    "one": "T"
+   },
+   "standardOfThatCodon": "T",
+   "lcmCodonMapping": [
+    "T"
+   ],
+   "geneKeys": "T",
+   "donorHdJs": "D",
+   "dnaHdCompiler": {
+    "codon": "AGG",
+    "aa": "R"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CAU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 12,
+   "schonberger": {
+    "codon": "UGA",
+    "aminoPrinted": "Stop?",
+    "one": "*"
+   },
+   "standardOfThatCodon": "*",
+   "lcmCodonMapping": [
+    "*"
+   ],
+   "geneKeys": "*",
+   "donorHdJs": "E",
+   "dnaHdCompiler": {
+    "codon": "AGU",
+    "aa": "S"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UGC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 13,
+   "schonberger": {
+    "codon": "CAA",
+    "aminoPrinted": "GluN",
+    "one": "Q"
+   },
+   "standardOfThatCodon": "Q",
+   "lcmCodonMapping": [
+    "Q"
+   ],
+   "geneKeys": "Q",
+   "donorHdJs": "N",
+   "dnaHdCompiler": {
+    "codon": "AUA",
+    "aa": "I"
+   },
+   "synthaiRule": {
+    "rnaCodon": "ACC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 14,
+   "schonberger": {
+    "codon": "AAG",
+    "aminoPrinted": "Lys",
+    "one": "K"
+   },
+   "standardOfThatCodon": "K",
+   "lcmCodonMapping": [
+    "K"
+   ],
+   "geneKeys": "K",
+   "donorHdJs": "Q",
+   "dnaHdCompiler": {
+    "codon": "AUC",
+    "aa": "I"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CCG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 15,
+   "schonberger": {
+    "codon": "UCU",
+    "aminoPrinted": "Ser",
+    "one": "S"
+   },
+   "standardOfThatCodon": "S",
+   "lcmCodonMapping": [
+    "S"
+   ],
+   "geneKeys": "S",
+   "donorHdJs": "K",
+   "dnaHdCompiler": {
+    "codon": "AUG",
+    "aa": "M"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UAU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 16,
+   "schonberger": {
+    "codon": "UGU",
+    "aminoPrinted": "Cys",
+    "one": "C"
+   },
+   "standardOfThatCodon": "C",
+   "lcmCodonMapping": [
+    "C"
+   ],
+   "geneKeys": "C",
+   "donorHdJs": "H",
+   "dnaHdCompiler": {
+    "codon": "AUU",
+    "aa": "I"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UGU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 17,
+   "schonberger": {
+    "codon": "CGC",
+    "aminoPrinted": "Arg",
+    "one": "R"
+   },
+   "standardOfThatCodon": "R",
+   "lcmCodonMapping": [
+    "R"
+   ],
+   "geneKeys": "R",
+   "donorHdJs": "R",
+   "dnaHdCompiler": {
+    "codon": "CAA",
+    "aa": "Q"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AGA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": false,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 18,
+   "schonberger": {
+    "codon": "GCG",
+    "aminoPrinted": "Ala",
+    "one": "A"
+   },
+   "standardOfThatCodon": "A",
+   "lcmCodonMapping": [
+    "A"
+   ],
+   "geneKeys": "A",
+   "donorHdJs": "W",
+   "dnaHdCompiler": {
+    "codon": "CAC",
+    "aa": "H"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GAG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 19,
+   "schonberger": {
+    "codon": "AUU",
+    "aminoPrinted": "Ileu",
+    "one": "I"
+   },
+   "standardOfThatCodon": "I",
+   "lcmCodonMapping": [
+    "I"
+   ],
+   "geneKeys": "I",
+   "donorHdJs": "C",
+   "dnaHdCompiler": {
+    "codon": "CAG",
+    "aa": "Q"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CUU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 20,
+   "schonberger": {
+    "codon": "UUA",
+    "aminoPrinted": "Leu",
+    "one": "L"
+   },
+   "standardOfThatCodon": "L",
+   "lcmCodonMapping": [
+    "L"
+   ],
+   "geneKeys": "L",
+   "donorHdJs": "R",
+   "dnaHdCompiler": {
+    "codon": "CAU",
+    "aa": "H"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UUC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 21,
+   "schonberger": {
+    "codon": "CGG",
+    "aminoPrinted": "Arg",
+    "one": "R"
+   },
+   "standardOfThatCodon": "R",
+   "lcmCodonMapping": [
+    "R"
+   ],
+   "geneKeys": "R",
+   "donorHdJs": "S",
+   "dnaHdCompiler": {
+    "codon": "CCA",
+    "aa": "P"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AGG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 22,
+   "schonberger": {
+    "codon": "CCG",
+    "aminoPrinted": "Pro",
+    "one": "P"
+   },
+   "standardOfThatCodon": "P",
+   "lcmCodonMapping": [
+    "P"
+   ],
+   "geneKeys": "P",
+   "donorHdJs": "L",
+   "dnaHdCompiler": {
+    "codon": "CCC",
+    "aa": "P"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AAG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": false,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 23,
+   "schonberger": {
+    "codon": "UUG",
+    "aminoPrinted": "Leu",
+    "one": "L"
+   },
+   "standardOfThatCodon": "L",
+   "lcmCodonMapping": [
+    "L"
+   ],
+   "geneKeys": "L",
+   "donorHdJs": "I",
+   "dnaHdCompiler": {
+    "codon": "CCG",
+    "aa": "P"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UUG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 24,
+   "schonberger": {
+    "codon": "CUU",
+    "aminoPrinted": "Leu",
+    "one": "L"
+   },
+   "standardOfThatCodon": "L",
+   "lcmCodonMapping": [
+    "L"
+   ],
+   "geneKeys": "L",
+   "donorHdJs": "M",
+   "dnaHdCompiler": {
+    "codon": "CCU",
+    "aa": "P"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AUU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 25,
+   "schonberger": {
+    "codon": "CGA",
+    "aminoPrinted": "Arg",
+    "one": "R"
+   },
+   "standardOfThatCodon": "R",
+   "lcmCodonMapping": [
+    "R"
+   ],
+   "geneKeys": "R",
+   "donorHdJs": "F",
+   "dnaHdCompiler": {
+    "codon": "CGA",
+    "aa": "R"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AGC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": false,
+    "dnaHdCompilerAA": false,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 26,
+   "schonberger": {
+    "codon": "ACG",
+    "aminoPrinted": "Thr",
+    "one": "T"
+   },
+   "standardOfThatCodon": "T",
+   "lcmCodonMapping": [
+    "T"
+   ],
+   "geneKeys": "T",
+   "donorHdJs": "Y",
+   "dnaHdCompiler": {
+    "codon": "CGC",
+    "aa": "R"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CAG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 27,
+   "schonberger": {
+    "codon": "CUG",
+    "aminoPrinted": "Leu",
+    "one": "L"
+   },
+   "standardOfThatCodon": "L",
+   "lcmCodonMapping": [
+    "L"
+   ],
+   "geneKeys": "L",
+   "donorHdJs": "G",
+   "dnaHdCompiler": {
+    "codon": "CGG",
+    "aa": "R"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AUG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 28,
+   "schonberger": {
+    "codon": "GAC",
+    "aminoPrinted": "Asp",
+    "one": "D"
+   },
+   "standardOfThatCodon": "D",
+   "lcmCodonMapping": [
+    "D"
+   ],
+   "geneKeys": "D",
+   "donorHdJs": "A",
+   "dnaHdCompiler": {
+    "codon": "CGU",
+    "aa": "R"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GCA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 29,
+   "schonberger": {
+    "codon": "GUC",
+    "aminoPrinted": "Val",
+    "one": "V"
+   },
+   "standardOfThatCodon": "V",
+   "lcmCodonMapping": [
+    "V"
+   ],
+   "geneKeys": "V",
+   "donorHdJs": "V",
+   "dnaHdCompiler": {
+    "codon": "CUA",
+    "aa": "L"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GUA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": false,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 30,
+   "schonberger": {
+    "codon": "CAG",
+    "aminoPrinted": "GluN",
+    "one": "Q"
+   },
+   "standardOfThatCodon": "Q",
+   "lcmCodonMapping": [
+    "Q"
+   ],
+   "geneKeys": "Q",
+   "donorHdJs": "T",
+   "dnaHdCompiler": {
+    "codon": "CUC",
+    "aa": "L"
+   },
+   "synthaiRule": {
+    "rnaCodon": "ACG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 31,
+   "schonberger": {
+    "codon": "UAC",
+    "aminoPrinted": "Tyr",
+    "one": "Y"
+   },
+   "standardOfThatCodon": "Y",
+   "lcmCodonMapping": [
+    "Y"
+   ],
+   "geneKeys": "Y",
+   "donorHdJs": "D",
+   "dnaHdCompiler": {
+    "codon": "CUG",
+    "aa": "L"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UCA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 32,
+   "schonberger": {
+    "codon": "GAU",
+    "aminoPrinted": "Asp",
+    "one": "D"
+   },
+   "standardOfThatCodon": "D",
+   "lcmCodonMapping": [
+    "D"
+   ],
+   "geneKeys": "D",
+   "donorHdJs": "E",
+   "dnaHdCompiler": {
+    "codon": "CUU",
+    "aa": "L"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GCU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 33,
+   "schonberger": {
+    "codon": "UAA",
+    "aminoPrinted": "Ochre",
+    "one": "*"
+   },
+   "standardOfThatCodon": "*",
+   "lcmCodonMapping": [
+    "*"
+   ],
+   "geneKeys": "*",
+   "donorHdJs": "N",
+   "dnaHdCompiler": {
+    "codon": "GAA",
+    "aa": "E"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UCC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 34,
+   "schonberger": {
+    "codon": "AAU",
+    "aminoPrinted": "AspN",
+    "one": "N"
+   },
+   "standardOfThatCodon": "N",
+   "lcmCodonMapping": [
+    "N"
+   ],
+   "geneKeys": "N",
+   "donorHdJs": "Q",
+   "dnaHdCompiler": {
+    "codon": "GAC",
+    "aa": "D"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CCU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 35,
+   "schonberger": {
+    "codon": "UGG",
+    "aminoPrinted": "Tryp",
+    "one": "W"
+   },
+   "standardOfThatCodon": "W",
+   "lcmCodonMapping": [
+    "W"
+   ],
+   "geneKeys": "W",
+   "donorHdJs": "K",
+   "dnaHdCompiler": {
+    "codon": "GAG",
+    "aa": "E"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UGG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 36,
+   "schonberger": {
+    "codon": "CCU",
+    "aminoPrinted": "Pro",
+    "one": "P"
+   },
+   "standardOfThatCodon": "P",
+   "lcmCodonMapping": [
+    "P"
+   ],
+   "geneKeys": "P",
+   "donorHdJs": "H",
+   "dnaHdCompiler": {
+    "codon": "GAU",
+    "aa": "D"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AAU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 37,
+   "schonberger": {
+    "codon": "CCA",
+    "aminoPrinted": "Pro",
+    "one": "P"
+   },
+   "standardOfThatCodon": "P",
+   "lcmCodonMapping": [
+    "P"
+   ],
+   "geneKeys": "P",
+   "donorHdJs": "R",
+   "dnaHdCompiler": {
+    "codon": "GCA",
+    "aa": "A"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AAC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 38,
+   "schonberger": {
+    "codon": "AGG",
+    "aminoPrinted": "Arg",
+    "one": "R"
+   },
+   "standardOfThatCodon": "R",
+   "lcmCodonMapping": [
+    "R"
+   ],
+   "geneKeys": "R",
+   "donorHdJs": "W",
+   "dnaHdCompiler": {
+    "codon": "GCC",
+    "aa": "A"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CGG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 39,
+   "schonberger": {
+    "codon": "UCC",
+    "aminoPrinted": "Ser",
+    "one": "S"
+   },
+   "standardOfThatCodon": "S",
+   "lcmCodonMapping": [
+    "S"
+   ],
+   "geneKeys": "S",
+   "donorHdJs": "C",
+   "dnaHdCompiler": {
+    "codon": "GCG",
+    "aa": "A"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UAA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 40,
+   "schonberger": {
+    "codon": "GGU",
+    "aminoPrinted": "Gly",
+    "one": "G"
+   },
+   "standardOfThatCodon": "G",
+   "lcmCodonMapping": [
+    "G"
+   ],
+   "geneKeys": "G",
+   "donorHdJs": "R",
+   "dnaHdCompiler": {
+    "codon": "GCU",
+    "aa": "A"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GGU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  },
+  {
+   "gate": 41,
+   "schonberger": {
+    "codon": "AUG",
+    "aminoPrinted": "Met",
+    "one": "M"
+   },
+   "standardOfThatCodon": "M",
+   "lcmCodonMapping": [
+    "M"
+   ],
+   "geneKeys": "M",
+   "donorHdJs": "S",
+   "dnaHdCompiler": {
+    "codon": "GGA",
+    "aa": "G"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CUG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 42,
+   "schonberger": {
+    "codon": "CUA",
+    "aminoPrinted": "Leu",
+    "one": "L"
+   },
+   "standardOfThatCodon": "L",
+   "lcmCodonMapping": [
+    "L"
+   ],
+   "geneKeys": "L",
+   "donorHdJs": "L",
+   "dnaHdCompiler": {
+    "codon": "GGC",
+    "aa": "G"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AUC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": false,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 43,
+   "schonberger": {
+    "codon": "AAC",
+    "aminoPrinted": "AspN",
+    "one": "N"
+   },
+   "standardOfThatCodon": "N",
+   "lcmCodonMapping": [
+    "N"
+   ],
+   "geneKeys": "N",
+   "donorHdJs": "I",
+   "dnaHdCompiler": {
+    "codon": "GGG",
+    "aa": "G"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CCA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 44,
+   "schonberger": {
+    "codon": "GAA",
+    "aminoPrinted": "Glu",
+    "one": "E"
+   },
+   "standardOfThatCodon": "E",
+   "lcmCodonMapping": [
+    "E"
+   ],
+   "geneKeys": "E",
+   "donorHdJs": "M",
+   "dnaHdCompiler": {
+    "codon": "GGU",
+    "aa": "G"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GCC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 45,
+   "schonberger": {
+    "codon": "UGC",
+    "aminoPrinted": "Cys",
+    "one": "C"
+   },
+   "standardOfThatCodon": "C",
+   "lcmCodonMapping": [
+    "C"
+   ],
+   "geneKeys": "C",
+   "donorHdJs": "F",
+   "dnaHdCompiler": {
+    "codon": "GUA",
+    "aa": "V"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UGA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 46,
+   "schonberger": {
+    "codon": "GCU",
+    "aminoPrinted": "Ala",
+    "one": "A"
+   },
+   "standardOfThatCodon": "A",
+   "lcmCodonMapping": [
+    "A"
+   ],
+   "geneKeys": "A",
+   "donorHdJs": "Y",
+   "dnaHdCompiler": {
+    "codon": "GUC",
+    "aa": "V"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GAU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 47,
+   "schonberger": {
+    "codon": "GGC",
+    "aminoPrinted": "Gly",
+    "one": "G"
+   },
+   "standardOfThatCodon": "G",
+   "lcmCodonMapping": [
+    "G"
+   ],
+   "geneKeys": "G",
+   "donorHdJs": "G",
+   "dnaHdCompiler": {
+    "codon": "GUG",
+    "aa": "V"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GGA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": false,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 48,
+   "schonberger": {
+    "codon": "GCC",
+    "aminoPrinted": "Ala",
+    "one": "A"
+   },
+   "standardOfThatCodon": "A",
+   "lcmCodonMapping": [
+    "A"
+   ],
+   "geneKeys": "A",
+   "donorHdJs": "A",
+   "dnaHdCompiler": {
+    "codon": "GUU",
+    "aa": "V"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GAA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": false,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 49,
+   "schonberger": {
+    "codon": "CAC",
+    "aminoPrinted": "His",
+    "one": "H"
+   },
+   "standardOfThatCodon": "H",
+   "lcmCodonMapping": [
+    "H"
+   ],
+   "geneKeys": "H",
+   "donorHdJs": "V",
+   "dnaHdCompiler": {
+    "codon": "UAA",
+    "aa": "*"
+   },
+   "synthaiRule": {
+    "rnaCodon": "ACA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 50,
+   "schonberger": {
+    "codon": "GAG",
+    "aminoPrinted": "Glu",
+    "one": "E"
+   },
+   "standardOfThatCodon": "E",
+   "lcmCodonMapping": [
+    "E"
+   ],
+   "geneKeys": "E",
+   "donorHdJs": "T",
+   "dnaHdCompiler": {
+    "codon": "UAC",
+    "aa": "Y"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GCG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 51,
+   "schonberger": {
+    "codon": "CGU",
+    "aminoPrinted": "Arg",
+    "one": "R"
+   },
+   "standardOfThatCodon": "R",
+   "lcmCodonMapping": [
+    "R"
+   ],
+   "geneKeys": "R",
+   "donorHdJs": "D",
+   "dnaHdCompiler": {
+    "codon": "UAG",
+    "aa": "*"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AGU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 52,
+   "schonberger": {
+    "codon": "UCG",
+    "aminoPrinted": "Ser",
+    "one": "S"
+   },
+   "standardOfThatCodon": "S",
+   "lcmCodonMapping": [
+    "S"
+   ],
+   "geneKeys": "S",
+   "donorHdJs": "E",
+   "dnaHdCompiler": {
+    "codon": "UAU",
+    "aa": "Y"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UAG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 53,
+   "schonberger": {
+    "codon": "UCA",
+    "aminoPrinted": "Ser",
+    "one": "S"
+   },
+   "standardOfThatCodon": "S",
+   "lcmCodonMapping": [
+    "S"
+   ],
+   "geneKeys": "S",
+   "donorHdJs": "N",
+   "dnaHdCompiler": {
+    "codon": "UCA",
+    "aa": "S"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UAC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": false,
+    "dnaHdCompilerAA": false,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 54,
+   "schonberger": {
+    "codon": "AGU",
+    "aminoPrinted": "Ser",
+    "one": "S"
+   },
+   "standardOfThatCodon": "S",
+   "lcmCodonMapping": [
+    "S"
+   ],
+   "geneKeys": "S",
+   "donorHdJs": "Q",
+   "dnaHdCompiler": {
+    "codon": "UCC",
+    "aa": "S"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CGU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": false,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 55,
+   "schonberger": {
+    "codon": "CAU",
+    "aminoPrinted": "His",
+    "one": "H"
+   },
+   "standardOfThatCodon": "H",
+   "lcmCodonMapping": [
+    "H"
+   ],
+   "geneKeys": "H",
+   "donorHdJs": "K",
+   "dnaHdCompiler": {
+    "codon": "UCG",
+    "aa": "S"
+   },
+   "synthaiRule": {
+    "rnaCodon": "ACU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 56,
+   "schonberger": {
+    "codon": "UAG",
+    "aminoPrinted": "Amber",
+    "one": "*"
+   },
+   "standardOfThatCodon": "*",
+   "lcmCodonMapping": [
+    "*"
+   ],
+   "geneKeys": "*",
+   "donorHdJs": "H",
+   "dnaHdCompiler": {
+    "codon": "UCU",
+    "aa": "S"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UCG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 57,
+   "schonberger": {
+    "codon": "GCA",
+    "aminoPrinted": "Ala",
+    "one": "A"
+   },
+   "standardOfThatCodon": "A",
+   "lcmCodonMapping": [
+    "A"
+   ],
+   "geneKeys": "A",
+   "donorHdJs": "R",
+   "dnaHdCompiler": {
+    "codon": "UGA",
+    "aa": "*"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GAC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 58,
+   "schonberger": {
+    "codon": "AGC",
+    "aminoPrinted": "Ser",
+    "one": "S"
+   },
+   "standardOfThatCodon": "S",
+   "lcmCodonMapping": [
+    "S"
+   ],
+   "geneKeys": "S",
+   "donorHdJs": "W",
+   "dnaHdCompiler": {
+    "codon": "UGC",
+    "aa": "C"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CGA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 59,
+   "schonberger": {
+    "codon": "GUA",
+    "aminoPrinted": "Val",
+    "one": "V"
+   },
+   "standardOfThatCodon": "V",
+   "lcmCodonMapping": [
+    "V"
+   ],
+   "geneKeys": "V",
+   "donorHdJs": "C",
+   "dnaHdCompiler": {
+    "codon": "UGG",
+    "aa": "W"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GUC"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 60,
+   "schonberger": {
+    "codon": "AUC",
+    "aminoPrinted": "Ileu",
+    "one": "I"
+   },
+   "standardOfThatCodon": "I",
+   "lcmCodonMapping": [
+    "I"
+   ],
+   "geneKeys": "I",
+   "donorHdJs": "R",
+   "dnaHdCompiler": {
+    "codon": "UGU",
+    "aa": "C"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CUA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 61,
+   "schonberger": {
+    "codon": "AUA",
+    "aminoPrinted": "Met",
+    "one": "M"
+   },
+   "standardOfThatCodon": "I",
+   "lcmCodonMapping": [
+    "I"
+   ],
+   "geneKeys": "I",
+   "donorHdJs": "S",
+   "dnaHdCompiler": {
+    "codon": "UUA",
+    "aa": "L"
+   },
+   "synthaiRule": {
+    "rnaCodon": "CUC"
+   },
+   "mismatch": {
+    "lcm": true,
+    "geneKeys": true,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 62,
+   "schonberger": {
+    "codon": "UAU",
+    "aminoPrinted": "Tyr",
+    "one": "Y"
+   },
+   "standardOfThatCodon": "Y",
+   "lcmCodonMapping": [
+    "Y"
+   ],
+   "geneKeys": "Y",
+   "donorHdJs": "L",
+   "dnaHdCompiler": {
+    "codon": "UUC",
+    "aa": "F"
+   },
+   "synthaiRule": {
+    "rnaCodon": "UCU"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 63,
+   "schonberger": {
+    "codon": "CCC",
+    "aminoPrinted": "Pro",
+    "one": "P"
+   },
+   "standardOfThatCodon": "P",
+   "lcmCodonMapping": [
+    "P"
+   ],
+   "geneKeys": "P",
+   "donorHdJs": "I",
+   "dnaHdCompiler": {
+    "codon": "UUG",
+    "aa": "L"
+   },
+   "synthaiRule": {
+    "rnaCodon": "AAA"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": true
+   }
+  },
+  {
+   "gate": 64,
+   "schonberger": {
+    "codon": "GGG",
+    "aminoPrinted": "Gly",
+    "one": "G"
+   },
+   "standardOfThatCodon": "G",
+   "lcmCodonMapping": [
+    "G"
+   ],
+   "geneKeys": "G",
+   "donorHdJs": "M",
+   "dnaHdCompiler": {
+    "codon": "UUU",
+    "aa": "F"
+   },
+   "synthaiRule": {
+    "rnaCodon": "GGG"
+   },
+   "mismatch": {
+    "lcm": false,
+    "geneKeys": false,
+    "donorHdJs": true,
+    "dnaHdCompilerCodon": true,
+    "dnaHdCompilerAA": true,
+    "synthaiRuleCodon": false
+   }
+  }
+ ]
+}

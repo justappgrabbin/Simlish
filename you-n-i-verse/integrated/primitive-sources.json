@@ -52,12 +52,12 @@
    "status": "EXISTS"
   },
   "wheelRank": {
-   "ref": "integrated/wheels.mjs:37",
+   "ref": "integrated/wheels.mjs:38",
    "origin": "repo adapter of her hexagram_sequences.py",
    "status": "EXISTS"
   },
   "wheelReadout": {
-   "ref": "integrated/wheels.mjs:40",
+   "ref": "integrated/wheels.mjs:41",
    "origin": "repo",
    "status": "EXISTS"
   },
@@ -280,6 +280,121 @@
    "ref": "integrated/reference/dimension-visual-core.mjs.txt:275",
    "origin": "builder PROVISIONAL formula (not hers)",
    "status": "PROTOTYPE"
+  },
+  "trigramShape": {
+   "ref": "integrated/sources/govinda.mjs:23",
+   "origin": "SOURCED: Govinda, Inner Structure of the I Ching p. ix ABBREV signs (Drive 1unb8il81Anv1REcSCdrpEzMEyRvgYwGP); replaces BANTU v10 random shapes for drawing (v10 constants kept as reference)",
+   "status": "SOURCED"
+  },
+  "trigramOfValue": {
+   "ref": "integrated/sources/govinda.mjs:10",
+   "origin": "SOURCED: Govinda p. ix trigram drawings (whole=1, line 1 = bit 0)",
+   "status": "SOURCED"
+  },
+  "trigramQuality": {
+   "ref": "integrated/sources/govinda.mjs:50",
+   "origin": "SOURCED: Govinda pp.46-47 table, one row = one plane; refuses mixing planes (p.42)",
+   "status": "SOURCED"
+  },
+  "hexagramQuality": {
+   "ref": "integrated/sources/govinda.mjs:56",
+   "origin": "SOURCED: Govinda pp.46-47 through upper/lower trigrams; one plane per call (p.42)",
+   "status": "SOURCED"
+  },
+  "groupOf": {
+   "ref": "integrated/sources/govinda.mjs:64",
+   "origin": "SOURCED: Govinda p.43 four groups universal/organic/elemental/inorganic (aaa/bbb, bba/aab, aba/bab, baa/abb)",
+   "status": "SOURCED"
+  },
+  "complementTrigram": {
+   "ref": "integrated/sources/govinda.mjs:66",
+   "origin": "SOURCED: Govinda p.44 polarity 1 (complement)",
+   "status": "SOURCED"
+  },
+  "reverseTrigram": {
+   "ref": "integrated/sources/govinda.mjs:67",
+   "origin": "SOURCED: Govinda p.44 polarity 2 (reversal / mirror)",
+   "status": "SOURCED"
+  },
+  "GENERATES": {
+   "ref": "integrated/sources/govinda.mjs:79",
+   "origin": "SOURCED: Govinda p.44 generating cycle (mother of)",
+   "status": "SOURCED"
+  },
+  "DESTROYS": {
+   "ref": "integrated/sources/govinda.mjs:80",
+   "origin": "SOURCED: Govinda p.44 / p.57 destroying cycle",
+   "status": "SOURCED"
+  },
+  "ELEMENTS_P57": {
+   "ref": "integrated/sources/govinda.mjs:71",
+   "origin": "SOURCED: Govinda p.57 Elements and their correspondences (as printed, organ row included)",
+   "status": "SOURCED"
+  },
+  "ANIMALS_PP51_53": {
+   "ref": "integrated/sources/govinda.mjs:87",
+   "origin": "SOURCED: Govinda pp.51-53 twelve animals, elements, directions",
+   "status": "SOURCED"
+  },
+  "SIXTY_CYCLE_P52": {
+   "ref": "integrated/sources/govinda.mjs:96",
+   "origin": "SOURCED: Govinda p.52 5x12=60; year order INVESTIGATING",
+   "status": "SOURCED"
+  },
+  "FIVE_TONES_P51": {
+   "ref": "integrated/sources/govinda.mjs:85",
+   "origin": "Govinda p.51: five tones named only as a count; no names/mapping",
+   "status": "INVESTIGATING"
+  },
+  "trigramElement": {
+   "ref": "integrated/sources/govinda.mjs:100",
+   "origin": "DERIVED from Govinda pp.46-47 directions + p.57 places (cardinals only); intercardinals INVESTIGATING",
+   "status": "SOURCED"
+  },
+  "fuHiToKingWen": {
+   "ref": "integrated/sources/govinda.mjs:112",
+   "origin": "SOURCED: Govinda p.67 transformation Fu Hi -> King Wen (Movement dimension)",
+   "status": "SOURCED"
+  },
+  "classifyPair": {
+   "ref": "integrated/sources/govinda.mjs:127",
+   "origin": "SOURCED geometry check of Govinda p.67 four movement types",
+   "status": "SOURCED"
+  },
+  "DURATION_P66": {
+   "ref": "integrated/sources/govinda.mjs:107",
+   "origin": "SOURCED quote: Govinda p.66 DURATION (phrase on Evolution/memory transitions; no rule)",
+   "status": "SOURCED"
+  },
+  "schonbergerCodonToHexagram": {
+   "ref": "integrated/sources/schonberger.mjs:8",
+   "origin": "SOURCED: Govinda p.64, Schönberger codon<->hexagram (binary order)",
+   "status": "SOURCED"
+  },
+  "schonbergerHexagramToCodon": {
+   "ref": "integrated/sources/schonberger.mjs:9",
+   "origin": "SOURCED: inverse of Govinda p.64 table",
+   "status": "SOURCED"
+  },
+  "standardAminoAcid": {
+   "ref": "integrated/sources/science.mjs:10",
+   "origin": "ESTABLISHED SCIENCE: NCBI transl_table=1 (separate science layer)",
+   "status": "SOURCED"
+  },
+  "repoMatchesTable4": {
+   "ref": "integrated/sources/rutt.mjs:12",
+   "origin": "SOURCED: Rutt pp.88-93 Table 4 binary (whole=1, right digit = bottom line); checks bitsOf",
+   "status": "SOURCED"
+  },
+  "decodeBaguaNumerals": {
+   "ref": "integrated/sources/rutt.mjs:18",
+   "origin": "SOURCED: Rutt pp.99-100 bagua numerals (odd whole, even broken)",
+   "status": "SOURCED"
+  },
+  "mawangduiGenerated": {
+   "ref": "integrated/sources/rutt.mjs:30",
+   "origin": "SOURCED: Rutt pp.115-117 Diagram 9 / Table 9 principles, GENERATED; equals Table 9 and Table 10; NOT declared hers",
+   "status": "SOURCED"
   },
   "bantuSoundFreq": {
    "ref": "integrated/four/bantu-v10.mjs:11",

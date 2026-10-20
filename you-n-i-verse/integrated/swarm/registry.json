@@ -3971,6 +3971,24 @@
    "count": 2
   },
   {
+   "sha256": "f2fb8a4a5614ee3e433453a968d494851bf4dc25dd1eced368e2d5503885cfd4",
+   "bytes": 229935,
+   "name": "trinity-framework.docx",
+   "paths": [
+    "research/apps/src/trinity-framework.docx"
+   ],
+   "count": 1
+  },
+  {
+   "sha256": "f87408eb25c10c53d96b273a80297df02f4b1342668a4e8d246ff1385ca86154",
+   "bytes": 89204,
+   "name": "trinity.txt",
+   "paths": [
+    "research/apps/src/trinity.txt"
+   ],
+   "count": 1
+  },
+  {
    "sha256": "1afc37d3c8ac5f058e55ff7e33b16e85845ec78385a04d7b75e04ff1e7cf48c7",
    "bytes": 19417,
    "name": "TrinityAssessment.tsx",
@@ -4151,7 +4169,7 @@
    "measure.mjs",
    "integrated/swarm/index.mjs"
   ],
-  "reachableModules": 90,
+  "reachableModules": 91,
   "byId": {
    "swarm-os-v9": {
     "status": "referenced",

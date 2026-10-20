@@ -1,3 +1,4 @@
+import {DURATION_P66} from './sources/govinda.mjs';
 // Thin adapter: Alexis's wheels per nsnf-spec §2.1 ("Each of the five Base layers uses its own distinct classical I Ching sequence").
 //   L1 Movement  = Fu Xi (binary/mathematical changes)       L2 Evolution = Mawangdui (matrix transitions)
 //   L3 Being     = Eight Palaces / Taiji pivot (spec: not yet implemented)
@@ -29,7 +30,7 @@ const mawangduiOrder=mawangduiKingWen().map(g=>KW2FX[g]);               // posit
 const kingWenOrder=Array.from({length:64},(_,i)=>KW2FX[i+1]);            // position i holds the macro code of gate i+1
 export const WHEELS=Object.freeze({
  Movement:Object.freeze({layer:'L1',sequence:'Fu Xi',status:'implemented',order:Object.freeze(fuxiOrder),source:'hexagram_sequences.py fu_xi_order()'}),
- Evolution:Object.freeze({layer:'L2',sequence:'Mawangdui',status:'investigating',order:Object.freeze(mawangduiOrder),source:'hexagram_sequences.py mawangdui_order() (port)',note:WHEELS_INVESTIGATING[0]}),
+ Evolution:Object.freeze({layer:'L2',sequence:'Mawangdui',status:'investigating',order:Object.freeze(mawangduiOrder),source:'hexagram_sequences.py mawangdui_order() (port)',note:WHEELS_INVESTIGATING[0],principle:Object.freeze({quote:DURATION_P66,source:'Govinda, The Inner Structure of the I Ching p.66 (quoting the Book of Transformations)',use:'quoted principle on Evolution/memory transitions only; no rule derived'})}),
  Being:Object.freeze({layer:'L3',sequence:'Eight Palaces / Taiji pivot',status:'investigating',order:null,source:null,note:'spec §2.1: not yet implemented'}),
  Design:Object.freeze({layer:'L4',sequence:'AST-style structural parsing',status:'investigating',order:null,source:null,note:'spec §2.1: not yet implemented'}),
  Space:Object.freeze({layer:'L5',sequence:'King Wen',status:'implemented',order:Object.freeze(kingWenOrder),readOnly:true,source:'repo vendor/kingwen.mjs (matches hexagram_sequences.py KING_WEN_BINARY on all 64)'})});

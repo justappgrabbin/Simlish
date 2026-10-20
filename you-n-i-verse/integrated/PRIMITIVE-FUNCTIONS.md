@@ -111,8 +111,8 @@ Gates by the Base number in her doc3 anchor map (a configuration, not a binding)
 | exchangeTrigrams | EXISTS | state-space.mjs:30 | repo |
 | nuclear | EXISTS | state-space.mjs:31 | repo (lines [2,3,4,3,4,5]; her spec §36 uses the same inner lines) |
 | hammingNeighbors | EXISTS | state-space.mjs:32 | repo (her spec §2: Hamming distance 1) |
-| wheelRank | EXISTS | integrated/wheels.mjs:37 | repo adapter of her hexagram_sequences.py |
-| wheelReadout | EXISTS | integrated/wheels.mjs:40 | repo |
+| wheelRank | EXISTS | integrated/wheels.mjs:38 | repo adapter of her hexagram_sequences.py |
+| wheelReadout | EXISTS | integrated/wheels.mjs:41 | repo |
 | mawangduiRuttKingWen | PROPOSED-SOURCED | integrated/mawangdui-rutt.mjs:12 | NEW this task: Rutt's printed rule + Table 10 (book in her Drive); reproduces all 64 of Table 10 (test); NOT declared hers |
 | packsOf | EXISTS | integrated/bantu.mjs:13 | her bridge.js layout (3-2-1, two bits each) via repo adapter |
 | encodeBytes | EXISTS | integrated/bantu.mjs:5 | HERS: bridge.js lines 5-9 copied verbatim |
@@ -157,6 +157,29 @@ Gates by the Base number in her doc3 anchor map (a configuration, not a binding)
 | vowelDim | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:431 | builder prototype over her Rules and syntax §3 vowel table |
 | letterColor | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:274 | builder PROVISIONAL formula (not hers; her spec §1.5 says color is computed from arc position) |
 | letterHz | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:275 | builder PROVISIONAL formula (not hers) |
+| trigramShape | SOURCED | integrated/sources/govinda.mjs:23 | SOURCED: Govinda, Inner Structure of the I Ching p. ix ABBREV signs (Drive 1unb8il81Anv1REcSCdrpEzMEyRvgYwGP); replaces BANTU v10 random shapes for drawing (v10 constants kept as reference) |
+| trigramOfValue | SOURCED | integrated/sources/govinda.mjs:10 | SOURCED: Govinda p. ix trigram drawings (whole=1, line 1 = bit 0) |
+| trigramQuality | SOURCED | integrated/sources/govinda.mjs:50 | SOURCED: Govinda pp.46-47 table, one row = one plane; refuses mixing planes (p.42) |
+| hexagramQuality | SOURCED | integrated/sources/govinda.mjs:56 | SOURCED: Govinda pp.46-47 through upper/lower trigrams; one plane per call (p.42) |
+| groupOf | SOURCED | integrated/sources/govinda.mjs:64 | SOURCED: Govinda p.43 four groups universal/organic/elemental/inorganic (aaa/bbb, bba/aab, aba/bab, baa/abb) |
+| complementTrigram | SOURCED | integrated/sources/govinda.mjs:66 | SOURCED: Govinda p.44 polarity 1 (complement) |
+| reverseTrigram | SOURCED | integrated/sources/govinda.mjs:67 | SOURCED: Govinda p.44 polarity 2 (reversal / mirror) |
+| GENERATES | SOURCED | integrated/sources/govinda.mjs:79 | SOURCED: Govinda p.44 generating cycle (mother of) |
+| DESTROYS | SOURCED | integrated/sources/govinda.mjs:80 | SOURCED: Govinda p.44 / p.57 destroying cycle |
+| ELEMENTS_P57 | SOURCED | integrated/sources/govinda.mjs:71 | SOURCED: Govinda p.57 Elements and their correspondences (as printed, organ row included) |
+| ANIMALS_PP51_53 | SOURCED | integrated/sources/govinda.mjs:87 | SOURCED: Govinda pp.51-53 twelve animals, elements, directions |
+| SIXTY_CYCLE_P52 | SOURCED | integrated/sources/govinda.mjs:96 | SOURCED: Govinda p.52 5x12=60; year order INVESTIGATING |
+| FIVE_TONES_P51 | INVESTIGATING | integrated/sources/govinda.mjs:85 | Govinda p.51: five tones named only as a count; no names/mapping |
+| trigramElement | SOURCED | integrated/sources/govinda.mjs:100 | DERIVED from Govinda pp.46-47 directions + p.57 places (cardinals only); intercardinals INVESTIGATING |
+| fuHiToKingWen | SOURCED | integrated/sources/govinda.mjs:112 | SOURCED: Govinda p.67 transformation Fu Hi -> King Wen (Movement dimension) |
+| classifyPair | SOURCED | integrated/sources/govinda.mjs:127 | SOURCED geometry check of Govinda p.67 four movement types |
+| DURATION_P66 | SOURCED | integrated/sources/govinda.mjs:107 | SOURCED quote: Govinda p.66 DURATION (phrase on Evolution/memory transitions; no rule) |
+| schonbergerCodonToHexagram | SOURCED | integrated/sources/schonberger.mjs:8 | SOURCED: Govinda p.64, Schönberger codon<->hexagram (binary order) |
+| schonbergerHexagramToCodon | SOURCED | integrated/sources/schonberger.mjs:9 | SOURCED: inverse of Govinda p.64 table |
+| standardAminoAcid | SOURCED | integrated/sources/science.mjs:10 | ESTABLISHED SCIENCE: NCBI transl_table=1 (separate science layer) |
+| repoMatchesTable4 | SOURCED | integrated/sources/rutt.mjs:12 | SOURCED: Rutt pp.88-93 Table 4 binary (whole=1, right digit = bottom line); checks bitsOf |
+| decodeBaguaNumerals | SOURCED | integrated/sources/rutt.mjs:18 | SOURCED: Rutt pp.99-100 bagua numerals (odd whole, even broken) |
+| mawangduiGenerated | SOURCED | integrated/sources/rutt.mjs:30 | SOURCED: Rutt pp.115-117 Diagram 9 / Table 9 principles, GENERATED; equals Table 9 and Table 10; NOT declared hers |
 | bantuSoundFreq | EXISTS | integrated/four/bantu-v10.mjs:11 | HERS: SWARM-OS v10 BANTU _sound_freq / magic-square sound_freq (20*1000^x), integrated/reference/her/swarm_os_bantu.v10.py.txt:101,317; ported |
 | BANTU_ASCII_SHAPES | EXISTS | integrated/four/bantu-v10.mjs:6 | HERS: SWARM-OS v10 BANTU ASCII_SHAPES (Shapes + Distance layer), swarm_os_bantu.v10.py.txt:63; ported verbatim |
 | BANTU_LAYER_COLORS | EXISTS | integrated/four/bantu-v10.mjs:9 | HERS: SWARM-OS v10 BANTU LAYER_COLORS, swarm_os_bantu.v10.py.txt:78; ported verbatim |

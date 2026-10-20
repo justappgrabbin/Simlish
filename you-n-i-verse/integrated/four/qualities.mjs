@@ -4,6 +4,7 @@ import { encodeBytes } from '../bantu.mjs';
 import { macroToGate, bitsOf, lineOf } from '../../state-space.mjs';
 import { OntologicalAddress } from './originals/ontological-address/OntologicalAddress.mjs';
 import { bantuSoundFreq } from './bantu-v10.mjs';
+import { trigramOfValue, trigramShape, trigramElement, ELEMENT_RGB_FILLED, FIVE_TONES_P51 } from '../sources/govinda.mjs';
 
 // Names of colors/tones/bases as printed in her color book (primitive-functions.json color.N / tone.N / base.N).
 export const COLOR_NAMES = ['FEAR', 'HOPE', 'DESIRE', 'NEED', 'GUILT', 'INNOCENCE'];
@@ -15,8 +16,11 @@ export const ATTRIBUTION = Object.freeze([
   { quality: 'six-bit code', rendered: true, fn: ['encodeBytes'], source: 'her Bantu bridge.js lines 5-9 (integrated/bantu.mjs, verbatim)', status: 'HERS', filled: 'for a character >= 63 (her escape 63,hi,lo) the LOW token is used' },
   { quality: 'gate', rendered: true, fn: ['macroToGate'], source: 'state-space.mjs:35 Fu Xi decimal -> King Wen (vendor/kingwen.mjs from her zips); her Bantu README: a 6-bit token is six primitive positions', status: 'HERS', filled: 'reading the six-bit code as the Fu Xi decimal of a hexagram' },
   { quality: 'line / color / tone / base', rendered: true, fn: ['OntologicalAddress'], source: 'tool-factory and ATO particles carry her factory address G.L.C.T.B (integrated-tool-factory.mjs); OntologicalAddress defaults color=tone=base=1 (OntologicalAddress.js:175)', status: 'HERS', filled: 'line = 1 when the particle has no address (neural, ModelMaker); her constructor has no line default' },
-  { quality: 'shape', rendered: true, fn: ['bitsOf', 'lineOf'], source: 'registry shape.hexagram (fn bitsOf, lineOf; state-space.mjs:22,25): the six lines of the glyph\'s hexagram, yang solid / yin broken', status: 'HERS', filled: 'bar thickness and gap width in pixels' },
-  { quality: 'texture', rendered: true, fn: ['bitsOf', 'lineOf'], source: 'same hexagram bars, drawn as the cell ground of the Movement layer (opaque: this is what gives 100% coverage)', status: 'HERS', filled: 'using the hexagram bars as texture' },
+  { quality: 'hexagram lines', rendered: false, fn: ['bitsOf', 'lineOf'], source: 'registry shape.hexagram (fn bitsOf, lineOf; state-space.mjs:22,25): the six lines of the glyph\'s hexagram, yang solid / yin broken', status: 'HERS', note: 'carried on every glyph; since this pass the ground draws the two trigram signs (texture row) instead of the six bars' },
+  { quality: 'shape', rendered: true, fn: ['trigramShape', 'trigramOfValue'], source: 'Govinda p. ix ABBREV signs of the glyph\'s upper and lower trigrams (replaces the random BANTU v10 shapes; v10 constants kept as reference)', status: 'SOURCED', filled: 'Unicode stand-ins for the printed signs (⌅ Wind, ⊻ Lake are readings); 6px size' },
+  { quality: 'texture', rendered: true, fn: ['trigramShape'], source: 'the two trigram signs, upper over lower, on the opaque Movement ground (replaces the hexagram-bar texture of b430902; opaque ground gives 100% coverage)', status: 'SOURCED', filled: 'layout: upper sign at top of cell, lower sign below' },
+  { quality: 'trigram colour', rendered: true, fn: ['trigramElement'], source: 'Govinda pp.46-47 trigram directions + p.57 element places and colours (p.53 print agrees)', status: 'SOURCED (DERIVED for the four cardinal trigrams)', filled: 'RGB rendering of the colour names; the four intercardinal trigrams have no stated element -> INVESTIGATING, drawn in the glyph hue instead' },
+  { quality: 'five tones', rendered: false, fn: ['FIVE_TONES_P51'], source: 'Govinda p.51 mentions five tones; no names or element mapping are printed', status: 'INVESTIGATING', note: 'sound stays BANTU v10' },
   { quality: 'color (value)', rendered: true, fn: ['OntologicalAddress', 'DEG_PER_COLOR'], source: 'her color book: color.1-6 FEAR..INNOCENCE (primitive-functions.json, ctx color-book-lines); OntologicalAddress.js:81', status: 'HERS' },
   { quality: 'hue', rendered: true, fn: ['OntologicalAddress'], source: 'her spec §1.5 "color is computed from arc position"; arc position = OntologicalAddress eclipticDeg (OntologicalAddress.js:188-196)', status: 'HERS', filled: 'hue in degrees = ecliptic degree (identity); saturation 70% / ground 40%' },
   { quality: 'brightness', rendered: true, fn: ['computeHierarchy'], source: 'her generative level (Base/Tone/Color/line) from computeHierarchy -> computeLevel (OntologicalAddress.js:122-160)', status: 'HERS', filled: 'lightness = 38 + 8 x level (%)' },
@@ -41,6 +45,7 @@ export function glyphQualities(ch, address) {
     shape: Object.freeze([1, 2, 3, 4, 5, 6].map((l) => lineOf(six, l))), bits: bitsOf(six),
     color: { value: a.color, name: COLOR_NAMES[a.color - 1] }, tone: { value: a.tone, name: TONE_NAMES[a.tone - 1], sense: TONE_SENSE[a.tone - 1] },
     hue: Math.round(oa.eclipticDeg * 1000) / 1000, level: oa.hierarchy.level, lightness: 38 + 8 * oa.hierarchy.level,
+    trigrams: Object.freeze(Object.fromEntries([['upper', (six >> 3) & 7], ['lower', six & 7]].map(([k, v]) => { const t = trigramOfValue(v), e = trigramElement(t); return [k, Object.freeze({ trigram: t, shape: trigramShape(t), element: e.element, elementStatus: e.status, rgb: e.element ? ELEMENT_RGB_FILLED[e.element] : null })]; }))),
     hz: Math.round(bantuSoundFreq(oa.eclipticDeg / 360) * 100) / 100,
   });
   cache.set(key, q); return q;
