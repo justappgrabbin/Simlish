@@ -1,0 +1,10 @@
+fastapi==0.143.0
+uvicorn==0.54.0
+Pillow==12.3.0
+httpx==0.28.1
+# Install torch for your compute platform before adding the model packages below.
+diffusers==0.41.0
+transformers==5.19.0
+accelerate==1.15.0
+huggingface-hub==1.33.0
+safetensors==0.8.0

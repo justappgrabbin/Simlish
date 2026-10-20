@@ -1,0 +1,12 @@
+# Four supplied source archives
+
+Reviewed the actual implementations on 2026-10-20:
+
+- Kimi_Agent_Modular Generative System Suite.zip (188580 bytes; Drive ID 1gWiZhb59ivLSi-XnRZ5nktY9uvx_YyFd): React/TypeScript suite of language, grammar, simulation and network modules. Read simulator.ts and klein-network.ts. It has supplied initial rules and network edges; these are authored model choices, not independent empirical findings. No app build or full module validation was run here. Not bundled.
+- generative_mesh.zip (168573 bytes; ID 1ZARNQ78V3lXUtcZqHhxAXFf0btsFaoMf): React UI with meshEngine.ts. Text/code ingestion splits sentences/lines into stored triples. The visual recipe takes a text description. Confidence values 0.94 and 0.91 are fixed constants; they do not establish truth or measured model performance. Not bundled.
+- GenerativePlayingNetworks-master.zip (326870 bytes; ID 1c0pF9m9U8CeYs7kHxk3CcOb45aC-fydX): Python/PyTorch generator, agent, critic, level adapter and training loop using generated environments and play/reward feedback. Requires external GVGAI Gym and RL dependencies. Read generator.py and trainer.py; no training/inference was run. Its model-specific game rewards do not by themselves verify arbitrary causal claims. Not bundled.
+- MESSY_Synthia_Mesh_Studio_Source.zip (68347 bytes; ID 13doeviAgbr5NBwFK8DcboTP8uyTf_-19): dependency-free mesh assertions/history, scheduled actions, numerical neural preference learning, inversion visits, language-contact simulation and standalone HTML artifact generation. All 14 donor engine tests pass. Actual shipped HTML initially failed in Chromium due to a build interpolation bug. Fixed locally and vendored in mesh-workspace with source/provenance and a build regression.
+
+The repaired MESSY page passed an actual mobile-size Chromium boot, assertion save/reload, completed world visit and artifact creation, with zero page errors and no off-origin requests. The integration test exports a real MESSY checkpoint, imports it into investigation, preserves preexisting candidates, retains the source assertions and leaves every imported empirical claim unverified across reload.
+
+mesh-evidence.mjs imports active triples as candidates and active/inactive triples as attributed evidence. It retains provenance and address strings as source metadata, never treats `rv` as proof, does not execute groups/rules, stages imports atomically and uses a checkpoint digest to avoid duplicating the same checkpoint. It does not solve dimensional self-assembly or implement full empirical investigation.
