@@ -246,6 +246,18 @@
    "sha256": "d393d803553ba8e8f92240b52900fffd445d72691d956a1fd8f193c96a5f45df",
    "sourceSha256": "d393d803553ba8e8f92240b52900fffd445d72691d956a1fd8f193c96a5f45df",
    "origin": "repo reference copy of the dimension-visual core.mjs, made importable"
+  },
+  {
+   "path": "originals/ontological-address/OntologicalAddress.mjs",
+   "sha256": "afbb6587e130ec20926848555697b0ce3f0f3066af9a4b95c50b2aec75fad5eb",
+   "sourceSha256": "afbb6587e130ec20926848555697b0ce3f0f3066af9a4b95c50b2aec75fad5eb",
+   "origin": "her resonance-engine core/OntologicalAddress.js (repo reference copy), made importable"
   }
- ]
+ ],
+ "bantuV10": {
+  "path": "integrated/reference/her/swarm_os_bantu.v10.py.txt",
+  "sha256": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7",
+  "from": "swarm-os-v14/x/v10/swarm_os_bantu.py",
+  "ported": "integrated/four/bantu-v10.mjs"
+ }
 }

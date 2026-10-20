@@ -2,7 +2,10 @@ import test from 'node:test'; import assert from 'node:assert/strict'; import fs
 import { docText, semanticUnits } from './doc-text.mjs';
 import * as P from './primitives.mjs';
 import { LAYERS, encodeLayer, decodeLayer, encodeParticle } from './bhantugh.mjs';
-import { drawField, streams, coverage, CELL } from './field.mjs';
+import { drawField, streams, coverage, CELL, cellIndex, motionOf, FIELD_DIMS, soundVoices, createSound } from './field.mjs';
+import { ATTRIBUTION, glyphQualities } from './qualities.mjs';
+import { attributionMarkdown } from './attribution.build.mjs';
+import { bantuSoundFreq } from './bantu-v10.mjs';
 import { FRAME_WHEEL_MAPPINGS, frameWheel } from '../play/adaptive.mjs';
 const here = new URL('.', import.meta.url).pathname;
 const doc = (f) => fs.readFileSync(here + 'docs/' + f);
@@ -26,12 +29,17 @@ test('B-H-A-N-T-U-G-H: eight layers, both H kept, invertible layers round-trip o
   assert.deepEqual(LAYERS.map((l) => l.key).join(''), 'BHANTUGH'); assert.deepEqual(LAYERS.filter((l) => l.key === 'H').map((l) => l.name), ['html', 'hex']);
   const ps = JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles;
   for (const p of [...ps.slice(0, 200), { text: 'Être ✓ 𝄞 — 42' }]) for (const l of LAYERS.filter((x) => x.invertible)) assert.equal(decodeLayer(l.name, encodeLayer(l.name, p.text)), p.text, l.name);
-  const e = encodeParticle(ps[5], 5); assert.deepEqual([...e.diagonal].sort((a, b) => a - b), [0, 1, 2, 3, 4, 5, 6, 7]); assert.equal(e.diagonal[0], 5);
+});
+test('diagonal exists ONLY in Movement (encoding order and field motion)', () => {
+  const ps = JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles; const straight = [0, 1, 2, 3, 4, 5, 6, 7];
+  for (const [i, p] of ps.entries()) { const e = encodeParticle(p, i); if (p.dimension === 'Movement') { assert.deepEqual([...e.diagonal].sort((a, b) => a - b), straight); assert.equal(e.diagonal[0], i % 8); } else assert.deepEqual(e.diagonal, straight, p.dimension); assert.deepEqual(p.diagonal, e.diagonal); }
+  assert.ok(ps.some((p) => p.dimension === 'Movement' && p.diagonal[0] !== 0));
+  for (const d of FIELD_DIMS) { const cols = 50, len = 997; const shift = cellIndex(d, 1, 0, cols, 0, len) - cellIndex(d, 0, 0, cols, 0, len); assert.equal(motionOf(d), d === 'Movement' ? 'diagonal' : 'straight'); assert.equal(shift, d === 'Movement' ? cols + 1 : cols, d); }
+  assert.ok(LAYERS.every((l) => l.placement === 'INVESTIGATING' && !('quality' in l)));
 });
 test('each layer spells a function that exists in her primitive-functions registry (or is listed as a gap)', () => {
   const reg = JSON.parse(fs.readFileSync(here + '../primitive-functions.json', 'utf8')).primitives; const ids = new Set((Array.isArray(reg) ? reg : Object.values(reg)).map((x) => x.id));
   for (const l of LAYERS) if (l.registry) assert.ok(ids.has(l.registry), l.registry); else assert.match(l.note, /INVESTIGATING/);
-  assert.deepEqual([...new Set(LAYERS.map((l) => l.quality))], ['Movement', 'Design', 'Space']);
 });
 test('field: five layers from real particles cover 100% of the screen (no background pixels)', () => {
   const ps = JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles; const S = streams(ps); assert.equal(S.length, 5);
@@ -40,8 +48,25 @@ test('field: five layers from real particles cover 100% of the screen (no backgr
     const ctx = { set fillStyle(v) {}, set font(v) {}, set textBaseline(v) {}, set globalAlpha(v) {}, set globalCompositeOperation(v) {}, fillText() {}, fillRect(x, y, w, h) { for (let j = Math.max(0, y); j < Math.min(H, y + h); j++) for (let i = Math.max(0, x); i < Math.min(W, x + w); i++) a[(j * W + i) * 4 + 3] = 255; } };
     const info = drawField(ctx, W, H, S, 3); assert.equal(info.layers, 5); assert.equal(coverage(a), 1, W + 'x' + H);
   }
-  const words = new Set(ps.flatMap((p) => p.words)); assert.ok(S.every((s) => s.join('').split(' ').filter(Boolean).every((w) => words.has(w) || ps.some((p) => p.text === w))));
+  const words = new Set(ps.flatMap((p) => p.words)); assert.ok(S.every((s) => s.map((q) => q.ch).join('').split(' ').filter(Boolean).every((w) => words.has(w) || ps.some((p) => p.text === w))));
 });
 test('frames x wheels: both hypotheses selectable, default unchanged', () => {
   assert.equal(frameWheel('sidereal'), 'fu-xi'); assert.equal(frameWheel('sidereal', 'hypothesis-A'), 'mawangdui'); assert.equal(frameWheel('draconic', 'hypothesis-A'), 'king-wen'); assert.equal(frameWheel('draconic', 'hypothesis-B'), 'fu-xi'); assert.ok(FRAME_WHEEL_MAPPINGS.current.default);
+});
+
+const FUNCS = JSON.parse(fs.readFileSync(here + '../primitive-sources.json', 'utf8')).functions;
+test('every rendered quality maps to a registry function (or is labeled filled/instruction)', () => {
+  for (const a of ATTRIBUTION) { for (const f of a.fn) assert.ok(FUNCS[f], f + ' missing from primitive-sources.json'); if (a.rendered && !a.fn.length) assert.ok(/HERS/.test(a.status), a.quality); }
+  for (const need of ['shape', 'sound', 'hue', 'brightness', 'texture', 'motion', 'color (value)']) assert.ok(ATTRIBUTION.find((a) => a.quality === need && a.rendered), need);
+  const q = glyphQualities('a', 'Space:G20.L2.C2.T2.B2'); assert.equal(q.gate, 27); assert.equal(q.color.name, 'HOPE'); assert.equal(q.shape.length, 6); assert.equal(q.hz, Math.round(bantuSoundFreq(q.hue / 360) * 100) / 100);
+  assert.ok(!/letterColor|letterHz/.test(fs.readFileSync(here + 'field.mjs', 'utf8')));
+});
+test('ATTRIBUTION.md matches the code', () => { assert.equal(fs.readFileSync(here + 'ATTRIBUTION.md', 'utf8'), attributionMarkdown(FUNCS)); });
+test('sound: real voices from glyph qualities, muted by default', () => {
+  const ps = JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles; const S = streams(ps); const v = soundVoices(S, 0, 50);
+  assert.equal(v.length, 5); assert.ok(v.every((h) => h >= 20 && h <= 20000)); const snd = createSound(null); assert.equal(snd.muted, true); assert.equal(snd.unmute(), false);
+});
+test('shape is drawn: the field paints the glyph hexagram bars', () => {
+  const S = streams(JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles); let rects = 0; const ctx = { set fillStyle(v) {}, set font(v) {}, set textBaseline(v) {}, set globalAlpha(v) {}, set globalCompositeOperation(v) {}, fillText() {}, fillRect() { rects++; } };
+  const info = drawField(ctx, 70, 24, S, 0); assert.ok(rects >= info.cols * info.rows * 7);
 });

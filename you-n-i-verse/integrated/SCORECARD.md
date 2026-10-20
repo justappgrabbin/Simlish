@@ -94,3 +94,4 @@ Tests: `integrated/acceptance-rows.test.mjs` (8 tests, all pass; each asserts th
 * **Frames × wheels:** hypothesis A (Draconic = King Wen, Tropical = Fu Xi, Sidereal = Mawangdui) vs hypothesis B (all three frames Fu Xi, "we are in the dimension of Being"). Both are selectable in `play/adaptive.mjs` `FRAME_WHEEL_MAPPINGS`; the default `current` is unchanged (Fu Xi decimal for every frame).
 * **B-H-A-N-T-U-G-H letter assignment:** which H is HTML and which is hexadecimal. Both layers are kept (`four/bhantugh.mjs`).
 * **Four primitives:** see `four/RUN-EVIDENCE.json` and `swarm/INVENTORY.md` § Four primitives.
+* **Correction 2026-10-20:** B-H-A-N-T-U-G-H diagonal is Movement-only; the Movement/Design/Space alternation fill is removed (layer placement INVESTIGATING). Field qualities re-attributed to her sources; table in `four/ATTRIBUTION.md` (generated, tested).

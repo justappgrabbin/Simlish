@@ -1,15 +1,16 @@
 // B-H-A-N-T-U-G-H: her BANTU layers (binary, ASCII, NATO, transliteration, Unicode) plus the three she named on Oct 19:
 // HTML, geometry, hexadecimal. REUSED code: layer functions are her dimension-visual core (binary, asciiOf, natoOf,
-// translitOf, hex, letterColor, letterHz; byte-identical copy in ./originals/dimension-visual) and her Bantu 6-bit
+// translitOf, hex; byte-identical copy in ./originals/dimension-visual) and her Bantu 6-bit
 // tokens (../bantu.mjs encodeBytes/decodeBytes/packsOf, verbatim from her bridge.js).
 // INVESTIGATING: which H is HTML and which is hexadecimal. Both are kept: H1 = html, H2 = hex is ONE reading only.
 // FILLED: html = numeric character references; hex = UTF-8 bytes in hex; geometry = her 6-bit token's 3-2-1 packs
-// (the only shape-like structure in her code); "on a diagonal" = layer k is read at step (i + k) mod 8 for particle i;
-// Movement/Design/Space distribution = DMS[k mod 3]. All of these are builder readings of her words.
-import { binary, asciiOf, natoOf, translitOf, hex, letterColor, letterHz } from './originals/dimension-visual/dimension-visual-core.mjs';
+// (the only shape-like structure in her code).
+// DIAGONAL (Alexis, 2026-10-20): ONLY in Movement. A Movement particle i reads layer (i + k) mod 8 at step k (FILLED: the step
+// rule); every other dimension reads the layers straight, 0..7. The 056bcd5 rule that alternated layers across
+// Movement/Design/Space (DMS[k mod 3]) was a builder fill and is REMOVED; placement of layers in dimensions = INVESTIGATING.
+import { binary, asciiOf, natoOf, translitOf, hex } from './originals/dimension-visual/dimension-visual-core.mjs';
 import { encodeBytes, decodeBytes, packsOf } from '../bantu.mjs';
 
-export const DMS = ['Movement', 'Design', 'Space'];
 // registry: the primitive-functions.json entry each layer spells out (null = no entry yet, gap).
 export const LAYERS = Object.freeze([
   { key: 'B', name: 'binary', registry: 'layer.binary', invertible: true },
@@ -20,8 +21,9 @@ export const LAYERS = Object.freeze([
   { key: 'U', name: 'unicode', registry: 'layer.unicode', invertible: true },
   { key: 'G', name: 'geometry', registry: 'layer.six', invertible: true, note: 'geometry = 3-2-1 packs, FILLED' },
   { key: 'H', name: 'hex', registry: null, invertible: true, note: 'H assignment INVESTIGATING' },
-].map((l, k) => Object.freeze({ ...l, index: k, quality: DMS[k % 3] })));
+].map((l, k) => Object.freeze({ ...l, index: k, placement: 'INVESTIGATING' })));
 
+export const isDiagonal = (dimension) => dimension === 'Movement';
 const enc = new TextEncoder(), dec = new TextDecoder('utf-8', { fatal: true });
 const chars = (t) => Array.from(t);
 export function encodeLayer(name, text) {
@@ -51,7 +53,6 @@ export function decodeLayer(name, s) {
 // One particle through all eight layers, read on the diagonal.
 export function encodeParticle(p, i = 0) {
   const layers = LAYERS.map((l) => ({ ...l, value: encodeLayer(l.name, p.text) }));
-  const diagonal = LAYERS.map((_, k) => layers[(i + k) % 8].index);
-  const cp = p.text.codePointAt(0) ?? 32;
-  return { id: p.id, dimension: p.dimension, layers, diagonal, note: letterColor(cp), sound: letterHz(cp), binaryFirst: binary(p.text[0] ?? ' ') };
+  const diagonal = isDiagonal(p.dimension) ? LAYERS.map((_, k) => (i + k) % 8) : LAYERS.map((_, k) => k);
+  return { id: p.id, dimension: p.dimension, layers, diagonal, binaryFirst: binary(p.text[0] ?? ' ') };
 }

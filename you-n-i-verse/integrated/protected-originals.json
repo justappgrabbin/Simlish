@@ -3,7 +3,7 @@
  "files": {
   "integrated/primitive-attributes.json": "73c0a25ff93762812b311e7bb2cb0595d660e25daa8a7d4655833d65f250a12a",
   "integrated/primitive-functions.json": "19357981eb044a464770e1badf6e7090daca571a009bd6c2260cda80882ba7b0",
-  "integrated/primitive-sources.json": "68c4e3812d4736bf0f95f92702581d32a4f3dc342e9a92b5615c637702c5034c",
+  "integrated/primitive-sources.json": "2323bf827497255ed5c2bbf4c7e3b6a528e7a54794c7f2ef1b57cc7325309be3",
   "integrated/reference/OntologicalAddress.js.txt": "afbb6587e130ec20926848555697b0ce3f0f3066af9a4b95c50b2aec75fad5eb",
   "integrated/reference/dimension-visual-core.mjs.txt": "d393d803553ba8e8f92240b52900fffd445d72691d956a1fd8f193c96a5f45df",
   "integrated/reference/drive/doc3-gates.json": "7a1662f34cddd74e62e7a13b3cd08b348f664ae4cfb647ab4230d49ab5f9fce1",
@@ -17,6 +17,7 @@
   "integrated/reference/her/field_scales.py.txt": "bc26fb418ccc6f93997331f011dc233d59f747874e92b4cc24a7fd47f0650e31",
   "integrated/reference/her/sentence-engine.ts.txt": "07d847ecbf57e4fe08943424508c470c459919f5b233acfcc858d8f41a7d66d2",
   "integrated/reference/her/sentence_engine.py.txt": "29c6021b5b3fab6f4b1315ee4e1aa52782e0dc7789659f9eb1c2f34067c9fffb",
+  "integrated/reference/her/swarm_os_bantu.v10.py.txt": "eb303f8c2f6404741c9eb8c76000591d7992eff44cd2d0abc70fea57897fe3e7",
   "integrated/reference/hexagram_sequences.js.txt": "4330073228b70fff601a0bbefab4934028aa68b5d1d25663deaeb257f627deb0",
   "integrated/reference/hexagram_sequences.py": "f104b323a4ff59cd117c433fe8312d96ed83376aa878f03f9834fbbeea26a08b",
   "integrated/reference/hf-synthia/BINARIES.sha256": "d06fc7353ef53a66295e0f978e3f7d5b5648a6d997df230825005de7d94a0db0",

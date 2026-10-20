@@ -157,6 +157,9 @@ Gates by the Base number in her doc3 anchor map (a configuration, not a binding)
 | vowelDim | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:431 | builder prototype over her Rules and syntax §3 vowel table |
 | letterColor | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:274 | builder PROVISIONAL formula (not hers; her spec §1.5 says color is computed from arc position) |
 | letterHz | PROTOTYPE | integrated/reference/dimension-visual-core.mjs.txt:275 | builder PROVISIONAL formula (not hers) |
+| bantuSoundFreq | EXISTS | integrated/four/bantu-v10.mjs:11 | HERS: SWARM-OS v10 BANTU _sound_freq / magic-square sound_freq (20*1000^x), integrated/reference/her/swarm_os_bantu.v10.py.txt:101,317; ported |
+| BANTU_ASCII_SHAPES | EXISTS | integrated/four/bantu-v10.mjs:6 | HERS: SWARM-OS v10 BANTU ASCII_SHAPES (Shapes + Distance layer), swarm_os_bantu.v10.py.txt:63; ported verbatim |
+| BANTU_LAYER_COLORS | EXISTS | integrated/four/bantu-v10.mjs:9 | HERS: SWARM-OS v10 BANTU LAYER_COLORS, swarm_os_bantu.v10.py.txt:78; ported verbatim |
 | Yao.flip | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | DRIVE-CODE: assistant-authored JavaScript inside her Drive doc 1MetULPQGCl7UEo0yNYQ4jdy7xXy9ojox2CRXhAhaf30 (line -> sense, flip, reflect) |
 | Codon.mutate | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | DRIVE-CODE (same doc): mutate, perturb, duiGua (complement), lower/upper trigram, reflect |
 | Center.enter | EXISTS-DRIVE-CODE | integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2 | DRIVE-CODE (same doc): 8 trigram centers + Taiji, enter by nearest Hamming vacancy |

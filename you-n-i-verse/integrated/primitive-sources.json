@@ -281,6 +281,21 @@
    "origin": "builder PROVISIONAL formula (not hers)",
    "status": "PROTOTYPE"
   },
+  "bantuSoundFreq": {
+   "ref": "integrated/four/bantu-v10.mjs:11",
+   "origin": "HERS: SWARM-OS v10 BANTU _sound_freq / magic-square sound_freq (20*1000^x), integrated/reference/her/swarm_os_bantu.v10.py.txt:101,317; ported",
+   "status": "EXISTS"
+  },
+  "BANTU_ASCII_SHAPES": {
+   "ref": "integrated/four/bantu-v10.mjs:6",
+   "origin": "HERS: SWARM-OS v10 BANTU ASCII_SHAPES (Shapes + Distance layer), swarm_os_bantu.v10.py.txt:63; ported verbatim",
+   "status": "EXISTS"
+  },
+  "BANTU_LAYER_COLORS": {
+   "ref": "integrated/four/bantu-v10.mjs:9",
+   "origin": "HERS: SWARM-OS v10 BANTU LAYER_COLORS, swarm_os_bantu.v10.py.txt:78; ported verbatim",
+   "status": "EXISTS"
+  },
   "Yao.flip": {
    "ref": "integrated/reference/drive/morphogenetic-self-reflection-protocol.txt:2",
    "origin": "DRIVE-CODE: assistant-authored JavaScript inside her Drive doc 1MetULPQGCl7UEo0yNYQ4jdy7xXy9ojox2CRXhAhaf30 (line -> sense, flip, reflect)",

@@ -1,41 +1,51 @@
 // Five-layer particle field: the play world's ground. One layer per dimension (Movement, Evolution, Being, Design, Space),
-// each streaming the WORDS of the real particles the four primitives emitted for that dimension (particles.json).
-// Colour per glyph = her dimension-visual letterColor(codepoint) hue; brightness from letterHz (her PROTOTYPE formulas,
-// marked in her core as provisional, not from her books). FILLED: cell size, scroll speeds (layer d moves d+1 cells/frame
-// along a diagonal: row r is offset by r*(d+1)), first layer paints opaque cells (that is what makes 100% coverage),
-// layers 2-5 add glyphs with 'lighter' compositing (the interference). Deterministic: frame number only, no Math.random.
-import { letterColor, letterHz } from './originals/dimension-visual/dimension-visual-core.mjs';
+// each streaming the WORDS of the real particles her four primitives emitted for that dimension (particles.json).
+// Every glyph quality (shape, texture, hue, brightness, sound...) comes from qualities.mjs; see ATTRIBUTION.md.
+// Motion: the diagonal is in Movement ONLY (Alexis, 2026-10-20); other layers run straight.
+// Deterministic: frame number only, no Math.random.
+import { glyphQualities } from './qualities.mjs';
+import { isDiagonal } from './bhantugh.mjs';
 export const FIELD_DIMS = ['Movement', 'Evolution', 'Being', 'Design', 'Space'];
-export const CELL = { w: 7, h: 11, font: '11px ui-monospace,monospace' };
+export const CELL = { w: 7, h: 12, font: '11px ui-monospace,monospace' }; // FILLED sizes
 export function streams(particles) {
   const by = Object.fromEntries(FIELD_DIMS.map((d) => [d, []]));
-  for (const p of particles) (by[p.dimension] ?? by.Space).push(...(p.words?.length ? p.words : [p.text]));
-  return FIELD_DIMS.map((d) => { const s = Array.from(by[d].join(' ') + ' '); return s.length > 1 ? s : Array.from(d + ' '); });
+  for (const p of particles) { const L = by[p.dimension] ?? by.Space; for (const w of (p.words?.length ? p.words : [p.text])) for (const ch of Array.from(w + ' ')) L.push(glyphQualities(ch, p.address)); }
+  return FIELD_DIMS.map((d) => by[d].length ? by[d] : Array.from(d + ' ', (ch) => glyphQualities(ch, null)));
 }
-const hsl = (cp, sat, light) => 'hsl(' + letterColor(cp).hue + ' ' + sat + '% ' + light + '%)';
-const light = (cp, base) => base + Math.round((letterHz(cp).semi / 35) * 22);
+// Which stream position a cell shows. Movement: row r is shifted by r*v (a diagonal that moves); others: straight rows.
+export function cellIndex(dim, r, c, cols, frame, len) { const v = FIELD_DIMS.indexOf(dim) + 1; const i = r * cols + c + (isDiagonal(dim) ? r * v : 0) + frame * v; return ((i % len) + len) % len; }
+export const motionOf = (dim) => (isDiagonal(dim) ? 'diagonal' : 'straight');
+// shape/texture: the glyph's hexagram, line 1 at the bottom (yang = solid bar, yin = broken bar)
+function hexagramBars(ctx, x, y, q) { const bh = Math.max(1, Math.floor(CELL.h / 6) - 1); for (let l = 0; l < 6; l++) { const yy = y + CELL.h - (l + 1) * Math.floor(CELL.h / 6); if (q.shape[l]) ctx.fillRect(x, yy, CELL.w, bh); else { ctx.fillRect(x, yy, 3, bh); ctx.fillRect(x + CELL.w - 3, yy, 3, bh); } } }
 export function drawField(ctx, W, H, S, frame = 0) {
   const cols = Math.ceil(W / CELL.w), rows = Math.ceil(H / CELL.h);
   ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1; ctx.font = CELL.font; ctx.textBaseline = 'top';
   for (let d = 0; d < S.length; d++) {
-    const s = S[d], v = d + 1;
+    const s = S[d], dim = FIELD_DIMS[d];
     if (d > 0) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.55; }
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-      const ch = s[(((r * cols + c + r * v + frame * v) % s.length) + s.length) % s.length], cp = ch.codePointAt(0);
-      const x = c * CELL.w, y = r * CELL.h;
-      if (d === 0) { ctx.fillStyle = hsl(cp, 40, 9 + (r + c + d) % 4); ctx.fillRect(x, y, CELL.w, CELL.h); }
-      if (ch !== ' ') { ctx.fillStyle = hsl(cp, 70, light(cp, 34 + d * 4)); ctx.fillText(ch, x, y); }
+      const q = s[cellIndex(dim, r, c, cols, frame, s.length)], x = c * CELL.w, y = r * CELL.h;
+      if (d === 0) { ctx.fillStyle = 'hsl(' + q.hue + ' 40% 8%)'; ctx.fillRect(x, y, CELL.w, CELL.h); ctx.fillStyle = 'hsl(' + q.hue + ' 40% 16%)'; hexagramBars(ctx, x, y, q); }
+      if (q.ch !== ' ') { ctx.fillStyle = 'hsl(' + q.hue + ' 70% ' + q.lightness + '%)'; ctx.fillText(q.ch, x, y); }
     }
   }
   ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
   return { cols, rows, layers: S.length };
 }
-// Coverage: fraction of pixels with alpha 255 (canvas starts fully transparent, so any 'background' pixel has alpha < 255).
+// Sound: one sine voice per layer at the frequency of the glyph in that layer's top-left cell. MUTED by default.
+export function soundVoices(S, frame, cols) { return S.map((s, d) => s[cellIndex(FIELD_DIMS[d], 0, 0, cols, frame, s.length)].hz); }
+export function createSound(AudioCtx = globalThis.AudioContext) {
+  let ac = null, osc = [], gain = null; const st = { muted: true };
+  st.unmute = () => { if (!AudioCtx) return false; ac ??= new AudioCtx(); gain ??= Object.assign(ac.createGain(), {}); gain.gain.value = 0.03; gain.connect(ac.destination); st.muted = false; return true; };
+  st.mute = () => { if (gain) gain.gain.value = 0; st.muted = true; };
+  st.set = (hzs) => { if (!ac) return; while (osc.length < hzs.length) { const o = ac.createOscillator(); o.type = 'sine'; o.connect(gain); o.start(); osc.push(o); } hzs.forEach((h, i) => { osc[i].frequency.value = Math.min(20000, Math.max(20, h)); }); };
+  return st;
+}
 export function coverage(rgba) { let n = 0; for (let i = 3; i < rgba.length; i += 4) if (rgba[i] === 255) n++; return n / (rgba.length / 4); }
 export function mountGround(canvas, particles, { animate = true } = {}) {
-  const S = streams(particles), ctx = canvas.getContext('2d'); let frame = 0, raf = 0;
-  const paint = () => { const W = canvas.width = Math.max(1, innerWidth), H = canvas.height = Math.max(1, innerHeight); return drawField(ctx, W, H, S, frame); };
-  const loop = () => { frame++; paint(); raf = setTimeout(loop, 250); }; // FILLED: 4 frames/s keeps a phone cool
-  const info = paint(); if (animate) raf = setTimeout(loop, 250);
-  return { info, streams: S, stop: () => clearTimeout(raf), measure: () => coverage(ctx.getImageData(0, 0, canvas.width, canvas.height).data), get frame() { return frame; } };
+  const S = streams(particles), ctx = canvas.getContext('2d'), sound = createSound(); let frame = 0, t = 0, info;
+  const paint = () => { const W = canvas.width = Math.max(1, innerWidth), H = canvas.height = Math.max(1, innerHeight); info = drawField(ctx, W, H, S, frame); if (!sound.muted) sound.set(soundVoices(S, frame, info.cols)); return info; };
+  const loop = () => { frame++; paint(); t = setTimeout(loop, 250); }; // FILLED: 4 frames/s
+  paint(); if (animate) t = setTimeout(loop, 250);
+  return { get info() { return info; }, streams: S, sound, stop: () => clearTimeout(t), measure: () => coverage(ctx.getImageData(0, 0, canvas.width, canvas.height).data), get frame() { return frame; } };
 }

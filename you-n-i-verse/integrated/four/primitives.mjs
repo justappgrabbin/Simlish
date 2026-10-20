@@ -21,7 +21,7 @@ export async function runToolFactory(doc, text, { limit = Infinity } = {}) {
     if (!g.tool) { unrouted.push({ unit: i, status: g.status }); continue; }
     let r; try { r = await g.tool.execute(u); } catch (e) { unrouted.push({ unit: i, error: e.code || e.message }); continue; }
     const m = g.tool.manifest();
-    out.push({ id: pid('tf', doc, i, u), primitive: 'tool-factory', doc, unit: i, text: u, dimension: m.dimension || g.tool.plan?.dimension, words: Array.isArray(r?.nodes) ? r.nodes : wordsOf(u), source: { tool: m.name ?? g.tool.name, address: r?.address ?? null } });
+    out.push({ id: pid('tf', doc, i, u), primitive: 'tool-factory', doc, unit: i, text: u, dimension: m.dimension || g.tool.plan?.dimension, words: Array.isArray(r?.nodes) ? r.nodes : wordsOf(u), source: { tool: m.name ?? g.tool.name, address: r?.address ?? m.addressKey ?? null } });
   }
   return { particles: out, unrouted };
 }

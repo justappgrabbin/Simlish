@@ -25,7 +25,7 @@ for (const d of DOCS) {
     ship.push(...r.particles.slice(0, CAP));
   }
 }
-const encoded = ship.map((p, i) => { const e = encodeParticle(p, i); return { id: p.id, primitive: p.primitive, doc: p.doc, dimension: p.dimension, text: p.text.slice(0, 160), words: p.words.slice(0, 24), diagonal: e.diagonal, hue: e.note.hue, hz: e.sound.hz }; });
-fs.writeFileSync(here + 'particles.json', JSON.stringify({ note: 'particles from the four primitives run on her Drive docs (four.build.mjs); hue/hz = her dimension-visual letterColor/letterHz on the first character (PROTOTYPE formulas, not from her books)', count: encoded.length, particles: encoded }));
+const encoded = ship.map((p, i) => { const e = encodeParticle(p, i); return { id: p.id, primitive: p.primitive, doc: p.doc, dimension: p.dimension, text: p.text.slice(0, 160), words: p.words.slice(0, 24), address: p.source?.address ?? p.source?.atoAddress ?? null, diagonal: e.diagonal }; });
+fs.writeFileSync(here + 'particles.json', JSON.stringify({ note: 'particles from the four primitives run on her Drive docs (four.build.mjs); address = her factory address (tool-factory / ATO particles) or null; glyph qualities are computed in qualities.mjs (see ATTRIBUTION.md); diagonal = B-H-A-N-T-U-G-H reading order (stepping only in Movement)', count: encoded.length, particles: encoded }));
 fs.writeFileSync(here + 'RUN-EVIDENCE.json', JSON.stringify(evidence, null, 1));
 console.log(JSON.stringify(Object.fromEntries(Object.entries(evidence.primitives).map(([k, v]) => [k, Object.fromEntries(Object.entries(v).map(([d, x]) => [d, x.particles]))]))));
