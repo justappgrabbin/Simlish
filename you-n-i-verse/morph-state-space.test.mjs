@@ -1,0 +1,16 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {MorphStateSpace,proveValid,makeWheel,encode,decode,span,ancestors,SLICES,GATE,BASE,DEG,INVESTIGATING} from './morph-state-space.mjs';
+import {probe} from './morph-expression-probe.mjs';
+test('arithmetic closes: 69,120 slices of 1,875 centi-arcsec; gate = 5°37′30″',()=>{assert.equal(SLICES,69120);assert.equal(BASE,1875);assert.equal(GATE,2_025_000)});
+test('whole space proves valid with existing settings (refuse-to-start passes)',()=>{const p=proveValid();assert.deepEqual(p.fail,[]);assert.ok(new MorphStateSpace().proof.valid)});
+test('refuses to start when the wheel disagrees with her engine',()=>{assert.throws(()=>new MorphStateSpace({wheel:makeWheel(0)}),/REFUSE TO START/)});
+test('refuses to start with an unsupported split',()=>{assert.throws(()=>new MorphStateSpace({split:13}))});
+test('gate 41 begins at 302° (2° Aquarius) as in chart-engine',()=>{const s=span({gate:41});assert.equal(s.start/DEG,302);assert.equal(s.end-s.start,GATE)});
+test('13-place address round-trips exactly in every dimension',()=>{const m=new MorphStateSpace();for(const d of ['Movement','Evolution','Being','Design','Space'])for(const P of [0,1,99,123_456_789,129_599_999]){const a=m.encode(P,{planet:3,dimension:d,house:7});assert.equal(Object.keys(a).length,13);assert.equal(m.decode(a).position,P)}});
+test('arc is two linear digits 0..99; 100 is rejected',()=>{const a=encode(99,{planet:1,dimension:'Being',house:1});assert.equal(a.arc,99);assert.throws(()=>decode({...a,arc:100}))});
+test('contradictory address is rejected, not repaired',()=>{const a=encode(5_000_000,{planet:1,dimension:'Being',house:1});assert.throws(()=>decode({...a,line:a.line%6+1}),/contradiction/)});
+test('nesting down: gate→6 lines→6 colors→6 tones→5 bases, spans tile exactly',()=>{const g=span({gate:41});let sum=0;for(let l=1;l<=6;l++){const s=span({gate:41,line:l});sum+=s.end-s.start;if(l>1)assert.equal(s.start,span({gate:41,line:l-1}).end)}assert.equal(sum,g.end-g.start);assert.equal(span({gate:41,line:1,color:1,tone:1}).children,5)});
+test('nesting up: ancestors contain the address',()=>{const a=encode(77_777_777,{planet:1,dimension:'Design',house:2});for(const p of ancestors(a)){const s=span(p);const P=decode(a).position;const inside=((P-s.start)%129_600_000+129_600_000)%129_600_000<s.end-s.start;assert.ok(inside)}});
+test('WH key from pass-05 is carried: WHERE = Being / Matter / Arc-second',()=>{const m=new MorphStateSpace();assert.deepEqual(m.key.WHERE,{dimension:'Being',nature:'Matter',term:'Arc-second'})});
+test('append-only history keeps addresses and relations',()=>{const m=new MorphStateSpace();const a=m.encode(1000,{planet:1,dimension:'Being',house:1}),b=m.encode(2000,{planet:2,dimension:'Movement',house:1});m.register('a',a);m.register('b',b);m.place('a','b','Axiom');const h=m.history();assert.equal(h.addresses.length,2);assert.equal(h.relations.length,3);assert.deepEqual(m.enter('b').address,b)});
+test('INVESTIGATING parameters stay undecided and the probe reports them',()=>{assert.equal(INVESTIGATING.split.value,12);const rows=probe();assert.ok(rows.length>=13);assert.equal(rows.find(r=>r.candidate==='302°').rejected,false)});
