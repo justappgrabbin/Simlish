@@ -3,7 +3,7 @@
 // Only exact closures are kept; failures are reported, never rounded.
 import {SLICES} from './morph-state-space.mjs';
 export const N=48, DUALITY_DIMS=Object.freeze(['Movement','Evolution','Being','Design']), ONE='Space';
-const COUNTS={'wheel slices (base)':SLICES,'tones':64*216,'colors':64*36,'lines':64*6,'gates':64,'slices per gate':1080,'degrees':360,'dodecahedron symmetries (full)':120,'dodecahedron rotations':60};
+const COUNTS={'wheel slices (base)':SLICES,'tones':64*216,'colors':64*36,'lines':64*6,'gates':64,'slices per gate':1080,'degrees':360,'arc-minutes':21600,'dodecahedron symmetries (full)':120,'dodecahedron rotations':60};
 export function closures(){return Object.entries(COUNTS).map(([k,v])=>({count:k,value:v,per48:v/N,exact:Number.isInteger(v/N)}))}
 // 48-sector wheel: 1,440 slices each = 1 gate + 2 lines = 7.5°
 export const SECTOR=SLICES/N;
