@@ -1,0 +1,12 @@
+{
+  "name": "messy-synthia-mesh-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone mobile-first MESSY mesh, inversion world, language contact, and creative generator",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node --test tests/*.test.cjs",
+    "check": "npm test && npm run build"
+  },
+  "license": "MIT"
+}

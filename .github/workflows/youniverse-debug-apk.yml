@@ -47,6 +47,9 @@ jobs:
           node you-n-i-verse/morph-project.test.mjs
           node you-n-i-verse/photo-identity.test.mjs
           node you-n-i-verse/hexagram-encodings.test.mjs
+          node you-n-i-verse/mesh-workspace/build.js
+          node --test you-n-i-verse/mesh-workspace/tests/*.test.cjs
+          node you-n-i-verse/mesh-evidence.test.mjs
           node you-n-i-verse/rule-verification.test.mjs
           node you-n-i-verse/causal-chains.test.mjs
           node you-n-i-verse/causal-conditions.test.mjs

@@ -1,3 +1,4 @@
+import {importMeshEvidence} from './mesh-evidence.mjs';
 import {RuleVerification} from './rule-verification.mjs';
 const key='you-n-i-verse-verification-v1',$=id=>document.getElementById(id);let ledger;
 try{const saved=localStorage.getItem(key);ledger=new RuleVerification(saved?JSON.parse(saved):undefined);}catch(e){ledger=new RuleVerification();$('status').textContent='Previous records could not load: '+e.message;}
@@ -12,6 +13,8 @@ function save(){try{localStorage.setItem(key,JSON.stringify(ledger.export()));re
 function render(){$('findings').replaceChildren();for(const r of ledger.candidates.values()){const a=document.createElement('article'),h=document.createElement('h2'),p=document.createElement('p'),pre=document.createElement('pre');h.textContent=r.claim;const f=ledger.inspect(r.id);p.textContent=f.status+' · '+(f.scope??'not checked');pre.textContent=JSON.stringify({...f,locatedEvidence:ledger.search(r.id).map(e=>({id:e.id,source:e.source,text:e.text}))},null,2);a.append(h,p,pre);$('findings').append(a);}}
 function investigate(){for(const id of ledger.candidates.keys())ledger.verify(id);if(save())$('status').textContent='Checks completed and saved. Unverified rules remain blocked.';render();}
 $('check').onclick=investigate;
-$('add').onclick=()=>{try{const r=JSON.parse($('record').value);if(r.version===1&&Array.isArray(r.candidates))ledger=new RuleVerification(r);else if(r.kind)ledger.addCandidate(r);else ledger.addEvidence(r);investigate();}catch(e){$('status').textContent=e.message;}};
+async function importRecord(r){if(r.kind==='messy-mesh-checkpoint')ledger=(await importMeshEvidence(ledger,r)).ledger;else if(r.version===1&&Array.isArray(r.candidates))ledger=new RuleVerification(r);else if(r.kind)ledger.addCandidate(r);else ledger.addEvidence(r);investigate();}
+$('add').onclick=async()=>{try{await importRecord(JSON.parse($('record').value));}catch(e){$('status').textContent=e.message;}};
+$('importFile').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>5_000_000)throw Error('Checkpoint exceeds 5 MB import limit');await importRecord(JSON.parse(await file.text()));}catch(error){$('status').textContent=error.message;}finally{e.target.value='';}};
 $('export').onclick=()=>{const blob=new Blob([JSON.stringify(ledger.export(),null,2)],{type:'application/json'});if(window.NativeDownloads?.save){const reader=new FileReader();reader.onload=()=>NativeDownloads.save('rule-investigation.json','application/json',reader.result.split(',')[1]);reader.readAsDataURL(blob);}else{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rule-investigation.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}};
 investigate();
