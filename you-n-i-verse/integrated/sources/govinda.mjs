@@ -129,3 +129,23 @@ export function classifyPair(t1, t2) {
   if (Math.abs(cross) / n < 1e-6) return dot > 0 ? 'parallel-equal' : 'parallel-opposite';
   const mirror = Math.abs(a[0] - b[0]) < 1e-6 && Math.abs(a[1] + b[1]) < 1e-6; return mirror ? 'diagonal-divergent' : 'unrelated';
 }
+
+// INHERITED COLOUR RULE (Alexis 2026-10-20, Govinda pp.57-60): every member of an element group takes that element's ONE colour.
+export const NEUTRAL_RGB = Object.freeze([128, 128, 128]); // 'unattributed': no element group is known
+export const elementColour = (element) => (element ? ELEMENT_RGB_FILLED[element] : NEUTRAL_RGB);
+// Members per element, as printed p.57 / p.60 (animals, season, direction, time, condition, virtue, organ, taste, planet).
+export const ELEMENT_MEMBERS_P57_60 = Object.freeze(Object.fromEntries(ELEMENTS.map((e) => [e, Object.freeze([
+  ...ANIMALS_PP51_53.filter((a) => a.element === e).map((a) => 'animal:' + a.animal),
+  ...['place', 'season', 'time', 'condition', 'virtue', 'organ', 'taste', 'planet'].filter((k) => ELEMENTS_P57[e][k]).map((k) => k + ':' + ELEMENTS_P57[e][k]),
+  ...TRIGRAMS.filter((t) => trigramElement(t).element === e).map((t) => 'trigram:' + t)])])));
+export function memberColour(member) { const e = ELEMENTS.find((x) => ELEMENT_MEMBERS_P57_60[x].includes(member)); return { element: e || null, rgb: elementColour(e || null), status: e ? 'INHERITED' : 'unattributed' }; }
+// Hexagram / glyph: inherits only when BOTH its trigrams are in the same element group (DERIVED); otherwise 'unattributed'.
+export function hexagramElement(macro) { const a = trigramElement(trigramOfValue((macro >> 3) & 7)).element, b = trigramElement(trigramOfValue(macro & 7)).element; return a && a === b ? a : null; }
+// p.152 PROJECTION OF ALL HEXAGRAMS ON ONE CIRCLE ACCORDING TO THE ABSTRACT ORDER (MOVEMENT): "Each line represents two movements.
+// For instance: 31/41 = DUI-GEN and GEN-DUI ... The numbers outside the circle represent the reduplication of the same hexagram".
+import { FUXI_DECIMAL_TO_KING_WEN as _FX2KW } from '../../vendor/kingwen.mjs';
+export function abstractCircleLine(macro) {
+  const u = trigramOfValue((macro >> 3) & 7), l = trigramOfValue(macro & 7), rev = (TRIGRAM_VALUE[l] << 3) | TRIGRAM_VALUE[u];
+  if (u === l) return { outsideCircle: true, trigrams: [u, l], kingWen: [_FX2KW[macro]], note: 'reduplication: an inner movement that cannot be shown graphically' };
+  return { outsideCircle: false, line: [u, l].sort().join('/'), movements: [u + '-' + l, l + '-' + u], kingWen: [_FX2KW[macro], _FX2KW[rev]] };
+}

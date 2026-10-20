@@ -180,6 +180,8 @@ Gates by the Base number in her doc3 anchor map (a configuration, not a binding)
 | repoMatchesTable4 | SOURCED | integrated/sources/rutt.mjs:12 | SOURCED: Rutt pp.88-93 Table 4 binary (whole=1, right digit = bottom line); checks bitsOf |
 | decodeBaguaNumerals | SOURCED | integrated/sources/rutt.mjs:18 | SOURCED: Rutt pp.99-100 bagua numerals (odd whole, even broken) |
 | mawangduiGenerated | SOURCED | integrated/sources/rutt.mjs:30 | SOURCED: Rutt pp.115-117 Diagram 9 / Table 9 principles, GENERATED; equals Table 9 and Table 10; NOT declared hers |
+| abstractCircleLine | SOURCED | integrated/sources/govinda.mjs:147 | SOURCED: Govinda p.152 projection on one circle, abstract order (Movement) |
+| hexagramElement | SOURCED | integrated/sources/govinda.mjs:143 | DERIVED: inherited element colour rule (Alexis 2026-10-20, Govinda pp.57-60); both trigrams in one element group |
 | bantuSoundFreq | EXISTS | integrated/four/bantu-v10.mjs:11 | HERS: SWARM-OS v10 BANTU _sound_freq / magic-square sound_freq (20*1000^x), integrated/reference/her/swarm_os_bantu.v10.py.txt:101,317; ported |
 | BANTU_ASCII_SHAPES | EXISTS | integrated/four/bantu-v10.mjs:6 | HERS: SWARM-OS v10 BANTU ASCII_SHAPES (Shapes + Distance layer), swarm_os_bantu.v10.py.txt:63; ported verbatim |
 | BANTU_LAYER_COLORS | EXISTS | integrated/four/bantu-v10.mjs:9 | HERS: SWARM-OS v10 BANTU LAYER_COLORS, swarm_os_bantu.v10.py.txt:78; ported verbatim |

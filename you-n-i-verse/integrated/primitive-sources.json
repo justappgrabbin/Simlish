@@ -396,6 +396,16 @@
    "origin": "SOURCED: Rutt pp.115-117 Diagram 9 / Table 9 principles, GENERATED; equals Table 9 and Table 10; NOT declared hers",
    "status": "SOURCED"
   },
+  "abstractCircleLine": {
+   "ref": "integrated/sources/govinda.mjs:147",
+   "origin": "SOURCED: Govinda p.152 projection on one circle, abstract order (Movement)",
+   "status": "SOURCED"
+  },
+  "hexagramElement": {
+   "ref": "integrated/sources/govinda.mjs:143",
+   "origin": "DERIVED: inherited element colour rule (Alexis 2026-10-20, Govinda pp.57-60); both trigrams in one element group",
+   "status": "SOURCED"
+  },
   "bantuSoundFreq": {
    "ref": "integrated/four/bantu-v10.mjs:11",
    "origin": "HERS: SWARM-OS v10 BANTU _sound_freq / magic-square sound_freq (20*1000^x), integrated/reference/her/swarm_os_bantu.v10.py.txt:101,317; ported",

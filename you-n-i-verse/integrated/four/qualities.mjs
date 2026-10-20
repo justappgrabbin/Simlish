@@ -4,7 +4,7 @@ import { encodeBytes } from '../bantu.mjs';
 import { macroToGate, bitsOf, lineOf } from '../../state-space.mjs';
 import { OntologicalAddress } from './originals/ontological-address/OntologicalAddress.mjs';
 import { bantuSoundFreq } from './bantu-v10.mjs';
-import { trigramOfValue, trigramShape, trigramElement, ELEMENT_RGB_FILLED, FIVE_TONES_P51 } from '../sources/govinda.mjs';
+import { trigramOfValue, trigramShape, trigramElement, ELEMENT_RGB_FILLED, FIVE_TONES_P51, hexagramElement, elementColour } from '../sources/govinda.mjs';
 
 // Names of colors/tones/bases as printed in her color book (primitive-functions.json color.N / tone.N / base.N).
 export const COLOR_NAMES = ['FEAR', 'HOPE', 'DESIRE', 'NEED', 'GUILT', 'INNOCENCE'];
@@ -22,8 +22,9 @@ export const ATTRIBUTION = Object.freeze([
   { quality: 'trigram colour', rendered: true, fn: ['trigramElement'], source: 'Govinda pp.46-47 trigram directions + p.57 element places and colours (p.53 print agrees)', status: 'SOURCED (DERIVED for the four cardinal trigrams)', filled: 'RGB rendering of the colour names; the four intercardinal trigrams have no stated element -> INVESTIGATING, drawn in the glyph hue instead' },
   { quality: 'five tones', rendered: false, fn: ['FIVE_TONES_P51'], source: 'Govinda p.51 mentions five tones; no names or element mapping are printed', status: 'INVESTIGATING', note: 'sound stays BANTU v10' },
   { quality: 'color (value)', rendered: true, fn: ['OntologicalAddress', 'DEG_PER_COLOR'], source: 'her color book: color.1-6 FEAR..INNOCENCE (primitive-functions.json, ctx color-book-lines); OntologicalAddress.js:81', status: 'HERS' },
-  { quality: 'hue', rendered: true, fn: ['OntologicalAddress'], source: 'her spec §1.5 "color is computed from arc position"; arc position = OntologicalAddress eclipticDeg (OntologicalAddress.js:188-196)', status: 'HERS', filled: 'hue in degrees = ecliptic degree (identity); saturation 70% / ground 40%' },
-  { quality: 'brightness', rendered: true, fn: ['computeHierarchy'], source: 'her generative level (Base/Tone/Color/line) from computeHierarchy -> computeLevel (OntologicalAddress.js:122-160)', status: 'HERS', filled: 'lightness = 38 + 8 x level (%)' },
+  { quality: 'drawn colour (glyph and trigram sign)', rendered: true, fn: ['hexagramElement', 'trigramElement'], source: 'INHERITED colour rule (Alexis 2026-10-20; Govinda pp.57-60): one colour per element group, every member the same; glyph inherits when both its trigrams share an element', status: 'SOURCED', filled: 'RGB rendering of the colour names; neutral grey = unattributed' },
+  { quality: 'hue', rendered: false, fn: ['OntologicalAddress'], source: 'her spec §1.5 "color is computed from arc position"; arc position = OntologicalAddress eclipticDeg (OntologicalAddress.js:188-196)', status: 'HERS', filled: 'hue in degrees = ecliptic degree (identity)', note: 'carried, NO LONGER DRAWN: a computed hue broke the inherited element colour' },
+  { quality: 'brightness', rendered: false, fn: ['computeHierarchy'], source: 'her generative level (Base/Tone/Color/line) from computeHierarchy -> computeLevel (OntologicalAddress.js:122-160)', status: 'HERS', filled: 'lightness = 38 + 8 x level (%)', note: 'carried, not drawn: drawn colour is the inherited element colour only' },
   { quality: 'tone (value) + sense', rendered: false, fn: ['OntologicalAddress', 'DEG_PER_TONE'], source: 'her color book tone.1-6 SECURITY..ACCEPTENCE; sense from primitive-attributes.json tone.N.sense', status: 'HERS', note: 'carried on every glyph, not drawn' },
   { quality: 'sound', rendered: true, fn: ['bantuSoundFreq', 'OntologicalAddress'], source: 'her SWARM-OS v10 BANTU sound_freq = 20*1000^x (swarm_os_bantu.v10.py.txt:101,317)', status: 'HERS', filled: 'x = eclipticDeg/360 (her file uses random()); Web Audio sine voices, MUTED by default' },
   { quality: 'motion', rendered: true, fn: [], source: 'Alexis 2026-10-20: the B-H-A-N-T-U-G-H diagonal is in Movement ONLY; other dimensions run straight', status: 'HERS (instruction)', filled: 'speed = layer number + 1 cells per frame; 4 frames/s' },
@@ -45,7 +46,8 @@ export function glyphQualities(ch, address) {
     shape: Object.freeze([1, 2, 3, 4, 5, 6].map((l) => lineOf(six, l))), bits: bitsOf(six),
     color: { value: a.color, name: COLOR_NAMES[a.color - 1] }, tone: { value: a.tone, name: TONE_NAMES[a.tone - 1], sense: TONE_SENSE[a.tone - 1] },
     hue: Math.round(oa.eclipticDeg * 1000) / 1000, level: oa.hierarchy.level, lightness: 38 + 8 * oa.hierarchy.level,
-    trigrams: Object.freeze(Object.fromEntries([['upper', (six >> 3) & 7], ['lower', six & 7]].map(([k, v]) => { const t = trigramOfValue(v), e = trigramElement(t); return [k, Object.freeze({ trigram: t, shape: trigramShape(t), element: e.element, elementStatus: e.status, rgb: e.element ? ELEMENT_RGB_FILLED[e.element] : null })]; }))),
+    trigrams: Object.freeze(Object.fromEntries([['upper', (six >> 3) & 7], ['lower', six & 7]].map(([k, v]) => { const t = trigramOfValue(v), e = trigramElement(t); return [k, Object.freeze({ trigram: t, shape: trigramShape(t), element: e.element, elementStatus: e.status, rgb: elementColour(e.element) })]; }))),
+    element: hexagramElement(six), rgb: elementColour(hexagramElement(six)), colourStatus: hexagramElement(six) ? 'INHERITED' : 'unattributed',
     hz: Math.round(bantuSoundFreq(oa.eclipticDeg / 360) * 100) / 100,
   });
   cache.set(key, q); return q;

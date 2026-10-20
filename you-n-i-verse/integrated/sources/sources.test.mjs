@@ -50,3 +50,15 @@ test('Rutt pp.115-117: generated Mawangdui = Table 9 grid = Table 10 = mawangdui
   const V = await mawangduiVersions(fs.readFileSync(new URL('../reference/hexagram_sequences.js.txt', import.meta.url), 'utf8'));
   assert.deepEqual(Object.fromEntries(Object.entries(V).map(([k, v]) => [k, differ({ macros: g }, v)])), { A: 40, C: 54, D: 58, E: 54, Bliteral: 61, Binternal: 61 });
 });
+test('Hatcher pp.445-465: scales, Er Yao counterparts a-v, Si Xiang, Kun/Gen; others pending', async () => {
+  const H = await import('./hatcher.mjs');
+  assert.deepEqual(H.SCALES_PP445_449.absent, [7, 9]); assert.equal(Object.keys(H.ER_YAO_PP450_453[0].keyWords).length, 22);
+  assert.deepEqual(H.erYaoCounterpart('u'), { rou: 'space, spatial', gang: 'time, temporal' });
+  assert.deepEqual(['00', '01', '10', '11'].map((k) => H.SI_XIANG_PP454_461[k].dimension), ['Depth', 'Length', 'Breadth', 'Time']);
+  assert.equal(H.BA_GUA_PP462_465.Kan, 'source pending'); assert.equal(H.LINE_TRIPLICITY_P446.status, 'INVESTIGATING');
+});
+test('Govinda p.152: one line = two movements (31/41 DUI-GEN, 63/64 KAN-LI); doubled hexagrams outside', async () => {
+  const { KING_WEN_TO_FUXI_DECIMAL: K } = await import('../../vendor/kingwen.mjs');
+  assert.deepEqual(G.abstractCircleLine(K[31]).kingWen.sort((a, b) => a - b), [31, 41]); assert.deepEqual(G.abstractCircleLine(K[63]).kingWen.sort((a, b) => a - b), [63, 64]);
+  assert.equal(G.abstractCircleLine(K[30]).outsideCircle, true); assert.equal(G.abstractCircleLine(K[29]).outsideCircle, true);
+});

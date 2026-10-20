@@ -16,7 +16,7 @@ export function streams(particles) {
 export function cellIndex(dim, r, c, cols, frame, len) { const v = FIELD_DIMS.indexOf(dim) + 1; const i = r * cols + c + (isDiagonal(dim) ? r * v : 0) + frame * v; return ((i % len) + len) % len; }
 export const motionOf = (dim) => (isDiagonal(dim) ? 'diagonal' : 'straight');
 // texture: Govinda p. ix trigram signs (upper over lower), coloured by element where the book places one (qualities.mjs ATTRIBUTION)
-function trigramSigns(ctx, x, y, q) { ctx.font = '6px ui-monospace,monospace'; for (const [k, dy] of [['upper', 0], ['lower', 6]]) { const t = q.trigrams[k]; ctx.fillStyle = t.rgb ? 'rgba(' + t.rgb.join(',') + ',0.45)' : 'hsl(' + q.hue + ' 40% 22%)'; ctx.fillText(t.shape, x, y + dy); } }
+function trigramSigns(ctx, x, y, q) { ctx.font = '6px ui-monospace,monospace'; for (const [k, dy] of [['upper', 0], ['lower', 6]]) { const t = q.trigrams[k]; ctx.fillStyle = 'rgba(' + t.rgb.join(',') + ',0.45)'; ctx.fillText(t.shape, x, y + dy); } }
 export function drawField(ctx, W, H, S, frame = 0) {
   const cols = Math.ceil(W / CELL.w), rows = Math.ceil(H / CELL.h);
   ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1; ctx.font = CELL.font; ctx.textBaseline = 'top';
@@ -25,8 +25,8 @@ export function drawField(ctx, W, H, S, frame = 0) {
     if (d > 0) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.55; }
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
       const q = s[cellIndex(dim, r, c, cols, frame, s.length)], x = c * CELL.w, y = r * CELL.h;
-      if (d === 0) { ctx.fillStyle = 'hsl(' + q.hue + ' 40% 8%)'; ctx.fillRect(x, y, CELL.w, CELL.h); trigramSigns(ctx, x, y, q); ctx.font = CELL.font; }
-      if (q.ch !== ' ') { ctx.fillStyle = 'hsl(' + q.hue + ' 70% ' + q.lightness + '%)'; ctx.fillText(q.ch, x, y); }
+      if (d === 0) { ctx.fillStyle = '#101010'; ctx.fillRect(x, y, CELL.w, CELL.h); trigramSigns(ctx, x, y, q); ctx.font = CELL.font; }
+      if (q.ch !== ' ') { ctx.fillStyle = 'rgb(' + q.rgb.join(',') + ')'; ctx.fillText(q.ch, x, y); }
     }
   }
   ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;

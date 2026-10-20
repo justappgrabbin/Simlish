@@ -57,7 +57,7 @@ test('frames x wheels: both hypotheses selectable, default unchanged', () => {
 const FUNCS = JSON.parse(fs.readFileSync(here + '../primitive-sources.json', 'utf8')).functions;
 test('every rendered quality maps to a registry function (or is labeled filled/instruction)', () => {
   for (const a of ATTRIBUTION) { for (const f of a.fn) assert.ok(FUNCS[f], f + ' missing from primitive-sources.json'); if (a.rendered && !a.fn.length) assert.ok(/HERS/.test(a.status), a.quality); }
-  for (const need of ['shape', 'sound', 'hue', 'brightness', 'texture', 'motion', 'color (value)']) assert.ok(ATTRIBUTION.find((a) => a.quality === need && a.rendered), need);
+  for (const need of ['shape', 'sound', 'drawn colour (glyph and trigram sign)', 'texture', 'motion', 'color (value)']) assert.ok(ATTRIBUTION.find((a) => a.quality === need && a.rendered), need);
   const q = glyphQualities('a', 'Space:G20.L2.C2.T2.B2'); assert.equal(q.gate, 27); assert.equal(q.color.name, 'HOPE'); assert.equal(q.shape.length, 6); assert.equal(q.hz, Math.round(bantuSoundFreq(q.hue / 360) * 100) / 100);
   assert.ok(!/letterColor|letterHz/.test(fs.readFileSync(here + 'field.mjs', 'utf8')));
 });
@@ -70,4 +70,15 @@ test('texture is drawn: the Movement ground paints the two Govinda p. ix trigram
   const S = streams(JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles); let rects = 0; const signs = new Set(['○', '□', '∪', '⌅', '△', '▽', '⊻', '∩']); let drawn = 0;
   const ctx = { set fillStyle(v) {}, set font(v) {}, set textBaseline(v) {}, set globalAlpha(v) {}, set globalCompositeOperation(v) {}, fillText(t) { if (signs.has(t)) drawn++; }, fillRect() { rects++; } };
   const info = drawField(ctx, 70, 24, S, 0); assert.equal(rects, info.cols * info.rows); assert.equal(drawn, info.cols * info.rows * 2);
+});
+
+test('INHERITED colour: every member of an element group renders its group colour; nothing else is drawn in a non-group colour', async () => {
+  const G = await import('../sources/govinda.mjs');
+  for (const e of G.ELEMENTS) for (const m of G.ELEMENT_MEMBERS_P57_60[e]) assert.deepEqual(G.memberColour(m).rgb, G.ELEMENT_RGB_FILLED[e], m);
+  const allowed = new Set([...Object.values(G.ELEMENT_RGB_FILLED), G.NEUTRAL_RGB].map((c) => c.join(',')));
+  const S = streams(JSON.parse(fs.readFileSync(here + 'particles.json', 'utf8')).particles); const seen = [];
+  const ctx = { set fillStyle(v) { seen.push(v); }, set font(v) {}, set textBaseline(v) {}, set globalAlpha(v) {}, set globalCompositeOperation(v) {}, fillText() {}, fillRect() {} };
+  drawField(ctx, 140, 48, S, 0);
+  for (const v of seen) { if (v === '#101010') continue; const m = /rgba?\((\d+,\d+,\d+)/.exec(v); assert.ok(m && allowed.has(m[1]), 'colour outside the element groups: ' + v); }
+  for (const s of S) for (const q of s) { if (q.element) assert.deepEqual(q.rgb, G.ELEMENT_RGB_FILLED[q.element]); for (const k of ['upper', 'lower']) { const t = q.trigrams[k]; assert.deepEqual(t.rgb, G.elementColour(t.element)); } }
 });
