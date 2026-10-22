@@ -1,0 +1,63 @@
+{
+  "dimensions": {
+    "left_hand": 3,
+    "right_hand": 3,
+    "posture": 6,
+    "wrists": 6,
+    "motion": 18,
+    "timing": 1,
+    "speech": 12,
+    "sign": 2,
+    "sign_motion": 2
+  },
+  "hidden": 24,
+  "heads": {
+    "phase": [
+      "Rest",
+      "Preparation",
+      "Stroke",
+      "Hold",
+      "Retraction"
+    ],
+    "speaker": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "movement": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ]
+  },
+  "head_requirements": {
+    "phase": [
+      "left_hand",
+      "right_hand"
+    ],
+    "speaker": [
+      "speech"
+    ],
+    "movement": [
+      "sign"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "data/gesture/a1_raw.csv",
+    "sha256": "6741786f4dd962da28e8fa999ed91e2254e673a5b5f640ebd9e46c8085ef20ef",
+    "bytes": 305963
+  },
+  {
+    "path": "data/gesture/a2_raw.csv",
+    "sha256": "e2e65cb9947e0d02a3ae6aa00866f73c705c3aa23c93222ef73ff70505fc9778",
+    "bytes": 221529
+  },
+  {
+    "path": "data/gesture/a3_raw.csv",
+    "sha256": "03e562700ec1cadf1b4d5a0b4cff2e113d1bda9d892a03e20977cfd150384d89",
+    "bytes": 323601
+  },
+  {
+    "path": "data/speech/JapaneseVowels_TEST.ts",
+    "sha256": "b3d41d6a0ca3bcad3afb9ca7d4365382aa51341e2e58bae2a574babdda5b9462",
+    "bytes": 649132
+  },
+  {
+    "path": "data/speech/JapaneseVowels_TRAIN.ts",
+    "sha256": "68a430eabd919cc77f40b1f5f3bc0dcafacc1486bca9260785aeb7d262cc78cd",
+    "bytes": 487971
+  },
+  {
+    "path": "data/sign/movement_libras.data",
+    "sha256": "f5632d747520251a0acc2740d8b5f4188c24c7ac3d9dbe478477ef6c2f444522",
+    "bytes": 256293
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "dimensions": {
+    "left_hand": 3,
+    "right_hand": 3,
+    "posture": 6,
+    "wrists": 6,
+    "motion": 18,
+    "timing": 1
+  },
+  "hidden": 24,
+  "heads": {
+    "phase": [
+      "Rest",
+      "Preparation",
+      "Stroke",
+      "Hold",
+      "Retraction"
+    ]
+  }
+}
