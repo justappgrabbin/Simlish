@@ -1,0 +1,11 @@
+{
+  "dataset": "synthetic feature-level contact task",
+  "seed": 7,
+  "initial_accuracy": 0.36833333333333335,
+  "held_out_accuracy": 0.9483333333333334,
+  "majority_baseline": 0.395,
+  "speech_only_ablation_accuracy": 0.3983333333333333,
+  "final_training_loss": 0.11878994342480835,
+  "changed_parameter_arrays": 12,
+  "limitation": "No raw perception, real human evaluation, or calibrated confidence established."
+}

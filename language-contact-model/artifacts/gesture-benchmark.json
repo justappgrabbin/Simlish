@@ -1,0 +1,159 @@
+{
+  "dataset": "UCI Gesture Phase Segmentation, mirrored raw recordings",
+  "source": "https://doi.org/10.24432/C5Z32C",
+  "license": "CC BY 4.0",
+  "seed": 7,
+  "epochs": 45,
+  "train_windows": 499,
+  "test_windows": 304,
+  "train_recordings": [
+    "a1",
+    "a2"
+  ],
+  "test_recordings": [
+    "a3"
+  ],
+  "labels": [
+    "Rest",
+    "Preparation",
+    "Stroke",
+    "Hold",
+    "Retraction"
+  ],
+  "initial": {
+    "accuracy": 0.375,
+    "macro_f1": 0.29655744866754036,
+    "confusion_matrix": [
+      [
+        77,
+        0,
+        0,
+        0,
+        32
+      ],
+      [
+        17,
+        11,
+        2,
+        1,
+        13
+      ],
+      [
+        42,
+        27,
+        12,
+        0,
+        10
+      ],
+      [
+        0,
+        18,
+        1,
+        4,
+        1
+      ],
+      [
+        10,
+        9,
+        6,
+        1,
+        10
+      ]
+    ]
+  },
+  "final": {
+    "accuracy": 0.5328947368421053,
+    "macro_f1": 0.34719602525241017,
+    "confusion_matrix": [
+      [
+        96,
+        0,
+        0,
+        0,
+        13
+      ],
+      [
+        15,
+        9,
+        11,
+        0,
+        9
+      ],
+      [
+        2,
+        12,
+        52,
+        0,
+        25
+      ],
+      [
+        0,
+        16,
+        7,
+        0,
+        1
+      ],
+      [
+        10,
+        4,
+        17,
+        0,
+        5
+      ]
+    ]
+  },
+  "last_frame_only_ablation": {
+    "accuracy": 0.5296052631578947,
+    "macro_f1": 0.3701766162969908,
+    "confusion_matrix": [
+      [
+        81,
+        0,
+        0,
+        0,
+        28
+      ],
+      [
+        13,
+        8,
+        13,
+        0,
+        10
+      ],
+      [
+        2,
+        5,
+        59,
+        0,
+        25
+      ],
+      [
+        0,
+        16,
+        7,
+        0,
+        1
+      ],
+      [
+        2,
+        3,
+        18,
+        0,
+        13
+      ]
+    ]
+  },
+  "training_majority_label": "Rest",
+  "majority_baseline_accuracy": 0.35855263157894735,
+  "files": {
+    "a2_raw.csv": "e2e65cb9947e0d02a3ae6aa00866f73c705c3aa23c93222ef73ff70505fc9778",
+    "a1_raw.csv": "6741786f4dd962da28e8fa999ed91e2254e673a5b5f640ebd9e46c8085ef20ef",
+    "a3_raw.csv": "03e562700ec1cadf1b4d5a0b4cff2e113d1bda9d892a03e20977cfd150384d89"
+  },
+  "limitations": [
+    "Three recordings only; not participant-independent evaluation.",
+    "Gesture phase identification is not semantic gesture understanding.",
+    "Overlapping windows within each split; no recording appears in both splits.",
+    "No raw video, speech, or sign-language training in this checkpoint."
+  ]
+}

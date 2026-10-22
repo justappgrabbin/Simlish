@@ -1,0 +1,6 @@
+{
+  "dataset": "synthetic history-dependent interpretation diagnostic",
+  "sequence_accuracy": 1.0,
+  "last_event_only_accuracy": 0.390625,
+  "meaning": "Identical final observations require different interpretations according to prior context."
+}
