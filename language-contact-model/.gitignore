@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+*.db
+*.db-shm
+*.db-wal
+data/*.jsonl
+data/gesture/*.jsonl
