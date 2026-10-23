@@ -1,0 +1,11 @@
+import {createUnifiedSwarm} from './src/index.mjs';
+const s=createUnifiedSwarm({authorize:()=>true});
+s.add({id:'factory',label:'Tool Factory',x:-.6,y:.4});
+s.add({id:'model',label:'Model Maker',x:.6,y:.4});
+s.add({id:'phenotype',label:'Simlish World',x:0,y:-.4});
+s.relate({from:'factory',to:'phenotype',predicate:'realizes',provenance:'caller-declared-test-evidence'});
+s.relate({from:'model',to:'phenotype',predicate:'conditions',provenance:'caller-declared-test-evidence'});
+s.arrange({factory:{x:-.5,y:.5},model:{x:.5,y:.5},phenotype:{x:0,y:-.5}},{rate:.1,momentGain:0});
+s.form({name:'scale',inputs:['x'],steps:[{id:'two',op:'const',args:[],value:2},{id:'out',op:'mul',args:['x','two']}],output:'out'});
+const r=await s.executeFormation('scale',{x:21});
+console.log(JSON.stringify({nodeCount:s.cloud().nodes.length,relations:s.cloud().edges.length,operationValue:r.value,source:'real donor modules',note:'demo has no Simlish host; phenotype integration uses connectGenerativeStateSpace'},null,2));

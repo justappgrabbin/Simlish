@@ -1,0 +1,49 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {projectThreeTwoOne,transitionThreeTwoOne} from '../src/three-two-one.mjs';
+import {createUnifiedSwarm,UnifiedSwarm} from '../src/unified-swarm.mjs';
+import {sixForGate} from '../vendor/pass05/king-wen-fuxi-map.mjs';
+import {fromLines} from '../vendor/pass05/zhouyi-state.mjs';
+
+test('3–2–1 represents all 64 hexagrams without collision, contradiction or missing bits',()=>{
+  const states=new Set();
+  for(let gate=1;gate<=64;gate++){
+    const r=projectThreeTwoOne({gate,provenance:'user:sourced-gate-map'});
+    assert.equal(r.six,sixForGate(gate));
+    assert.equal(r.sixLines.length,6);assert.equal(fromLines(r.sixLines),r.six);
+    assert.deepEqual([r.levels.level3.length,r.levels.level2.length,r.levels.level1.length],[3,2,1]);
+    assert.deepEqual(r.levels.level3.flatMap(x=>x.bits),r.sixLines);
+    assert.deepEqual(r.levels.level2.flatMap(x=>x.bits),r.sixLines);
+    assert.deepEqual(r.levels.level1[0].bits,r.sixLines);
+    states.add(r.six);
+  }
+  assert.equal(states.size,64);
+});
+test('3–2–1 fails closed on absent provenance, invalid gates and conflicting binary states',()=>{
+  assert.throws(()=>projectThreeTwoOne({gate:1}),/provenance/);
+  assert.throws(()=>projectThreeTwoOne({gate:0,provenance:'source'}),/gate/);
+  assert.throws(()=>projectThreeTwoOne({gate:1,six:0,provenance:'source'}),/conflicts/);
+});
+test('3–2–1 mounts six actual resident particles without invented semantic relationships',()=>{
+  const u=createUnifiedSwarm();const result=u.mount321({gate:3,provenance:'explicit:source-gate-3'});
+  assert.deepEqual(result.shape.roleCounts,{level3:3,level2:2,level1:1});
+  assert.equal(result.nodeIds.length,6);assert.equal(u.swarm.positions().length,6);
+  assert.equal(u.swarm.edges.size,0);
+  assert.equal(u.cloud().nodes.length,6);
+  const restored=UnifiedSwarm.restore(u.snapshot());assert.equal(restored.swarm.positions().length,6);
+  assert.throws(()=>u.mount321({gate:3,provenance:'explicit:source-gate-3'}),/already mounted/);
+});
+
+test('moving one line recalculates exactly one bigram, one trigram and the hexagram',()=>{
+ for(let g=1;g<=64;g++){
+  for(let line=1;line<=6;line++){
+   const t=transitionThreeTwoOne({gate:g,provenance:'source:king-wen'}, {line});
+   assert.equal(t.before.six ^ t.after.six,1<<(line-1));
+   assert.equal(t.changed.level3,Math.floor((line-1)/2)+1);
+   assert.equal(t.changed.level2,Math.floor((line-1)/3)+1);
+   assert.equal(t.changed.level1,1);
+   assert.equal(t.before.levels.level3.filter((x,i)=>x.value!==t.after.levels.level3[i].value).length,1);
+   assert.equal(t.before.levels.level2.filter((x,i)=>x.value!==t.after.levels.level2[i].value).length,1);
+  }
+ }
+});
