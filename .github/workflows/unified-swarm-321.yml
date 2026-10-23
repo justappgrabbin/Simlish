@@ -1,0 +1,80 @@
+name: Synthia Unified Swarm 3-2-1
+on:
+  push:
+    branches: [main, 'integration/unified-swarm-321-source-20261022']
+    paths:
+      - 'you-n-i-verse/unified-swarm/**'
+      - 'you-n-i-verse/source-archives/Synthia-Unified-Swarm-v0.1.2-321-binaries.zip'
+      - 'you-n-i-verse/unified-swarm-entry.mjs'
+      - 'you-n-i-verse/unified-swarm-live.test.mjs'
+      - '.github/workflows/unified-swarm-321.yml'
+  pull_request:
+permissions:
+  contents: write
+jobs:
+  integrate-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: simlish
+          persist-credentials: true
+      - name: Verify archive integrity and stage executable source
+        working-directory: simlish
+        run: |
+          set -euo pipefail
+          ARCHIVE=you-n-i-verse/source-archives/Synthia-Unified-Swarm-v0.1.2-321-binaries.zip
+          printf "%s  %s\n" "d9005f4f266a5850fc12a5f1d329009d98e284eb4757316d8adad5713f8b98c4" "$ARCHIVE" | sha256sum -c -
+          mkdir -p /tmp/unified-swarm-staged you-n-i-verse/unified-swarm
+          unzip -oq "$ARCHIVE" -d /tmp/unified-swarm-staged
+          rsync -a --exclude=unified-swarm-entry.mjs --exclude=unified-swarm-live.test.mjs --exclude=unified-swarm-ci.yml /tmp/unified-swarm-staged/synthia-unified-swarm/ you-n-i-verse/unified-swarm/
+          cp /tmp/unified-swarm-staged/synthia-unified-swarm/unified-swarm-entry.mjs you-n-i-verse/
+          cp /tmp/unified-swarm-staged/synthia-unified-swarm/unified-swarm-live.test.mjs you-n-i-verse/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test original donor checksums and binary 3-2-1
+        working-directory: simlish/you-n-i-verse/unified-swarm
+        run: npm test
+      - name: Checkout existing state-space source without donor archives
+        uses: actions/checkout@v4
+        with:
+          repository: justappgrabbin/Generative-address-system
+          ref: ce1704d5d53d5729b499463f7eeaf5dcd5091550
+          path: state-space
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/package.json
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/authorities/execution-spine/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/authorities/trainable-core/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/generative-address-morphology/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/generative-address-morphology/config/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/translation-layer/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/morphmir-memory/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/generative-reconstruction/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-neural-symbolic/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-visual-grammar/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-visual-grammar/data/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-visual-grammar/vendor/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/modelmaker-image-trainer/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/modelmaker-image-trainer/vendor/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/moving-photo/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/moving-photo/vendor/**
+      - name: Test actual source authority and Simlish phenotype
+        working-directory: simlish/you-n-i-verse
+        env:
+          SYNTHIA_STATE_SPACE_ROOT: ${{ github.workspace }}/state-space/Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE
+        run: node --test unified-swarm-live.test.mjs generative-state-space-plug.test.mjs
+      - name: Preserve expanded source in GitHub
+        if: github.event_name == 'push' && github.ref_name == 'integration/unified-swarm-321-source-20261022'
+        working-directory: simlish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add you-n-i-verse/unified-swarm you-n-i-verse/unified-swarm-entry.mjs you-n-i-verse/unified-swarm-live.test.mjs
+          if ! git diff --cached --quiet; then
+            git commit -m "Expand validated unified swarm source and Simlish integration"
+            git push origin HEAD:integration/unified-swarm-321-source-20261022
+          fi

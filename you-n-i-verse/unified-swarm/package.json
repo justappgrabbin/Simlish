@@ -1,0 +1,14 @@
+{
+  "name": "@synthia/unified-swarm",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "demo": "node demo.mjs"
+  },
+  "description": "Additive sourced SWARM-OS + consciousness formation + primitive VM + contextual Simlish phenotype bridge. No duplicate semantic address authority."
+}

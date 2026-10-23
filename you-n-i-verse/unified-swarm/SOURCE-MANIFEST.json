@@ -1,0 +1,100 @@
+{
+  "schema": "synthia-unified-swarm-source-manifest.v1",
+  "sources": {
+    "pass05": "SWARM-OS-source-locked-relational-state-space-pass-05.zip",
+    "consciousness": "Synthia-Consciousness-Swarm-CONTINUITY-v0.1.1.zip",
+    "neural": "SWARM-OS-neural-composition-next-pass-checkpoint.zip"
+  },
+  "modules": [
+    {
+      "path": "vendor/consciousness/causal-graph.mjs",
+      "sha256": "027206e5ad286414257b90de2ec24510fa3e3cc1607e2d6698b8d8057094f0b9",
+      "bytes": 6350,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/consciousness/computer-bridge.mjs",
+      "sha256": "e44ec48db2d39bc2a4b7c22206543709e5d1e4e5ecf003235834cb47e4a338c0",
+      "bytes": 6017,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/consciousness/consciousness-swarm.mjs",
+      "sha256": "2275da46e260d4d4804441ed96400bc16b9473e813c709f26fb4493f678973e4",
+      "bytes": 14736,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/consciousness/gate-matrix.mjs",
+      "sha256": "26f41b45bb08e037615467da59fb537592b51f5163e4588b84e1cf25a67435b3",
+      "bytes": 13159,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/neural/neural-formation-adapter.mjs",
+      "sha256": "189d59fb0ff3301abacc291eb24b08b7ed2374986f47347cb2795c561bb99ec9",
+      "bytes": 2299,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/king-wen-fuxi-map.mjs",
+      "sha256": "3ed092c342f565ebeed4d139131e90ab800065f47195103a4572e87527cabddd",
+      "bytes": 1405,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/positioned-state-space.mjs",
+      "sha256": "35092e0f592fef7f7da90c366e8cdfdad4dc0f4cfaef035296331327fcef1fbe",
+      "bytes": 8157,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/recursive-primitive-kernel.mjs",
+      "sha256": "57c7d0541b7685d2850afcb0920cd6a17f9e6c5bbd74970c8c1fe74fdd4effb8",
+      "bytes": 6514,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/spec-locked-dimensional-relations.mjs",
+      "sha256": "913eaa5c1861edf751801eb3b23f05c253c59ca8719842562f0b3694edb9da4a",
+      "bytes": 5681,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/tri-modal-expression.mjs",
+      "sha256": "728ef158b6703cae65cef94d49e2324bb598ce5a558df60725876fbc24f5160e",
+      "bytes": 3421,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/universal-primitive-execution-bridge.mjs",
+      "sha256": "b550d213dec858c26289aa843dc4df49fd2fa1a2d7a25a402515db4e8fddcb1e",
+      "bytes": 7984,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/verified-foundation-address.mjs",
+      "sha256": "12b7ca8a9a38ed038c00f068816c45c674ce77e8c422c9a222f0a6d962038c10",
+      "bytes": 1844,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/zhouyi-execution-adapter.mjs",
+      "sha256": "e8937ff4ccaf8a222a192fdd7707d5f0228b388513f7870b6992a1e80cdf80e1",
+      "bytes": 5018,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/zhouyi-state.mjs",
+      "sha256": "5653a2c4cced7e5263b58501e4f986cfbf7f1fc6a839c2332e29d178359578cf",
+      "bytes": 2198,
+      "policy": "source-preserved; untouched"
+    },
+    {
+      "path": "vendor/pass05/zhouyi-structural-isomorphism.mjs",
+      "sha256": "770af73c807643001f513fd8ff1166fe58da15b5736c796f77f140f39bed38ed",
+      "bytes": 3472,
+      "policy": "source-preserved; untouched"
+    }
+  ]
+}
