@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: justappgrabbin/Generative-address-system
-          ref: 4c5ba5560c14aab654c2d6e7070a422fd13c54ea
+          ref: ce1704d5d53d5729b499463f7eeaf5dcd5091550
           path: state-space
           sparse-checkout-cone-mode: false
           sparse-checkout: |
