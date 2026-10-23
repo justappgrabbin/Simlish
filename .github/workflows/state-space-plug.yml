@@ -1,0 +1,50 @@
+name: Simlish Generative State Space plug
+on:
+  push:
+    branches: ['integration/generative-state-space-20261022']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  dual-state-space:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Simlish checkout
+        uses: actions/checkout@v4
+        with:
+          path: simlish
+      - name: Checkout existing state-space source without donor archives
+        uses: actions/checkout@v4
+        with:
+          repository: justappgrabbin/Generative-address-system
+          ref: ce1704d5d53d5729b499463f7eeaf5dcd5091550
+          path: state-space
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/package.json
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/authorities/execution-spine/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/authorities/trainable-core/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/generative-address-morphology/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/generative-address-morphology/config/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/translation-layer/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/morphmir-memory/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/generative-reconstruction/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-neural-symbolic/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-visual-grammar/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-visual-grammar/data/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/klein-visual-grammar/vendor/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/modelmaker-image-trainer/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/modelmaker-image-trainer/vendor/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/moving-photo/src/**
+            Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE/extensions/moving-photo/vendor/**
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run existing-world and live-source tests
+        working-directory: simlish/you-n-i-verse
+        env:
+          SYNTHIA_STATE_SPACE_ROOT: ${{ github.workspace }}/state-space/Synthia-Generative-Address-Morphology-Integrated-v0.2.1-RUNNABLE
+        run: node --test generative-state-space-plug.test.mjs
