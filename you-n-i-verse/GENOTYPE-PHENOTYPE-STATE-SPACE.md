@@ -14,7 +14,7 @@ Simlish CONSUMES Generative-address-system. The original source state space is n
 
 ## Source checkout and CI
 
-The workflow .github/workflows/state-space-plug.yml fetches the existing state-space repository at exact commit 4c5ba5560c14aab654c2d6e7070a422fd13c54ea using a sparse source checkout, without making a second 800 MB Simlish history. A sparse checkout reduces the worktree; it does not guarantee minimal Git network transfer.
+The workflow .github/workflows/state-space-plug.yml fetches the existing state-space repository at exact commit ce1704d5d53d5729b499463f7eeaf5dcd5091550 using a sparse source checkout, without making a second 800 MB Simlish history. A sparse checkout reduces the worktree; it does not guarantee minimal Git network transfer.
 
 To run locally from you-n-i-verse:
 
