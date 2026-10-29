@@ -1,0 +1,450 @@
+[
+  {
+    "gate": 1,
+    "englishName": "Creative",
+    "chinese": "乾",
+    "pinyin": "qian",
+    "illustrativeColor": "#0BDF7F"
+  },
+  {
+    "gate": 2,
+    "englishName": "Receptive",
+    "chinese": "坤",
+    "pinyin": "kun",
+    "illustrativeColor": "#000000"
+  },
+  {
+    "gate": 3,
+    "englishName": "Difficulty at Beginning",
+    "chinese": "屯",
+    "pinyin": "zhun",
+    "illustrativeColor": "#0AE2A2"
+  },
+  {
+    "gate": 4,
+    "englishName": "Youthful Folly",
+    "chinese": "蒙",
+    "pinyin": "meng",
+    "illustrativeColor": "#8571D1"
+  },
+  {
+    "gate": 5,
+    "englishName": "Waiting",
+    "chinese": "需",
+    "pinyin": "xu",
+    "illustrativeColor": "#02FABA"
+  },
+  {
+    "gate": 6,
+    "englishName": "Conflict",
+    "chinese": "訟",
+    "pinyin": "song",
+    "illustrativeColor": "#C3B757"
+  },
+  {
+    "gate": 7,
+    "englishName": "Army",
+    "chinese": "師",
+    "pinyin": "shi",
+    "illustrativeColor": "#501010"
+  },
+  {
+    "gate": 8,
+    "englishName": "Holding Together",
+    "chinese": "比",
+    "pinyin": "bi",
+    "illustrativeColor": "#6AC282"
+  },
+  {
+    "gate": 9,
+    "englishName": "Small Taming",
+    "chinese": "小畜",
+    "pinyin": "xiao xu",
+    "illustrativeColor": "#375B7B"
+  },
+  {
+    "gate": 10,
+    "englishName": "Treading",
+    "chinese": "履",
+    "pinyin": "lü",
+    "illustrativeColor": "#63D777"
+  },
+  {
+    "gate": 11,
+    "englishName": "Peace",
+    "chinese": "泰",
+    "pinyin": "tai",
+    "illustrativeColor": "#983838"
+  },
+  {
+    "gate": 12,
+    "englishName": "Standstill",
+    "chinese": "否",
+    "pinyin": "pi",
+    "illustrativeColor": "#73A747"
+  },
+  {
+    "gate": 13,
+    "englishName": "Fellowship",
+    "chinese": "同人",
+    "pinyin": "tong ren",
+    "illustrativeColor": "#BBCF6F"
+  },
+  {
+    "gate": 14,
+    "englishName": "Great Possession",
+    "chinese": "大有",
+    "pinyin": "da you",
+    "illustrativeColor": "#A11DFD"
+  },
+  {
+    "gate": 15,
+    "englishName": "Modesty",
+    "chinese": "謙",
+    "pinyin": "qian",
+    "illustrativeColor": "#A80808"
+  },
+  {
+    "gate": 16,
+    "englishName": "Enthusiasm",
+    "chinese": "豫",
+    "pinyin": "yu",
+    "illustrativeColor": "#D48404"
+  },
+  {
+    "gate": 17,
+    "englishName": "Following",
+    "chinese": "隨",
+    "pinyin": "sui",
+    "illustrativeColor": "#DE66A6"
+  },
+  {
+    "gate": 18,
+    "englishName": "Work on Decayed",
+    "chinese": "蠱",
+    "pinyin": "gu",
+    "illustrativeColor": "#2D79D9"
+  },
+  {
+    "gate": 19,
+    "englishName": "Approach",
+    "chinese": "臨",
+    "pinyin": "lin",
+    "illustrativeColor": "#F03030"
+  },
+  {
+    "gate": 20,
+    "englishName": "Contemplation",
+    "chinese": "觀",
+    "pinyin": "guan",
+    "illustrativeColor": "#9F2343"
+  },
+  {
+    "gate": 21,
+    "englishName": "Biting Through",
+    "chinese": "噬嗑",
+    "pinyin": "shi ke",
+    "illustrativeColor": "#A905E5"
+  },
+  {
+    "gate": 22,
+    "englishName": "Grace",
+    "chinese": "賁",
+    "pinyin": "bi",
+    "illustrativeColor": "#7D89E9"
+  },
+  {
+    "gate": 23,
+    "englishName": "Splitting Apart",
+    "chinese": "剝",
+    "pinyin": "bo",
+    "illustrativeColor": "#3561C1"
+  },
+  {
+    "gate": 24,
+    "englishName": "Return",
+    "chinese": "復",
+    "pinyin": "fu",
+    "illustrativeColor": "#A02020"
+  },
+  {
+    "gate": 25,
+    "englishName": "Innocence",
+    "chinese": "無妄",
+    "pinyin": "wu wang",
+    "illustrativeColor": "#13C767"
+  },
+  {
+    "gate": 26,
+    "englishName": "Great Taming",
+    "chinese": "大畜",
+    "pinyin": "da xu",
+    "illustrativeColor": "#CD99F9"
+  },
+  {
+    "gate": 27,
+    "englishName": "Nourishment",
+    "chinese": "頤",
+    "pinyin": "yi",
+    "illustrativeColor": "#D581E1"
+  },
+  {
+    "gate": 28,
+    "englishName": "Great Excess",
+    "chinese": "大過",
+    "pinyin": "da guo",
+    "illustrativeColor": "#365E9E"
+  },
+  {
+    "gate": 29,
+    "englishName": "Abysmal Water",
+    "chinese": "坎",
+    "pinyin": "kan",
+    "illustrativeColor": "#BAD292"
+  },
+  {
+    "gate": 30,
+    "englishName": "Clinging Fire",
+    "chinese": "離",
+    "pinyin": "li",
+    "illustrativeColor": "#510DED"
+  },
+  {
+    "gate": 31,
+    "englishName": "Influence",
+    "chinese": "咸",
+    "pinyin": "xian",
+    "illustrativeColor": "#E64E8E"
+  },
+  {
+    "gate": 32,
+    "englishName": "Duration",
+    "chinese": "恆",
+    "pinyin": "heng",
+    "illustrativeColor": "#CC9C1C"
+  },
+  {
+    "gate": 33,
+    "englishName": "Retreat",
+    "chinese": "遯",
+    "pinyin": "dun",
+    "illustrativeColor": "#1BAF4F"
+  },
+  {
+    "gate": 34,
+    "englishName": "Great Power",
+    "chinese": "大壯",
+    "pinyin": "da zhuang",
+    "illustrativeColor": "#6CBC3C"
+  },
+  {
+    "gate": 35,
+    "englishName": "Progress",
+    "chinese": "晉",
+    "pinyin": "jin",
+    "illustrativeColor": "#09E5C5"
+  },
+  {
+    "gate": 36,
+    "englishName": "Darkening of Light",
+    "chinese": "明夷",
+    "pinyin": "ming yi",
+    "illustrativeColor": "#482828"
+  },
+  {
+    "gate": 37,
+    "englishName": "Family",
+    "chinese": "家人",
+    "pinyin": "jia ren",
+    "illustrativeColor": "#E74B6B"
+  },
+  {
+    "gate": 38,
+    "englishName": "Opposition",
+    "chinese": "睽",
+    "pinyin": "kui",
+    "illustrativeColor": "#F915F5"
+  },
+  {
+    "gate": 39,
+    "englishName": "Obstruction",
+    "chinese": "蹇",
+    "pinyin": "jian",
+    "illustrativeColor": "#12CA8A"
+  },
+  {
+    "gate": 40,
+    "englishName": "Deliverance",
+    "chinese": "解",
+    "pinyin": "xie",
+    "illustrativeColor": "#249414"
+  },
+  {
+    "gate": 41,
+    "englishName": "Decrease",
+    "chinese": "損",
+    "pinyin": "sun",
+    "illustrativeColor": "#2591F1"
+  },
+  {
+    "gate": 42,
+    "englishName": "Increase",
+    "chinese": "益",
+    "pinyin": "yi",
+    "illustrativeColor": "#3F4363"
+  },
+  {
+    "gate": 43,
+    "englishName": "Breakthrough",
+    "chinese": "夬",
+    "pinyin": "guai",
+    "illustrativeColor": "#D67EBE"
+  },
+  {
+    "gate": 44,
+    "englishName": "Coming to Meet",
+    "chinese": "姤",
+    "pinyin": "gou",
+    "illustrativeColor": "#6BBF5F"
+  },
+  {
+    "gate": 45,
+    "englishName": "Gathering",
+    "chinese": "萃",
+    "pinyin": "cui",
+    "illustrativeColor": "#3E4686"
+  },
+  {
+    "gate": 46,
+    "englishName": "Pushing Upward",
+    "chinese": "升",
+    "pinyin": "sheng",
+    "illustrativeColor": "#F81818"
+  },
+  {
+    "gate": 47,
+    "englishName": "Oppression",
+    "chinese": "困",
+    "pinyin": "kun",
+    "illustrativeColor": "#8E5696"
+  },
+  {
+    "gate": 48,
+    "englishName": "Well",
+    "chinese": "井",
+    "pinyin": "jing",
+    "illustrativeColor": "#62DA9A"
+  },
+  {
+    "gate": 49,
+    "englishName": "Revolution",
+    "chinese": "革",
+    "pinyin": "ge",
+    "illustrativeColor": "#866EAE"
+  },
+  {
+    "gate": 50,
+    "englishName": "Cauldron",
+    "chinese": "鼎",
+    "pinyin": "ding",
+    "illustrativeColor": "#01FDDD"
+  },
+  {
+    "gate": 51,
+    "englishName": "Thunder",
+    "chinese": "震",
+    "pinyin": "zhen",
+    "illustrativeColor": "#74A424"
+  },
+  {
+    "gate": 52,
+    "englishName": "Mountain",
+    "chinese": "艮",
+    "pinyin": "gen",
+    "illustrativeColor": "#DD69C9"
+  },
+  {
+    "gate": 53,
+    "englishName": "Development",
+    "chinese": "漸",
+    "pinyin": "jian",
+    "illustrativeColor": "#472B4B"
+  },
+  {
+    "gate": 54,
+    "englishName": "Marrying Maiden",
+    "chinese": "歸妹",
+    "pinyin": "gui mei",
+    "illustrativeColor": "#C4B434"
+  },
+  {
+    "gate": 55,
+    "englishName": "Abundance",
+    "chinese": "豐",
+    "pinyin": "feng",
+    "illustrativeColor": "#1CAC2C"
+  },
+  {
+    "gate": 56,
+    "englishName": "Wanderer",
+    "chinese": "旅",
+    "pinyin": "lü",
+    "illustrativeColor": "#B1EDCD"
+  },
+  {
+    "gate": 57,
+    "englishName": "Wind",
+    "chinese": "巽",
+    "pinyin": "xun",
+    "illustrativeColor": "#973B5B"
+  },
+  {
+    "gate": 58,
+    "englishName": "Lake",
+    "chinese": "兌",
+    "pinyin": "dui",
+    "illustrativeColor": "#2E76B6"
+  },
+  {
+    "gate": 59,
+    "englishName": "Dispersion",
+    "chinese": "渙",
+    "pinyin": "huan",
+    "illustrativeColor": "#EF3353"
+  },
+  {
+    "gate": 60,
+    "englishName": "Limitation",
+    "chinese": "節",
+    "pinyin": "jie",
+    "illustrativeColor": "#5AF2B2"
+  },
+  {
+    "gate": 61,
+    "englishName": "Inner Truth",
+    "chinese": "中孚",
+    "pinyin": "zhong fu",
+    "illustrativeColor": "#8F5373"
+  },
+  {
+    "gate": 62,
+    "englishName": "Small Excess",
+    "chinese": "小過",
+    "pinyin": "xiao guo",
+    "illustrativeColor": "#7C8C0C"
+  },
+  {
+    "gate": 63,
+    "englishName": "After Completion",
+    "chinese": "既濟",
+    "pinyin": "ji ji",
+    "illustrativeColor": "#B2EAAA"
+  },
+  {
+    "gate": 64,
+    "englishName": "Before Completion",
+    "chinese": "未濟",
+    "pinyin": "wei ji",
+    "illustrativeColor": "#59F5D5"
+  }
+]
