@@ -1,0 +1,4 @@
+{ "$schema":"https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name":"io.github.justappgrabbin/swarm-computer","description":"Swarm Computer apps tray: list apps, resolve addresses through the address engine, read/write app files (writes are address-gated).",
+  "version":"0.1.0","packages":[{"registryType":"npm","identifier":"swarm-computer-mcp","version":"0.1.0","transport":{"type":"stdio"}}],
+  "remotes":[{"type":"streamable-http","url":"http://localhost:8787/mcp"},{"type":"sse","url":"http://localhost:8787/sse"}] }

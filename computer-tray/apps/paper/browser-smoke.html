@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Paper browser smoke</title></head>
+<body><pre id="out">running…</pre>
+<script type="module">
+import { AutomataIngestionExecutionKernel } from './automata/ingestion-execution-kernel.mjs';
+import { detectArtifactKind } from './automata/artifact-normalizer.mjs';
+const out = [];
+const log = (m) => { out.push(m); document.getElementById('out').textContent = out.join('\n'); };
+try {
+  if (!globalThis.structuredClone) globalThis.structuredClone = (v) => JSON.parse(JSON.stringify(v));
+  const k = new AutomataIngestionExecutionKernel();
+  const html = await k.process({ name:'x.html', type:'text/html', content:'<!doctype html><html><head><title>Garden Note</title></head><body><p>Beds and paths</p></body></html>' }, { execute:true });
+  if (html.artifact.kind !== 'html') throw new Error('kind '+html.artifact.kind);
+  if (html.execution.path === 'compiled-without-execution') throw new Error('still without execution');
+  log('html ok ' + html.execution.path);
+
+  const file = new File(['<!doctype html><html><body><h1>Visit</h1></body></html>'], 'visit.html', { type:'text/html' });
+  const r = await k.process(file, { execute:true });
+  if (r.artifact.kind !== 'html') throw new Error('file kind '+r.artifact.kind);
+  log('file upload html kind ok');
+
+  const js = await k.process({ name:'a.js', content:'2+2' }, { execute:false });
+  if (js.execution.path !== 'compiled-without-execution') throw new Error('js path '+js.execution.path);
+  log('js compile-only ok');
+
+  if (detectArtifactKind({ name:'a.md', text:'# Hi' }) !== 'markdown') throw new Error('md');
+  log('markdown detect ok');
+
+  document.title = 'PASS';
+  log('PASS');
+} catch (e) {
+  document.title = 'FAIL';
+  log('FAIL: ' + e.message);
+}
+</script>
+</body></html>

@@ -1,0 +1,1461 @@
+{
+  "schema": "capability-registry-v1",
+  "stage": "4a + amendment-c + excavation-registration + 4d-wave1",
+  "branch_ref": "integration/ecosystem-convergence",
+  "donor_pin": "Back-up- @ 1c45318",
+  "capabilities": [
+    {
+      "capability": "resolve_address",
+      "description": "Canonical 13-field address resolution (planetary, dimension, gate, line, color, tone, base, degree, minute, second, arc, zodiac, house).",
+      "providers": [
+        {
+          "provider_id": "back-up-:execution-spine-canonical-address",
+          "capability": "resolve_address",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/execution-spine-v0.4.0/src/canonical-address.mjs",
+          "status": "WIRED",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {
+            "address": "canonical address object"
+          },
+          "outputs": {
+            "validation": "boolean",
+            "canonical_key": "string"
+          },
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/acceptance-1-routing.test.mjs",
+              "summary": "Authority executed for real: YNIV parts resolved then translated to spine form and validated by spine.validateCanonicalAddress -> canonicalAddressKey 'planetary=4|dimension=Being|gate=42|line=5|color=3|tone=6|base=4|degree=248|minute=19|second=52|arcUnit=11|zodiac=6|house=8'; contract arc<->spine arcAxis mapping still NOT translated (documented)",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [
+            "Spine schema names field 11 'arcAxis' (arcUnit 1-99 + axis); contract field 'arc' is served by the kimi DMS codec instead. Spine structure metadata is preserved via ADDRESS_STRUCTURE.",
+            "authority-by-designation (Amendment C); automated validation of contract-shaped addresses blocked on arcAxis<->arc field-mapping reconciliation"
+          ],
+          "lineage": {
+            "derived_from": [
+              "execution-spine-v0.4.0"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "pure schema/validation",
+            "preferred_when": "ALWAYS as final validator: completed addresses (from any constructor, incl. kimi DMS codec) should be validated against execution-spine canonical schema before being treated as canonical. NOTE: spine field 11 is 'arcAxis' (arcUnit 1-99 + axis) vs contract/DMS 'arc' (arc-seconds); validation adapter for this field mapping is a pending reconciliation item, so authority is designated but automated spine-validation is not yet wired."
+          },
+          "conclusions": [
+            {
+              "timestamp": "2026-09-22T00:00:00.000Z",
+              "kind": "classification_change",
+              "previous": {
+                "role": "schema/validation provider (undesignated)",
+                "status_at_change": "PRESENT"
+              },
+              "conclusion": "DESIGNATED canonical-address AUTHORITY (Amendment C): its schema/validator decides canonicity of completed 13-field addresses. Other address providers construct/resolve parts; completed addresses SHOULD be validated against execution-spine before being called canonical.",
+              "reason": "Amendment C ruling: address authority and address construction are distinct roles; the execution-spine holds the full canonical spine (incl. arcAxis/ADDRESS_STRUCTURE) and must remain the arbiter.",
+              "evidence": {
+                "kind": "governance",
+                "ref": "amendment-C",
+                "summary": "orchestrator amendment C directive"
+              }
+            }
+          ],
+          "role": "canonical_address_authority"
+        },
+        {
+          "provider_id": "back-up-:kimi-dms-codec",
+          "capability": "resolve_address",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/state-space/addressing.js",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {
+            "arcSecond": "int 0..1295999",
+            "address": "partial canonical address"
+          },
+          "outputs": {
+            "address": "13-field canonical address (arc, house=trigram 1-8)"
+          },
+          "dependencies": [
+            "state-space/constants.js"
+          ],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/address-state-mount.test.mjs",
+              "summary": "addressForArcSec/arcSecForAddress/gateBits executed via ComputerRuntime.resolveAddress; 13-field address for 1990-01-01 12:00 UTC (Sun gate 64 line 5, Capricorn); arc 123456 -> G7.L1.C4.T3.B5",
+              "timestamp": "2026-09-21T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-21T00:00:00.000Z",
+          "known_limitations": [
+            "house convention is 1-8 trigram houses (45°), not 12 astrological houses"
+          ],
+          "lineage": {
+            "derived_from": [
+              "COHERENT donor substrate",
+              "pure-synthia-automata"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "pure math, deterministic",
+            "preferred_when": "constructing/resolving address parts (arc-seconds <-> gate/line/color/tone/base/DMS); NOT the canonical authority — validate completed addresses against back-up-:execution-spine-canonical-address"
+          },
+          "conclusions": [
+            {
+              "timestamp": "2026-09-22T00:00:00.000Z",
+              "kind": "classification_change",
+              "previous": {
+                "role": "resolve_address provider (implicitly canonical)",
+                "status_at_change": "VERIFIED"
+              },
+              "conclusion": "RECLASSIFIED as SPECIALIZED provider: constructs/resolves address parts (DMS wheel encode/decode, Fu Xi gate bits, trigram house). It is NOT the canonical provider; completed addresses are validated against the execution-spine authority.",
+              "reason": "Amendment C ruling: construction != canonicity.",
+              "evidence": {
+                "kind": "governance",
+                "ref": "amendment-C",
+                "summary": "orchestrator amendment C directive"
+              }
+            }
+          ],
+          "role": "specialized_constructor"
+        },
+        {
+          "provider_id": "back-up-:kimi-coordinate-engine",
+          "capability": "resolve_address",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/engine/v2/coordinate_engine.js",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_probe",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "excavation probe: toAddress({planet:0,gate:41,line:2,...})=12023169149007581n; fromAddress roundtrip true; TOTALS.full=241477720473600000; resonance(self,self)=1",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "parallel/specialized scheme — execution-spine canonical-address.mjs REMAINS the canonical-address authority; coordinate-engine is never a grammar source",
+            "degree cardinality 360 here vs DMS arc-second exactness in kimi addressing.js — reconcile before any canonical use",
+            "adds a 14th 'season' layer outside the canonical 13-field grammar"
+          ],
+          "lineage": {
+            "derived_from": [
+              "synthia_os_complete_v2 (PORT #4)"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, zero-dep",
+            "preferred_when": "read-only resonance/enumeration queries; never as canonical grammar source"
+          },
+          "role": "specialized_parallel_addressing"
+        },
+        {
+          "provider_id": "recovered:yniv-addressing-engine",
+          "capability": "resolve_address",
+          "repository": "donors/recovered",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "donors/recovered/you-n-i-verse-corrected/ (synthia-bridge.ts; sha256 f913997b787f15ac825446ad93c4664d006e51cabff6361d1d426e2cc2645197)",
+          "status": "WIRED",
+          "environment_requirements": [
+            "node-esm (execution via esbuild type-erasure .ported.mjs; originals TS, Node 20 has no TS runtime)"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/recovered-donors.test.mjs",
+              "summary": "encodeMicro({41,4,2,5,3})=45088 (matches recovery probe) with exact decode round-trip; encodeMacro=2511/2515 round-trip; MICRO_SIZE=69120 MACRO_SIZE=9360 via ComputerRuntime.resolveAddress contract",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [
+            "classification: SPECIALIZED canonical-resolution engine - execution-spine REMAINS the grammar authority (validator); YNIV resolves, never validates",
+            "donor coords 0-based internally; emergent arcSecond is 0-99 quarter-minutes, NOT contract arc",
+            "donor defect not fixed: runPipeline() reassigns const state (throws if called; we don't call it)",
+            "shipped bugs fixed in extracted copies only (see PROVENANCE.md): paren in encodeMicro; state-space-engine-v2 createNode/export fixes"
+          ],
+          "lineage": {
+            "derived_from": [
+              "justappgrabbin/Synthia@main vault archives (wave-1 recovery)"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "pure integer math / table lookup",
+            "preferred_when": "encoding/decoding the full 13-dim address arithmetic (micro 69120 / macro 9360 / emergent 129.6M)"
+          },
+          "role": "specialized_resolution_engine"
+        }
+      ]
+    },
+    {
+      "capability": "hd_chart",
+      "description": "Human Design chart from a real birth datum (13 placements, centers, type/profile/authority).",
+      "providers": [
+        {
+          "provider_id": "back-up-:kimi-human-design",
+          "capability": "hd_chart",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/state-space/human-design.js",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {
+            "birthDate": "YYYY-MM-DD",
+            "birthTime": "HH:MM (UTC)"
+          },
+          "outputs": {
+            "chart": "placements, centers, type, profile, authority"
+          },
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/address-state-mount.test.mjs",
+              "summary": "calculateHumanDesign('1990-01-01','12:00') executed: Manifesting Generator 5/6, Sun 64.5 Capricorn 11°19'15\"",
+              "timestamp": "2026-09-21T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-21T00:00:00.000Z",
+          "known_limitations": [
+            "approximate ephemeris (mean longitudes)",
+            "wheel anchor 58.0 per donor F2 conflict, recorded in HD_WHEEL_ANCHOR_VARIANTS"
+          ],
+          "lineage": {
+            "derived_from": [
+              "Kimi_Agent Human Design Agent Builder humanDesign.ts"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "pure math, deterministic",
+            "preferred_when": "birth datum available"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "resolve_state",
+      "description": "Entity state resolution: identity, address, current state, five-level active structures, trajectory, confidence, provenance.",
+      "providers": [
+        {
+          "provider_id": "back-up-:kimi-mesh-state-space",
+          "capability": "resolve_state",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/state-space/mesh-state-space.js",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {
+            "entity": "{identity|birthDate|arcSecond|address}",
+            "event": "grammar-v1 event",
+            "context": "object"
+          },
+          "outputs": {
+            "state": "{identity, address, current_state, active_structures, trajectory, confidence, source_provider}"
+          },
+          "dependencies": [
+            "state-space/addressing.js",
+            "state-space/constants.js",
+            "state-space/claim-status.js"
+          ],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/address-state-mount.test.mjs",
+              "summary": "StateSpace.address(64) executed via resolveState: five dimensions (Movement/Evolution/Being/Design/Space) each returned real gate-64 node with binary+trigrams",
+              "timestamp": "2026-09-21T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-21T00:00:00.000Z",
+          "known_limitations": [
+            "Movement='reverse' and Space='complement' dimension orderings are donor PROJECT_HYPOTHESIS claims, exposed as dimension_claim_status"
+          ],
+          "lineage": {
+            "derived_from": [
+              "COHERENT state_space_core.mjs"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, no wall-clock",
+            "preferred_when": "gate resolvable"
+          }
+        },
+        {
+          "provider_id": "back-up-:kimi-layer5-ssm",
+          "capability": "resolve_state",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/engine/v2/layer5_ssm.js",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [
+            "state-space/constants.js (mulberry32)"
+          ],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_probe",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "excavation probe: step([1,0,1,0,1,0]) -> out[0]=0.4714; recall self-similarity=1.0; mood={dominant:19,secondary:23,tertiary:33,activation:0.0732,mood:'neutral'}; SSM(dim=64,time=1,mood=neutral)",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "recall is cosine-similarity episodic memory, NOT energy-based Hopfield (no Hopfield implementation exists in donor)",
+            "probe-verified only; NOT yet mounted behind Computer contracts"
+          ],
+          "lineage": {
+            "derived_from": [
+              "synthia_os_complete_v2 (PORT #4)"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, zero-dep",
+            "preferred_when": "state-memory/attractor dynamics behind state-resolver (event -> SSM step -> recall/mood)"
+          }
+        },
+        {
+          "provider_id": "back-up-:kimi-phase-space-engine",
+          "capability": "resolve_state",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/engine/v2/phase_space_engine.js",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_probe",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "excavation probe: compose({vector:[0.6,0.1,0.8]}, mesh=1 vertex) -> complete=true, stages Movement>Evolution>Being>Design>Space, final _space.address='addr_3134', double-run deterministic=true, project() keys Who/What/Where/When/Why",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "works on numeric vectors; its addr_NNNN hashes are NOT canonical addresses",
+            "probe-verified only; NOT yet mounted"
+          ],
+          "lineage": {
+            "derived_from": [
+              "synthia_os_complete_v2 (PORT #4)"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, zero-dep",
+            "preferred_when": "trajectory/trace generator for the milestone pipeline"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "living_loop",
+      "description": "Organism LivingLoop episode loop with hash-chained episode log.",
+      "providers": [
+        {
+          "provider_id": "back-up-:kimi-living-loop",
+          "capability": "living_loop",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/organism/living-loop.js",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {
+            "engine": "SynthiaAutomata-compatible surface"
+          },
+          "outputs": {
+            "episodes": "hash-chained episode log"
+          },
+          "dependencies": [
+            "automata swarm engine"
+          ],
+          "persistence_behavior": "none",
+          "verification_evidence": [],
+          "last_verified": null,
+          "known_limitations": [
+            "requires a live automata engine surface; not yet mounted"
+          ],
+          "lineage": {
+            "derived_from": [
+              "pure-synthia-automata organism"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "needs engine",
+            "preferred_when": "automata engine mounted (stage 4b+)"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "emit_event",
+      "description": "Shared event grammar v1 emission with append-only JSONL persistence.",
+      "providers": [
+        {
+          "provider_id": "computer:events/event-emitter",
+          "capability": "emit_event",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "events/event-emitter.mjs",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {
+            "event": "partial grammar-v1 event"
+          },
+          "outputs": {
+            "event": "complete grammar-v1 event with event_id/timestamp/trajectory_id"
+          },
+          "dependencies": [],
+          "persistence_behavior": "local",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/address-state-mount.test.mjs",
+              "summary": "emitEvent appended grammar-v1 event to events.jsonl; new runtime instance read back identical event_id and actor_address.gate=64 (restart survival)",
+              "timestamp": "2026-09-21T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-21T00:00:00.000Z",
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "append-only jsonl",
+            "preferred_when": "always"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "execute",
+      "description": "Routed real execution via selected provider.",
+      "providers": [
+        {
+          "provider_id": "computer:runtime/execution",
+          "capability": "execute",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "runtime/execution.mjs",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "local",
+          "verification_evidence": [],
+          "last_verified": null,
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "route",
+      "description": "Provider selection + recorded routing_decision.",
+      "providers": [
+        {
+          "provider_id": "computer:registry/capability-registry",
+          "capability": "route",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "registry/capability-registry.mjs",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {
+            "capability": "string"
+          },
+          "outputs": {
+            "routing_decision": "object"
+          },
+          "dependencies": [],
+          "persistence_behavior": "local",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/address-state-mount.test.mjs",
+              "summary": "queryCapability('resolve_address') listed donor providers; route() selected back-up-:kimi-dms-codec; evidence-less WIRED promotion correctly refused",
+              "timestamp": "2026-09-21T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-21T00:00:00.000Z",
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "observe",
+      "description": "Runtime observability records via kernel EventBus.",
+      "providers": [
+        {
+          "provider_id": "computer:core/kernel",
+          "capability": "observe",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "core/kernel.mjs",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "local",
+          "verification_evidence": [],
+          "last_verified": null,
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "remember",
+      "description": "Append-only memory via StateStore persistence.",
+      "providers": [
+        {
+          "provider_id": "computer:core/kernel",
+          "capability": "remember",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "core/kernel.mjs",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "local",
+          "verification_evidence": [],
+          "last_verified": null,
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "automata_activation",
+      "description": "Route a capability task into the donor automata organism (pure-synthia v0.4.0 swarm, 47 baseline processes) via the Computer gateway; returns honest execution records.",
+      "providers": [
+        {
+          "provider_id": "back-up-:pure-synthia-v0.4.0-swarm",
+          "capability": "automata_activation",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/pure-synthia-v0.4.0 (src/synthia/swarm/bootstrap.mjs)",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm",
+            "zero npm deps"
+          ],
+          "inputs": {
+            "capability": "string (e.g. grammar.learn, grammar.generate)",
+            "input": "donor process input"
+          },
+          "outputs": {
+            "execution": "{status, workerId, output, cycle}"
+          },
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/milestone-one-real-event.test.mjs",
+              "summary": "Full chain: real user_action -> resolveAddress (Sun 64.5 Capricorn) -> resolveState (5-level mesh) -> gateway bootstrapped 47 donor processes -> grammar.learn (15 rules, worker deg-grammar-learner) -> grammar.generate (4-node graph, 3 rule applications) -> CONSUMPTION RECEIPT (result consumed into StateStore milestone.consumption + referenced downstream) -> grammar-v1 event persisted (trajectory traj-milestone-one-real-event) -> fresh runtime replayed trajectory with receipt intact. Amendment-C VERIFIED: consumption receipt + observable state change both present.",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [
+            "gateway routes one capability task per execute(); multi-step orchestration remains the donor swarm's own assigner"
+          ],
+          "lineage": {
+            "derived_from": [
+              "pure-synthia-v0.4.0"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "bootstrap ~2-3s (47 processes), cached per runtime",
+            "preferred_when": "any donor swarm capability execution behind Computer contracts"
+          }
+        },
+        {
+          "provider_id": "computer:services/automata-engine",
+          "capability": "automata_activation",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "services/automata-engine.mjs",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {
+            "capability": "string",
+            "input": "object"
+          },
+          "outputs": {
+            "record": "execution record or unroutable"
+          },
+          "dependencies": [
+            "back-up-:pure-synthia-v0.4.0-swarm"
+          ],
+          "persistence_behavior": "local",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/milestone-one-real-event.test.mjs",
+              "summary": "gateway execute() routed grammar.learn/generate to real donor workers; unroutable capabilities return honest 'unroutable' record",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "wraps donor swarm lazily",
+            "preferred_when": "executing through ComputerRuntime.executeOnSwarm"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "state_space_runtime",
+      "description": "Runtime-object mesh: tasks, intents, checkpoints, memory gists, residency, ATO recall, causal trace over the five-dimension mesh.",
+      "providers": [
+        {
+          "provider_id": "back-up-:pure-synthia-emergent-state-space",
+          "capability": "state_space_runtime",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/pure-synthia-v0.4.0/src/synthia/emergent-state-space/ (core/state_space_core.mjs, mesh/emergent_mesh.mjs, mesh/ato_recall.mjs, core/task_continuity.mjs)",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_probe",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "excavation probe: new StateSpace(gateTable).address(41) -> 5 dims; new EmergentMesh(gateTable) -> nodes=320, structuralEdges=960, fiveFieldStates=320, residency all 0",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "runtime.mjs imports ../canonicalState.mjs which is ABSENT from the vendor copy — use core/mesh directly, not runtime.mjs",
+            "Movement/Space sequences and Being tropical chart are PROJECT_HYPOTHESIS per claim-status"
+          ],
+          "lineage": {
+            "derived_from": [
+              "pure-synthia v0.6.7 canonical 5D mesh"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, zero-dep",
+            "preferred_when": "mount only if runtime-object mesh / task continuity / symbolic ATO recall is needed; otherwise defer"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "linguistic_kernel",
+      "description": "Five-projection linguistic kernel: immutable language state L={x,r,c,h} with Movement/Evolution/Being/Design/Space projections and single-pass resolve.",
+      "providers": [
+        {
+          "provider_id": "back-up-:pure-synthia-grammar-kernel",
+          "capability": "linguistic_kernel",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/pure-synthia-v0.4.0/src/synthia/five-substrate/grammarKernel.mjs",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_probe",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "excavation probe: step(L={x:{term:'hello world'}},{type:'test'}) -> r.perspective='self', h[0].eventId='ling-fa1db543', accepted=true",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "touches none of the canonical 13 address dimensions — grammar/semantics substrate, not addressing"
+          ],
+          "lineage": {
+            "derived_from": [
+              "pure-synthia five-substrate"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, zero-dep",
+            "preferred_when": "mount when text-intent parsing is wired"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "state_space_enumeration",
+      "description": "Generic BigInt state-space estimation/enumeration + executable Govinda trigram structure tables.",
+      "providers": [
+        {
+          "provider_id": "back-up-:trainable-assembly-state-space",
+          "capability": "state_space_enumeration",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/trainable-assembly-v0.4.2/src/core/state-space/ (index.mjs estimator/enumerator + govinda-structure.js; 20/22 files byte-identical duplicates of kimi tree)",
+          "status": "PRESENT",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_probe",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "excavation probe: estimateStateSpace({cartesian:{gate:1..64,line:1..6,base:{values:[1..5]}}})=1920n; enumerateStateSpace yielded exactly 1920 states; diff/cmp: 20/22 files byte-IDENTICAL to kimi tree",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "20/22 files are exact duplicates of mounted kimi providers — kimi tree stays sole source for those",
+            "index.mjs + govinda-structure.js are TA-only additions, candidates for mounting"
+          ],
+          "lineage": {
+            "derived_from": [
+              "trainable-assembly-v0.4.2"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "deterministic, zero-dep",
+            "preferred_when": "enumerator for honest state-space size bounds; Govinda tables as claim-status metadata provider"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "penta_group_state",
+      "description": "Penta (composite group-state) implementation.",
+      "providers": [
+        {
+          "provider_id": "NOT-FOUND",
+          "capability": "penta_group_state",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": null,
+          "status": "NOT_FOUND",
+          "environment_requirements": [],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_search",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "searched entire donor: no Penta-person group-state code anywhere; only primitive-dimensions.js R-S3 claim mapping pentatonic scale degrees (gong/shang/jue/zhi/yu) to lines 1-5 of a scalegram, plus prose in kimi docs/corpus",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        },
+        {
+          "provider_id": "recovered:synthai2-penta-ephemeris",
+          "capability": "penta_group_state",
+          "repository": "justappgrabbin/Synthai2",
+          "branch_ref": "main @ cfbe3ee3018c41fc8abe6e1734eee5b630595a3f",
+          "source_artifact": "computer/donors/recovered/synthai2-ephemeris/ephemeris.py (verbatim) + services/penta-runner.py adapter",
+          "status": "WIRED",
+          "environment_requirements": [
+            "python3 + pyephem 4.2.1 (pip user install, documented in PROVENANCE.md)"
+          ],
+          "inputs": {
+            "members": "[{birth_date, birth_time}]"
+          },
+          "outputs": {
+            "group": "{members: penta roles, filled/needed positions}"
+          },
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/acceptance-3-world-event.test.mjs",
+              "summary": "REAL PyEphem triple-zodiac execution via child_process: 5 members -> gates A44/B42/C46/D54/E33, roles Provider/Foundation/Director/Director/Foundation, needed=Connector,Transmitter; position formula PLACEHOLDER flagged in output",
+              "timestamp": "2026-09-23T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-23T00:00:00.000Z",
+          "known_limitations": [
+            "penta POSITION FORMULA is a PLACEHOLDER hash ((body+mind+heart)%5+1); gates are real PyEphem, group completion logic real",
+            "calc_wa/nine_fields not wrapped (need extra Synthai2 modules not vendored)"
+          ],
+          "lineage": {
+            "derived_from": [
+              "justappgrabbin/Synthai2@main"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "child_process python3, ~1s per member",
+            "preferred_when": "group penta/composite ephemeris roles"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "composite_chart",
+      "description": "Composite (relationship) chart implementation.",
+      "providers": [
+        {
+          "provider_id": "NOT-FOUND",
+          "capability": "composite_chart",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": null,
+          "status": "NOT_FOUND",
+          "environment_requirements": [],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_search",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "searched entire donor: occurrences are structural only (channel-mesh-body 'higher-order-channel-composite'/'composite-polarity' = channel-level composition, not composite group charts)",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "hopfield_network",
+      "description": "Hopfield network implementation (by name).",
+      "providers": [
+        {
+          "provider_id": "NOT-FOUND",
+          "capability": "hopfield_network",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": null,
+          "status": "NOT_FOUND",
+          "environment_requirements": [],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "excavation_search",
+              "ref": "../../excavation-state-space-dirs.md",
+              "summary": "searched entire donor: only a LABEL — ato ARCHITECTURES table declares channel 18-58 'Judgment' {architecture:'hopfield', behavior:'attractor'}; no implementation exists",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "closest real machinery: layer5_ssm.js StateSpaceModel (64-hex state, distance-weighted coupling, recall) + emergent-state-space ATORecall (deterministic cue recall, not energy-based)"
+          ],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "resolve_relationship",
+      "description": "Channel-edge resolution between two addressed entities (36 HD channels as executable edge functions).",
+      "providers": [
+        {
+          "provider_id": "recovered:yniv-emergent-edge-resolver",
+          "capability": "resolve_relationship",
+          "repository": "donors/recovered",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "donors/recovered/you-n-i-verse-corrected/emergent-edge-resolver.ts (shipped working; archive sha256 f913997b787f15ac825446ad93c4664d006e51cabff6361d1d426e2cc2645197)",
+          "status": "WIRED",
+          "environment_requirements": [
+            "node-esm (execution via esbuild type-erasure .ported.mjs; originals TS, Node 20 has no TS runtime)"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/recovered-donors.test.mjs",
+              "summary": "resolveRelationship(g10,g20) -> EmergentEdgeResolver executed: edgeType AWAKENING, score 0.7, coherence 0.8, resonance 14.094 (matches recovery probe trace 'Awakening: Gates 10 and 20 awaken to 0.800')",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [
+            "edge labels carry donor semantics (AWAKENING 10-20 etc.); coherence/resonance values are donor-internal scoring"
+          ],
+          "lineage": {
+            "derived_from": [
+              "justappgrabbin/Synthia@main vault archives (wave-1 recovery)"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "pure integer math / table lookup",
+            "preferred_when": "resolving relational channel edges between two gates"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "calculate_human_design",
+      "description": "Ephemeris -> gate/line/color/tone/base via the mandala wheel (zodiac+deg/min/sec input).",
+      "providers": [
+        {
+          "provider_id": "recovered:foundry-glyphs-ephemeris",
+          "capability": "calculate_human_design",
+          "repository": "donors/recovered",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "donors/recovered/foundry-glyphs/server/resonance-engine.ts (archive sha256 9d8a894b95fdf7ad42d1bf2f5d9b9b6521c31d567edb7b6dc807dbb8835d84e5)",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm (execution via esbuild type-erasure .ported.mjs; originals TS, Node 20 has no TS runtime)"
+          ],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/recovered-donors.test.mjs",
+              "summary": "getHDActivation('Capricorn',11,19,15)->G38.L2.C6.T4.B5 via real mandala wheel; CONSUMPTION RECEIPT: address consumed by resolveState (five-level state-space at gate 38, active_structures.ephemeris) -> grammar-v1 event persisted (post_state.resolved_gate=38) -> fresh runtime replayed trajectory intact. Amendment-C VERIFIED: consumption receipt + observable state change + restart replay.",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [
+            "classification: REAL ephemeris provider vs kimi approximate-ephemeris - different calculation engine, NOT a winner-pick; wheels disagree (mandala gate-25-at-0-Aries vs kimi 58.0 anchor) and both are preserved",
+            "covers 9/13 dims (zodiac,degree,minute,second,gate,line,color,tone,base); no planet/dimension/arc/house",
+            "resonance-engine.ported.mjs imports extracted constants module (shared/schema.ts needs drizzle-orm/zod at value level; not installed)"
+          ],
+          "lineage": {
+            "derived_from": [
+              "justappgrabbin/Synthia@main vault archives (wave-1 recovery)"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "pure integer math / table lookup",
+            "preferred_when": "resolving real ecliptic coordinates to GLCTB"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "application_mounting",
+      "description": "Mount a real app artifact through intake -> mutation -> shell-manager; app consumes shared Computer services via a restricted mount contract (events, addressing, namespaced state, VFS).",
+      "providers": [
+        {
+          "provider_id": "computer:runtime/mountApplication",
+          "capability": "application_mounting",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "ComputerRuntime.mjs#mountApplication + runtime/shells.mjs + runtime/storage.mjs",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {
+            "appId": "string",
+            "artifactId": "ingested artifact"
+          },
+          "outputs": {
+            "contract": "restricted services surface {emitEvent,resolveAddress,resolveState,getState,setState,readArtifact}"
+          },
+          "dependencies": [
+            "computer:core/kernel"
+          ],
+          "persistence_behavior": "local",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/acceptance-2-application-mounting.test.mjs",
+              "summary": "Mounted real artifact public/computer.html; app emitted grammar-v1 event via shared emitter, resolveAddress executed on app's behalf (gate 64), app state persisted under apps.* namespace; CONSUMPTION RECEIPT: Computer observed app state + event; restart recovery: fresh runtime (JsonFilePersistence + events.jsonl) recovered app state, mount record, and event. Amendment-C VERIFIED.",
+              "timestamp": "2026-09-22T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-22T00:00:00.000Z",
+          "known_limitations": [
+            "JsonFilePersistence is the local Node persistence backend; LocalStoragePersistence remains the browser one"
+          ],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": "mounting artifact apps"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "world_simulation",
+      "description": "Embodied free-agent world: agent movement, short/long-term memory with consolidation, bonding/intent, 5W event-collapse substrate.",
+      "providers": [
+        {
+          "provider_id": "recovered:glowing-winner-world-engine",
+          "capability": "world_simulation",
+          "repository": "justappgrabbin/glowing-winner",
+          "branch_ref": "main @ a9afc57a455e0c6070b8107c0a32ea299c591414",
+          "source_artifact": "computer/donors/recovered/glowing-winner/EmbodiedWorldEngine.ts (+ .ported.mjs)",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm (execution via esbuild type-erasure .ported.mjs; uuid npm dep substituted by documented crypto.randomUUID shim)"
+          ],
+          "inputs": {
+            "event": "grammar-v1 event {spawn|intent|move|tick_ms|consolidate}"
+          },
+          "outputs": {
+            "record": "{actions, snapshot, fiveW deltas}"
+          },
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/acceptance-3-world-event.test.mjs",
+              "summary": "REAL donor execution through gateway: createAgent x2 (5W emergence collapses), processIntent 'store \"arrival memory\"' -> shortTerm memory, moveAgent + 600ms real ticks -> agent moved 34.2->32.0 toward target, donor consolidateMemory -> longTerm=1; observed via Computer observe contract; CONSUMPTION RECEIPT in StateStore acc3.world-receipt; consequence event with parents=[origin] persisted; restart replay + backward trace intact. Amendment-C VERIFIED.",
+              "timestamp": "2026-09-23T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-23T00:00:00.000Z",
+          "known_limitations": [
+            "Placement13/OntologicalAddressGenerator ephemeris is a PLACEHOLDER (synthetic) — future wiring path: consume recovered:foundry-glyphs-ephemeris (routing note, not implemented)",
+            "movement integrates over real ticks (moveAgent sets target)",
+            "HumanDesignSimulation.ts/InfluenceManager.ts/SharedSession.ts vendored but NOT ported (need onnxruntime-node/react/SynthiaClient-network) — PRESENT only"
+          ],
+          "lineage": {
+            "derived_from": [
+              "justappgrabbin/glowing-winner@main"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "10fps tick engine, in-memory",
+            "preferred_when": "any embodied world/agent simulation behind Computer contracts"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "morph_expression",
+      "description": "Digital Skynthia effect substrate: morph-expression state changes driven by real system processes.",
+      "providers": [
+        {
+          "provider_id": "computer:runtime/morph-engine",
+          "capability": "morph_expression",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": "runtime/experience.mjs MorphEngine",
+          "status": "WIRED",
+          "environment_requirements": [
+            "node"
+          ],
+          "inputs": {
+            "target": "string",
+            "patch": "expression patch"
+          },
+          "outputs": {
+            "expression": "morph.targets.* state"
+          },
+          "dependencies": [],
+          "persistence_behavior": "local",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/acceptance-4-skynthia-effect.test.mjs",
+              "summary": "real world-engine movement (2.74 units over real ticks) -> MorphEngine.express('skynthia-avatar') -> observable StateStore morph.targets state + morph:expressed bus event -> persisted grammar-v1 event -> restart replay",
+              "timestamp": "2026-09-23T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-23T00:00:00.000Z",
+          "known_limitations": [
+            "state-only substrate; NO renderer exists (see skynthia_rendering NOT_FOUND)"
+          ],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": "expressing real process output as morph state"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "skynthia_rendering",
+      "description": "Visual renderer for Digital Skynthia morph state.",
+      "providers": [
+        {
+          "provider_id": "NOT-FOUND",
+          "capability": "skynthia_rendering",
+          "repository": "computer",
+          "branch_ref": "integration/ecosystem-convergence",
+          "source_artifact": null,
+          "status": "NOT_FOUND",
+          "environment_requirements": [],
+          "inputs": {},
+          "outputs": {},
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "acceptance_search",
+              "ref": "computer/tests/acceptance-4-skynthia-effect.test.mjs",
+              "summary": "searched computer/ services + runtime: no render component; public/*.mjs shells are DOM demos not wired to a runtime",
+              "timestamp": "2026-09-23T00:00:00.000Z"
+            }
+          ],
+          "last_verified": null,
+          "known_limitations": [
+            "PATH FORWARD: wire morph.targets.* to a renderer service (canvas/DOM) consuming morph:expressed bus events; public/ shells are the natural host"
+          ],
+          "lineage": {
+            "derived_from": [],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "",
+            "preferred_when": ""
+          }
+        }
+      ]
+    },
+    {
+      "capability": "experiment_loop",
+      "description": "Hypothesis -> experiment -> real execution -> observation -> explicit evidence classification (never auto-upgraded) -> replication.",
+      "providers": [
+        {
+          "provider_id": "back-up-:kimi-hypothesis-registry",
+          "capability": "experiment_loop",
+          "repository": "donors/Back-up-",
+          "branch_ref": "1c45318",
+          "source_artifact": "vendor/kimi-agent-automata-state-space-merge/pure-synthia-automata/src/experiments/hypothesis-registry.js",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "node-esm"
+          ],
+          "inputs": {
+            "hypothesis": "H=(claim,nullHypothesis,metric,test,threshold)",
+            "method": "real provider callable"
+          },
+          "outputs": {
+            "classification": "hypothesis|observation|correlation|candidate_mechanism|supported_result|rejected_result|unknown"
+          },
+          "dependencies": [],
+          "persistence_behavior": "none",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "computer/tests/acceptance-7-experiment-loop.test.mjs",
+              "summary": "REAL experiment loop: hypothesis 'ephemeris determinism' -> experiment (conditions/variables) -> run1 real foundry execution gate 38 -> NEGATIVE: classify stays 'observation' (no replication, no auto-upgrade) -> run2 replicated -> explicit classify -> donor evaluate(1.0>=0.99) -> supported_result, hypothesis supported -> events persisted (observation then supported_result) -> restart replay. Amendment-C VERIFIED: consumption receipt + observable state change (hypothesis status) + restart replay.",
+              "timestamp": "2026-09-23T00:00:00.000Z"
+            }
+          ],
+          "last_verified": "2026-09-23T00:00:00.000Z",
+          "known_limitations": [
+            "donor rule preserved: execution never classifies; Hypothesis.evaluate() is a separate explicit step",
+            "alternative donor candidates registered but not wrapped: synthia-core-v1.0.0 learning/scientist-loop.mjs (question/evidence loop), pure-synthia-v0.4.0 orchestrator/experimentEngine.mjs"
+          ],
+          "lineage": {
+            "derived_from": [
+              "pure-synthia-automata experiments"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "zero-dep, in-memory registry",
+            "preferred_when": "any experiment/evidence classification loop"
+          }
+        }
+      ]
+    },
+    {
+      "capability": "formation_execution",
+      "description": "Addressed executable ATO graph formations: create, transform, compose, recursively synthesize, execute, activate historical revisions and recover from the Computer event ledger.",
+      "providers": [
+        {
+          "provider_id": "synthai:recovered-ato-core-formation",
+          "capability": "formation_execution",
+          "repository": "justappgrabbin/SynthAi",
+          "branch_ref": "swarm-os-computer-formation-20261016 (draft PR #46)",
+          "source_artifact": "computer/services/executable-formations.mjs; computer/ComputerRuntime.mjs; computer/donors/recovered/synthai-r21.22-self-cultivation-graph-integrated/vendor/ato-core/src/",
+          "status": "VERIFIED",
+          "environment_requirements": [
+            "Node.js 22 ESM for verified Computer/EventEmitter persistence path",
+            "existing Back-up- pinned Git submodule for complete Computer regression suite",
+            "PyEphem for existing Penta regression suite, not for formation execution",
+            "Chromium/Android WebView with IndexedDB and ES modules for verified browser-local path; no external LLM, app backend or web worker"
+          ],
+          "inputs": {
+            "formation": "{id,address,graph,purpose}; registered installed operation functions",
+            "composition": "{id,sourceId,targetId, optional revisions}"
+          },
+          "outputs": {
+            "execution": "{formationId, revisionId, artifactId, address, outputs}",
+            "history": "append-only Computer grammar-v1 events",
+            "lineage": "versioned graph dependencies and native GenerativeEmergence association"
+          },
+          "dependencies": [
+            "recovered:ATOEngine",
+            "recovered:AutomataMesh",
+            "recovered:Anomata",
+            "recovered:StateSpaceKernel (code projection)",
+            "Computer EventEmitter events.jsonl"
+          ],
+          "persistence_behavior": "Node: Computer grammar-v1 events.jsonl. Browser: append-only IndexedDB events keyed to the Computer namespace. Fresh Node boot and mobile Chromium reload replay formation revisions, native Diseminer lexical vectors and user-learned AUTOLING rules.",
+          "verification_evidence": [
+            {
+              "kind": "test_run",
+              "ref": "https://github.com/justappgrabbin/SynthAi/actions/runs/38941769809",
+              "summary": "Five focused formation tests passed, including native AutoLing + Diseminer, ATO graph mutation, restart replay, native GenerativeEmergence child/grandchild recursive synthesis, lineage depth, failure preservation. All 28 Computer regression tests passed and existing Computer web build succeeded.",
+              "timestamp": "2026-10-16T17:41:07Z"
+            },
+            {
+              "kind": "test_run",
+              "ref": "https://github.com/justappgrabbin/SynthAi/actions/runs/38944990590",
+              "summary": "Real Chromium phone-sized viewport 420x850 loaded existing Computer shell; mounted native AUTOLING+Diseminer ATO formation; executed with network requests blocked, persisted native memory in IndexedDB, learned a new AUTOLING rule and verified after browser reload. Five focused tests + 29 Computer tests passed; web build passed.",
+              "timestamp": "2026-10-16T18:08:50Z"
+            }
+          ],
+          "last_verified": "2026-10-16T18:08:50Z",
+          "known_limitations": [
+            "VERIFIED scope is Node.js executable formation graph composition and restart replay, not unrestricted program synthesis or a trained model.",
+            "The Node event emitter uses node:fs; the browser uses the same grammar-v1 contract through IndexedDB. Android APK packaging/device installation is not yet verified.",
+            "Executable operators must be re-registered from actual installed source after restart; native mutable tool memories are not yet restored automatically.",
+            "Generated composition currently uses native address association to construct a two-member ATO graph; arbitrary topology synthesis remains unverified.",
+            "Only registered callable operations execute; effects/policies of new operations require explicit review before exposing to end users.",
+            "Chromium verified execution after network blocking once modules were loaded; cold offline reload and distribution as an installable APK remain unverified."
+          ],
+          "lineage": {
+            "derived_from": [
+              "justappgrabbin/SynthAi@main:recovered/ato-core",
+              "justappgrabbin/Simlish pull/4 executable formation slice"
+            ],
+            "supersedes_for_scope": []
+          },
+          "selection_hints": {
+            "locality": "local",
+            "performance_notes": "Node.js test-verified; no external LLM or backend for graph execution",
+            "preferred_when": "Creating/recomposing executable formations through existing SynthAi Computer ATO contracts"
+          }
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "amendment-c-synthia-server",
+      "timestamp": "2026-09-22T00:00:00.000Z",
+      "record": "Synthia Server = repository justappgrabbin/Synthia-server. Computer/GitHub bridge work happens on branch computer-github-bridge-2026-09-22.",
+      "open_questions": [
+        "authoritative branch for Synthia-server bridge work",
+        "bridge convergence (how Synthia-server and Computer bridge code merge)",
+        "Computer -> bridge -> real GitHub -> result-into-events round-trip path (not yet executed end-to-end)"
+      ]
+    },
+    {
+      "id": "amendment-c-android-truth-record",
+      "timestamp": "2026-09-22T00:00:00.000Z",
+      "record": [
+        "Android/Capacitor in current SynthAi assembly: NOT FOUND",
+        "Android/mobile residence in wider ecosystem: PRESENT / REQUIRES PROVIDER INVENTORY (Synthai2 Capacitor, Stellar APK shell + MCP 17 tools, historical packages)"
+      ],
+      "rule": "Never record 'absent everywhere'; scope the NOT_FOUND to the assembly actually inspected."
+    },
+    {
+      "id": "unresolved-items",
+      "timestamp": "2026-09-22T00:00:00.000Z",
+      "record": "Unresolved/recovery-blocking items",
+      "items": [
+        {
+          "id": "authority-zips-missing",
+          "status": "BLOCKED",
+          "detail": "authorities/ contains ONLY SHA256SUMS.txt (712 bytes, 6 SHA-256 hashes for originals/01..06.zip). The originals/ directory does NOT exist — 6 authority ZIP binaries absent; hashes unverifiable without recovery. RECOVERY BLOCKER: obtain originals/01-06.zip or a provenance statement. (Note: nested vendor/*/donors/*.zip bundles exist but are different, unhashed artifacts.)"
+        }
+      ]
+    },
+    {
+      "id": "alternative-milestone-route",
+      "timestamp": "2026-09-22T00:00:00.000Z",
+      "record": "Excavation-proposed ALTERNATIVE milestone route (documented, NOT implemented): address -> mesh-state-space -> SSM.processMeshEvent (gate 6-bit vector via addressing.js gateBits as input; h-state update = automaton firing) -> phase-space compose() (full five-stage trace, deterministic) -> causal trace / SSM recall + getMood() as consumable result; trajectory via PhaseSpaceEngine trace + project(trace,'interrogative'). Determinism: all engine/v2 modules are wall-clock-free and seed-deterministic (bit-for-bit replay). Status: documented alternative; current milestone route (grammar.learn/generate via swarm gateway) remains the VERIFIED one. Caveat: Movement/Space sequences + Being tropical chart are PROJECT_HYPOTHESIS; Penta/composite genuinely absent.",
+      "open_questions": [
+        "reconcile coordinate-engine degree cardinality (360) with kimi DMS arc-second exactness before canonical use",
+        "recover authority ZIP originals for SHA256SUMS verification"
+      ]
+    }
+  ]
+}

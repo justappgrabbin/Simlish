@@ -1,0 +1,1 @@
+{"name":"swarm-computer-mcp","version":"0.1.0","type":"module","bin":{"swarm-computer-mcp":"server.mjs"},"scripts":{"start":"node server.mjs","http":"node server.mjs --http","test":"node test-client.mjs"},"engines":{"node":">=18"}}

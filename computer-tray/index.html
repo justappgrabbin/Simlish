@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#12091f">
+  <title>SynthAI Computer</title>
+  <link rel="stylesheet" href="./computer.css">
+</head>
+<body>
+  <div class="computer">
+    <aside class="rail">
+      <div class="brand">
+        <div class="orb">S</div>
+        <div><strong>SynthAI</strong><small>Computer</small></div>
+      </div>
+      <nav id="nav">
+        <button class="nav active" data-view="home">⌂ <span>Home</span></button>
+        <button class="nav" data-view="apps">▦ <span>Apps</span></button>
+        <button class="nav" data-view="build">✦ <span>Build</span></button>
+        <button class="nav" data-view="files">▤ <span>Files</span></button>
+        <button class="nav" data-view="github">⌁ <span>GitHub</span></button>
+        <button class="nav" data-view="systems">◫ <span>Systems</span></button>
+        <button class="nav" data-view="activity">↯ <span>Activity</span></button>
+      </nav>
+      <a class="diagnostic" href="./computer.html">Diagnostic</a>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <small class="eyebrow">PRIMARY OPERATING SURFACE</small>
+          <h1 id="viewTitle">Computer Home</h1>
+        </div>
+        <div class="statusline"><a class="pill" href="../index.html" aria-label="Return to YOU-N-I-VERSE Studio">← Studio</a>
+          <span class="dot" id="bootDot"></span>
+          <span id="bootLabel">booting</span>
+        </div>
+      </header>
+
+      <section class="view active" id="home">
+        <div class="hero">
+          <div>
+            <span class="pill">SynthAI Computer</span>
+            <h2>Your work lives here first.</h2>
+            <p>Build projects, keep their files in the Computer, publish through GitHub, and mount the rest of the SynthAI family into one operating home as each runtime becomes available.</p>
+          </div>
+          <button class="primary big" data-go="build">Create something</button>
+        </div>
+
+        <div class="status-grid">
+          <article><small>Computer runtime</small><strong id="runtimeStatus">PRESENT</strong><span id="runtimeDetail">booting</span></article>
+          <article><small>Project workspace</small><strong id="projectStatus">WIRED</strong><span id="projectCount">0 projects</span></article>
+          <article><small>GitHub creation</small><strong id="githubStatus">PRESENT</strong><span id="githubDetail">not connected</span></article>
+          <article><small>Mounted apps</small><strong id="mountStatus">WIRED</strong><span id="mountCount">0 mounted</span></article>
+        </div>
+
+        <div class="two">
+          <article class="panel">
+            <div class="panel-head"><div><small>RECENT PROJECTS</small><h3>Workspace</h3></div><button class="quiet" data-go="build">Open builder</button></div>
+            <div id="recentProjects" class="empty">No local projects yet.</div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><small>REGISTERED FAMILY</small><h3>Computer occupants</h3></div></div>
+            <div id="homeSystems" class="system-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="apps">
+      <div class="apps-head"><h2>Apps</h2><button id="appsAdd" class="btn">+ Add app folder</button></div>
+      <p class="muted">Every app and every file goes through the address engine first (gate.line.color.tone.base).</p>
+      <div id="appsGrid" class="apps-grid"></div>
+      <h3>Address gate ledger</h3><pre id="appsLedger"></pre>
+    </section>
+    <section class="view" id="build">
+        <div class="builder-grid">
+          <article class="panel project-panel">
+            <div class="panel-head"><div><small>PROJECT</small><h3>Build workspace</h3></div><span class="pill" id="projectState">no project</span></div>
+            <label>Project name<input id="projectName" placeholder="My app"></label>
+            <label>Description<input id="projectDescription" placeholder="What this project is for"></label>
+            <div class="row">
+              <button class="primary" id="createProject">New project</button>
+              <select id="projectPicker"><option value="">Choose project</option></select>
+            </div>
+          </article>
+
+          <article class="panel editor-panel">
+            <div class="editor-head">
+              <input id="filePath" value="index.html" aria-label="File path">
+              <div class="row">
+                <button class="quiet" id="saveFile">Save file</button>
+                <button class="quiet" id="previewFile">Preview</button>
+                <button class="primary" id="publishProject">Publish to GitHub</button>
+              </div>
+            </div>
+            <textarea id="editor" spellcheck="false" aria-label="Project file editor"></textarea>
+            <div id="builderMessage" class="message">Create or choose a project.</div>
+          </article>
+
+          <article class="panel preview-panel">
+            <div class="panel-head"><div><small>LIVE LOCAL OUTPUT</small><h3>Preview</h3></div></div>
+            <iframe id="preview" sandbox="allow-scripts"></iframe>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="files">
+        <article class="panel">
+          <div class="panel-head"><div><small>COMPUTER VFS</small><h3>Project files</h3></div><span id="fileProjectName" class="pill">choose a project</span></div>
+          <div id="fileList" class="file-list empty">No project selected.</div>
+        </article>
+      </section>
+
+      <section class="view" id="github">
+        <div class="two">
+          <article class="panel">
+            <div class="panel-head"><div><small>SERVER BRIDGE</small><h3>GitHub connection</h3></div><strong id="githubPanelState">PRESENT</strong></div>
+            <p class="muted">The GitHub credential stays on Synthia Server. This Computer stores only the server URL and your Computer access token on this device.</p>
+            <label>Synthia Server URL<input id="serverUrl" value="https://synthia-server.onrender.com"></label>
+            <label>Computer access token<input id="computerToken" type="password" placeholder="TERMINAL_TOKEN"></label>
+            <div class="row">
+              <button class="primary" id="connectGitHub">Connect and verify</button>
+              <button class="quiet" id="refreshRepos">Refresh repos</button>
+            </div>
+            <div id="githubMessage" class="message">Not verified yet.</div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><small>REPOSITORIES</small><h3>GitHub workspace</h3></div><span id="repoCount" class="pill">0</span></div>
+            <div id="repoList" class="repo-list empty">Connect to load repositories.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="systems">
+        <article class="panel">
+          <div class="panel-head"><div><small>MACRO REGISTRY</small><h3>SynthAI family</h3></div></div>
+          <div id="systemsList" class="cards"></div>
+        </article>
+        <article class="panel swarm-panel" id="swarmPanel">
+          <div class="panel-head">
+            <div><small>LOCAL ATO EXECUTION</small><h3>Executable formations</h3></div>
+            <span class="pill" id="formationStatus">Local runtime</span>
+          </div>
+          <p class="muted">Compose native Klein tools through your existing state space and ATO engine. Execution and lexical memory stay on this device.</p>
+          <div class="row">
+            <button class="primary" id="assembleKlein">Assemble AUTOLING + Diseminer</button>
+            <button class="quiet" id="refreshFormations">Refresh formations</button>
+          </div>
+          <div id="formationMessage" class="message" role="status">No changes made yet.</div>
+          <div id="formationList" class="formation-list"></div>
+          <div class="formation-controls">
+            <label>Executable formation
+              <select id="formationPicker" aria-label="Executable formation">
+                <option value="">Assemble a formation first</option>
+              </select>
+            </label>
+            <label>Sentence to process
+              <input id="formationText" value="wolf is curious" autocomplete="off"
+                aria-label="Text for the selected formation">
+            </label>
+            <button class="primary" id="runFormation">Execute formation</button>
+          </div>
+          <div class="formation-output" id="formationOutput" role="status" aria-live="polite">Select and execute a formation to see its actual output.</div>
+          <div class="formation-memory">
+            <div class="panel-head"><div><small>NOTEBOOK HISTORY</small><h3>Klein lexical memory</h3></div></div>
+            <div id="formationMemory" class="muted">No lexical records written by this Computer session.</div>
+          </div>
+          <details class="formation-teacher">
+            <summary>Teach AUTOLING a new grammar relation</summary>
+            <p class="muted">This is a real learned rule, kept with Computer history and applied by the recovered AUTOLING implementation.</p>
+            <div class="formation-controls">
+              <label>Rule ID<input id="ruleId" value="admires.v1" aria-label="AUTOLING rule ID"></label>
+              <label>Relation<input id="ruleRelation" value="ADMIRES" aria-label="AUTOLING relation"></label>
+              <label>Token pattern<input id="rulePattern" value="$entity admires $quality" aria-label="AUTOLING token pattern"></label>
+              <label>Language template<input id="ruleTemplate" value="$entity admires $quality" aria-label="AUTOLING template"></label>
+            </div>
+            <button class="primary" id="teachAutoling">Learn this rule</button>
+            <div id="ruleMessage" class="message" role="status">Learned rules become available to the executing formation.</div>
+          </details>
+        </article>
+      </section>
+
+      <section class="view" id="activity">
+        <article class="panel">
+          <div class="panel-head"><div><small>EVENT BUS</small><h3>Runtime activity</h3></div><button class="quiet" id="clearActivity">Clear view</button></div>
+          <div id="activityList" class="activity-list"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="./computer-app.mjs"></script>
+<div id="appOverlay" class="app-overlay" hidden><div class="app-bar"><span id="appTitle"></span><button id="appClose">✕ Close</button></div><iframe id="appFrame" allow="clipboard-write; fullscreen" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups allow-modals"></iframe></div>
+<div id="appEditor" class="app-editor" hidden><div class="app-bar"><span id="edTitle"></span><button id="edClose">✕</button></div><select id="edFile"></select><textarea id="edText" spellcheck="false"></textarea><div class="ed-actions"><button id="edSave">Save (through gate)</button><button id="edRevert">Revert file</button><button id="edExport">Export edits</button><label class="btn">Import file<input id="edImport" type="file" hidden></label><span id="edStatus"></span></div></div>
+<script type="module" src="./apps-tray.mjs"></script>
+</body>
+</html>

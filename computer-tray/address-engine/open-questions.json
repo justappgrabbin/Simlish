@@ -1,0 +1,183 @@
+[
+ {
+  "topic": "gate name",
+  "gate": 3,
+  "q": "Gate 3 is named differently: Difficulty at Beginning / Difficulty at the Beginning. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 6,
+  "q": "Gate 6 is named differently: Friction / Conflict. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 9,
+  "q": "Gate 9 is named differently: Small Taming / Taming Power of the Small / Taming Power. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 13,
+  "q": "Gate 13 is named differently: The Listener / Fellowship of Man / Fellowship. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 14,
+  "q": "Gate 14 is named differently: Possessions in Great Measure / Possession in Great Measure / Possession. Same thing, or different?"
+ },
+ {
+  "topic": "gate sign",
+  "gate": 16,
+  "q": "Gate 16: the 64-Gate Anchor Map says Aries / House 1, but the other gate tables say Gemini. Which one should the address use?",
+  "ids": [
+   73
+  ]
+ },
+ {
+  "topic": "gate name",
+  "gate": 18,
+  "q": "Gate 18 is named differently: Work on Spoilt / Work on What Has Been Spoilt. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 26,
+  "q": "Gate 26 is named differently: Taming Power of Great / Taming Power of the Great / Taming Power. Same thing, or different?"
+ },
+ {
+  "topic": "gate sign",
+  "gate": 27,
+  "q": "Gate 27: the 64-Gate Anchor Map says Aries / House 1, but the other gate tables say Taurus, Tau. Which one should the address use?",
+  "ids": [
+   84
+  ]
+ },
+ {
+  "topic": "gate name",
+  "gate": 28,
+  "q": "Gate 28 is named differently: Great Preponderance / Preponderance of Great / Preponderance of the Great. Same thing, or different?"
+ },
+ {
+  "topic": "gate sign",
+  "gate": 31,
+  "q": "Gate 31: the 64-Gate Anchor Map says Virgo / House 6, but the other gate tables say Leo. Which one should the address use?",
+  "ids": [
+   88
+  ]
+ },
+ {
+  "topic": "gate name",
+  "gate": 31,
+  "q": "Gate 31 is named differently: Leading / Influence. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 34,
+  "q": "Gate 34 is named differently: Power of Great / Power of the Great. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 36,
+  "q": "Gate 36 is named differently: Darkening of Light / Darkening of the Light / Darkening. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 37,
+  "q": "Gate 37 is named differently: Family / The Family. Same thing, or different?"
+ },
+ {
+  "topic": "gate sign",
+  "gate": 43,
+  "q": "Gate 43: the 64-Gate Anchor Map says Taurus / House 2, but the other gate tables say Scorpio, Sco. Which one should the address use?",
+  "ids": [
+   100
+  ]
+ },
+ {
+  "topic": "gate name",
+  "gate": 43,
+  "q": "Gate 43 is named differently: Insight / Breakthrough. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 54,
+  "q": "Gate 54 is named differently: Marrying Maiden / The Marrying Maiden. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 57,
+  "q": "Gate 57 is named differently: Gentle / The Gentle. Same thing, or different?"
+ },
+ {
+  "topic": "gate name",
+  "gate": 58,
+  "q": "Gate 58 is named differently: Joyous / The Joyous. Same thing, or different?"
+ },
+ {
+  "topic": "mandala position",
+  "gate": 43,
+  "q": "Gate 43 has two different positions: 18°52'30\" – 24°30'00\" Sco vs 20°45'00\" – 26°22'30\". Which is right?"
+ },
+ {
+  "topic": "wheel coverage",
+  "q": "2160 test points on the wheel do not resolve to exactly one gate (overlaps or holes). First few: [[228.875,\"none\"],[228.8776,\"none\"],[228.8802,\"none\"],[228.8828,\"none\"],[228.8854,\"none\"],[228.888,\"none\"]]"
+ },
+ {
+  "topic": "zodiac",
+  "q": "Capricorn is listed as Fixed in the Zodiac table (Aries, Cancer, Libra are Cardinal there). Keep it Fixed, or should it be Cardinal?"
+ },
+ {
+  "topic": "axis",
+  "q": "The Vertical axis row differs between copies: [\"Individuality\\n\\nBody\",\"D1 (Movement)\\n D3 being\"] vs [\"Spirit–Matter / Transcendent\",\"Base 3 (Being), Base 1 (Movement)\"]. Your edited one (\"Individuality / Body\", \"D1 (Movement), D3 being\") looks like the newer one — use that?"
+ },
+ {
+  "topic": "lines",
+  "q": "The last copy of the Line table adds role names (1 investigator, 2 hermit, 3 martyr, 4 opportunist, 5 heretic, 6role model). Should those names be part of each line?"
+ },
+ {
+  "topic": "tone x color",
+  "q": "Tone 1 (Security): the doc says nothing about Colors 3, 4, 5. Are those allowed (Rule O) or not? The resolver marks them \"not stated in doc\"."
+ },
+ {
+  "topic": "tone x color",
+  "q": "Tone 2 (Uncertainty): the doc says nothing about Colors 3, 5, 6. Are those allowed (Rule O) or not? The resolver marks them \"not stated in doc\"."
+ },
+ {
+  "topic": "tone x color",
+  "q": "Tone 3 (Action): the doc says nothing about Colors 2, 5, 6. Are those allowed (Rule O) or not? The resolver marks them \"not stated in doc\"."
+ },
+ {
+  "topic": "tone x color",
+  "q": "Tone 4 (Meditation): the doc says nothing about Colors 1, 2, 6. Are those allowed (Rule O) or not? The resolver marks them \"not stated in doc\"."
+ },
+ {
+  "topic": "tone x color",
+  "q": "Tone 5 (Judgement): the doc says nothing about Colors 1, 3, 6. Are those allowed (Rule O) or not? The resolver marks them \"not stated in doc\"."
+ },
+ {
+  "topic": "tone x color",
+  "q": "Tone 6 (Acceptance): the doc says nothing about Colors 2, 3, 4. Are those allowed (Rule O) or not? The resolver marks them \"not stated in doc\"."
+ },
+ {
+  "topic": "siding/gift",
+  "q": "Section Q says Siding/Gift turns on when \"the Color Binary (e.g., Leader) aligns with the Axis Type (e.g., Vertical)\". The doc never says which Color has which binary (Leader/...), or which Axis goes with which Color. What is that table?"
+ },
+ {
+  "topic": "Rule O",
+  "q": "Section I marks every Base x Tone cell Valid or Resonant Anchor, so the Base-Tone check never halts. Is that intended?"
+ },
+ {
+  "topic": "base chains",
+  "q": "The engine says \"Select Base Chain\" and \"Apply Gate Anchor (entry node)\" but the doc never lists the nodes of each Base chain in order (only the entry node per gate). Where is the chain list?"
+ },
+ {
+  "topic": "gate 34 lines",
+  "q": "Gate 34 has words for Lines 1 and 6 only; Lines 2-5 are not in the doc."
+ },
+ {
+  "topic": "BHANTUGH",
+  "q": "NATO and transliteration only cover letters on your sources, so they are given for the words label (e.g. \"The Creative Foundation Fear Security Movement\"), not the digits. Geometry uses the settled dodecahedron axis order. Is that how you want T and G read?"
+ },
+ {
+  "topic": "duplicates",
+  "q": "Sections 1-5 appear three times in the doc. All copies are kept as separate entries. Should later copies replace earlier ones where they differ?"
+ }
+]

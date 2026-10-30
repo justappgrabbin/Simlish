@@ -1,0 +1,1 @@
+export const CANONICAL_MICROS=[{id:'prime',name:'Prime'},{id:'venom',name:'Venom'},{id:'echo',name:'Echo'},{id:'celestial',name:'Celestial',alias:'Dream'},{id:'siren',name:'Siren',alias:'Soft Core'}];export function registerCanonicalMicros(r){for(const m of CANONICAL_MICROS)if(!r.has(m.id))r.register(m.id,{...m,macro:null,assignment:'unassigned'});return r.list()}

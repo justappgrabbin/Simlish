@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Neural smoke</title></head>
+<body><pre id="out">running…</pre>
+<script type="module">
+import { MODEL_ID, LEGACY_MODEL_ID, MAX_TOKENS, loadTinyLlama, isReady, chat } from './neural.mjs';
+const out = [];
+const log = (m) => { out.push(m); document.getElementById('out').textContent = out.join('\n'); };
+try {
+  if (MODEL_ID !== 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC') throw new Error('model id ' + MODEL_ID);
+  if (LEGACY_MODEL_ID !== 'TinyLlama-1.1B-Chat-v1.0-q4f16_1') throw new Error('legacy id');
+  if (MAX_TOKENS !== 256) throw new Error('max_tokens ' + MAX_TOKENS);
+  log('exports ok');
+  log('WebGPU: ' + (!!(navigator.gpu)));
+  // Confirm CDN module exposes CreateMLCEngine (no weight download)
+  const mod = await import('https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.86/+esm');
+  if (typeof mod.CreateMLCEngine !== 'function') throw new Error('CreateMLCEngine missing');
+  log('CDN CreateMLCEngine ok');
+  if (!navigator.gpu) {
+    log('SKIP full load (no WebGPU on this box)');
+    document.title = 'PASS';
+    log('PASS');
+  } else {
+    log('WebGPU present — attempting loadTinyLlama (may download weights)…');
+    await loadTinyLlama((t) => log('progress: ' + t));
+    if (!isReady()) throw new Error('engine not ready');
+    const reply = await chat('Say hello in five words.');
+    log('reply: ' + reply);
+    document.title = 'PASS';
+    log('PASS');
+  }
+} catch (e) {
+  document.title = 'FAIL';
+  log('FAIL: ' + (e && e.message ? e.message : e));
+}
+</script>
+</body></html>

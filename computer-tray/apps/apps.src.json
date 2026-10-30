@@ -1,0 +1,9 @@
+[
+ {"id":"paper","name":"Paper","icon":"📄","folder":"apps/paper","entry":"index.html","status":"ready","note":"Site studio: generate, upload, export ZIP, TinyLlama (needs a WebGPU device with shader-f16)."},
+ {"id":"youniverse","name":"YOU-N-I-VERSE","icon":"🌐","folder":"apps/youniverse","entry":"world.html","status":"ready","note":"World / watching place from the SWARM OS APK. Studio = index.html, rig = rig.html."},
+ {"id":"synthia-lab","name":"Synthia Lab","icon":"🧠","folder":"apps/youniverse","entry":"laboratory.html","status":"ready","note":"Synthia Klein neural laboratory (from the SWARM OS APK)."},
+ {"id":"synthia","name":"Synthia v14","icon":"✨","folder":"apps/synthia","entry":"index.html","status":"ready","note":"From Generative-address-system. Communication mode works alone; Klein/Morph modes need the integrated core server."},
+ {"id":"human-design","name":"Human Design","icon":"◈","folder":"apps/human-design","entry":"index.html","status":"not-built","note":"Source exists (Synthai2 branch synthia-human-design-studio, React/TS; SynthAi/SynthAi.HumanDesign, C#) but no built web page yet."},
+ {"id":"synthworld","name":"SYNTHWORLD","icon":"🎮","folder":"apps/synthworld","entry":"index.html","status":"not-built","note":"Godot game (SYNTHWORLD- repo). Needs a Godot Web export before it can run here."},
+ {"id":"trident","name":"Trident","icon":"🔱","folder":"apps/trident","entry":"index.html","status":"not-built","note":"Python/Gradio (Stellarproximology-lab). Not a web page; no released weights."}
+]
