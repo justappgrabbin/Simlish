@@ -119,9 +119,20 @@ jobs:
               assert b'../index.html' in z.read('assets/computer/index.html')
               assert 'assets/computer/apps/p2p-hd-rules.json' in files
               assert b'NativeApps' in z.read('assets/computer/apps-tray.mjs')
+              for f in ['index.html','app.js','style.css','jszip.min.js','neural.mjs']:
+                  assert 'assets/computer/apps/paper/'+f in files, 'Paper missing '+f
+              assert any(n.startswith('assets/computer/apps/paper/ato/') for n in files)
+              assert b'guardUploads' in z.read('assets/computer/apps-tray.mjs')
+              assert b'"paper"' in z.read('assets/computer/apps/apps.json')
+              print('Paper bundled:', sum(n.startswith('assets/computer/apps/paper/') for n in files), 'files')
               print('APK content verified:', len(files), 'ZIP entries,', len(manifest['files']), 'pinned Computer source files')
           PY
           ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Check file chooser is wired in compiled app
+        run: |
+          grep -q 'onShowFileChooser' android/app/src/main/java/app/youniverse/studio/MainActivity.java
+          grep -q 'EXTRA_ALLOW_MULTIPLE' android/app/src/main/java/app/youniverse/studio/MainActivity.java
+          unzip -p android/app/build/outputs/apk/debug/app-debug.apk 'classes*.dex' | grep -a -c 'onShowFileChooser'
       - name: Check native bridge permissions in manifest
         run: |
           AAPT=$(find "$SDK_ROOT/build-tools" -name aapt | sort | tail -1)

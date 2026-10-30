@@ -35,8 +35,10 @@ public class MainActivity extends Activity {
   web.setWebChromeClient(new WebChromeClient(){
    @Override public boolean onShowFileChooser(WebView view,ValueCallback<Uri[]> callback,FileChooserParams params){
     if(chooser!=null)chooser.onReceiveValue(null);chooser=callback;cameraUri=null;
-    Intent pick=new Intent(Intent.ACTION_GET_CONTENT);pick.addCategory(Intent.CATEGORY_OPENABLE);String[] accepts=params.getAcceptTypes();boolean image=false;for(String t:accepts)if(t.startsWith("image/"))image=true;boolean model=false;for(String t:accepts)if(t.contains("glb")||t.contains("gltf")||t.contains("octet-stream"))model=true;pick.setType(image?"image/*":model?"*/*":"application/json");
-    Intent select=Intent.createChooser(pick,image?"Choose from Photos":model?"Open animated character":"Open studio project");
+    Intent pick=new Intent(Intent.ACTION_GET_CONTENT);pick.addCategory(Intent.CATEGORY_OPENABLE);String[] accepts=params.getAcceptTypes();boolean image=false;for(String t:accepts)if(t.startsWith("image/"))image=true;boolean model=false;for(String t:accepts)if(t.contains("glb")||t.contains("gltf")||t.contains("octet-stream"))model=true;boolean jsonOnly=accepts.length>0;for(String t:accepts){String x=t.trim().toLowerCase();if(!(x.equals("application/json")||x.equals(".json")))jsonOnly=false;}boolean imageOnly=accepts.length>0;for(String t:accepts){if(!t.trim().toLowerCase().startsWith("image/"))imageOnly=false;}
+    /* Any file type (Paper accepts .zip/.html/.md/.txt/.css/.js/images): open the full picker, not JSON only */
+    pick.setType(imageOnly?"image/*":(jsonOnly?"application/json":"*/*"));if(params.getMode()==FileChooserParams.MODE_OPEN_MULTIPLE)pick.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+    Intent select=Intent.createChooser(pick,imageOnly?"Choose from Photos":model?"Open animated character":jsonOnly?"Open studio project":"Choose files");
     if(image && params.isCaptureEnabled()){Intent camera=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);if(camera.resolveActivity(getPackageManager())!=null){try{File dir=new File(getCacheDir(),"camera");dir.mkdirs();File f=File.createTempFile("portrait-",".jpg",dir);cameraUri=FileProvider.getUriForFile(MainActivity.this,getPackageName()+".files",f);camera.putExtra(MediaStore.EXTRA_OUTPUT,cameraUri);camera.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_READ_URI_PERMISSION);camera.setClipData(ClipData.newRawUri("portrait",cameraUri));select.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{camera});}catch(Exception e){cameraUri=null;}}}
     try{startActivityForResult(select,PICK);}catch(Exception e){chooser.onReceiveValue(null);chooser=null;toast("File picker unavailable");}return true;
    }
@@ -119,7 +121,7 @@ public class MainActivity extends Activity {
    }catch(Exception e){runOnUiThread(()->toast("Could not open photo: "+e.getMessage()));}}).start();
   }
 
-  if(request==PICK&&chooser!=null){Uri[] uris=null;if(result==RESULT_OK){Uri uri=data!=null?data.getData():null;if(uri==null)uri=cameraUri;if(uri!=null)uris=new Uri[]{uri};}chooser.onReceiveValue(uris);chooser=null;cameraUri=null;}
+  if(request==PICK&&chooser!=null){Uri[] uris=null;if(result==RESULT_OK){if(data!=null&&data.getClipData()!=null){ClipData c=data.getClipData();uris=new Uri[c.getItemCount()];for(int i=0;i<c.getItemCount();i++)uris[i]=c.getItemAt(i).getUri();}else{Uri uri=data!=null?data.getData():null;if(uri==null)uri=cameraUri;if(uri!=null)uris=new Uri[]{uri};}}chooser.onReceiveValue(uris);chooser=null;cameraUri=null;}
   if(request==NativeApps.PICK_PIECE){nativeApps.onPicked(result==RESULT_OK&&data!=null?data.getData():null);return;}
   if(request==SAVE){final byte[] bytes=pendingExport;pendingExport=null;if(result!=RESULT_OK||data==null||data.getData()==null){notifySave("Save cancelled. Your project is still in the studio.");return;}Uri uri=data.getData();new Thread(()->{try(OutputStream stream=getContentResolver().openOutputStream(uri)){if(stream==null)throw new Exception("Destination unavailable");stream.write(bytes);stream.flush();notifySave("File saved successfully.");}catch(Exception e){notifySave("Save failed: "+e.getMessage());}}).start();}
  }

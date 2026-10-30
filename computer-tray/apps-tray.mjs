@@ -42,6 +42,25 @@ function open(a){
   const f=$('#appFrame'); f.removeAttribute('srcdoc'); f.src='about:blank';
   if(edits[a.entry]!=null) f.srcdoc=edits[a.entry].replace(/<head([^>]*)>/i,`<head$1><base href="${base}">`); else f.src=`${a.folder}/${a.entry}`;
   $('#appTitle').textContent=`${a.icon} ${a.name} · ${r.record.address} · ${r.record.gate||''}`; $('#appOverlay').hidden=false;
+  f.onload=()=>{ guardUploads(f,a); if(a.id==='paper') neuralNotice(f); };
+}
+// Every file a hosted app takes in passes the address gate first (the app itself is not modified).
+// Capture-phase listener on the app's document runs before the app's own upload handler; refused files never reach it.
+export function guardUploads(f,a){
+  let doc; try{ doc=f.contentDocument; }catch{ return; } if(!doc||doc.__gateGuard) return; doc.__gateGuard=true;
+  doc.addEventListener('change',e=>{
+    const input=e.target; if(!input||input.type!=='file'||!input.files?.length) return;
+    const address=addrFor(a);
+    for(const file of input.files){ const g=admit({kind:'upload',id:`${a.id}/${file.name}`,name:file.name,address});
+      if(!g.ok){ e.stopImmediatePropagation(); e.stopPropagation(); input.value=''; alert(`Address gate refused upload ${file.name}: ${g.reason}`); render(); return; } }
+    render();
+  },true);
+}
+// TinyLlama needs WebGPU with shader-f16. Say plainly when this phone lacks it; everything else in Paper still works.
+async function neuralNotice(f){
+  let ok=false, why='this WebView has no WebGPU';
+  try{ const gpu=f.contentWindow?.navigator?.gpu; if(gpu){ const ad=await gpu.requestAdapter(); if(!ad) why='no WebGPU adapter'; else if(!ad.features.has('shader-f16')) why='WebGPU is present but without shader-f16'; else ok=true; } }catch(e){ why=e.message; }
+  const t=$('#appTitle'); if(t) t.textContent+= ok?' · TinyLlama: available (first load downloads weights)':` · TinyLlama off on this phone (${why}); the rest of Paper works offline`;
 }
 function render(){
   const addrs=store(ADDR);
