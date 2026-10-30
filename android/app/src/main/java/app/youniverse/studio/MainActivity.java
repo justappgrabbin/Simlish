@@ -41,7 +41,9 @@ public class MainActivity extends Activity {
    }
   });
   web.addJavascriptInterface(new NativeExport(),"NativeDownloads");
-  web.loadUrl(ORIGIN+"/assets/index.html");
+  // Players enter the world; the existing studio remains available only by an explicit developer intent.
+  boolean developerStudio = getIntent() != null && getIntent().getBooleanExtra("developer_studio", false);
+  web.loadUrl(ORIGIN+"/assets/"+(developerStudio ? "index.html" : "world.html"));
  }
  public class NativeExport {
   @JavascriptInterface public void analyzeFace(String encoded,int requestId){
