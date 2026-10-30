@@ -122,6 +122,8 @@ jobs:
               for f in ['index.html','app.js','style.css','jszip.min.js','neural.mjs']:
                   assert 'assets/computer/apps/paper/'+f in files, 'Paper missing '+f
               assert any(n.startswith('assets/computer/apps/paper/ato/') for n in files)
+              assert 'assets/computer/mobile/paper-mobile.css' in files and 'assets/computer/mobile/computer-mobile.css' in files
+              assert b'computer-mobile.css' in z.read('assets/computer/index.html')
               assert b'guardUploads' in z.read('assets/computer/apps-tray.mjs')
               assert b'"paper"' in z.read('assets/computer/apps/apps.json')
               print('Paper bundled:', sum(n.startswith('assets/computer/apps/paper/') for n in files), 'files')

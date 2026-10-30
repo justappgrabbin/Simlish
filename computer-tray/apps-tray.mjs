@@ -42,8 +42,10 @@ function open(a){
   const f=$('#appFrame'); f.removeAttribute('srcdoc'); f.src='about:blank';
   if(edits[a.entry]!=null) f.srcdoc=edits[a.entry].replace(/<head([^>]*)>/i,`<head$1><base href="${base}">`); else f.src=`${a.folder}/${a.entry}`;
   $('#appTitle').textContent=`${a.icon} ${a.name} · ${r.record.address} · ${r.record.gate||''}`; $('#appOverlay').hidden=false;
-  f.onload=()=>{ guardUploads(f,a); if(a.id==='paper') neuralNotice(f); };
+  f.onload=()=>{ guardUploads(f,a); if(a.id==='paper'){ mobileLayer(f,'mobile/paper-mobile.css'); neuralNotice(f); } };
 }
+// Phone-first layout layer, added from outside so the app's own files stay unchanged.
+function mobileLayer(f,href){ try{ const d=f.contentDocument; if(!d||d.getElementById('computerMobileLayer')) return; const l=d.createElement('link'); l.id='computerMobileLayer'; l.rel='stylesheet'; l.href=new URL(href,location.href).href; d.head.appendChild(l); }catch{} }
 // Every file a hosted app takes in passes the address gate first (the app itself is not modified).
 // Capture-phase listener on the app's document runs before the app's own upload handler; refused files never reach it.
 export function guardUploads(f,a){
