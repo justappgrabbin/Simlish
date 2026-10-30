@@ -64,7 +64,8 @@
    "smoke-check.mjs",
    "style.css",
    "sw.js"
-  ]
+  ],
+  "iconFile": "icons/dashboard/papermark.svg"
  },
  {
   "id": "youniverse",
@@ -75,7 +76,8 @@
   "status": "ready",
   "note": "World / watching place from the SWARM OS APK. Studio = index.html, rig = rig.html.",
   "type": "web",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/google-earth.svg"
  },
  {
   "id": "synthia-lab",
@@ -86,7 +88,8 @@
   "status": "ready",
   "note": "Synthia Klein neural laboratory (from the SWARM OS APK).",
   "type": "web",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/ollama.svg"
  },
  {
   "id": "synthia",
@@ -99,7 +102,8 @@
   "type": "web",
   "files": [
    "index.html"
-  ]
+  ],
+  "iconFile": "icons/dashboard/sparkleshare.svg"
  },
  {
   "id": "human-design",
@@ -110,7 +114,8 @@
   "status": "not-built",
   "note": "Source exists (Synthai2 branch synthia-human-design-studio, React/TS; SynthAi/SynthAi.HumanDesign, C#) but no built web page yet.",
   "type": "web",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/qnap-qvr-human.svg"
  },
  {
   "id": "synthworld",
@@ -120,7 +125,8 @@
   "note": "Godot game (SYNTHWORLD- repo). Once an Android export exists, add it with + Add app (pick the APK).",
   "type": "native",
   "package": "",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/godot.svg"
  },
  {
   "id": "prism-keys",
@@ -132,7 +138,8 @@
   "opens": "keyboard-setup",
   "status": "ready",
   "note": "Android keyboard. Opens its setup; enable it under Keyboard settings.",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/monkeytype.svg"
  },
  {
   "id": "synthia-resonance",
@@ -142,7 +149,8 @@
   "package": "app.synthia.resonance.preview",
   "apkSource": "https://github.com/justappgrabbin/SynthAi/releases/download/phone-preview-v0.2.0/Synthia-Resonance-preview.apk",
   "status": "ready",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/music.svg"
  },
  {
   "id": "trident",
@@ -153,7 +161,8 @@
   "apkSource": "",
   "status": "ready",
   "note": "No GitHub release yet (only a CI artifact on branch codex/trident-synthai-computer). Pick the APK file to install.",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/android.svg"
  },
  {
   "id": "stellar",
@@ -164,6 +173,7 @@
   "apkSource": "https://github.com/justappgrabbin/stellar-proximology-full-v0.1.0/releases/download/stellar-full-ci-14/Stellar-Proximology-FULL-debug.apk",
   "status": "ready",
   "note": "Private repo: the download link needs a GitHub sign-in, so pick the APK file instead if it fails.",
-  "files": []
+  "files": [],
+  "iconFile": "icons/dashboard/starlight.svg"
  }
 ]

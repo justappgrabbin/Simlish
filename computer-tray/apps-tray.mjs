@@ -64,9 +64,12 @@ async function neuralNotice(f){
   try{ const gpu=f.contentWindow?.navigator?.gpu; if(gpu){ const ad=await gpu.requestAdapter(); if(!ad) why='no WebGPU adapter'; else if(!ad.features.has('shader-f16')) why='WebGPU is present but without shader-f16'; else ok=true; } }catch(e){ why=e.message; }
   const t=$('#appTitle'); if(t) t.textContent+= ok?' · TinyLlama: available (first load downloads weights)':` · TinyLlama off on this phone (${why}); the rest of Paper works offline`;
 }
+// Bundled dashboard-icons (Apache-2.0, see icons/dashboard/). Local files only, no network. Emoji stays as fallback.
+function iconHtml(a){ const f=a.iconFile||(a.type==='native'?'icons/dashboard/generic-native.svg':'icons/dashboard/generic-web.svg');
+  return `<img class="app-icon-img" src="${esc(f)}" alt="" width="40" height="40" onerror="this.replaceWith(document.createTextNode(this.dataset.e))" data-e="${esc(a.icon||'▢')}">`; }
 function render(){
   const addrs=store(ADDR);
-  $('#appsGrid').innerHTML=apps.map(a=>`<div class="app-tile ${a.status!=='ready'?'pending':''}"><button class="app-open" data-id="${esc(a.id)}"><span class="app-icon">${esc(a.icon)}</span><strong>${esc(a.name)}</strong><small>${a.status!=='ready'?'not built yet':a.type==='native'?(NA?(NA.isInstalled(a.package)?'native · installed':'native · tap to install'):'native app'):esc(addrs[a.id]||'no address yet')}</small></button>${a.type==='native'?'':`<button class="app-edit" data-id="${esc(a.id)}" title="Edit files">✎</button>`}</div>`).join('');
+  $('#appsGrid').innerHTML=apps.map(a=>`<div class="app-tile ${a.status!=='ready'?'pending':''}"><button class="app-open" data-id="${esc(a.id)}"><span class="app-icon">${iconHtml(a)}</span><strong>${esc(a.name)}</strong><small>${a.status!=='ready'?'not built yet':a.type==='native'?(NA?(NA.isInstalled(a.package)?'native · installed':'native · tap to install'):'native app'):esc(addrs[a.id]||'no address yet')}</small></button>${a.type==='native'?'':`<button class="app-edit" data-id="${esc(a.id)}" title="Edit files">✎</button>`}</div>`).join('');
   $('#appsLedger').textContent=ledger().slice(0,20).map(x=>`${x.at.slice(0,19)}  ${x.kind}  ${x.name}  → ${x.address} (${x.gate||'?'})`).join('\n')||'Nothing has passed the gate yet.';
 }
 async function edit(a){
