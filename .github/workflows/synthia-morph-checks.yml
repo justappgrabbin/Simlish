@@ -1,0 +1,28 @@
+name: Synthia morph provider checks
+on:
+  pull_request:
+    paths:
+      - 'you-n-i-verse/morph-provider.mjs'
+      - 'you-n-i-verse/morph-provider.test.mjs'
+      - 'you-n-i-verse/docs/SYNTHIA-MORPH-PROVIDER.md'
+      - '.github/workflows/synthia-morph-checks.yml'
+  push:
+    branches:
+      - 'integration/synthia-autonomous-morph-*'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check standalone service and existing morph engines
+        run: |
+          node --check you-n-i-verse/morph-provider.mjs
+          node --test you-n-i-verse/morph-provider.test.mjs
+          node --test you-n-i-verse/photo-morph.test.mjs
+          node --test you-n-i-verse/frame-morph.test.mjs
+          node --test you-n-i-verse/animation.test.mjs
