@@ -68,9 +68,17 @@
       </section>
 
       <section class="view" id="apps">
-      <div class="apps-head"><h2>Apps</h2><button id="appsAdd" class="btn">+ Add app folder</button></div>
+      <div class="apps-head"><h2>Apps</h2><button id="appsAdd" class="btn">+ Add app</button></div>
       <p class="muted">Every app and every file goes through the address engine first (gate.line.color.tone.base).</p>
       <div id="appsGrid" class="apps-grid"></div>
+      <p id="appsNativeStatus" class="muted"></p>
+      <details class="conn"><summary>Connections (all optional)</summary>
+        <label><input type="checkbox" id="connP2p"> P2P, device to device <em>(placeholder: not built yet)</em></label><br>
+        <label><input type="checkbox" id="connP2pHd"> P2P by Human Design configuration <em>(off = everyone can use P2P; rules live in apps/p2p-hd-rules.json)</em></label><br>
+        <label><input type="checkbox" id="connLocal"> Local server <input id="connLocalUrl" placeholder="http://127.0.0.1:8080"></label><br>
+        <label><input type="checkbox" id="connRemote"> Remote / shared server <input id="connRemoteUrl" placeholder="https://…"></label><br>
+        <button id="connSave" class="btn">Save</button> <small id="connStatus">Any mix, or none. Nothing here is required: apps run on this device without any server.</small>
+      </details>
       <h3>Address gate ledger</h3><pre id="appsLedger"></pre>
     </section>
     <section class="view" id="build">

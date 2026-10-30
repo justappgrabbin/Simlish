@@ -1,0 +1,6 @@
+{
+ "_note": "Fill in which Human Design centers make someone eligible for P2P when 'P2P by Human Design configuration' is on. Empty = nobody is blocked. Center names must match the chart's definedCenters values.",
+ "requireDefinedCenters": [],
+ "anyDefinedCenters": [],
+ "matching": {}
+}

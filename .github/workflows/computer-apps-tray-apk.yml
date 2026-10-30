@@ -49,6 +49,8 @@ jobs:
           rm "$DEST/scripts-build-apps.mjs"
           node computer-tray/address-engine/resolver.test.mjs
           node computer-tray/mcp/test-client.mjs
+          node computer-tray/native-bridge.test.mjs
+          rm -f "$DEST/native-bridge.test.mjs"
       - name: Verify original studio and SWARM-OS execution tests
         run: |
           node --test you-n-i-verse/formation-spine.test.mjs you-n-i-verse/formation-klein.test.mjs
@@ -87,7 +89,7 @@ jobs:
           path: ~/.android/debug.keystore
           key: youniverse-debug-signing-v1
       - name: Preserve existing Studio host and build debug APK
-        run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
+        run: gradle -p android --no-daemon testDebugUnitTest assembleDebug -PbuildNumber=${{ github.run_number }}
       - name: Verify real APK asset entries and pinned provenance
         run: |
           python3 - <<'PY'
@@ -115,9 +117,16 @@ jobs:
               assert b'computer/index.html' in z.read('assets/index.html')
               assert b'./computer-runtime/ComputerRuntime.mjs' in z.read('assets/computer/computer-app.mjs')
               assert b'../index.html' in z.read('assets/computer/index.html')
+              assert 'assets/computer/apps/p2p-hd-rules.json' in files
+              assert b'NativeApps' in z.read('assets/computer/apps-tray.mjs')
               print('APK content verified:', len(files), 'ZIP entries,', len(manifest['files']), 'pinned Computer source files')
           PY
           ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Check native bridge permissions in manifest
+        run: |
+          AAPT=$(find "$SDK_ROOT/build-tools" -name aapt | sort | tail -1)
+          "$AAPT" dump permissions android/app/build/outputs/apk/debug/app-debug.apk | tee perms.txt
+          grep -q REQUEST_INSTALL_PACKAGES perms.txt
       - name: Name installable SWARM-OS debug APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk SWARM-OS-Computer-Apps-Tray-debug.apk
       - name: Retain verified signed Android debug build

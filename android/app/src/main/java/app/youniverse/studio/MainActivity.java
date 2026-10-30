@@ -15,6 +15,7 @@ import java.io.OutputStream;
 
 public class MainActivity extends Activity {
  private WebView web;
+ private NativeApps nativeApps;
  private ValueCallback<Uri[]> chooser;
  private Uri cameraUri;
  private byte[] pendingExport;
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
   web=new WebView(this);setContentView(web);
   WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
   WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setAllowFileAccess(false);s.setAllowContentAccess(true);s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);s.setMediaPlaybackRequiresUserGesture(true);
-  WebViewAssetLoader loader=new WebViewAssetLoader.Builder().addPathHandler("/assets/",new WebViewAssetLoader.AssetsPathHandler(this)).build();
+  WebViewAssetLoader loader=new WebViewAssetLoader.Builder().addPathHandler("/assets/",new WebViewAssetLoader.AssetsPathHandler(this)).addPathHandler("/local/",new WebViewAssetLoader.InternalStoragePathHandler(this,new File(getFilesDir(),"local-root"))).build();
   web.setWebViewClient(new WebViewClient(){
    @Override public WebResourceResponse shouldInterceptRequest(WebView view,WebResourceRequest request){WebResourceResponse response=loader.shouldInterceptRequest(request.getUrl());if(response!=null){String path=request.getUrl().getPath();if(path!=null&&(path.endsWith(".mjs")||path.endsWith(".js")))response.setMimeType("application/javascript");else if(path!=null&&path.endsWith(".wasm"))response.setMimeType("application/wasm");else if(path!=null&&path.endsWith(".json"))response.setMimeType("application/json");}return response;}
    @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){Uri u=request.getUrl();if(ORIGIN.equals(u.getScheme()+"://"+u.getHost())&&u.getPath()!=null&&u.getPath().startsWith("/assets/"))return false;if(request.isForMainFrame()&&(u.getScheme().equals("https")||u.getScheme().equals("http"))){try{startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(Exception e){toast("No browser available");}}return true;}
@@ -41,6 +42,7 @@ public class MainActivity extends Activity {
    }
   });
   web.addJavascriptInterface(new NativeExport(),"NativeDownloads");
+  nativeApps=new NativeApps(this,web,ORIGIN);web.addJavascriptInterface(nativeApps,"NativeApps");
   web.loadUrl(ORIGIN+"/assets/index.html");
  }
  public class NativeExport {
@@ -118,6 +120,7 @@ public class MainActivity extends Activity {
   }
 
   if(request==PICK&&chooser!=null){Uri[] uris=null;if(result==RESULT_OK){Uri uri=data!=null?data.getData():null;if(uri==null)uri=cameraUri;if(uri!=null)uris=new Uri[]{uri};}chooser.onReceiveValue(uris);chooser=null;cameraUri=null;}
+  if(request==NativeApps.PICK_PIECE){nativeApps.onPicked(result==RESULT_OK&&data!=null?data.getData():null);return;}
   if(request==SAVE){final byte[] bytes=pendingExport;pendingExport=null;if(result!=RESULT_OK||data==null||data.getData()==null){notifySave("Save cancelled. Your project is still in the studio.");return;}Uri uri=data.getData();new Thread(()->{try(OutputStream stream=getContentResolver().openOutputStream(uri)){if(stream==null)throw new Exception("Destination unavailable");stream.write(bytes);stream.flush();notifySave("File saved successfully.");}catch(Exception e){notifySave("Save failed: "+e.getMessage());}}).start();}
  }
  private void notifySave(String message){runOnUiThread(()->{toast(message);web.evaluateJavascript("window.dispatchEvent(new CustomEvent('native-save-result',{detail:"+org.json.JSONObject.quote(message)+"}));",null);});}
@@ -125,5 +128,5 @@ public class MainActivity extends Activity {
  @Override protected void onPause(){super.onPause();web.onPause();}
  @Override protected void onResume(){super.onResume();if(web!=null)web.onResume();}
  @Override public void onBackPressed(){if(web.canGoBack())web.goBack();else super.onBackPressed();}
- @Override protected void onDestroy(){if(chooser!=null)chooser.onReceiveValue(null);web.removeJavascriptInterface("NativeDownloads");web.destroy();super.onDestroy();}
+ @Override protected void onDestroy(){if(chooser!=null)chooser.onReceiveValue(null);web.removeJavascriptInterface("NativeDownloads");web.removeJavascriptInterface("NativeApps");web.destroy();super.onDestroy();}
 }

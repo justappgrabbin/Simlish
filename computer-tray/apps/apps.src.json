@@ -1,9 +1,101 @@
 [
- {"id":"paper","name":"Paper","icon":"📄","folder":"apps/paper","entry":"index.html","status":"ready","note":"Site studio: generate, upload, export ZIP, TinyLlama (needs a WebGPU device with shader-f16)."},
- {"id":"youniverse","name":"YOU-N-I-VERSE","icon":"🌐","folder":"apps/youniverse","entry":"world.html","status":"ready","note":"World / watching place from the SWARM OS APK. Studio = index.html, rig = rig.html."},
- {"id":"synthia-lab","name":"Synthia Lab","icon":"🧠","folder":"apps/youniverse","entry":"laboratory.html","status":"ready","note":"Synthia Klein neural laboratory (from the SWARM OS APK)."},
- {"id":"synthia","name":"Synthia v14","icon":"✨","folder":"apps/synthia","entry":"index.html","status":"ready","note":"From Generative-address-system. Communication mode works alone; Klein/Morph modes need the integrated core server."},
- {"id":"human-design","name":"Human Design","icon":"◈","folder":"apps/human-design","entry":"index.html","status":"not-built","note":"Source exists (Synthai2 branch synthia-human-design-studio, React/TS; SynthAi/SynthAi.HumanDesign, C#) but no built web page yet."},
- {"id":"synthworld","name":"SYNTHWORLD","icon":"🎮","folder":"apps/synthworld","entry":"index.html","status":"not-built","note":"Godot game (SYNTHWORLD- repo). Needs a Godot Web export before it can run here."},
- {"id":"trident","name":"Trident","icon":"🔱","folder":"apps/trident","entry":"index.html","status":"not-built","note":"Python/Gradio (Stellarproximology-lab). Not a web page; no released weights."}
+ {
+  "id": "paper",
+  "name": "Paper",
+  "icon": "📄",
+  "folder": "apps/paper",
+  "entry": "index.html",
+  "status": "ready",
+  "note": "Site studio: generate, upload, export ZIP, TinyLlama (needs a WebGPU device with shader-f16).",
+  "type": "web"
+ },
+ {
+  "id": "youniverse",
+  "name": "YOU-N-I-VERSE",
+  "icon": "🌐",
+  "folder": "apps/youniverse",
+  "entry": "world.html",
+  "status": "ready",
+  "note": "World / watching place from the SWARM OS APK. Studio = index.html, rig = rig.html.",
+  "type": "web"
+ },
+ {
+  "id": "synthia-lab",
+  "name": "Synthia Lab",
+  "icon": "🧠",
+  "folder": "apps/youniverse",
+  "entry": "laboratory.html",
+  "status": "ready",
+  "note": "Synthia Klein neural laboratory (from the SWARM OS APK).",
+  "type": "web"
+ },
+ {
+  "id": "synthia",
+  "name": "Synthia v14",
+  "icon": "✨",
+  "folder": "apps/synthia",
+  "entry": "index.html",
+  "status": "ready",
+  "note": "From Generative-address-system. Communication mode works alone; Klein/Morph modes need the integrated core server.",
+  "type": "web"
+ },
+ {
+  "id": "human-design",
+  "name": "Human Design",
+  "icon": "◈",
+  "folder": "apps/human-design",
+  "entry": "index.html",
+  "status": "not-built",
+  "note": "Source exists (Synthai2 branch synthia-human-design-studio, React/TS; SynthAi/SynthAi.HumanDesign, C#) but no built web page yet.",
+  "type": "web"
+ },
+ {
+  "id": "synthworld",
+  "name": "SYNTHWORLD",
+  "icon": "🎮",
+  "status": "not-built",
+  "note": "Godot game (SYNTHWORLD- repo). Once an Android export exists, add it with + Add app (pick the APK).",
+  "type": "native",
+  "package": ""
+ },
+ {
+  "id": "prism-keys",
+  "type": "native",
+  "name": "Prism Keys",
+  "icon": "⌨️",
+  "package": "app.prismkeys",
+  "apkSource": "https://github.com/justappgrabbin/SynthAi/releases/download/prism-keys-build-5/Prism-Keys.apk",
+  "opens": "keyboard-setup",
+  "status": "ready",
+  "note": "Android keyboard. Opens its setup; enable it under Keyboard settings."
+ },
+ {
+  "id": "synthia-resonance",
+  "type": "native",
+  "name": "Synthia Resonance",
+  "icon": "🎵",
+  "package": "app.synthia.resonance.preview",
+  "apkSource": "https://github.com/justappgrabbin/SynthAi/releases/download/phone-preview-v0.2.0/Synthia-Resonance-preview.apk",
+  "status": "ready"
+ },
+ {
+  "id": "trident",
+  "type": "native",
+  "name": "Trident",
+  "icon": "🔱",
+  "package": "org.stellarproximology.trident",
+  "apkSource": "",
+  "status": "ready",
+  "note": "No GitHub release yet (only a CI artifact on branch codex/trident-synthai-computer). Pick the APK file to install."
+ },
+ {
+  "id": "stellar",
+  "type": "native",
+  "name": "Stellar Proximology",
+  "icon": "🌌",
+  "package": "com.synthia.autonomy",
+  "apkSource": "https://github.com/justappgrabbin/stellar-proximology-full-v0.1.0/releases/download/stellar-full-ci-14/Stellar-Proximology-FULL-debug.apk",
+  "status": "ready",
+  "note": "Private repo: the download link needs a GitHub sign-in, so pick the APK file instead if it fails."
+ }
 ]
