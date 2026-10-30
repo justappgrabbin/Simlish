@@ -1,0 +1,1637 @@
+{
+ "schema": "app-catalog/1",
+ "fields": [
+  "planetary",
+  "dimension",
+  "gate",
+  "line",
+  "color",
+  "tone",
+  "base",
+  "degree",
+  "minute",
+  "second",
+  "arc",
+  "zodiac",
+  "house"
+ ],
+ "dimensions": [
+  "Movement",
+  "Evolution",
+  "Being",
+  "Design",
+  "Space"
+ ],
+ "planetaryRange": [
+  1,
+  13
+ ],
+ "catalogAddress": {
+  "planetary": "-",
+  "dimension": "-",
+  "gate": 15,
+  "line": 2,
+  "color": 6,
+  "tone": 6,
+  "base": 4,
+  "degree": 20,
+  "minute": 37,
+  "second": 6,
+  "arc": 290227,
+  "zodiac": "Gemini",
+  "house": 2
+ },
+ "catalogAddressKey": "-.-.15.2.6.6.4.20.37.6.290227.Gemini.2",
+ "created": "2026-10-30T04:01:04.815Z",
+ "containers": [
+  {
+   "id": "root",
+   "owner": "admin",
+   "kind": "catalog",
+   "name": "App Catalog (root)",
+   "parent": null,
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "layers": {
+    "stateSpace": {
+     "address": "15.2.6.6.4",
+     "index": 15478,
+     "gateNames": [
+      "Modesty"
+     ],
+     "toneName": "Acceptance"
+    },
+    "bhantugh": {
+     "text": "15.2.6.6.4",
+     "words": "Modesty Natural Innocence Acceptance Design",
+     "B": {
+      "binary": "00110001 00110101 00101110 00110010 00101110 00110110 00101110 00110110 00101110 00110100",
+      "components": {
+       "gate": "001110",
+       "line": "001",
+       "color": "101",
+       "tone": "101",
+       "base": "011"
+      },
+      "index": "00011110001110110"
+     },
+     "H": "&#x31;&#x35;&#x2E;&#x32;&#x2E;&#x36;&#x2E;&#x36;&#x2E;&#x34;",
+     "A": [
+      49,
+      53,
+      46,
+      50,
+      46,
+      54,
+      46,
+      54,
+      46,
+      52
+     ],
+     "N": [
+      "Mike",
+      "Oscar",
+      "Delta",
+      "Echo",
+      "Sierra",
+      "Tango",
+      "Yankee",
+      "(space)",
+      "November",
+      "Alfa",
+      "Tango",
+      "Uniform",
+      "Romeo",
+      "Alfa",
+      "Lima",
+      "(space)",
+      "India",
+      "November",
+      "November",
+      "Oscar",
+      "Charlie",
+      "Echo",
+      "November",
+      "Charlie",
+      "Echo",
+      "(space)",
+      "Alfa",
+      "Charlie",
+      "Charlie",
+      "Echo",
+      "Papa",
+      "Tango",
+      "Alfa",
+      "November",
+      "Charlie",
+      "Echo",
+      "(space)",
+      "Delta",
+      "Echo",
+      "Sierra",
+      "India",
+      "Golf",
+      "November"
+     ],
+     "T": [
+      {
+       "ch": "M",
+       "russian": [
+        "Мм"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "o",
+       "russian": [
+        "Оо"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "d",
+       "russian": [
+        "Дд"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "e",
+       "russian": [
+        "Ее",
+        "Ёё",
+        "Ээ"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "s",
+       "russian": [
+        "Сс"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "t",
+       "russian": [
+        "Тт"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "y",
+       "russian": [
+        "Йй",
+        "Ыы"
+       ],
+       "greek": null
+      },
+      {
+       "ch": " ",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "N",
+       "russian": [
+        "Нн"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "a",
+       "russian": [
+        "Аа"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "t",
+       "russian": [
+        "Тт"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "u",
+       "russian": [
+        "Уу"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "r",
+       "russian": [
+        "Рр"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "a",
+       "russian": [
+        "Аа"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "l",
+       "russian": [
+        "Лл"
+       ],
+       "greek": null
+      },
+      {
+       "ch": " ",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "I",
+       "russian": [
+        "Ии"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "n",
+       "russian": [
+        "Нн"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "n",
+       "russian": [
+        "Нн"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "o",
+       "russian": [
+        "Оо"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "c",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "e",
+       "russian": [
+        "Ее",
+        "Ёё",
+        "Ээ"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "n",
+       "russian": [
+        "Нн"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "c",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "e",
+       "russian": [
+        "Ее",
+        "Ёё",
+        "Ээ"
+       ],
+       "greek": null
+      },
+      {
+       "ch": " ",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "A",
+       "russian": [
+        "Аа"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "c",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "c",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "e",
+       "russian": [
+        "Ее",
+        "Ёё",
+        "Ээ"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "p",
+       "russian": [
+        "Пп"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "t",
+       "russian": [
+        "Тт"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "a",
+       "russian": [
+        "Аа"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "n",
+       "russian": [
+        "Нн"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "c",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "e",
+       "russian": [
+        "Ее",
+        "Ёё",
+        "Ээ"
+       ],
+       "greek": null
+      },
+      {
+       "ch": " ",
+       "russian": null,
+       "greek": null
+      },
+      {
+       "ch": "D",
+       "russian": [
+        "Дд"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "e",
+       "russian": [
+        "Ее",
+        "Ёё",
+        "Ээ"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "s",
+       "russian": [
+        "Сс"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "i",
+       "russian": [
+        "Ии"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "g",
+       "russian": [
+        "Гг"
+       ],
+       "greek": null
+      },
+      {
+       "ch": "n",
+       "russian": [
+        "Нн"
+       ],
+       "greek": null
+      }
+     ],
+     "U": [
+      "U+0031",
+      "U+0035",
+      "U+002E",
+      "U+0032",
+      "U+002E",
+      "U+0036",
+      "U+002E",
+      "U+0036",
+      "U+002E",
+      "U+0034"
+     ],
+     "G": {
+      "hexagramCode": 4,
+      "dodecaFaces": [
+       10,
+       11,
+       6,
+       8,
+       9,
+       4
+      ],
+      "lineAxis": {
+       "line": 2,
+       "axis": 2,
+       "yangFace": 2,
+       "yinFace": 11
+      }
+     },
+     "Hx": {
+      "index": "03C76",
+      "bytes": "31 35 2E 32 2E 36 2E 36 2E 34"
+     }
+    }
+   },
+   "provenance": {
+    "derived": {
+     "planetary": "level does not exist for the root catalog (top container, not inside a planet/dimension) -> dash",
+     "dimension": "level does not exist for the root catalog (top container, not inside a planet/dimension) -> dash",
+     "gate": "address-service kimi DMS wheel addressForArcSec(arcSecond)",
+     "line": "address-service kimi DMS wheel addressForArcSec(arcSecond)",
+     "color": "address-service kimi DMS wheel addressForArcSec(arcSecond)",
+     "tone": "address-service kimi DMS wheel addressForArcSec(arcSecond)",
+     "base": "address-service kimi DMS wheel addressForArcSec(arcSecond)",
+     "degree": "address-service HD longitudeToZodiac(arcSecond)",
+     "minute": "address-service HD longitudeToZodiac(arcSecond)",
+     "second": "address-service HD longitudeToZodiac(arcSecond)",
+     "arc": "address-service kimi DMS wheel addressForArcSec(arcSecond)",
+     "zodiac": "address-service HD longitudeToZodiac(arcSecond)",
+     "house": "address-service kimi DMS wheel addressForArcSec(arcSecond)"
+    },
+    "method": "auto-intake: sha256(app ids+names) mod 1,296,000 -> arcSecond -> address-service.mjs _resolveFromArc (kimi DMS wheel + HD zodiac); g.l.c.t.b cross-checked by state-space-fill resolver.state()",
+    "hash": "9e9ca7d6fece4ffe2aaa41b66cbdf07909755a395b86a6cf342b1ccd913f9033",
+    "arcSecond": 290227,
+    "provider": "back-up-:execution-spine-canonical-address+kimi-dms-codec",
+    "unresolvedFields": [
+     "planetary",
+     "dimension"
+    ],
+    "note": "planetary/dimension not derivable from an arc; set by placing the catalog into a planet/dimension container"
+   }
+  }
+ ],
+ "permissions": {
+  "note": "Editable. Intake into a container is accepted only if uploader is in residents, or passes resonance. Resonance criteria intentionally unset.",
+  "default": {
+   "residents": [
+    "admin"
+   ],
+   "open": [
+    "admin"
+   ],
+   "resonance": {
+    "enabled": false,
+    "criteria": null
+   }
+  },
+  "spaces": {
+   "root": {
+    "residents": [
+     "admin"
+    ],
+    "open": [
+     "admin"
+    ],
+    "resonance": {
+     "enabled": false,
+     "criteria": null
+    }
+   }
+  }
+ },
+ "apps": [
+  {
+   "name": "Synthia v0.5.1 Klein Situation Router",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Klein/ATO tools",
+    "Needs a computer"
+   ],
+   "type": "Node",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "https://drive.google.com/file/d/1_wvppmKY_LeD0PZOzJMHL5IIy1n2OWLJ/view",
+   "localPath": "/workspace/drive-builds/Synthia-v0.5.1-KLEIN-ROUTER-fixed",
+   "build": "",
+   "status": "working",
+   "evidence": "Base files restored from 3 shelved zips; 48/48 tests pass",
+   "addressSystem": true,
+   "notes": "Fixed copy; Drive original untouched",
+   "id": "app-1",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "SYNTHIA v0.3 Klein Body-Language",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Klein/ATO tools",
+    "AI models",
+    "Needs a computer"
+   ],
+   "type": "Node",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "https://drive.google.com/file/d/1oJr-3M23AyL3z_8XVZ2lIV_WktsCez-c/view",
+   "localPath": "/workspace/drive-builds/SYNTHIA-v0.3-Klein-Body-fixed",
+   "status": "working",
+   "evidence": "Small neural model + all 9 Klein tools (AutoLing, Boolean ATO, MESSY, Model Maker…) ran",
+   "addressSystem": true,
+   "notes": "",
+   "id": "app-2",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Kimi Human Design Life-Sim",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Human Design",
+    "Games",
+    "Needs a computer"
+   ],
+   "type": "web",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "https://drive.google.com/file/d/1jzgx-SXdwRZg5ZDUOsHQISZ-WhjrhsJx/view",
+   "localPath": "/workspace/drive-builds/Kimi-HD-Life-Sim-fixed",
+   "status": "working",
+   "evidence": "One-line fix stopped blank-screen crash; rendered (kimi-fixed.png)",
+   "addressSystem": true,
+   "notes": "Web/Vite build, not native",
+   "id": "app-3",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Klein Replit IDE",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Klein/ATO tools",
+    "Builders/Foundry",
+    "Needs a computer"
+   ],
+   "type": "Node",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "https://drive.google.com/file/d/1brMh41vbTC-kUBnPxKVJKq7aGTYToTV2/view",
+   "localPath": "/workspace/drive-builds/Klein-Replit-IDE-fixed",
+   "status": "working",
+   "evidence": "Worked as-is; address system added",
+   "addressSystem": true,
+   "notes": "Closest computer-like build, no app tray",
+   "id": "app-4",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Cynthia Research Swarm",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Builders/Foundry",
+    "AI models",
+    "Needs a computer"
+   ],
+   "type": "Python",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "Drive",
+   "localPath": "/workspace/drive-builds/Cynthia_Research_Swarm_Starter",
+   "status": "working",
+   "evidence": "Ran as-is",
+   "addressSystem": false,
+   "notes": "Address system not added yet",
+   "id": "app-5",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "hexagram-mesh-automata",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Klein/ATO tools",
+    "Worlds"
+   ],
+   "type": "web",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "Drive",
+   "localPath": "/workspace/drive-builds/hexagram-mesh-automata",
+   "status": "working",
+   "evidence": "Ran as-is (hex.png)",
+   "addressSystem": false,
+   "notes": "Address system not added yet",
+   "id": "app-6",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "klein-mesh-game-engine v5.1",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Games",
+    "Klein/ATO tools",
+    "Worlds"
+   ],
+   "type": "web",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "Drive",
+   "localPath": "/workspace/drive-builds/klein-mesh-game-engine-v5.1",
+   "status": "working",
+   "evidence": "Ran as-is",
+   "addressSystem": false,
+   "notes": "Address system not added yet",
+   "id": "app-7",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Resonance repair pass 24 (ATO Klein trace)",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Klein/ATO tools"
+   ],
+   "type": "Node",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "Drive",
+   "localPath": "/workspace/drive-builds/resonance-pass-24-ato-klein-trace",
+   "status": "working",
+   "evidence": "Ran as-is",
+   "addressSystem": false,
+   "notes": "Address system not added yet",
+   "id": "app-8",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "mesh-automaton",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Klein/ATO tools",
+    "Needs a computer"
+   ],
+   "type": "Node",
+   "runsOn": [
+    "computer",
+    "server"
+   ],
+   "needsServer": "yes",
+   "source": "Drive",
+   "localPath": "/workspace/drive-builds/mesh-automaton-fixed",
+   "status": "partly",
+   "evidence": "Shelved files restored; built on Manus (paid key + login); local swap of login/DB/AI in progress",
+   "addressSystem": false,
+   "notes": "Breaks free rule until Manus parts replaced",
+   "id": "app-9",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "SynthAi.HumanDesign",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Human Design"
+   ],
+   "type": "other (C#)",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "https://github.com/justappgrabbin/SynthAi",
+   "localPath": "/workspace/drive-builds/SynthAi.HumanDesign",
+   "status": "not built",
+   "evidence": "Two required projects missing from zip",
+   "addressSystem": false,
+   "notes": "Contains address-service.mjs (15-field address) — candidate fuller engine",
+   "id": "app-10",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "SWARM OS Computer (apps tray)",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Phone apps",
+    "Worlds"
+   ],
+   "type": "native APK",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "optional",
+   "source": "https://github.com/justappgrabbin/Simlish/tree/computer-apps-tray",
+   "localPath": "/workspace/tray-native",
+   "build": "https://github.com/justappgrabbin/Simlish/actions/runs/40996594636/artifacts/12951054739",
+   "status": "partly",
+   "evidence": "CI build passed; not yet tested on a real phone",
+   "addressSystem": true,
+   "notes": "Web-in-WebView shell; runs web + native apps; P2P/local/remote switches",
+   "id": "app-11",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Paper",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Builders/Foundry",
+    "Phone apps"
+   ],
+   "type": "web",
+   "runsOn": [
+    "any"
+   ],
+   "needsServer": "no",
+   "source": "Drive",
+   "localPath": "/workspace/paper-sovereign",
+   "status": "partly",
+   "evidence": "Upload/generate/export passed; TinyLlama needs WebGPU shader-f16 (failed on box)",
+   "addressSystem": true,
+   "notes": "In the tray",
+   "id": "app-12",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "YOU-N-I-VERSE",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Worlds",
+    "Phone apps"
+   ],
+   "type": "web",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "no",
+   "source": "SWARM OS APK",
+   "localPath": "/workspace/tray-native/computer-tray/apps/youniverse",
+   "status": "working",
+   "evidence": "Opens in tray (world.html)",
+   "addressSystem": true,
+   "notes": "Studio/rig pages included",
+   "id": "app-13",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Synthia Lab",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "AI models",
+    "Klein/ATO tools",
+    "Phone apps"
+   ],
+   "type": "web",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "no",
+   "source": "SWARM OS APK",
+   "localPath": "/workspace/tray-native/computer-tray/apps/youniverse",
+   "status": "working",
+   "evidence": "Opens in tray (laboratory.html)",
+   "addressSystem": true,
+   "notes": "",
+   "id": "app-14",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Synthia v14",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "AI models"
+   ],
+   "type": "web",
+   "runsOn": [
+    "phone",
+    "computer"
+   ],
+   "needsServer": "optional",
+   "source": "https://github.com/justappgrabbin/Generative-address-system",
+   "localPath": "/workspace/tray-native/computer-tray/apps/synthia",
+   "status": "partly",
+   "evidence": "Communication mode works alone; Klein/Morph modes need core server",
+   "addressSystem": true,
+   "notes": "",
+   "id": "app-15",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Synthia Resonance (preview)",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Phone apps"
+   ],
+   "type": "native APK",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "no",
+   "source": "https://github.com/justappgrabbin/SynthAi",
+   "build": "https://github.com/justappgrabbin/SynthAi/releases/download/phone-preview-v0.2.0/Synthia-Resonance-preview.apk",
+   "localPath": "",
+   "status": "working",
+   "evidence": "GitHub release APK",
+   "addressSystem": false,
+   "notes": "Address gate applied by tray at launch",
+   "id": "app-16",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Prism Keys",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Keyboard",
+    "Phone apps"
+   ],
+   "type": "native APK",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "no",
+   "source": "https://github.com/justappgrabbin/SynthAi",
+   "build": "https://github.com/justappgrabbin/SynthAi/releases/download/prism-keys-build-5/Prism-Keys.apk",
+   "localPath": "",
+   "status": "working",
+   "evidence": "GitHub release APK",
+   "addressSystem": false,
+   "notes": "Android keyboard",
+   "id": "app-17",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Stellar Proximology (full)",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Human Design",
+    "Phone apps"
+   ],
+   "type": "native APK",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "no",
+   "source": "private repo",
+   "build": "releases/download/stellar-full-ci-14/Stellar-Proximology-FULL-debug.apk",
+   "localPath": "",
+   "status": "working",
+   "evidence": "CI release APK",
+   "addressSystem": false,
+   "notes": "Repo private: link fails in-app; pick APK file",
+   "id": "app-18",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "SYNTHWORLD",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Games",
+    "Worlds"
+   ],
+   "type": "native APK",
+   "runsOn": [
+    "phone"
+   ],
+   "needsServer": "no",
+   "source": "https://github.com/justappgrabbin/SYNTHWORLD-",
+   "localPath": "",
+   "status": "not built",
+   "evidence": "Godot project; no Android export yet",
+   "addressSystem": false,
+   "notes": "",
+   "id": "app-19",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Pocket Foundry",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "Builders/Foundry",
+    "Needs a computer"
+   ],
+   "type": "Node",
+   "runsOn": [
+    "computer",
+    "phone"
+   ],
+   "needsServer": "optional",
+   "source": "https://github.com/justappgrabbin/Synthia-server/tree/pocket-foundry-background",
+   "localPath": "",
+   "status": "partly",
+   "evidence": "Inbox→job→outbox ZIP ran on box; every drop fails calling suspended Render server",
+   "addressSystem": false,
+   "notes": "Planned: on-device helper replaces Render",
+   "id": "app-20",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  },
+  {
+   "name": "Trident weights (trident_syntia.pt + retrained)",
+   "address": {
+    "planetary": "-",
+    "dimension": "-",
+    "gate": 15,
+    "line": 2,
+    "color": 6,
+    "tone": 6,
+    "base": 4,
+    "degree": 20,
+    "minute": 37,
+    "second": 6,
+    "arc": 290227,
+    "zodiac": "Gemini",
+    "house": 2
+   },
+   "categories": [
+    "AI models"
+   ],
+   "type": "Python",
+   "runsOn": [
+    "computer"
+   ],
+   "needsServer": "no",
+   "source": "https://huggingface.co/stellarproximology/Synthia",
+   "localPath": "/workspace/trident-check",
+   "status": "partly",
+   "evidence": "3 weight sets load and run; output gibberish (~20k chars training); repo loader rejects original format",
+   "addressSystem": false,
+   "notes": "Fix: loader patch + more training text",
+   "id": "app-21",
+   "build": "",
+   "container": "root",
+   "owner": "admin",
+   "derived": {
+    "planetary": "dash: inherited from root (no such level)",
+    "dimension": "dash: inherited from root (no such level)",
+    "gate": "inherited from root container",
+    "line": "inherited from root container",
+    "color": "inherited from root container",
+    "tone": "inherited from root container",
+    "base": "inherited from root container",
+    "degree": "inherited from root container",
+    "minute": "inherited from root container",
+    "second": "inherited from root container",
+    "arc": "inherited from root container",
+    "zodiac": "inherited from root container",
+    "house": "inherited from root container"
+   }
+  }
+ ]
+}

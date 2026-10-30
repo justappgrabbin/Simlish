@@ -1,0 +1,29 @@
+{
+ "note": "Editable. Intake into a container is accepted only if uploader is in residents, or passes resonance. Resonance criteria intentionally unset.",
+ "default": {
+  "residents": [
+   "admin"
+  ],
+  "open": [
+   "admin"
+  ],
+  "resonance": {
+   "enabled": false,
+   "criteria": null
+  }
+ },
+ "spaces": {
+  "root": {
+   "residents": [
+    "admin"
+   ],
+   "open": [
+    "admin"
+   ],
+   "resonance": {
+    "enabled": false,
+    "criteria": null
+   }
+  }
+ }
+}
