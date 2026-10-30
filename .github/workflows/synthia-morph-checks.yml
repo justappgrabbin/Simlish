@@ -5,6 +5,8 @@ on:
       - 'you-n-i-verse/morph-provider.mjs'
       - 'you-n-i-verse/morph-provider.test.mjs'
       - 'you-n-i-verse/docs/SYNTHIA-MORPH-PROVIDER.md'
+      - 'you-n-i-verse/world*'
+      - 'android/**'
       - '.github/workflows/synthia-morph-checks.yml'
   push:
     branches:
@@ -19,6 +21,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check world consumer syntax
+        run: node --check you-n-i-verse/world-ui.mjs
       - name: Check standalone service and existing morph engines
         run: |
           node --check you-n-i-verse/morph-provider.mjs
@@ -26,3 +30,26 @@ jobs:
           node --test you-n-i-verse/photo-morph.test.mjs
           node --test you-n-i-verse/frame-morph.test.mjs
           node --test you-n-i-verse/animation.test.mjs
+  android-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Install Android build SDK
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Compile offline player entry and morph assets
+        run: gradle -p android --no-daemon assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YOU-N-I-VERSE-player-morph-preview
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
