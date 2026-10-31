@@ -1,11 +1,12 @@
 import * as THREE from './vendor/three/three.module.js';
 import {BEACONS,startRun,offerChoices,activateBeacon,rechargeAtCamp,restoreRun} from './adventure-core.mjs';
+import {loadCharacterIntoWorld} from './avatar-runtime.mjs';
 
 const $=selector=>document.querySelector(selector);
 const STORE='you-n-i-verse-five-lights-v1';
 const stage=$('#stage');
-let run,hadSave=false,renderer,scene,camera,player,cloak,arms=[],lighting=[],glows=[],starfield;
-let lastFrame=0,travel=null,pending=null,choiceBusy=false,gameStarted=false,resetArmed=false;
+let run,hadSave=false,renderer,scene,camera,player,lighting=[],glows=[],starfield;
+let lastFrame=0,travel=null,pending=null,choiceBusy=false,gameStarted=false,resetArmed=false,avatarController=null;
 const keys=new Set();
 const interactive=[];
 const beacons=new Map();
@@ -101,37 +102,6 @@ function addRock(parent,x,z,size,color){
   const o=mesh(new THREE.DodecahedronGeometry(size,0),material(color),x,size*.6,z);
   o.rotation.y=x+z;parent.add(o);
 }
-function createCharacter(){
-  const root=new THREE.Group();
-  const skin=material(0xc58e82),robe=material(0x753d8f),trim=material(0xf3b76e),hair=material(0x21172c);
-  const boots=material(0x26172e);
-  const disk=mesh(new THREE.CircleGeometry(.75,24),new THREE.MeshBasicMaterial({color:0x05030d,transparent:true,opacity:.34,depthWrite:false}),0,.04,0);disk.rotation.x=-Math.PI/2;root.add(disk);
-  const legs=[];
-  for(const x of [-.24,.24]){
-    const leg=new THREE.Group();leg.position.set(x,.94,0);
-    leg.add(mesh(new THREE.CylinderGeometry(.18,.23,.78,9),boots,0,-.39,0));
-    leg.add(mesh(new THREE.SphereGeometry(.23,10,8),boots,0,-.76,.1));
-    root.add(leg);legs.push(leg);
-  }
-  const cape=mesh(new THREE.ConeGeometry(.95,1.95,10),robe,0,1.34,-.12);
-  cape.rotation.z=.04;root.add(cape);cloak=cape;
-  root.add(mesh(new THREE.CylinderGeometry(.48,.72,.95,10),material(0x633a74),0,1.66,0));
-  root.add(mesh(new THREE.TorusGeometry(.43,.1,9,20),trim,0,2.1,0).rotateX(Math.PI/2));
-  for(const x of [-.63,.63]){
-    const arm=new THREE.Group();arm.position.set(x,2.05,0);
-    arm.add(mesh(new THREE.CylinderGeometry(.18,.14,.9,8),robe,0,-.39,0));
-    arm.add(mesh(new THREE.SphereGeometry(.18,10,8),skin,0,-.88,0));
-    root.add(arm);arms.push(arm);
-  }
-  root.add(mesh(new THREE.SphereGeometry(.4,18,14),skin,0,2.6,.08));
-  root.add(mesh(new THREE.SphereGeometry(.43,15,10),hair,0,2.79,-.09));
-  root.add(mesh(new THREE.TorusGeometry(.39,.095,9,24),trim,0,2.77,.04).rotateX(Math.PI/2));
-  const eyeMat=new THREE.MeshBasicMaterial({color:0x2b193c});
-  for(const x of [-.14,.14])root.add(mesh(new THREE.SphereGeometry(.038,8,8),eyeMat,x,2.61,.438));
-  const gem=mesh(new THREE.OctahedronGeometry(.17),material(0x71edd7,0x4aeace,1.7),0,2.03,.58);root.add(gem);
-  root.userData.legs=legs;root.userData.cape=cape;
-  scene.add(root);return root;
-}
 function addZoneDecor(group,b,index){
   // Small handcrafted 3D landmarks make the locations visually distinct.
   if(index===1){
@@ -213,7 +183,7 @@ function makeWorld(){
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(points,3));
   starfield=new THREE.Points(geometry,new THREE.PointsMaterial({color:0xffd4e9,size:.14,sizeAttenuation:true}));
   scene.add(starfield);
-  player=createCharacter();
+  player=new THREE.Group();scene.add(player);
 }
 function resize(){
   if(!renderer||!camera)return;
@@ -231,6 +201,13 @@ function init3d(){
     camera=new THREE.OrthographicCamera(-10,10,15,-15,.1,200);
     camera.position.set(18,23,28);camera.lookAt(0,0,0);
     makeWorld();resize();
+    $('#start').disabled=true;
+    loadCharacterIntoWorld(player,message=>$('#avatarStatus').textContent=message).then(controller=>{
+      avatarController=controller;$('#start').disabled=false;
+    }).catch(error=>{
+      $('#avatarStatus').textContent='Character load failed: '+error.message+'. Return to Morph World to choose or repair your character.';
+      $('#start').disabled=true;
+    });
     if('ResizeObserver' in window)new ResizeObserver(resize).observe(stage);
     else window.addEventListener('resize',resize);
     renderer.domElement.addEventListener('pointerup',hitTest);
@@ -289,10 +266,9 @@ function frame(now){
     const d=Math.hypot(dx,dz);
     if(d>0){player.position.x=Math.max(-10,Math.min(10,player.position.x+dx/d*dt*4.7));
       player.position.z=Math.max(-10,Math.min(10,player.position.z+dz/d*dt*4.7));
-      player.rotation.y=Math.atan2(dx,dz);arms[0].rotation.x=Math.sin(now*.01)*.42;arms[1].rotation.x=-Math.sin(now*.01)*.42;
-      player.userData.legs[0].rotation.x=Math.sin(now*.01)*.28;player.userData.legs[1].rotation.x=-Math.sin(now*.01)*.28;
-    }else{arms[0].rotation.x=arms[1].rotation.x=0;player.userData.legs.forEach(leg=>leg.rotation.x=0);}
-    cloak.rotation.z=Math.sin(now*.0017)*.018;
+      player.rotation.y=Math.atan2(dx,dz);
+    }
+    avatarController?.update(now,d>0,dt);
     for(const {orb,ring,light,glow} of lighting){
       orb.rotation.y+=dt*.65;ring.rotation.z+=dt*.3;
       light.intensity=1.4+Math.sin(now*.002)*.25+(orb.material.emissiveIntensity>1?1.3:0);

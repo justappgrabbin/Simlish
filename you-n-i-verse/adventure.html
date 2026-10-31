@@ -27,7 +27,7 @@
       <button id="camp" class="camp-button" aria-label="Return to camp to recover focus">✦ CAMP</button>
     </section>
     <aside class="journal">
-      <div class="journal-heading"><p class="eyebrow">YOUR STORY IS STILL UNWRITTEN</p><h1>Bring the<br><em>light back.</em></h1><p>Explore five places. Make five choices. Every decision changes the path ahead.</p></div>
+      <div class="journal-heading"><p class="eyebrow">YOUR STORY IS STILL UNWRITTEN</p><div class="avatar-status"><strong>CHARACTER SOURCE</strong><p id="avatarStatus" role="status">Looking for your saved Morph World character…</p><a href="index.html">Edit or create your character ↗</a></div><h1>Bring the<br><em>light back.</em></h1><p>Explore five places. Make five choices. Every decision changes the path ahead.</p></div>
       <div class="stats"><div><span>LIGHTS</span><strong id="lights">0 / 5</strong></div><div><span>FOCUS</span><strong id="focus">9 / 9</strong></div><div><span>POINTS</span><strong id="score">0</strong></div></div>
       <div class="progress" id="progress" aria-label="Light restoration progress"><span></span><span></span><span></span><span></span><span></span></div>
       <p class="eyebrow">PLACES TO DISCOVER</p>
@@ -42,7 +42,7 @@
     <p class="eyebrow">A SMALL WORLD. A REAL ADVENTURE.</p><h2 id="introTitle">The world went dark.<br><em>Not everyone did.</em></h2>
     <p>Five lights have disappeared from the Living Residence. Follow the paths, meet each challenge, and decide how to bring them home. Your choices change the next chapter.</p>
     <p class="hint">Explore a true 3D scene. Tap a light to walk there, or use the directional pad. Get near a light to make a choice. Rest at camp if you need more focus.</p>
-    <button class="primary" id="start">Begin the journey ✦</button>
+    <button class="primary" id="start" disabled>Loading character…</button>
     <p class="hint" id="resumeHint"></p>
   </div></div>
 </div>
@@ -71,5 +71,6 @@
   <h2>3D world unavailable</h2><p id="renderMessage">This device couldn't start its WebGL renderer.</p>
   <a href="index.html">Return to studio</a>
 </div></div></div>
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
 <script type="module" src="adventure.mjs"></script>
 </body></html>
