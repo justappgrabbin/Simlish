@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#120d24">
+<title>THE FIVE LIGHTS · YOU-N-I-VERSE</title>
+<link rel="stylesheet" href="adventure.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <a class="back" href="index.html" aria-label="Back to your character studio">← STUDIO</a>
+    <div class="identity"><span class="symbol">✧</span><div><strong>THE FIVE LIGHTS</strong><small>A YOU-N-I-VERSE ADVENTURE</small></div></div>
+    <button class="quiet" id="reset" title="Start a new journey">New game</button>
+  </header>
+  <main class="layout">
+    <section class="playarea" aria-label="Interactive three-dimensional world">
+      <div id="stage" tabindex="0" aria-label="3D world. Tap a glowing light to travel there, or use arrow keys to walk."></div>
+      <div class="stage-top"><span class="tag">✦ THE LIVING RESIDENCE</span><span class="tag" id="stageHint">Five lights are waiting</span></div>
+      <div class="statusbar" id="toast" role="status" aria-live="polite">Tap a glowing light to travel there.</div>
+      <div class="pad" aria-label="Movement controls">
+        <button class="up" data-move="up" aria-label="Walk forward">▲</button>
+        <button class="left" data-move="left" aria-label="Walk left">◀</button>
+        <button class="down" data-move="down" aria-label="Walk backward">▼</button>
+        <button class="right" data-move="right" aria-label="Walk right">▶</button>
+      </div>
+      <button id="camp" class="camp-button" aria-label="Return to camp to recover focus">✦ CAMP</button>
+    </section>
+    <aside class="journal">
+      <div class="journal-heading"><p class="eyebrow">YOUR STORY IS STILL UNWRITTEN</p><h1>Bring the<br><em>light back.</em></h1><p>Explore five places. Make five choices. Every decision changes the path ahead.</p></div>
+      <div class="stats"><div><span>LIGHTS</span><strong id="lights">0 / 5</strong></div><div><span>FOCUS</span><strong id="focus">9 / 9</strong></div><div><span>POINTS</span><strong id="score">0</strong></div></div>
+      <div class="progress" id="progress" aria-label="Light restoration progress"><span></span><span></span><span></span><span></span><span></span></div>
+      <p class="eyebrow">PLACES TO DISCOVER</p>
+      <div class="places" id="places" aria-label="Visit game locations"></div>
+      <div class="storylog"><p class="eyebrow">YOUR CHRONICLE <span id="gate">GATE 6</span></p><div id="chronicle" aria-live="polite">Your first choice is ahead.</div></div>
+      <p class="hint">Use arrows or WASD on a keyboard, or tap a location. At camp you can restore focus for a points penalty. The six choices and gate changes come from the existing source-based path engine; points and focus are game rules.</p>
+    </aside>
+  </main>
+</div>
+<div class="overlay" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
+  <div class="modal intro"><div class="cover" aria-hidden="true"></div><div class="modal-body">
+    <p class="eyebrow">A SMALL WORLD. A REAL ADVENTURE.</p><h2 id="introTitle">The world went dark.<br><em>Not everyone did.</em></h2>
+    <p>Five lights have disappeared from the Living Residence. Follow the paths, meet each challenge, and decide how to bring them home. Your choices change the next chapter.</p>
+    <p class="hint">Explore a true 3D scene. Tap a light to walk there, or use the directional pad. Get near a light to make a choice. Rest at camp if you need more focus.</p>
+    <button class="primary" id="start">Begin the journey ✦</button>
+    <p class="hint" id="resumeHint"></p>
+  </div></div>
+</div>
+<div class="overlay" id="decision" role="dialog" aria-modal="true" aria-labelledby="decisionTitle" hidden>
+  <div class="modal choice-modal">
+    <div class="modal-body"><p class="eyebrow" id="decisionEyebrow">A NEW ENCOUNTER</p><h2 id="decisionTitle"></h2><p id="challenge"></p>
+      <div class="decision-row"><span id="choiceGate"></span><span id="choiceFocus"></span></div>
+      <p class="choice-instruction">Choose a source-backed line. Higher-numbered lines earn more points but use more focus.</p>
+      <div id="choices" class="choices"></div>
+      <p id="decisionStatus" role="status"></p>
+      <button class="quiet" id="closeDecision">Explore some more</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="ending" role="dialog" aria-modal="true" aria-labelledby="endTitle" hidden>
+  <div class="modal ending"><div class="modal-body">
+    <p class="eyebrow">✧ FIVE LIGHTS RESTORED ✧</p><h2 id="endTitle">You changed the world.</h2>
+    <p>Not by finding the perfect answer. By showing up, choosing, and making the next place possible.</p>
+    <div class="end-score" id="endScore"></div>
+    <div id="endChronicle"></div>
+    <button class="primary" id="playAgain">Play a different path ✦</button>
+    <a href="index.html" class="end-link">Return to your character studio</a>
+  </div></div>
+</div>
+<div class="overlay" id="renderError" role="alertdialog" aria-modal="true" hidden><div class="modal"><div class="modal-body">
+  <h2>3D world unavailable</h2><p id="renderMessage">This device couldn't start its WebGL renderer.</p>
+  <a href="index.html">Return to studio</a>
+</div></div></div>
+<script type="module" src="adventure.mjs"></script>
+</body></html>

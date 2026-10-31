@@ -38,6 +38,8 @@ jobs:
           node you-n-i-verse/touch.test.mjs
           node you-n-i-verse/lexical-fill.test.mjs
           node you-n-i-verse/game-path.test.mjs
+          node you-n-i-verse/adventure.test.mjs
+          node --check you-n-i-verse/adventure.mjs
           node you-n-i-verse/photo-morph.test.mjs
           node you-n-i-verse/animation.test.mjs
           node you-n-i-verse/frame-morph.test.mjs
