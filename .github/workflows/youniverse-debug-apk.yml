@@ -1,7 +1,7 @@
 name: YOU-N-I-VERSE Debug APK
 on:
   push:
-    branches: [main, 'fix/morph-game-handoff-20261031']
+    branches: [main]
     paths: ['you-n-i-verse/**', 'android/**', '.github/workflows/youniverse-debug-apk.yml']
   workflow_dispatch:
 permissions:
