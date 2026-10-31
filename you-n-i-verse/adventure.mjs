@@ -114,7 +114,7 @@ function createCharacter(){
     root.add(leg);legs.push(leg);
   }
   const cape=mesh(new THREE.ConeGeometry(.95,1.95,10),robe,0,1.34,-.12);
-  cape.rotation.z=.04;root.add(cape);
+  cape.rotation.z=.04;root.add(cape);cloak=cape;
   root.add(mesh(new THREE.CylinderGeometry(.48,.72,.95,10),material(0x633a74),0,1.66,0));
   root.add(mesh(new THREE.TorusGeometry(.43,.1,9,20),trim,0,2.1,0).rotateX(Math.PI/2));
   for(const x of [-.63,.63]){
