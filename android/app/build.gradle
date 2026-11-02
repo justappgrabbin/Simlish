@@ -5,11 +5,11 @@ android {
  buildFeatures { buildConfig true }
  compileSdk 35
  defaultConfig {
-  applicationId 'app.youniverse.studio'
+  applicationId 'app.simlish.gamecomputer'
   minSdk 26
   targetSdk 35
   versionCode = debugBuildNumber
-  versionName '0.1-debug'
+  versionName '0.1-gaming-debug'
  }
  compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
  sourceSets { main { assets.srcDirs = ['../../you-n-i-verse'] } }
