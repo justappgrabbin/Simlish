@@ -1,0 +1,72 @@
+name: SIMLISH Gaming Computer APK
+on:
+  push:
+    branches: ['integration/simlish-gaming-computer-20261102']
+    paths:
+      - 'android/**'
+      - 'you-n-i-verse/**'
+      - '.github/workflows/simlish-gaming-apk.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: simlish-gaming-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: simlish-gaming-debug-signing-v1
+      - run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Test resolver and game modules
+        run: |
+          node --test you-n-i-verse/gaming-computer.test.mjs
+          node you-n-i-verse/adventure.test.mjs
+          node you-n-i-verse/game-path.test.mjs
+          node you-n-i-verse/rig-format.test.mjs
+          node --check you-n-i-verse/gaming-computer.mjs
+          node --check you-n-i-verse/adventure.mjs
+      - name: Build Android APK
+        run: gradle -p android --no-daemon assembleDebug -PbuildNumber=${{ github.run_number }}
+      - name: Copy installable APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk SIMLISH-Gaming-Computer.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SIMLISH-Gaming-Computer-APK
+          path: SIMLISH-Gaming-Computer.apk
+          retention-days: 30
+      - name: Publish standalone release APK
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const tag = 'simlish-gaming-' + context.sha.slice(0, 12);
+            const release = (await github.rest.repos.createRelease({
+              ...context.repo,
+              tag_name: tag,
+              target_commitish: context.sha,
+              name: 'SIMLISH Gaming Computer · ' + context.sha.slice(0, 7),
+              prerelease: true,
+              body: 'Standalone Android 8+ debug build. Opens a local Gaming Computer launcher for the existing Five Lights game, world, Morph Studio, engine laboratory, rig and real local HostRegistry resolver. This is not a native Android port of SimsWorld.exe or the external Node genotype resolver.'
+            })).data;
+            await github.rest.repos.uploadReleaseAsset({
+              ...context.repo, release_id: release.id,
+              name: 'SIMLISH-Gaming-Computer.apk',
+              data: fs.readFileSync('SIMLISH-Gaming-Computer.apk'),
+              headers: {'content-type':'application/vnd.android.package-archive'}
+            });

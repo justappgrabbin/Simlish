@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
    }
   });
   web.addJavascriptInterface(new NativeExport(),"NativeDownloads");
-  web.loadUrl(ORIGIN+"/assets/index.html");
+  web.loadUrl(ORIGIN+"/assets/gaming-computer.html");
  }
  public class NativeExport {
   @JavascriptInterface public void analyzeFace(String encoded,int requestId){
